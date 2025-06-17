@@ -1,1 +1,0 @@
-# Externship Project Template
