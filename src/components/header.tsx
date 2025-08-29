@@ -32,8 +32,8 @@ const Header: React.FC = () => {
   return (
     <header className="sticky top-0 z-99 flex h-[65px] items-center justify-between border border-gray-200 bg-white px-8 pb-px">
       <Logo />
+      //TODO event props로 클릭이벤트 전달, 회원가입은 별도로 전달
       <div className="flex items-center">
-        //TODO event props로 클릭이벤트 전달, 회원가입은 별도로 전달
         <NavComponent label="강의 목록" />
         <NavComponent label="스터디 그룹" />
         <NavComponent label="구인 공고" />
