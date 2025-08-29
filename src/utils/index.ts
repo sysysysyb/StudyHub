@@ -1,4 +1,4 @@
 // utils
-import { cn } from './utils'
+import { cn } from '@/utils/utils'
 
 export { cn }
