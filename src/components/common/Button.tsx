@@ -7,15 +7,26 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary:
+        primary: cn(
           'text-white bg-primary-500 hover:bg-primary-600 active:bg-primary-700',
-        secondary:
+          'disabled:hover:bg-primary-500 disabled:active:bg-primary-500'
+        ),
+        secondary: cn(
           'text-gray-900 bg-gray-100 hover:bg-gray-200 active:bg-gray-300',
-        outline:
+          'disabled:hover:bg-gray-100 disabled:active:bg-gray-100'
+        ),
+        outline: cn(
           'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50 active:bg-gray-100 active:border-gray-400',
-        ghost: 'text-gray-700 bg-white hover:bg-gray-50 active:bg-gray-200',
-        danger:
+          'disabled:hover:bg-white disabled:active:bg-white disabled:active:border-gray-300'
+        ),
+        ghost: cn(
+          'text-gray-700 bg-white hover:bg-gray-50 active:bg-gray-200',
+          'disabled:hover:bg-white disabled:active:bg-white'
+        ),
+        danger: cn(
           'text-white bg-danger-500 hover:bg-danger-600 active:bg-danger-800',
+          'disabled:hover:bg-danger-500 disabled:active:bg-danger-500'
+        ),
       },
       size: {
         sm: 'rounded-[0.375rem] px-3 py-2', //radius 6px
