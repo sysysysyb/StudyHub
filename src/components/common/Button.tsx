@@ -30,10 +30,19 @@ interface ButtonProps
   extends ComponentProps<'button'>,
     VariantProps<typeof buttonVariants> {}
 
-export default function Button({ variant, className, ...props }: ButtonProps) {
+export default function Button({
+  variant,
+  className,
+  children,
+  size,
+  ...props
+}: ButtonProps) {
   return (
-    <button className={(cn(buttonVariants({ variant })), className)} {...props}>
-      Button
+    <button
+      className={(cn(buttonVariants({ variant, size })), className)}
+      {...props}
+    >
+      {children}
     </button>
   )
 }
