@@ -1,1 +1,18 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+
+@theme {
+  --text-heading1: 2.25rem;
+  --text-heading1--font-weight: 700;
+
+  --text-heading2: 1.875rem;
+  --text-heading2--font-weight: 700;
+
+  --text-heading3: 1.5rem;
+  --text-heading3--font-weight: 700;
+
+  --text-heading4: 1.25rem;
+  --text-heading4--font-weight: 600;
+
+  --text-heading5: 1.125rem;
+  --text-heading5--font-weight: 600;
+}
