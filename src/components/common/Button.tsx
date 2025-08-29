@@ -3,30 +3,19 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/utils'
 
 const buttonVariants = cva(
-  'font-medium text-base leading-5 rounded-lg transition-colors focus:outline-none disabled:opacity-50 text-center ',
+  'font-medium text-base leading-5 rounded-lg transition-colors focus:outline-none disabled:opacity-50 disabled:pointer-events-none text-center ',
   {
     variants: {
       variant: {
-        primary: cn(
+        primary:
           'text-white bg-primary-500 hover:bg-primary-600 active:bg-primary-700',
-          'disabled:hover:bg-primary-500 disabled:active:bg-primary-500'
-        ),
-        secondary: cn(
+        secondary:
           'text-gray-900 bg-gray-100 hover:bg-gray-200 active:bg-gray-300',
-          'disabled:hover:bg-gray-100 disabled:active:bg-gray-100'
-        ),
-        outline: cn(
+        outline:
           'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50 active:bg-gray-100 active:border-gray-400',
-          'disabled:hover:bg-white disabled:active:bg-white disabled:active:border-gray-300'
-        ),
-        ghost: cn(
-          'text-gray-700 bg-white hover:bg-gray-50 active:bg-gray-200',
-          'disabled:hover:bg-white disabled:active:bg-white'
-        ),
-        danger: cn(
+        ghost: 'text-gray-700 bg-white hover:bg-gray-50 active:bg-gray-200',
+        danger:
           'text-white bg-danger-500 hover:bg-danger-600 active:bg-danger-800',
-          'disabled:hover:bg-danger-500 disabled:active:bg-danger-500'
-        ),
       },
       size: {
         sm: 'rounded-[0.375rem] px-3 py-2', //radius 6px
