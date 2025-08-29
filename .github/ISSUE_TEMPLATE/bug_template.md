@@ -1,9 +1,9 @@
 ---
 name: Bug Template
 about: 버그 발견 이슈 템플릿
-title: "[ Bug ]"
-labels: ""
-assignees: ""
+title: ''
+labels: ''
+assignees: ''
 ---
 
 ## 🐞 어떤 버그인가요?
