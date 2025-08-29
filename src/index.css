@@ -1,5 +1,17 @@
 @import 'tailwindcss';
 
+@font-face {
+  font-family: 'Pretendard';
+  src: url('/src/assets/font/PretendardVariable.woff2');
+}
+
+body {
+  font-family: 'Pretendard', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
 @theme {
   --text-heading1: 2.25rem;
   --text-heading1--font-weight: 700;
