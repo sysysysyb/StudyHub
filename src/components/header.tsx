@@ -29,20 +29,16 @@ const NavComponent: React.FC<NavProps> = ({ label, event }) => {
 
 const Header: React.FC = () => {
   return (
-    <header className="sticky top-0 h-[65px] border border-[#E5E7EB] bg-white pb-px">
-      <div className="flex justify-between px-[112px]">
-        <div className="h-[48px] w-[144px]">
-          <Logo />
-        </div>
-        <div className="flex w-[450px] items-center">
-          <NavComponent label="강의 목록" />
-          <NavComponent label="스터디 그룹" />
-          <NavComponent label="구인 공고" />
-          <NavComponent label="로그인" />
-          <button className="rounded-md bg-[#CA8A04] p-2 whitespace-nowrap text-white">
-            회원가입
-          </button>
-        </div>
+    <header className="sticky top-0 flex h-[65px] items-center justify-between border border-[#E5E7EB] bg-white px-[32px] pb-px">
+      <Logo />
+      <div className="flex items-center">
+        <NavComponent label="강의 목록" />
+        <NavComponent label="스터디 그룹" />
+        <NavComponent label="구인 공고" />
+        <NavComponent label="로그인" />
+        <button className="rounded-md bg-[#CA8A04] p-2 whitespace-nowrap text-white">
+          회원가입
+        </button>
       </div>
     </header>
   )
