@@ -1,4 +1,5 @@
 import { cva } from 'class-variance-authority'
+import clsx from 'clsx'
 import { Mail, Search } from 'lucide-react'
 
 const inputStyle = cva(
@@ -48,7 +49,9 @@ function Input({ icon, isRequired }) {
           className={inputStyle({ hasIcon: Boolean(icon) })}
         />
       </div>
-      <span>올바른 형식으로 입력해주세요</span>
+      <span className={clsx(errorMessageStyle({ isError: isError }))}>
+        올바른 형식으로 입력해주세요
+      </span>
     </label>
   )
 }
