@@ -3,7 +3,7 @@ import { cn } from '@/utils'
 import { Mail, Search } from 'lucide-react'
 import type { ComponentProps } from 'react'
 
-const inputStyle = cva(
+const inputVariants = cva(
   'w-full focus:ring-primary-500 rounded-lg py-[13px] text-sm ring ring-gray-300 outline-none placeholder:text-gray-400 focus:border-none focus:ring-2',
   {
     variants: {
@@ -31,7 +31,7 @@ const errorMessageStyle = cva('text-sm', {
 
 interface InputProps
   extends ComponentProps<'input'>,
-    VariantProps<typeof inputStyle> {
+    VariantProps<typeof inputVariants> {
   label: string
   isRequired?: boolean
   isError?: boolean
@@ -63,7 +63,7 @@ function Input({
         <input
           type={type}
           placeholder={placeholder}
-          className={cn(inputStyle({ hasIcon: Boolean(icon) }))}
+          className={cn(inputVariants({ hasIcon: Boolean(icon) }))}
         />
       </div>
       <span className={cn(errorMessageStyle({ isError: isError }))}>
