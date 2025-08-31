@@ -20,7 +20,7 @@ const inputVariants = cva(
   }
 )
 
-const errorMessageStyle = cva('text-sm', {
+const errorMessageVariants = cva('text-sm', {
   variants: {
     isError: {
       true: 'block text-danger-600',
@@ -72,7 +72,7 @@ function Input({
           {...props}
         />
       </div>
-      <span className={cn(errorMessageStyle({ isError: isError }))}>
+      <span className={cn(errorMessageVariants({ isError: isError }))}>
         올바른 형식으로 입력해주세요
       </span>
     </label>
