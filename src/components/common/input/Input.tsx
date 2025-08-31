@@ -13,7 +13,7 @@ const inputStyle = cva(
   }
 )
 
-function Input() {
+function Input({ icon }) {
   return (
     <label className="flex flex-col gap-2">
       <div className="flex gap-1 text-sm font-medium">
