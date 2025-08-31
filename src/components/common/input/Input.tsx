@@ -45,6 +45,8 @@ function Input({
   isRequired = false,
   isError = false,
   icon,
+  className,
+  ...props
 }: InputProps) {
   return (
     <label className="flex flex-col gap-2">
