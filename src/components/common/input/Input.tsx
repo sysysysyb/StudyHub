@@ -28,7 +28,7 @@ const errorMessageStyle = cva('text-sm', {
   },
 })
 
-function Input({ icon, isRequired }) {
+function Input({ icon, isRequired, isError }) {
   return (
     <label className="flex flex-col gap-2">
       <div className="flex gap-1 text-sm font-medium">
