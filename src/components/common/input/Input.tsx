@@ -32,6 +32,7 @@ const errorMessageStyle = cva('text-sm', {
 interface InputProps
   extends ComponentProps<'input'>,
     VariantProps<typeof inputStyle> {
+  label: string
   isRequired?: boolean
   isError?: boolean
   icon?: string | null
