@@ -22,8 +22,12 @@ function Input() {
       </div>
 
       <div className="relative">
-        <Search className="absolute inset-y-0 left-2 my-auto h-4 text-gray-400" />
-        <Mail className="absolute inset-y-0 left-2 my-auto h-4 text-gray-400" />
+        {icon === 'search' && (
+          <Search className="absolute inset-y-0 left-2 my-auto h-4 text-gray-400" />
+        )}
+        {icon === 'email' && (
+          <Mail className="absolute inset-y-0 left-2 my-auto h-4 text-gray-400" />
+        )}
         <input
           type="text"
           placeholder="이름을 입력하세요"
