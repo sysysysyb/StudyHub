@@ -18,6 +18,15 @@ const inputStyle = cva(
   }
 )
 
+const errorMessageStyle = cva('text-sm', {
+  variants: {
+    isError: {
+      true: 'block text-danger-600',
+      false: 'hidden',
+    },
+  },
+})
+
 function Input({ icon, isRequired }) {
   return (
     <label className="flex flex-col gap-2">
