@@ -63,30 +63,14 @@ jobs:
             MENTIONS=""
             for login in $(echo "$REVIEWERS_JSON" | jq -r '.[] | .login'); do
               case "$login" in
-                "chen4023")
-                  MENTIONS="$MENTIONS <@683563560063991848>"
-                  ;;
-                "Kwonyeojiny")
-                  MENTIONS="$MENTIONS <@579296258091646976>"
-                  ;;
-                "shin-minhyuk")
-                  MENTIONS="$MENTIONS <@1121074841102069814>"
-                  ;;
-                "sysysysyb")
-                  MENTIONS="$MENTIONS <@950597490086924368>"
-                  ;;
-                 "dirage1")
-                  MENTIONS="$MENTIONS <@1128168230540804258>"
-                  ;;
-                 "Jaeeun0723")
-                  MENTIONS="$MENTIONS <@478568545748254720>"
-                  ;;
-                 "JaeHyunLee123")
-                  MENTIONS="$MENTIONS <@338615685498273792>"
-                  ;;
-                *)
-                  MENTIONS="$MENTIONS @$login"
-                  ;;
+                "chen4023") MENTIONS="$MENTIONS <@683563560063991848>" ;;
+                "Kwonyeojiny") MENTIONS="$MENTIONS <@579296258091646976>" ;;
+                "shin-minhyuk") MENTIONS="$MENTIONS <@1121074841102069814>" ;;
+                "sysysysyb") MENTIONS="$MENTIONS <@950597490086924368>" ;;
+                "dirage1") MENTIONS="$MENTIONS <@1128168230540804258>" ;;
+                "Jaeeun0723") MENTIONS="$MENTIONS <@478568545748254720>" ;;
+                "JaeHyunLee123") MENTIONS="$MENTIONS <@338615685498273792>" ;;
+                *) MENTIONS="$MENTIONS @$login" ;;
               esac
             done
 
@@ -114,16 +98,8 @@ jobs:
                      \"description\": \"[${{ github.event.pull_request.title }}](${{ github.event.pull_request.html_url }})\",
                      \"color\": 16776960,
                      \"fields\": [
-                       {
-                         \"name\": \"👤 PR 작성자\",
-                         \"value\": \"${{ github.event.pull_request.user.login }}\",
-                         \"inline\": true
-                       },
-                       {
-                         \"name\": \"📁 변경사항\",
-                         \"value\": \"파일 ${{ github.event.pull_request.changed_files }}개 | +${{ github.event.pull_request.additions }} -${{ github.event.pull_request.deletions }}\",
-                         \"inline\": false
-                       }
+                       { \"name\": \"👤 PR 작성자\", \"value\": \"${{ github.event.pull_request.user.login }}\", \"inline\": true },
+                       { \"name\": \"📁 변경사항\", \"value\": \"파일 ${{ github.event.pull_request.changed_files }}개 | +${{ github.event.pull_request.additions }} -${{ github.event.pull_request.deletions }}\", \"inline\": false }
                      ]
                    }]
                  }" \
@@ -154,16 +130,8 @@ jobs:
                   \"description\": \"[${{ github.event.pull_request.title }}](${{ github.event.pull_request.html_url }})\",
                   \"color\": $COLOR,
                   \"fields\": [
-                    {
-                      \"name\": \"👤 작성자\",
-                      \"value\": \"${{ github.event.pull_request.user.login }}\",
-                      \"inline\": true
-                    },
-                    {
-                      \"name\": \"🌿 브랜치\",
-                      \"value\": \"\`${{ github.event.pull_request.head.ref }}\` → \`${{ github.event.pull_request.base.ref }}\`\",
-                      \"inline\": true
-                    }
+                    { \"name\": \"👤 작성자\", \"value\": \"${{ github.event.pull_request.user.login }}\", \"inline\": true },
+                    { \"name\": \"🌿 브랜치\", \"value\": \"\`${{ github.event.pull_request.head.ref }}\` → \`${{ github.event.pull_request.base.ref }}\`\", \"inline\": true }
                   ]
                 }]
               }" \
@@ -175,30 +143,14 @@ jobs:
         run: |
           # PR 작성자 Discord ID 매핑
           case "${{ github.event.pull_request.user.login }}" in
-            "chen4023")
-                  AUTHOR_MENTION="<@683563560063991848>"
-                  ;;
-            "Kwonyeojiny")
-                  AUTHOR_MENTION="<@579296258091646976>"
-                  ;;
-            "shin-minhyuk")
-                  AUTHOR_MENTION="<@1121074841102069814>"
-                  ;;
-            "sysysysyb")
-                  AUTHOR_MENTION="<@950597490086924368>"
-                  ;;
-             "dirage1")
-                  AUTHOR_MENTION="<@1128168230540804258>"
-                  ;;
-             "Jaeeun0723")
-                  AUTHOR_MENTION="<@478568545748254720>"
-                  ;;
-             "JaeHyunLee123")
-                  AUTHOR_MENTION="<@338615685498273792>"
-                  ;;
-            *)
-              AUTHOR_MENTION="@${{ github.event.pull_request.user.login }}"
-              ;;
+            "chen4023") AUTHOR_MENTION="<@683563560063991848>" ;;
+            "Kwonyeojiny") AUTHOR_MENTION="<@579296258091646976>" ;;
+            "shin-minhyuk") AUTHOR_MENTION="<@1121074841102069814>" ;;
+            "sysysysyb") AUTHOR_MENTION="<@950597490086924368>" ;;
+            "dirage1") AUTHOR_MENTION="<@1128168230540804258>" ;;
+            "Jaeeun0723") AUTHOR_MENTION="<@478568545748254720>" ;;
+            "JaeHyunLee123") AUTHOR_MENTION="<@338615685498273792>" ;;
+            *) AUTHOR_MENTION="@${{ github.event.pull_request.user.login }}" ;;
           esac
 
           curl -H "Content-Type: application/json" \
@@ -210,20 +162,10 @@ jobs:
                   \"description\": \"[${{ github.event.pull_request.title }}](${{ github.event.pull_request.html_url }})\",
                   \"color\": 65280,
                   \"fields\": [
-                    {
-                      \"name\": \"👀 리뷰어\",
-                      \"value\": \"${{ github.event.review.user.login }}\",
-                      \"inline\": true
-                    },
-                    {
-                      \"name\": \"💬 리뷰 내용\",
-                      \"value\": \"승인되었습니다!\",
-                      \"inline\": false
-                    }
+                    { \"name\": \"👀 리뷰어\", \"value\": \"${{ github.event.review.user.login }}\", \"inline\": true },
+                    { \"name\": \"💬 리뷰 내용\", \"value\": \"승인되었습니다!\", \"inline\": false }
                   ],
-                  \"footer\": {
-                    \"text\": \"이제 병합할 수 있습니다! 🚀\"
-                  }
+                  \"footer\": { \"text\": \"이제 병합할 수 있습니다! 🚀\" }
                 }]
               }" \
               ${{ secrets.DISCORD_WEBHOOK_URL }}
@@ -234,30 +176,14 @@ jobs:
         run: |
           # PR 작성자 Discord ID 매핑
           case "${{ github.event.pull_request.user.login }}" in
-            "chen4023")
-                  AUTHOR_MENTION="<@683563560063991848>"
-                  ;;
-            "Kwonyeojiny")
-                  AUTHOR_MENTION="<@579296258091646976>"
-                  ;;
-            "shin-minhyuk")
-                  AUTHOR_MENTION="<@1121074841102069814>"
-                  ;;
-            "sysysysyb")
-                  AUTHOR_MENTION="<@950597490086924368>"
-                  ;;
-             "dirage1")
-                  AUTHOR_MENTION="<@1128168230540804258>"
-                  ;;
-             "Jaeeun0723")
-                  AUTHOR_MENTION="<@478568545748254720>"
-                  ;;
-             "JaeHyunLee123")
-                  AUTHOR_MENTION="<@338615685498273792>"
-                  ;;
-              *)
-		              AUTHOR_MENTION="@${{ github.event.pull_request.user.login }}"
-		              ;;
+            "chen4023") AUTHOR_MENTION="<@683563560063991848>" ;;
+            "Kwonyeojiny") AUTHOR_MENTION="<@579296258091646976>" ;;
+            "shin-minhyuk") AUTHOR_MENTION="<@1121074841102069814>" ;;
+            "sysysysyb") AUTHOR_MENTION="<@950597490086924368>" ;;
+            "dirage1") AUTHOR_MENTION="<@1128168230540804258>" ;;
+            "Jaeeun0723") AUTHOR_MENTION="<@478568545748254720>" ;;
+            "JaeHyunLee123") AUTHOR_MENTION="<@338615685498273792>" ;;
+            *) AUTHOR_MENTION="@${{ github.event.pull_request.user.login }}" ;;
           esac
 
           curl -H "Content-Type: application/json" \
@@ -269,16 +195,8 @@ jobs:
                   \"description\": \"[${{ github.event.pull_request.title }}](${{ github.event.pull_request.html_url }})\",
                   \"color\": 16776960,
                   \"fields\": [
-                    {
-                      \"name\": \"👀 리뷰어\",
-                      \"value\": \"${{ github.event.review.user.login }}\",
-                      \"inline\": true
-                    },
-                    {
-                      \"name\": \"📝 요청사항\",
-                      \"value\": \"변경사항이 요청되었습니다. 자세한 내용은 PR을 확인해주세요.\",
-                      \"inline\": false
-                    }
+                    { \"name\": \"👀 리뷰어\", \"value\": \"${{ github.event.review.user.login }}\", \"inline\": true },
+                    { \"name\": \"📝 요청사항\", \"value\": \"변경사항이 요청되었습니다. 자세한 내용은 PR을 확인해주세요.\", \"inline\": false }
                   ]
                 }]
               }" \
