@@ -63,7 +63,9 @@ function Input({
         <input
           type={type}
           placeholder={placeholder}
-          className={cn(inputVariants({ hasIcon: Boolean(icon) }))}
+          className={cn(
+            inputVariants({ isError: isError, hasIcon: Boolean(icon) })
+          )}
         />
       </div>
       <span className={cn(errorMessageStyle({ isError: isError }))}>
