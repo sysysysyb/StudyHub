@@ -28,11 +28,11 @@ const errorMessageStyle = cva('text-sm', {
   },
 })
 
-function Input({ icon, isRequired, isError }) {
+function Input({ type, label, placeholder, icon, isRequired, isError }) {
   return (
     <label className="flex flex-col gap-2">
       <div className="flex gap-1 text-sm font-medium">
-        <span className="color-gray-700">이름</span>
+        <span className="color-gray-700">{label}</span>
         {isRequired && <span className="text-danger-500">*</span>}
       </div>
 
@@ -44,8 +44,8 @@ function Input({ icon, isRequired, isError }) {
           <Mail className="absolute inset-y-0 left-2 my-auto h-4 text-gray-400" />
         )}
         <input
-          type="text"
-          placeholder="이름을 입력하세요"
+          type={type}
+          placeholder={placeholder}
           className={clsx(inputStyle({ hasIcon: Boolean(icon) }))}
         />
       </div>
