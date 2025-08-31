@@ -1,6 +1,7 @@
-import { cva } from 'class-variance-authority'
+import { cva, type VariantProps } from 'class-variance-authority'
 import clsx from 'clsx'
 import { Mail, Search } from 'lucide-react'
+import type { ComponentProps } from 'react'
 
 const inputStyle = cva(
   'w-full focus:ring-primary-500 rounded-lg py-[13px] text-sm ring ring-gray-300 outline-none placeholder:text-gray-400 focus:border-none focus:ring-2',
@@ -27,6 +28,14 @@ const errorMessageStyle = cva('text-sm', {
     },
   },
 })
+
+interface InputProps
+  extends ComponentProps<'input'>,
+    VariantProps<typeof inputStyle> {
+  isRequired?: boolean
+  isError?: boolean
+  icon?: string | null
+}
 
 function Input({
   type = 'text',
