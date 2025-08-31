@@ -28,7 +28,14 @@ const errorMessageStyle = cva('text-sm', {
   },
 })
 
-function Input({ type, label, placeholder, icon, isRequired, isError }) {
+function Input({
+  type = 'text',
+  label = '라벨',
+  placeholder = '텍스트를 입력하세요',
+  isRequired = false,
+  isError = false,
+  icon,
+}) {
   return (
     <label className="flex flex-col gap-2">
       <div className="flex gap-1 text-sm font-medium">
