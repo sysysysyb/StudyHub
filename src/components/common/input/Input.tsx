@@ -46,7 +46,7 @@ function Input({ icon, isRequired }) {
         <input
           type="text"
           placeholder="이름을 입력하세요"
-          className={inputStyle({ hasIcon: Boolean(icon) })}
+          className={clsx(inputStyle({ hasIcon: Boolean(icon) }))}
         />
       </div>
       <span className={clsx(errorMessageStyle({ isError: isError }))}>
