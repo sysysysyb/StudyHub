@@ -1,5 +1,5 @@
 import { cva, type VariantProps } from 'class-variance-authority'
-import clsx from 'clsx'
+import { cn } from '@/utils'
 import { Mail, Search } from 'lucide-react'
 import type { ComponentProps } from 'react'
 
@@ -63,10 +63,10 @@ function Input({
         <input
           type={type}
           placeholder={placeholder}
-          className={clsx(inputStyle({ hasIcon: Boolean(icon) }))}
+          className={cn(inputStyle({ hasIcon: Boolean(icon) }))}
         />
       </div>
-      <span className={clsx(errorMessageStyle({ isError: isError }))}>
+      <span className={cn(errorMessageStyle({ isError: isError }))}>
         올바른 형식으로 입력해주세요
       </span>
     </label>
