@@ -18,7 +18,7 @@ function Input({ icon }) {
     <label className="flex flex-col gap-2">
       <div className="flex gap-1 text-sm font-medium">
         <span className="color-gray-700">이름</span>
-        <span className="text-danger-500">*</span>
+        {isRequired && <span className="text-danger-500">*</span>}
       </div>
 
       <div className="relative">
