@@ -35,7 +35,7 @@ interface InputProps
   label: string
   isRequired?: boolean
   isError?: boolean
-  icon?: string | null
+  icon?: 'search' | 'email'
 }
 
 function Input({
