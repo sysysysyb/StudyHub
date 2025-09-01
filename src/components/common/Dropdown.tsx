@@ -25,6 +25,9 @@ interface DropdownItemProps
 
 interface DropdownProps {
   options?: DropdownItemProps[]
+  value: string
+  onSelect: (value: string) => void
+  placeholder?: string
 }
 
 function DropdownItem({ label, icon, className, ...props }: DropdownItemProps) {
