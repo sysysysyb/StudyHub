@@ -1,5 +1,6 @@
 import { ChevronDown } from 'lucide-react'
 import Input from './Input'
+import { useState } from 'react'
 
 function DropdownItem({ option }) {
   return (
@@ -16,21 +17,29 @@ function DropdownEmptyItem() {
 }
 
 function Dropdown({ options = [] }) {
+  const [isOptionsOpen, setIsOptionsOpen] = useState(false)
+
   return (
     <div className="flex flex-col gap-1">
       <div className="relative h-fit">
-        <Input className="placeholder:text-gray-500 focus:ring-1 focus:ring-gray-300" />
+        <Input
+          className="cursor-pointer placeholder:text-gray-500 focus:ring-1 focus:ring-gray-300"
+          onClick={() => setIsOptionsOpen((prev) => !prev)}
+          readOnly
+        />
         <ChevronDown className="absolute inset-y-0 right-2 my-auto h-[14px]" />
       </div>
-      <div className="max-h-36 overflow-auto rounded-lg font-normal ring-1 ring-gray-300">
-        {options.length > 0 ? (
-          options.map((option, idx) => (
-            <DropdownItem key={idx} option={option} />
-          ))
-        ) : (
-          <DropdownEmptyItem />
-        )}
-      </div>
+      {isOptionsOpen && (
+        <div className="max-h-36 overflow-auto rounded-lg font-normal ring-1 ring-gray-300">
+          {options.length > 0 ? (
+            options.map((option, idx) => (
+              <DropdownItem key={idx} option={option} />
+            ))
+          ) : (
+            <DropdownEmptyItem />
+          )}
+        </div>
+      )}
     </div>
   )
 }
