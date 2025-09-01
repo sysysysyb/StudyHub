@@ -14,7 +14,7 @@ function Dropdown({ options = [] }) {
         <Input className="placeholder:text-gray-500 focus:ring-1 focus:ring-gray-300" />
         <ChevronDown className="absolute inset-y-0 right-2 my-auto h-[14px]" />
       </div>
-      <div className="h-36 overflow-auto rounded-lg text-base font-normal ring-1 ring-gray-300">
+      <div className="max-h-36 overflow-auto rounded-lg text-base font-normal ring-1 ring-gray-300">
         {options.map((option, idx) => (
           <DropdownItem key={idx} option={option} />
         ))}
