@@ -23,9 +23,13 @@ function Dropdown({ options = [] }) {
         <ChevronDown className="absolute inset-y-0 right-2 my-auto h-[14px]" />
       </div>
       <div className="max-h-36 overflow-auto rounded-lg font-normal ring-1 ring-gray-300">
-        {options.map((option, idx) => (
-          <DropdownItem key={idx} option={option} />
-        ))}
+        {options.length > 0 ? (
+          options.map((option, idx) => (
+            <DropdownItem key={idx} option={option} />
+          ))
+        ) : (
+          <DropdownEmptyItem />
+        )}
       </div>
     </div>
   )
