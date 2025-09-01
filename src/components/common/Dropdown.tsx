@@ -3,7 +3,15 @@ import Input from './Input'
 
 function DropdownItem({ option }) {
   return (
-    <div className="cursor-pointer px-4 py-3 hover:bg-gray-100">{option}</div>
+    <div className="cursor-pointer px-4 py-3 text-base hover:bg-gray-100">
+      {option}
+    </div>
+  )
+}
+
+function DropdownEmptyItem() {
+  return (
+    <div className="bg-gray-50 px-4 py-3 text-sm text-gray-300">옵션 없음</div>
   )
 }
 
@@ -14,7 +22,7 @@ function Dropdown({ options = [] }) {
         <Input className="placeholder:text-gray-500 focus:ring-1 focus:ring-gray-300" />
         <ChevronDown className="absolute inset-y-0 right-2 my-auto h-[14px]" />
       </div>
-      <div className="max-h-36 overflow-auto rounded-lg text-base font-normal ring-1 ring-gray-300">
+      <div className="max-h-36 overflow-auto rounded-lg font-normal ring-1 ring-gray-300">
         {options.map((option, idx) => (
           <DropdownItem key={idx} option={option} />
         ))}
