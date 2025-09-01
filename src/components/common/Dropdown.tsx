@@ -1,6 +1,6 @@
 import { ChevronDown, type LucideIcon } from 'lucide-react'
 import Input from './Input'
-import { useRef, useState, type ComponentProps } from 'react'
+import { useState, type ComponentProps } from 'react'
 import { cn } from '@/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
 
@@ -55,20 +55,15 @@ function DropdownEmptyItem() {
 
 function Dropdown({
   options,
-  value,
+  value = '',
   onSelect,
   placeholder = '옵션을 선택하세요',
 }: DropdownProps) {
   const [isOptionsOpen, setIsOptionsOpen] = useState(false)
-  const inputRef = useRef<HTMLInputElement>(null)
 
   const handleClickOption = (label: string) => {
     onSelect(label)
     setIsOptionsOpen(false)
-
-    if (inputRef.current) {
-      inputRef.current.value = label
-    }
   }
 
   return (
@@ -76,7 +71,7 @@ function Dropdown({
       <div className="relative h-fit">
         <Input
           className="cursor-pointer placeholder:text-gray-500 focus:ring-1 focus:ring-gray-300"
-          ref={inputRef}
+          value={value}
           placeholder={placeholder}
           onClick={() => setIsOptionsOpen((prev) => !prev)}
           readOnly
