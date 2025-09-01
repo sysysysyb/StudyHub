@@ -35,6 +35,7 @@ interface InputProps
   label: string
   isRequired?: boolean
   isError?: boolean
+  errorMessage?: string
   icon?: 'search' | 'email'
 }
 
