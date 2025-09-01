@@ -147,6 +147,9 @@ function ModalDescription({
 /* --------------------
    Content
 -------------------- */
+
+const MODAL_ANIMATION_TIME_MS = 120
+
 interface ModalContentProps extends ComponentProps<'div'> {
   children: ReactNode
 }
@@ -154,16 +157,20 @@ interface ModalContentProps extends ComponentProps<'div'> {
 function ModalContent({ children, className, ...rest }: ModalContentProps) {
   const { isOpen, close } = useModalContext()
   const [show, setShow] = useState(false)
+  const [isAnimating, setIsAnimating] = useState(false)
 
-  // 모달 열릴 때 mount
   useEffect(() => {
     if (isOpen) {
       setShow(true)
-    } else {
-      // 닫힘 애니메이션 시간만큼 지연 후 언마운트
-      const timer = setTimeout(() => setShow(false), 200) // 200ms = transition duration
+      const timer = setTimeout(
+        () => setIsAnimating(true),
+        MODAL_ANIMATION_TIME_MS
+      ) // For animation
       return () => clearTimeout(timer)
     }
+    setIsAnimating(false)
+    const timer = setTimeout(() => setShow(false), MODAL_ANIMATION_TIME_MS) // Delay unmount for animation
+    return () => clearTimeout(timer)
   }, [isOpen])
 
   // ESC 키 닫기
@@ -183,8 +190,9 @@ function ModalContent({ children, className, ...rest }: ModalContentProps) {
       {/* Overlay */}
       <div
         className={cn(
-          'fixed inset-0 z-40 bg-black/50 transition-opacity duration-200',
-          isOpen ? 'opacity-100' : 'opacity-0'
+          'fixed inset-0 z-40 bg-black/50 transition-opacity',
+          `duration-[${MODAL_ANIMATION_TIME_MS}]`,
+          isAnimating ? 'opacity-100' : 'opacity-0'
         )}
         onClick={close}
       />
@@ -192,8 +200,9 @@ function ModalContent({ children, className, ...rest }: ModalContentProps) {
       {/* Modal */}
       <div
         className={cn(
-          'fixed top-1/2 left-1/2 z-50 flex min-w-64 -translate-x-1/2 -translate-y-1/2 transform flex-col rounded-xl bg-white transition-all duration-200',
-          isOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0',
+          'fixed top-1/2 left-1/2 z-50 flex min-w-64 -translate-x-1/2 -translate-y-1/2 transform flex-col rounded-xl bg-white transition-all',
+          `duration-[${MODAL_ANIMATION_TIME_MS}]`,
+          isAnimating ? 'scale-100 opacity-100' : 'scale-95 opacity-0',
           className
         )}
         {...rest}
