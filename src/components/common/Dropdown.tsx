@@ -1,11 +1,11 @@
 import { ChevronDown, type LucideIcon } from 'lucide-react'
 import Input from './Input'
-import { useState } from 'react'
+import { useState, type ComponentProps } from 'react'
 import { cn } from '@/utils'
-import { cva } from 'class-variance-authority'
+import { cva, type VariantProps } from 'class-variance-authority'
 
 const dropdownItemVariants = cva(
-  'relative cursor-pointer px-4 py-3 text-base hover:bg-gray-100',
+  'text-left w-full relative cursor-pointer px-4 py-3 text-base hover:bg-gray-100',
   {
     variants: {
       hasIcon: {
@@ -25,14 +25,20 @@ interface DropdownProps {
   options?: DropdownItemProps[]
 }
 
-function DropdownItem({ label, icon }: DropdownItemProps) {
+function DropdownItem({ label, icon, className, ...props }: DropdownItemProps) {
   const Icon = icon
 
   return (
-    <div className={cn(dropdownItemVariants({ hasIcon: Boolean(icon) }))}>
+    <button
+      className={cn(
+        dropdownItemVariants({ hasIcon: Boolean(icon) }),
+        className
+      )}
+      {...props}
+    >
       {label}
       {Icon && <Icon className="absolute inset-y-0 left-2 my-auto h-4" />}
-    </div>
+    </button>
   )
 }
 
@@ -44,6 +50,12 @@ function DropdownEmptyItem() {
 
 function Dropdown({ options }: DropdownProps) {
   const [isOptionsOpen, setIsOptionsOpen] = useState(false)
+  const [selectedOption, setSelectedOption] = useState<string>('')
+
+  const handleClickOption = (label: string) => {
+    setSelectedOption(label)
+    setIsOptionsOpen(false)
+  }
 
   return (
     <div className="relative">
@@ -56,10 +68,15 @@ function Dropdown({ options }: DropdownProps) {
         <ChevronDown className="absolute inset-y-0 right-2 my-auto h-[14px]" />
       </div>
       {isOptionsOpen && (
-        <div className="absolute top-13 z-10 max-h-36 w-full overflow-auto rounded-lg bg-white font-normal ring-1 ring-gray-300 [&::-webkit-scrollbar]:w-4 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:border-3 [&::-webkit-scrollbar-thumb]:border-solid [&::-webkit-scrollbar-thumb]:border-white [&::-webkit-scrollbar-thumb]:bg-gray-100 [&::-webkit-scrollbar-track]:rounded-full">
+        <div className="absolute top-13 z-10 flex max-h-36 w-full flex-col overflow-auto rounded-lg bg-white font-normal ring-1 ring-gray-300 [&::-webkit-scrollbar]:w-4 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:border-3 [&::-webkit-scrollbar-thumb]:border-solid [&::-webkit-scrollbar-thumb]:border-white [&::-webkit-scrollbar-thumb]:bg-gray-100 [&::-webkit-scrollbar-track]:rounded-full">
           {options ? (
             options.map((option, idx) => (
-              <DropdownItem key={idx} label={option.label} icon={option.icon} />
+              <DropdownItem
+                key={idx}
+                label={option.label}
+                icon={option.icon}
+                onClick={() => handleClickOption(option.label)}
+              />
             ))
           ) : (
             <DropdownEmptyItem />
