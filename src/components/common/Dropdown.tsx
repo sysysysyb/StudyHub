@@ -16,7 +16,9 @@ const dropdownItemVariants = cva(
   }
 )
 
-interface DropdownItemProps {
+interface DropdownItemProps
+  extends ComponentProps<'button'>,
+    VariantProps<typeof dropdownItemVariants> {
   label: string
   icon?: LucideIcon
 }
