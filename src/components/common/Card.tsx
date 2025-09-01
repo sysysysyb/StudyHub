@@ -2,17 +2,23 @@ import type { ComponentProps, ReactElement } from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/utils'
 
-function CardTitle() {
-  return <h1>Card Title</h1>
+function CardTitle({ children, className, ...props }: ComponentProps<'h3'>) {
+  return (
+    <h3 className={cn('text-base font-semibold', className)} {...props}>
+      {children}
+    </h3>
+  )
 }
 
-interface CardContentProps extends ComponentProps<'div'> {}
-
-function CardContent({ children }: CardContentProps) {
-  return <div>{children}</div>
+function CardContent({ children, className, ...props }: ComponentProps<'div'>) {
+  return (
+    <div className={cn('gray-600 text-sm', className)} {...props}>
+      {children}
+    </div>
+  )
 }
 
-const cardVariants = cva('rounded p-[25px] bg-white', {
+const cardVariants = cva('rounded-lg p-6 bg-white', {
   variants: {
     variant: {
       default: 'border border-gray-200',
@@ -35,9 +41,11 @@ interface CardProps
     | [ReactElement<typeof CardTitle>, ReactElement<typeof CardContent>] // 제목 있는 경우
 }
 
-function Card({ children, variant, className }: CardProps) {
+function Card({ children, variant, className, ...props }: CardProps) {
   return (
-    <div className={cn(cardVariants({ variant }), className)}>{children}</div>
+    <div className={cn(cardVariants({ variant }), className)} {...props}>
+      {children}
+    </div>
   )
 }
 
