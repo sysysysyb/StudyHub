@@ -7,14 +7,18 @@ function DropdownItem({ option }) {
   )
 }
 
-function Dropdown() {
+function Dropdown({ options = [] }) {
   return (
     <div className="flex flex-col gap-1">
       <div className="relative h-fit">
         <Input className="placeholder:text-gray-500 focus:ring-1 focus:ring-gray-300" />
         <ChevronDown className="absolute inset-y-0 right-2 my-auto h-[14px]" />
       </div>
-      <div className="h-36 overflow-auto rounded-lg text-base font-normal ring-1 ring-gray-300"></div>
+      <div className="h-36 overflow-auto rounded-lg text-base font-normal ring-1 ring-gray-300">
+        {options.map((option, idx) => (
+          <DropdownItem key={idx} option={option} />
+        ))}
+      </div>
     </div>
   )
 }
