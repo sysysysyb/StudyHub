@@ -14,7 +14,7 @@ const LandingPage = () => {
               <span className="text-gray-900">IT 전문 지식을</span>
               <span className="text-primary-600">함께 배워나가세요</span>
             </div>
-            <div className="text-heading5 pb-8 leading-7 text-gray-600">
+            <div className="text-heading4 text-secondary pb-8 leading-7">
               최고의 강사진과 함께하는 IT 강의와 스터디 그룹으로 실무 역량을
               키워보세요.
             </div>
@@ -41,7 +41,7 @@ const LandingPage = () => {
             <div className="text-heading2 flex justify-center pb-4 text-gray-900">
               왜 StudyHub을 선택해야 할까요?
             </div>
-            <span className="text-heading5 flex justify-center text-gray-600">
+            <span className="text-heading5 text-secondary flex justify-center">
               체계적인 학습과 실무경험을 동시에 얻을 수 있는 최적의
               플랫폼입니다.
             </span>
@@ -105,8 +105,8 @@ const BenefitCard: React.FC<BenefitCardProps> = ({
         {icon}
       </div>
       <div className="text-heading4 pb-3 text-gray-900">{title}</div>
-      <div className="text-heading5 text-gray-600">{comment1}</div>
-      <div className="text-heading5 text-gray-600">{comment2}</div>
+      <div className="text-secondary">{comment1}</div>
+      <div className="text-secondary">{comment2}</div>
     </div>
   )
 }
