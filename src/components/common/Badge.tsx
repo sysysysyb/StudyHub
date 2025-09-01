@@ -2,7 +2,7 @@ import { cn } from '@/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
 import type { ComponentProps } from 'react'
 
-const badgeVariants = cva('font-normal text-center rounded-full', {
+const badgeVariants = cva('font-normal text-center rounded-full inline-block', {
   variants: {
     variant: {
       default: 'bg-gray-100 text-gray-800',
