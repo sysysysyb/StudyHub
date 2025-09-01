@@ -53,7 +53,7 @@ function Input({
   return (
     <label className="flex flex-col gap-2">
       <div className="flex gap-1 text-sm font-medium">
-        <span className="color-gray-700">{label}</span>
+        {label && <span className="color-gray-700">{label}</span>}
         {isRequired && <span className="text-danger-500">*</span>}
       </div>
 
