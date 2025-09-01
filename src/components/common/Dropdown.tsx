@@ -17,17 +17,20 @@ const dropdownItemVariants = cva(
 )
 
 interface DropdownItemProps {
-  option: { label: string; icon?: LucideIcon }
+  label: string
+  icon?: LucideIcon
 }
 
-function DropdownItem({ option }: DropdownItemProps) {
-  const Icon = option.icon
+interface DropdownProps {
+  options?: DropdownItemProps[]
+}
+
+function DropdownItem({ label, icon }: DropdownItemProps) {
+  const Icon = icon
 
   return (
-    <div
-      className={cn(dropdownItemVariants({ hasIcon: Boolean(option.icon) }))}
-    >
-      {option.label}
+    <div className={cn(dropdownItemVariants({ hasIcon: Boolean(icon) }))}>
+      {label}
       {Icon && <Icon className="absolute inset-y-0 left-2 my-auto h-4" />}
     </div>
   )
@@ -39,7 +42,7 @@ function DropdownEmptyItem() {
   )
 }
 
-function Dropdown({ options = [] }) {
+function Dropdown({ options }: DropdownProps) {
   const [isOptionsOpen, setIsOptionsOpen] = useState(false)
 
   return (
@@ -54,9 +57,9 @@ function Dropdown({ options = [] }) {
       </div>
       {isOptionsOpen && (
         <div className="absolute top-13 z-10 max-h-36 w-full overflow-auto rounded-lg bg-white font-normal ring-1 ring-gray-300 [&::-webkit-scrollbar]:w-4 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:border-3 [&::-webkit-scrollbar-thumb]:border-solid [&::-webkit-scrollbar-thumb]:border-white [&::-webkit-scrollbar-thumb]:bg-gray-100 [&::-webkit-scrollbar-track]:rounded-full">
-          {options.length > 0 ? (
+          {options ? (
             options.map((option, idx) => (
-              <DropdownItem key={idx} option={option} />
+              <DropdownItem key={idx} label={option.label} icon={option.icon} />
             ))
           ) : (
             <DropdownEmptyItem />
