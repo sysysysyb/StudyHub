@@ -1,12 +1,13 @@
-import Button from '@/components/common/Button'
+import { Button, ImageCard } from '@/components'
+import { BenefitCard } from '@/components/common/Card/BenefitCard'
+import { CardTitle } from '@/components/common/Card/Card'
 import LandingPageImage from '@/assets/images/LandingPageImage.jpg'
 import StudyGroupIcon from '@/assets/images/StudyGroupIcon.png'
 import { BookOpen, Award, ArrowRight } from 'lucide-react'
-import { ImageCard } from '@/components'
 
 const LandingPage = () => {
   return (
-    <div className="flex max-w-[1440px] flex-col">
+    <div className="mx-auto flex max-w-[1440px] flex-col">
       {/* 1번 섹션 */}
       <div className="bg-primary-50 flex items-center px-28 py-20">
         <div className="mx-auto flex max-w-[1280px] gap-12">
@@ -50,23 +51,29 @@ const LandingPage = () => {
               iconbgcolor="bg-primary-100"
               icon={<BookOpen className="text-primary-600" />}
               title="다양한 IT 강의"
-              comment1="프론트엔드부터 백엔드, 데이터사이언스까지"
-              comment2="모든 분야의 전문 강의를 제공합니다."
+              comments={[
+                '프론트엔드부터 백엔드, 데이터사이언스까지',
+                '모든 분야의 전문 강의를 제공합니다.',
+              ]}
             />
             <BenefitCard
               iconbgcolor="bg-green-100"
               // 스터디그룹 아이콘은 lucide에서 찾지 못하여 다운받아 첨부
               icon={<img src={StudyGroupIcon} />}
               title="스터디 그룹"
-              comment1="같은 목표를 가진 사람들과 함께 학습하며"
-              comment2="서로 동기부여하고 성장할 수 있습니다."
+              comments={[
+                '같은 목표를 가진 사람들과 함께 학습하며',
+                '서로 동기부여하고 성장할 수 있습니다.',
+              ]}
             />
             <BenefitCard
               iconbgcolor="bg-purple-100"
               icon={<Award className="text-purple-600" />}
               title="전문 강사진"
-              comment1="실무 경험이 풍부한 전문가들이 직접 제작한 "
-              comment2="고품질의 강의 콘텐츠를 만나보세요."
+              comments={[
+                '실무 경험이 풍부한 전문가들이 직접 제작한 ',
+                '고품질의 강의 콘텐츠를 만나보세요.',
+              ]}
             />
           </div>
         </div>
@@ -88,7 +95,7 @@ const LandingPage = () => {
         <div className="flex gap-6">
           {/* 임시로 만든 강의목록 카드 */}
           <ImageCard imageUrl={LandingPageImage} variant="elevate">
-            <h3 className="pb-2 text-lg font-bold">타이틀</h3>
+            <CardTitle className="pb-2 text-lg font-bold">타이틀</CardTitle>
             <div>
               <p className="text-secondary pb-3">제공자</p>
               <div className="text-secondary gap- flex pb-3">
@@ -102,7 +109,7 @@ const LandingPage = () => {
             </div>
           </ImageCard>
           <ImageCard imageUrl={LandingPageImage} variant="elevate">
-            <h3 className="pb-2 text-lg font-bold">타이틀</h3>
+            <CardTitle className="pb-2 text-lg font-bold">타이틀</CardTitle>
             <div>
               <p className="text-secondary pb-3">제공자</p>
               <div className="text-secondary gap- flex pb-3">
@@ -116,7 +123,7 @@ const LandingPage = () => {
             </div>
           </ImageCard>
           <ImageCard imageUrl={LandingPageImage} variant="elevate">
-            <h3 className="pb-2 text-lg font-bold">타이틀</h3>
+            <CardTitle className="pb-2 text-lg font-bold">타이틀</CardTitle>
             <div>
               <p className="text-secondary pb-3">제공자</p>
               <div className="text-secondary gap- flex pb-3">
@@ -161,32 +168,3 @@ const LandingPage = () => {
 }
 
 export default LandingPage
-
-interface BenefitCardProps {
-  iconbgcolor: string
-  icon: React.ReactNode
-  title: string
-  comment1: string
-  comment2?: string
-}
-
-const BenefitCard: React.FC<BenefitCardProps> = ({
-  iconbgcolor,
-  icon,
-  title,
-  comment1,
-  comment2,
-}) => {
-  return (
-    <div className="flex h-54 w-96 flex-col items-center p-6">
-      <div
-        className={`${iconbgcolor} mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full`}
-      >
-        {icon}
-      </div>
-      <div className="text-heading4 pb-3 text-gray-900">{title}</div>
-      <div className="text-secondary">{comment1}</div>
-      <div className="text-secondary">{comment2}</div>
-    </div>
-  )
-}
