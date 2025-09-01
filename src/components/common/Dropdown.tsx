@@ -1,4 +1,4 @@
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown, type LucideIcon } from 'lucide-react'
 import Input from './Input'
 import { useState } from 'react'
 import { cn } from '@/utils'
@@ -16,13 +16,19 @@ const dropdownItemVariants = cva(
   }
 )
 
-function DropdownItem({ option }) {
+interface DropdownItemProps {
+  option: { label: string; icon?: LucideIcon }
+}
+
+function DropdownItem({ option }: DropdownItemProps) {
+  const Icon = option.icon
+
   return (
     <div
       className={cn(dropdownItemVariants({ hasIcon: Boolean(option.icon) }))}
     >
       {option.label}
-      <option.icon className="absolute inset-y-0 left-2 my-auto h-4" />
+      {Icon && <Icon className="absolute inset-y-0 left-2 my-auto h-4" />}
     </div>
   )
 }
