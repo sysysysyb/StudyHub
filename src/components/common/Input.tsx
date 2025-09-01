@@ -32,7 +32,7 @@ const errorMessageVariants = cva('text-sm', {
 interface InputProps
   extends ComponentProps<'input'>,
     VariantProps<typeof inputVariants> {
-  label: string
+  label?: string
   isRequired?: boolean
   isError?: boolean
   errorMessage?: string
@@ -41,7 +41,7 @@ interface InputProps
 
 function Input({
   type = 'text',
-  label = '라벨',
+  label,
   placeholder = '텍스트를 입력하세요',
   isRequired = false,
   isError = false,
@@ -53,7 +53,7 @@ function Input({
   return (
     <label className="flex flex-col gap-2">
       <div className="flex gap-1 text-sm font-medium">
-        <span className="color-gray-700">{label}</span>
+        {label && <span className="color-gray-700">{label}</span>}
         {isRequired && <span className="text-danger-500">*</span>}
       </div>
 
