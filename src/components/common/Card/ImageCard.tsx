@@ -12,12 +12,8 @@ export default function ImageCard({
   ...props
 }: ImageCardProps) {
   return (
-    <Card className={cn('p-0', className)} {...props}>
-      <div
-        className={cn(
-          'aspect-[16/9] overflow-hidden rounded-t-lg object-cover object-center'
-        )}
-      >
+    <Card className={cn('overflow-hidden p-0', className)} {...props}>
+      <div className={cn('aspect-[16/9] object-cover object-center')}>
         <img src={imageUrl} alt="" className="h-full w-full object-cover" />
       </div>
       <div className="p-6">{children}</div>
