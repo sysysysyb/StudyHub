@@ -32,7 +32,7 @@ const errorMessageVariants = cva('text-sm', {
 interface InputProps
   extends ComponentProps<'input'>,
     VariantProps<typeof inputVariants> {
-  label: string
+  label?: string
   isRequired?: boolean
   isError?: boolean
   errorMessage?: string
