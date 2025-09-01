@@ -1,7 +1,8 @@
 import Button from '@/components/common/Button'
 import LandingPageImage from '@/assets/images/LandingPageImage.jpg'
 import StudyGroupIcon from '@/assets/images/StudyGroupIcon.png'
-import { BookOpen, Award } from 'lucide-react'
+import { BookOpen, Award, ArrowRight } from 'lucide-react'
+import { ImageCard } from '@/components'
 
 const LandingPage = () => {
   return (
@@ -73,7 +74,65 @@ const LandingPage = () => {
         </div>
       </div>
       {/* 3번 섹션 */}
-      <div className="bg-gray-50"></div>
+      <div className="flex flex-col bg-gray-50 px-28 py-16">
+        <div className="flex items-center justify-between pb-8">
+          <div className="flex flex-col gap-2">
+            <p className="text-heading2">인기 강의</p>
+            <p className="text-secondary">
+              지금 가장 많은 사람들이 수강하는 강의들
+            </p>
+          </div>
+          <button className="text-primary-600 flex whitespace-nowrap">
+            <span>모든 강의 보기</span>
+            <ArrowRight className="pl-1" />
+          </button>
+        </div>
+        <div className="flex gap-6">
+          {/* 임시로 만든 강의목록 카드 */}
+          <ImageCard imageUrl={LandingPageImage} variant="elevate">
+            <h3 className="pb-2 text-lg font-bold">타이틀</h3>
+            <div>
+              <p className="text-secondary pb-3">제공자</p>
+              <div className="text-secondary gap- flex pb-3">
+                <span className="text-primary-500">별점 컴포넌트</span>
+                <span className="pl-2">별점 텍스트 (리뷰어 수)</span>
+              </div>
+              <div>
+                <span className="text-heading5">Final Price</span>
+                <s className="text-secondary pl-2">original price</s>
+              </div>
+            </div>
+          </ImageCard>
+          <ImageCard imageUrl={LandingPageImage} variant="elevate">
+            <h3 className="pb-2 text-lg font-bold">타이틀</h3>
+            <div>
+              <p className="text-secondary pb-3">제공자</p>
+              <div className="text-secondary gap- flex pb-3">
+                <span className="text-primary-500">별점 컴포넌트</span>
+                <span className="pl-2">별점 텍스트 (리뷰어 수)</span>
+              </div>
+              <div>
+                <span className="text-heading5">Final Price</span>
+                <s className="text-secondary pl-2">original price</s>
+              </div>
+            </div>
+          </ImageCard>
+          <ImageCard imageUrl={LandingPageImage} variant="elevate">
+            <h3 className="pb-2 text-lg font-bold">타이틀</h3>
+            <div>
+              <p className="text-secondary pb-3">제공자</p>
+              <div className="text-secondary gap- flex pb-3">
+                <span className="text-primary-500">별점 컴포넌트</span>
+                <span className="pl-2">별점 텍스트 (리뷰어 수)</span>
+              </div>
+              <div>
+                <span className="text-heading5">Final Price</span>
+                <s className="text-secondary pl-2">original price</s>
+              </div>
+            </div>
+          </ImageCard>
+        </div>
+      </div>
       {/* 4번 섹션 */}
       <div className="bg-primary-500"></div>
     </div>
