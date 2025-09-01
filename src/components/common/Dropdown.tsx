@@ -50,21 +50,25 @@ function DropdownEmptyItem() {
   )
 }
 
-function Dropdown({ options }: DropdownProps) {
+function Dropdown({
+  options,
+  value,
+  onSelect,
+  placeholder = '옵션을 선택하세요',
+}: DropdownProps) {
   const [isOptionsOpen, setIsOptionsOpen] = useState(false)
-  const [selectedOption, setSelectedOption] = useState<string>('')
   const inputRef = useRef<HTMLInputElement>(null)
 
   const handleClickOption = (label: string) => {
-    setSelectedOption(label)
+    onSelect(label)
     setIsOptionsOpen(false)
   }
 
   useEffect(() => {
     if (inputRef.current) {
-      inputRef.current.value = selectedOption
+      inputRef.current.value = value
     }
-  }, [selectedOption])
+  }, [value])
 
   return (
     <div className="relative">
@@ -72,6 +76,7 @@ function Dropdown({ options }: DropdownProps) {
         <Input
           className="cursor-pointer placeholder:text-gray-500 focus:ring-1 focus:ring-gray-300"
           ref={inputRef}
+          placeholder={placeholder}
           onClick={() => setIsOptionsOpen((prev) => !prev)}
           readOnly
         />
