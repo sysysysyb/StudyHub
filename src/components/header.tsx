@@ -10,7 +10,7 @@ const Logo = () => {
       <div className="bg-primary-500 text-4 flex h-8 w-8 items-center justify-center rounded-md font-bold text-white">
         S
       </div>
-      <div className="text-primary-500 text-heading4 bg-white pl-2 font-bold">
+      <div className="text-primary-600 text-heading4 bg-white pl-2 font-bold">
         StudyHub
       </div>
     </div>
