@@ -28,7 +28,8 @@ body {
   --text-heading5: 1.125rem;
   --text-heading5--font-weight: 600;
 
-  --text-secondary: #4b5563;
+  --color-secondary: #4b5563;
+  --text-secondary: 1rem;
   --text-secondary--font-weight: 400;
 }
 
