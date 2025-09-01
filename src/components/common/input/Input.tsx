@@ -8,7 +8,7 @@ const inputVariants = cva(
   {
     variants: {
       isError: {
-        true: 'ring-[#fca5a5]',
+        true: 'ring-danger-100',
         false:
           'ring-gray-300 focus:ring-primary-500 focus:border-none focus:ring-2',
       },
