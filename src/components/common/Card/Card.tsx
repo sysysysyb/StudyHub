@@ -1,4 +1,4 @@
-import type { ComponentProps, ReactElement } from 'react'
+import type { ComponentProps, ReactElement, ReactNode } from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/utils'
 
@@ -33,12 +33,14 @@ const cardVariants = cva('rounded-lg p-6 bg-white', {
   },
 })
 
+type RecommendedChildren =
+  | ReactElement<typeof CardContent>
+  | [ReactElement<typeof CardTitle>, ReactElement<typeof CardContent>]
+
 interface CardProps
   extends ComponentProps<'div'>,
     VariantProps<typeof cardVariants> {
-  children:
-    | ReactElement<typeof CardContent> // 제목 없는 경우
-    | [ReactElement<typeof CardTitle>, ReactElement<typeof CardContent>] // 제목 있는 경우
+  children: RecommendedChildren | ReactNode
 }
 
 function Card({ children, variant, className, ...props }: CardProps) {
@@ -49,4 +51,4 @@ function Card({ children, variant, className, ...props }: CardProps) {
   )
 }
 
-export { Card, CardTitle, CardContent }
+export { Card, CardTitle, CardContent, type CardProps }
