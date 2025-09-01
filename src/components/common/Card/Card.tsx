@@ -23,7 +23,7 @@ const cardVariants = cva('rounded-lg p-6 bg-white', {
     variant: {
       default: 'border border-gray-200',
       outline: 'border-2 border-gray-300',
-      elavate: 'shadow-lg border border-gray-100',
+      elevate: 'shadow-lg border border-gray-100',
       flat: 'border-0',
     },
   },
