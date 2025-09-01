@@ -41,7 +41,7 @@ interface InputProps
 
 function Input({
   type = 'text',
-  label = '라벨',
+  label,
   placeholder = '텍스트를 입력하세요',
   isRequired = false,
   isError = false,
