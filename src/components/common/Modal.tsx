@@ -78,7 +78,7 @@ function ModalHeader({
       )}
       {...props}
     >
-      {children}
+      {children ? children : <div />}
       <button onClick={close} className="cursor-pointer text-gray-400">
         <X />
       </button>
