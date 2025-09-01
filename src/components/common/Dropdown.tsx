@@ -30,7 +30,7 @@ function Dropdown({ options = [] }) {
         <ChevronDown className="absolute inset-y-0 right-2 my-auto h-[14px]" />
       </div>
       {isOptionsOpen && (
-        <div className="absolute top-13 z-10 max-h-36 w-full overflow-auto rounded-lg bg-white font-normal ring-1 ring-gray-300">
+        <div className="absolute top-13 z-10 max-h-36 w-full overflow-auto rounded-lg bg-white font-normal ring-1 ring-gray-300 [&::-webkit-scrollbar]:w-4 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:border-3 [&::-webkit-scrollbar-thumb]:border-solid [&::-webkit-scrollbar-thumb]:border-white [&::-webkit-scrollbar-thumb]:bg-gray-100 [&::-webkit-scrollbar-track]:rounded-full">
           {options.length > 0 ? (
             options.map((option, idx) => (
               <DropdownItem key={idx} option={option} />
