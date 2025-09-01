@@ -44,6 +44,7 @@ function Input({
   placeholder = '텍스트를 입력하세요',
   isRequired = false,
   isError = false,
+  errorMessage = '올바른 형식으로 입력해주세요',
   icon,
   className,
   ...props
@@ -73,7 +74,7 @@ function Input({
         />
       </div>
       <span className={cn(errorMessageVariants({ isError: isError }))}>
-        올바른 형식으로 입력해주세요
+        {errorMessage}
       </span>
     </label>
   )
