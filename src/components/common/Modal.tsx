@@ -28,7 +28,7 @@ function useModalContext() {
 }
 
 /* --------------------
-   1. ModalOpen
+   ModalOpen
 -------------------- */
 interface ModalTriggerProps extends ComponentProps<'div'> {
   children: ReactNode
@@ -44,7 +44,7 @@ function ModalTrigger({ children, ...rest }: ModalTriggerProps) {
 }
 
 /* --------------------
-   2. ModalClose
+   ModalClose
 -------------------- */
 
 interface ModalCloseProps extends ComponentProps<'div'> {
@@ -61,7 +61,7 @@ function ModalClose({ children, ...rest }: ModalCloseProps) {
 }
 
 /* --------------------
-   3. ModalHeader
+   ModalHeader
 -------------------- */
 function ModalHeader({
   children,
@@ -87,7 +87,7 @@ function ModalHeader({
 }
 
 /* --------------------
-   4. ModalFooter
+   ModalFooter
 -------------------- */
 function ModalFooter({
   children,
@@ -108,7 +108,18 @@ function ModalFooter({
 }
 
 /* --------------------
-   5. ModalTitle
+   ModalMain
+-------------------- */
+function ModalMain({ children, className, ...props }: ComponentProps<'main'>) {
+  return (
+    <main className={cn('p-6', className)} {...props}>
+      {children}
+    </main>
+  )
+}
+
+/* --------------------
+   ModalTitle
 -------------------- */
 function ModalTitle({ children, className, ...props }: ComponentProps<'h3'>) {
   return (
@@ -119,7 +130,7 @@ function ModalTitle({ children, className, ...props }: ComponentProps<'h3'>) {
 }
 
 /* --------------------
-   6. ModalDescription
+   ModalDescription
 -------------------- */
 function ModalDescription({
   children,
@@ -134,7 +145,7 @@ function ModalDescription({
 }
 
 /* --------------------
-   7. Content
+   Content
 -------------------- */
 interface ModalContentProps extends ComponentProps<'div'> {
   children: ReactNode
@@ -181,7 +192,7 @@ function ModalContent({ children, className, ...rest }: ModalContentProps) {
       {/* Modal */}
       <div
         className={cn(
-          'fixed top-1/2 left-1/2 z-50 flex min-w-64 -translate-x-1/2 -translate-y-1/2 transform flex-col rounded-lg border-2 bg-white shadow-lg transition-all duration-200',
+          'fixed top-1/2 left-1/2 z-50 flex min-w-64 -translate-x-1/2 -translate-y-1/2 transform flex-col rounded-xl bg-white transition-all duration-200',
           isOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0',
           className
         )}
@@ -194,7 +205,7 @@ function ModalContent({ children, className, ...rest }: ModalContentProps) {
 }
 
 /* --------------------
-   8. Wrapper
+   Wrapper
 -------------------- */
 interface ModalProps {
   children: ReactNode
@@ -235,4 +246,5 @@ export {
   ModalFooter,
   ModalTitle,
   ModalDescription,
+  ModalMain,
 }
