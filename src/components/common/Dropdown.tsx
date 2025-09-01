@@ -1,6 +1,7 @@
 import { ChevronDown } from 'lucide-react'
 import Input from './Input'
 import { useState } from 'react'
+import { cn } from '@/utils'
 import { cva } from 'class-variance-authority'
 
 const dropdownItemVariants = cva(
@@ -17,8 +18,11 @@ const dropdownItemVariants = cva(
 
 function DropdownItem({ option }) {
   return (
-    <div className="cursor-pointer px-4 py-3 text-base hover:bg-gray-100">
-      {option}
+    <div
+      className={cn(dropdownItemVariants({ hasIcon: Boolean(option.icon) }))}
+    >
+      {option.label}
+      <option.icon className="absolute inset-y-0 left-2 my-auto h-4" />
     </div>
   )
 }
