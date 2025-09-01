@@ -1,6 +1,6 @@
 import { ChevronDown, type LucideIcon } from 'lucide-react'
 import Input from './Input'
-import { useEffect, useRef, useState, type ComponentProps } from 'react'
+import { useRef, useState, type ComponentProps } from 'react'
 import { cn } from '@/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
 
@@ -65,13 +65,11 @@ function Dropdown({
   const handleClickOption = (label: string) => {
     onSelect(label)
     setIsOptionsOpen(false)
-  }
 
-  useEffect(() => {
     if (inputRef.current) {
-      inputRef.current.value = value
+      inputRef.current.value = label
     }
-  }, [value])
+  }
 
   return (
     <div className="relative">
@@ -86,7 +84,7 @@ function Dropdown({
         <ChevronDown className="absolute inset-y-0 right-2 my-auto h-[14px]" />
       </div>
       {isOptionsOpen && (
-        <div className="absolute top-13 z-10 flex max-h-36 w-full flex-col overflow-auto rounded-lg bg-white font-normal ring-1 ring-gray-300 [&::-webkit-scrollbar]:w-4 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:border-3 [&::-webkit-scrollbar-thumb]:border-solid [&::-webkit-scrollbar-thumb]:border-white [&::-webkit-scrollbar-thumb]:bg-gray-100 [&::-webkit-scrollbar-track]:rounded-full">
+        <div className="animate-fade-in-translateY absolute top-13 z-10 flex max-h-36 w-full flex-col overflow-auto rounded-lg bg-white font-normal ring-1 ring-gray-300 [&::-webkit-scrollbar]:w-4 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:border-3 [&::-webkit-scrollbar-thumb]:border-solid [&::-webkit-scrollbar-thumb]:border-white [&::-webkit-scrollbar-thumb]:bg-gray-100 [&::-webkit-scrollbar-track]:rounded-full">
           {options ? (
             options.map((option, idx) => (
               <DropdownItem
