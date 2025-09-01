@@ -1,6 +1,6 @@
 import { ChevronDown, type LucideIcon } from 'lucide-react'
 import Input from './Input'
-import { useState, type ComponentProps } from 'react'
+import { useEffect, useRef, useState, type ComponentProps } from 'react'
 import { cn } from '@/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
 
@@ -53,17 +53,25 @@ function DropdownEmptyItem() {
 function Dropdown({ options }: DropdownProps) {
   const [isOptionsOpen, setIsOptionsOpen] = useState(false)
   const [selectedOption, setSelectedOption] = useState<string>('')
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const handleClickOption = (label: string) => {
     setSelectedOption(label)
     setIsOptionsOpen(false)
   }
 
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.value = selectedOption
+    }
+  }, [selectedOption])
+
   return (
     <div className="relative">
       <div className="relative h-fit">
         <Input
           className="cursor-pointer placeholder:text-gray-500 focus:ring-1 focus:ring-gray-300"
+          ref={inputRef}
           onClick={() => setIsOptionsOpen((prev) => !prev)}
           readOnly
         />
