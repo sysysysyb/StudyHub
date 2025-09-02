@@ -9,20 +9,22 @@ const LandingPage = () => {
   return (
     <div className="mx-auto flex max-w-[1440px] flex-col">
       {/* 1번 섹션 */}
-      <div className="bg-primary-50 flex items-center px-28 py-20">
-        <div className="mx-auto flex max-w-[1280px] gap-12">
+      <div className="bg-primary-50 flex items-center px-5 py-20 sm:px-14 md:px-21 xl:px-28">
+        <div className="mx-auto flex max-w-[1280px] gap-4 sm:gap-12">
           <div>
-            <div className="flex flex-col pb-6 text-5xl font-bold">
+            <div className="sm:text-heading2 text-heading3 flex flex-col pb-6 font-bold lg:text-4xl xl:text-5xl">
               <span className="text-gray-900">IT 전문 지식을</span>
               <span className="text-primary-600">함께 배워나가세요</span>
             </div>
-            <div className="text-heading4 text-secondary pb-8 leading-7">
+            <div className="sm:text-heading5 lg:text-heading4 text-secondary text-md pb-4 font-semibold sm:pb-8 sm:leading-7">
               최고의 강사진과 함께하는 IT 강의와 스터디 그룹으로 실무 역량을
               키워보세요.
             </div>
             <div className="flex gap-4">
-              <Button size="lg">강의 둘러보기</Button>
-              <button className="border-primary-500 text-primary-600 rounded-lg border px-6 py-3 leading-6">
+              <Button size="sm" className="sm:px-6 sm:py-3 sm:leading-6">
+                강의 둘러보기
+              </Button>
+              <button className="border-primary-500 text-primary-600 rounded-[0.375rem] border px-3 py-2 sm:px-6 sm:py-3 sm:leading-6">
                 스터디 그룹 참여
               </button>
             </div>
@@ -30,12 +32,12 @@ const LandingPage = () => {
           <img
             src={LandingPageImage}
             alt="스터디 이미지"
-            className="w-146 rounded-lg"
+            className="aspect-[3/2] w-[45vw] max-w-146 rounded-lg object-contain"
           />
         </div>
       </div>
       {/* 2번 섹션 */}
-      <div className="bg-white px-28 py-16">
+      <div className="bg-white px-4 py-16 md:px-8 lg:px-20 xl:px-28">
         <div className="flex max-w-[1280px] flex-col">
           <div className="pb-12">
             <div className="text-heading2 flex justify-center pb-4 text-gray-900">
@@ -46,7 +48,7 @@ const LandingPage = () => {
               플랫폼입니다.
             </span>
           </div>
-          <div className="flex gap-8">
+          <div className="mx-auto grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             <BenefitCard
               iconbgcolor="bg-primary-100"
               icon={<BookOpen className="text-primary-600" />}
@@ -79,7 +81,7 @@ const LandingPage = () => {
         </div>
       </div>
       {/* 3번 섹션 */}
-      <div className="flex flex-col bg-gray-50 px-28 py-16">
+      <div className="flex flex-col bg-gray-50 px-4 py-16 md:px-8 lg:px-20 xl:px-28">
         <div className="flex items-center justify-between pb-8">
           <div className="flex flex-col gap-2">
             <p className="text-heading2">인기 강의</p>
@@ -92,7 +94,7 @@ const LandingPage = () => {
             <ArrowRight className="pl-1" />
           </button>
         </div>
-        <div className="flex gap-6">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {/* 임시로 만든 강의목록 카드 */}
           <ImageCard imageUrl={LandingPageImage} variant="elevate">
             <CardTitle className="pb-2 text-lg font-bold">타이틀</CardTitle>
@@ -139,7 +141,7 @@ const LandingPage = () => {
         </div>
       </div>
       {/* 4번 섹션 */}
-      <div className="bg-primary-500 px-28 py-16">
+      <div className="bg-primary-500 px-4 py-16 md:px-8 lg:px-20 xl:px-28">
         <div className="flex max-w-[1280px] flex-col items-center">
           <div className="text-heading2 pb-4 text-white">
             지금 시작하여 IT 전문가가 되어보세요!
