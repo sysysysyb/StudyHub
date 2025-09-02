@@ -1,20 +1,27 @@
+import type { ReactNode } from 'react'
+import { cn } from '@/utils'
+
 interface BenefitCardProps {
   iconbgcolor: string
-  icon: React.ReactNode
+  icon: ReactNode
   title: string
   comments: string[]
 }
 
-export const BenefitCard: React.FC<BenefitCardProps> = ({
+// React.FC는 레거시이기에 사용을 지양해야 한다. ReactNode로 대체 필요.
+export function BenefitCard({
   iconbgcolor,
   icon,
   title,
   comments,
-}) => {
+}: BenefitCardProps): ReactNode {
   return (
-    <div className="flex h-54 w-96 flex-col items-center p-6">
+    // cn 사용 필요.
+    <div className={cn('flex h-54 w-96 flex-col items-center p-6')}>
       <div
-        className={`${iconbgcolor} mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full`}
+        className={cn(
+          `${iconbgcolor} mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full`
+        )}
       >
         {icon}
       </div>
