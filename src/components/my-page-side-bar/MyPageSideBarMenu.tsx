@@ -15,7 +15,7 @@ export default function MyPageSideBarMenu({
   return (
     <Card
       variant={'flat'}
-      className="hover:text-primary-800 hover:bg-primary-100 flex items-center justify-start space-x-3 px-4 py-3 text-gray-700 transition-colors"
+      className="hover:text-primary-800 hover:bg-primary-100 flex w-full cursor-pointer items-center justify-start space-x-3 px-4 py-3 text-gray-700 transition-colors"
     >
       <Icon />
       <div className="flex flex-col">
