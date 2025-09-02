@@ -1,32 +1,49 @@
+import { cn } from '@/utils'
 import { CircleCheck, X } from 'lucide-react'
 
-function Toast() {
+const TOAST_COLORS = {
+  success: {
+    border: 'border-[#BBF7D0]',
+    bg: 'bg-[#F0FDF4]',
+    icon: 'text-[#4ADE80]',
+    title: 'text-success-800',
+    content: 'text-[#15803D]',
+  },
+  warning: {
+    border: 'border-primary-200',
+    bg: 'bg-primary-50',
+    icon: 'text-primary-400',
+    title: 'text-primary-800',
+    content: 'text-primary-700',
+  },
+  error: {
+    border: 'border-[#fecaca]',
+    bg: 'bg-[#fef2f2]',
+    icon: 'text-[#f87171]',
+    title: 'text-danger-800',
+    content: 'text-[#b91c1c]',
+  },
+}
+
+function Toast({ type }) {
+  const styles = TOAST_COLORS[type]
+
   return (
-    <div className="flex flex-col gap-2">
-      <div className="flex max-w-112 justify-between gap-3 rounded-lg border border-solid border-[#BBF7D0] bg-[#F0FDF4] p-[17px]">
-        <CircleCheck className="relative bottom-[1.75px] w-[18px] text-[#4ADE80]" />
-        <div className="flex-1 text-sm">
-          <h4 className="text-success-800">Toast 메시지 제목</h4>
-          <p className="text-[#15803D]">Toast 메시지 내용</p>
-        </div>
-        <X className="relative bottom-[1.75px] w-[18px] text-[#4ADE80]" />
+    <div
+      className={cn(
+        'flex max-w-112 justify-between gap-3 rounded-lg border border-solid p-[17px]',
+        styles.border,
+        styles.bg
+      )}
+    >
+      <CircleCheck
+        className={cn('relative bottom-[1.75px] w-[18px]', styles.icon)}
+      />
+      <div className="flex-1 text-sm">
+        <h4 className={styles.title}>Toast 메시지 제목</h4>
+        <p className={styles.content}>Toast 메시지 내용</p>
       </div>
-      <div className="border-primary-200 bg-primary-50 flex max-w-112 justify-between gap-3 rounded-lg border border-solid p-[17px]">
-        <CircleCheck className="text-primary-400 relative bottom-[1.75px] w-[18px]" />
-        <div className="flex-1 text-sm">
-          <h4 className="text-primary-800">Toast 메시지 제목</h4>
-          <p className="text-primary-700">Toast 메시지 내용</p>
-        </div>
-        <X className="text-primary-400 relative bottom-[1.75px] w-[18px]" />
-      </div>
-      <div className="flex max-w-112 justify-between gap-3 rounded-lg border border-solid border-[#fecaca] bg-[#fef2f2] p-[17px]">
-        <CircleCheck className="relative bottom-[1.75px] w-[18px] text-[#f87171]" />
-        <div className="flex-1 text-sm">
-          <h4 className="text-danger-800">Toast 메시지 제목</h4>
-          <p className="text-[#b91c1c]">Toast 메시지 내용</p>
-        </div>
-        <X className="relative bottom-[1.75px] w-[18px] text-[#f87171]" />
-      </div>
+      <X className={cn('relative bottom-[1.75px] w-[18px]', styles.icon)} />
     </div>
   )
 }
