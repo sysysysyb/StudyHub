@@ -291,4 +291,5 @@ export {
   ModalTitle,
   ModalDescription,
   ModalMain,
+  useModalContext,
 }
