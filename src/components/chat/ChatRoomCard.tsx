@@ -18,7 +18,7 @@ export default function ChatRoomCard({
   const lastUpdateDate = lastUpdateTime.getDate()
 
   return (
-    <div className="flex w-full flex-col items-start justify-start border-b border-gray-200 p-3">
+    <div className="flex w-full cursor-pointer flex-col items-start justify-start space-y-1 border-b border-gray-200 p-3">
       <div className="flex w-full items-center justify-between">
         <span className="text-gray-900">{title}</span>
         <div className="flex items-center justify-center space-x-1">
