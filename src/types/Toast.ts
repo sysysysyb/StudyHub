@@ -1,5 +1,5 @@
-export interface ToastItemProps {
-  id?: number
+export interface Toast {
+  id: number
   type: 'success' | 'warning' | 'error'
-  content?: string
+  content: string
 }
