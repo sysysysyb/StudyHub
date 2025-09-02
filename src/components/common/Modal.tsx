@@ -170,18 +170,24 @@ function ModalContent({
   ...props
 }: ModalContentProps) {
   const { isOpen } = useModalContext()
+  const [show, setShow] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
 
   useEffect(() => {
     if (isOpen) {
+      setShow(true)
       const timer = setTimeout(
         () => setIsAnimating(true),
         MODAL_ANIMATION_TIME_MS
-      ) // For animation
+      )
       return () => clearTimeout(timer)
     }
     setIsAnimating(false)
+    const timer = setTimeout(() => setShow(false), MODAL_ANIMATION_TIME_MS)
+    return () => clearTimeout(timer)
   }, [isOpen])
+
+  if (!show) return null
 
   return (
     <>
