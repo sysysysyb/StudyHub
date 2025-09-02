@@ -163,6 +163,43 @@ interface ModalContentProps extends ComponentProps<'div'> {
 }
 
 function ModalContent({ children, className, ...props }: ModalContentProps) {
+  const { isOpen } = useModalContext()
+  const [show, setShow] = useState(false)
+  const [isAnimating, setIsAnimating] = useState(false)
+
+  useEffect(() => {
+    if (isOpen) {
+      setShow(true)
+      const timer = setTimeout(
+        () => setIsAnimating(true),
+        MODAL_ANIMATION_TIME_MS
+      ) // For animation
+      return () => clearTimeout(timer)
+    }
+    setIsAnimating(false)
+    const timer = setTimeout(() => setShow(false), MODAL_ANIMATION_TIME_MS) // Delay unmount for animation
+    return () => clearTimeout(timer)
+  }, [isOpen])
+
+  return (
+    <>
+      {/* Modal */}
+      <div
+        className={cn(
+          'fixed top-1/2 left-1/2 z-50 flex min-w-64 -translate-x-1/2 -translate-y-1/2 transform flex-col rounded-xl bg-white transition-all',
+          `duration-[${MODAL_ANIMATION_TIME_MS}]`,
+          isAnimating ? 'scale-100 opacity-100' : 'scale-95 opacity-0',
+          className
+        )}
+        {...props}
+      >
+        {children}
+      </div>
+    </>
+  )
+}
+
+function ModalOverlay() {
   const { isOpen, close } = useModalContext()
   const [show, setShow] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
@@ -181,60 +218,6 @@ function ModalContent({ children, className, ...props }: ModalContentProps) {
     return () => clearTimeout(timer)
   }, [isOpen])
 
-  // ESC 키 닫기
-  useEffect(() => {
-    if (!isOpen) return
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') close()
-    }
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [isOpen, close])
-
-  if (!show) return null
-
-  return (
-    <>
-      {/* Overlay */}
-      <div
-        className={cn(
-          'fixed inset-0 z-40 bg-black/50 transition-opacity',
-          `duration-[${MODAL_ANIMATION_TIME_MS}]`,
-          isAnimating ? 'opacity-100' : 'opacity-0'
-        )}
-        onClick={close}
-      />
-
-      {/* Modal */}
-      <div
-        className={cn(
-          'fixed top-1/2 left-1/2 z-50 flex min-w-64 -translate-x-1/2 -translate-y-1/2 transform flex-col rounded-xl bg-white transition-all',
-          `duration-[${MODAL_ANIMATION_TIME_MS}]`,
-          isAnimating ? 'scale-100 opacity-100' : 'scale-95 opacity-0',
-          className
-        )}
-        {...props}
-      >
-        {children}
-      </div>
-    </>
-  )
-}
-
-/* --------------------
-   Wrapper
--------------------- */
-interface ModalProps {
-  children: ReactNode
-}
-
-function Modal({ children }: ModalProps) {
-  const [isOpen, setIsOpen] = useState(false)
-
-  const open = () => setIsOpen(true)
-  const close = () => setIsOpen(false)
-  const toggle = () => setIsOpen((prev) => !prev)
-
   // 스크롤 방지
   useEffect(() => {
     if (isOpen) {
@@ -247,8 +230,47 @@ function Modal({ children }: ModalProps) {
     }
   }, [isOpen])
 
+  // ESC 키 닫기
+  useEffect(() => {
+    if (!isOpen) return
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') close()
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [isOpen, close])
+
+  if (!show) return null
+  return (
+    <div
+      className={cn(
+        'fixed inset-0 z-40 bg-black/50 transition-opacity',
+        `duration-[${MODAL_ANIMATION_TIME_MS}]`,
+        isAnimating ? 'opacity-100' : 'opacity-0'
+      )}
+      onClick={close}
+    />
+  )
+}
+
+/* --------------------
+   Wrapper
+-------------------- */
+interface ModalProps {
+  children: ReactNode
+  isOverlay?: boolean
+}
+
+function Modal({ children, isOverlay = true }: ModalProps) {
+  const [isOpen, setIsOpen] = useState(false)
+
+  const open = () => setIsOpen(true)
+  const close = () => setIsOpen(false)
+  const toggle = () => setIsOpen((prev) => !prev)
+
   return (
     <ModalContext.Provider value={{ isOpen, open, close, toggle }}>
+      {isOverlay ? <ModalOverlay /> : null}
       <div>{children}</div>
     </ModalContext.Provider>
   )
