@@ -1,5 +1,5 @@
 import Header from '@/components/header'
-import LandingPage from '@/pages'
+import { LandingPage } from '@/pages'
 
 function App() {
   return (
