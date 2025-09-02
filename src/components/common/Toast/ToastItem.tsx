@@ -29,7 +29,7 @@ interface ToastProps {
   type: 'success' | 'warning' | 'error'
 }
 
-function Toast({ type }: ToastProps) {
+function ToastItem({ type }: ToastProps) {
   const styles = TOAST_COLORS[type]
 
   return (
@@ -57,4 +57,4 @@ function Toast({ type }: ToastProps) {
   )
 }
 
-export default Toast
+export default ToastItem
