@@ -1,3 +1,4 @@
+import type { ToastItemProps } from '@/types/Toast'
 import { cn } from '@/utils'
 import { CircleCheck, X } from 'lucide-react'
 
@@ -25,11 +26,7 @@ const TOAST_COLORS = {
   },
 }
 
-interface ToastProps {
-  type: 'success' | 'warning' | 'error'
-}
-
-function ToastItem({ type }: ToastProps) {
+function ToastItem({ type }: ToastItemProps) {
   const styles = TOAST_COLORS[type]
 
   return (
