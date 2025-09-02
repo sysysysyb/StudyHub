@@ -7,5 +7,16 @@ import MyPageSideBar from '@/components/my-page-side-bar/MyPageSideBar'
 import Header from '@/components/header/Header'
 import { Symbol } from '@/components/common/Symbol'
 import { Logo } from '@/components/common/Logo'
+import { Footer } from '@/components/footer/Footer'
 
-export { Badge, Button, ImageCard, Input, MyPageSideBar, Header, Symbol, Logo }
+export {
+  Badge,
+  Button,
+  ImageCard,
+  Input,
+  MyPageSideBar,
+  Header,
+  Symbol,
+  Logo,
+  Footer,
+}

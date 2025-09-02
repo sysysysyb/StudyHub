@@ -1,4 +1,4 @@
-import { Header } from '@/components'
+import { Header, Footer } from '@/components'
 import { LandingPage } from '@/pages'
 
 function App() {
@@ -6,6 +6,7 @@ function App() {
     <>
       <Header />
       <LandingPage />
+      <Footer />
     </>
   )
 }
