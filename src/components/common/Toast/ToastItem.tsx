@@ -1,6 +1,6 @@
 import type { Toast } from '@/types'
 import { cn } from '@/utils'
-import { CircleCheck, X } from 'lucide-react'
+import { CircleAlert, CircleCheck, CircleX, X } from 'lucide-react'
 
 const TOAST_COLORS = {
   success: {
@@ -32,9 +32,16 @@ const TOAST_TITLE = {
   error: '오류가 발생했습니다',
 }
 
+const TOAST_ICON = {
+  success: CircleCheck,
+  warning: CircleAlert,
+  error: CircleX,
+}
+
 function ToastItem({ type, content = '' }: Toast) {
   const styles = TOAST_COLORS[type]
   const title = TOAST_TITLE[type]
+  const Icon = TOAST_ICON[type]
 
   return (
     <div
@@ -44,9 +51,7 @@ function ToastItem({ type, content = '' }: Toast) {
         styles.bg
       )}
     >
-      <CircleCheck
-        className={cn('relative bottom-[1.75px] w-[18px]', styles.icon)}
-      />
+      <Icon className={cn('relative bottom-[1.75px] w-[18px]', styles.icon)} />
       <div className="flex-1 text-sm">
         <h4 className={styles.title}>{title}</h4>
         <p className={styles.content}>{content}</p>
