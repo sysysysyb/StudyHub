@@ -34,10 +34,10 @@ interface ModalTriggerProps extends ComponentProps<'div'> {
   children: ReactNode
 }
 
-function ModalTrigger({ children, ...rest }: ModalTriggerProps) {
+function ModalTrigger({ children, ...props }: ModalTriggerProps) {
   const { open } = useModalContext()
   return (
-    <div onClick={open} {...rest} className="hover:cursor-pointer">
+    <div onClick={open} {...props} className="hover:cursor-pointer">
       {children}
     </div>
   )
@@ -51,10 +51,10 @@ interface ModalCloseProps extends ComponentProps<'div'> {
   children: ReactNode
 }
 
-function ModalClose({ children, ...rest }: ModalCloseProps) {
+function ModalClose({ children, ...props }: ModalCloseProps) {
   const { close } = useModalContext()
   return (
-    <div onClick={close} {...rest} className="hover:cursor-pointer">
+    <div onClick={close} {...props} className="hover:cursor-pointer">
       {children}
     </div>
   )
@@ -154,7 +154,7 @@ interface ModalContentProps extends ComponentProps<'div'> {
   children: ReactNode
 }
 
-function ModalContent({ children, className, ...rest }: ModalContentProps) {
+function ModalContent({ children, className, ...props }: ModalContentProps) {
   const { isOpen, close } = useModalContext()
   const [show, setShow] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
@@ -205,7 +205,7 @@ function ModalContent({ children, className, ...rest }: ModalContentProps) {
           isAnimating ? 'scale-100 opacity-100' : 'scale-95 opacity-0',
           className
         )}
-        {...rest}
+        {...props}
       >
         {children}
       </div>
