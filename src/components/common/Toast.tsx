@@ -25,7 +25,11 @@ const TOAST_COLORS = {
   },
 }
 
-function Toast({ type }) {
+interface ToastProps {
+  type: 'success' | 'warning' | 'error'
+}
+
+function Toast({ type }: ToastProps) {
   const styles = TOAST_COLORS[type]
 
   return (
