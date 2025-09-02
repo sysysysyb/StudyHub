@@ -170,12 +170,10 @@ function ModalContent({
   ...props
 }: ModalContentProps) {
   const { isOpen } = useModalContext()
-  const [show, setShow] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
 
   useEffect(() => {
     if (isOpen) {
-      setShow(true)
       const timer = setTimeout(
         () => setIsAnimating(true),
         MODAL_ANIMATION_TIME_MS
@@ -183,8 +181,6 @@ function ModalContent({
       return () => clearTimeout(timer)
     }
     setIsAnimating(false)
-    const timer = setTimeout(() => setShow(false), MODAL_ANIMATION_TIME_MS) // Delay unmount for animation
-    return () => clearTimeout(timer)
   }, [isOpen])
 
   return (
