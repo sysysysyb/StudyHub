@@ -55,3 +55,33 @@ body {
   --color-danger-600: #dc2626;
   --color-danger-800: #991b1b;
 }
+
+@theme {
+  --animate-fade-in-translateY: fade-in-translateY 0.3s ease-out;
+
+  @keyframes fade-in-translateY {
+    0% {
+      opacity: 0;
+      transform: translateY(-5%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+}
+
+@layer utilities {
+  .scrollbar-custom::-webkit-scrollbar {
+    width: 16px;
+  }
+  .scrollbar-custom::-webkit-scrollbar-track {
+    border-radius: 16px;
+  }
+  .scrollbar-custom::-webkit-scrollbar-thumb {
+    border-radius: 16px;
+  }
+  .scrollbar-custom::-webkit-scrollbar-thumb {
+    border: 3px solid #fff;
+    background-color: #f3f4f6;
+  }
+}
