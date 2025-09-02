@@ -160,9 +160,15 @@ const MODAL_ANIMATION_TIME_MS = 120
 
 interface ModalContentProps extends ComponentProps<'div'> {
   children: ReactNode
+  isPositionCenter?: boolean
 }
 
-function ModalContent({ children, className, ...props }: ModalContentProps) {
+function ModalContent({
+  children,
+  className,
+  isPositionCenter = true,
+  ...props
+}: ModalContentProps) {
   const { isOpen } = useModalContext()
   const [show, setShow] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
@@ -186,7 +192,10 @@ function ModalContent({ children, className, ...props }: ModalContentProps) {
       {/* Modal */}
       <div
         className={cn(
-          'fixed top-1/2 left-1/2 z-50 flex min-w-64 -translate-x-1/2 -translate-y-1/2 transform flex-col rounded-xl bg-white transition-all',
+          'fixed z-50 flex min-w-64 transform flex-col rounded-xl bg-white transition-all',
+          isPositionCenter
+            ? 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'
+            : '',
           `duration-[${MODAL_ANIMATION_TIME_MS}]`,
           isAnimating ? 'scale-100 opacity-100' : 'scale-95 opacity-0',
           className
