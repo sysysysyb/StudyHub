@@ -16,7 +16,8 @@ const buttonVariants = cva(
         ghost: 'text-gray-700 bg-white hover:bg-gray-50 active:bg-gray-200',
         danger:
           'text-white bg-danger-500 hover:bg-danger-600 active:bg-danger-800',
-        reverse: 'text-primary-500 hover:opacity-80 active:opacity-60',
+        reverse:
+          'text-primary-500 hover:opacity-80 active:opacity-60 bg-transparent border border-primary-500',
       },
       size: {
         sm: 'rounded-[0.375rem] px-3 py-2', //radius 6px
