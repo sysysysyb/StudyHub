@@ -4,7 +4,7 @@ import { AlignJustify } from 'lucide-react'
 
 export function MobileHeader(): ReactNode {
   return (
-    <div className="flex items-center justify-start gap-4 px-6">
+    <div className="flex h-16 items-center justify-start gap-4 px-6">
       <button className="cursor-pointer">
         <AlignJustify />
       </button>
