@@ -1,8 +1,18 @@
-import type { ToastItemProps } from '@/types/Toast'
+import type { Toast } from '@/types/Toast'
 import { create } from 'zustand'
 
-export const useToastStore = create((set) => ({
+interface ToastStore {
+  toasts: Toast[]
+  addToast: (newToast: Toast) => void
+  removeToast: (id: number) => void
+}
+
+export const useToastStore = create<ToastStore>((set) => ({
   toasts: [],
-  addToast: (newToast: ToastItemProps) =>
-    set((state: ToastItemProps[]) => [...state, newToast]),
+  addToast: (newToast) =>
+    set((state) => ({ toasts: [...state.toasts, newToast] })),
+  removeToast: (id) =>
+    set((state) => ({
+      toasts: state.toasts.filter((toast) => toast.id !== id),
+    })),
 }))
