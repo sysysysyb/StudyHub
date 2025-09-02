@@ -1,4 +1,4 @@
-import Header from '@/components/header'
+import { Header } from '@/components'
 import { LandingPage } from '@/pages'
 
 function App() {
