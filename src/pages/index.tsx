@@ -104,7 +104,7 @@ const LandingPage = () => {
             <CardTitle className="pb-2 text-lg font-bold">타이틀</CardTitle>
             <div>
               <p className="text-secondary pb-3">제공자</p>
-              <div className="text-secondary gap- flex pb-3">
+              <div className="text-secondary flex pb-3">
                 <span className="text-primary-500">별점 컴포넌트</span>
                 <span className="pl-2">별점 텍스트 (리뷰어 수)</span>
               </div>
@@ -118,7 +118,7 @@ const LandingPage = () => {
             <CardTitle className="pb-2 text-lg font-bold">타이틀</CardTitle>
             <div>
               <p className="text-secondary pb-3">제공자</p>
-              <div className="text-secondary gap- flex pb-3">
+              <div className="text-secondary flex pb-3">
                 <span className="text-primary-500">별점 컴포넌트</span>
                 <span className="pl-2">별점 텍스트 (리뷰어 수)</span>
               </div>
@@ -132,7 +132,7 @@ const LandingPage = () => {
             <CardTitle className="pb-2 text-lg font-bold">타이틀</CardTitle>
             <div>
               <p className="text-secondary pb-3">제공자</p>
-              <div className="text-secondary gap- flex pb-3">
+              <div className="text-secondary flex pb-3">
                 <span className="text-primary-500">별점 컴포넌트</span>
                 <span className="pl-2">별점 텍스트 (리뷰어 수)</span>
               </div>
