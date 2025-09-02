@@ -35,7 +35,7 @@ function ToastItem({ type }: ToastProps) {
   return (
     <div
       className={cn(
-        'flex max-w-112 justify-between gap-3 rounded-lg border border-solid p-[17px]',
+        'flex w-112 justify-between gap-3 rounded-lg border border-solid p-[17px]',
         styles.border,
         styles.bg
       )}
