@@ -47,7 +47,12 @@ function Toast({ type }: ToastProps) {
         <h4 className={styles.title}>Toast 메시지 제목</h4>
         <p className={styles.content}>Toast 메시지 내용</p>
       </div>
-      <X className={cn('relative bottom-[1.75px] w-[18px]', styles.icon)} />
+      <X
+        className={cn(
+          'relative bottom-[1.75px] w-[18px] cursor-pointer',
+          styles.icon
+        )}
+      />
     </div>
   )
 }
