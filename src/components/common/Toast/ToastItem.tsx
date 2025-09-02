@@ -26,8 +26,15 @@ const TOAST_COLORS = {
   },
 }
 
-function ToastItem({ type }: Toast) {
+const TOAST_TITLE = {
+  success: '성공적으로 저장되었습니다',
+  warning: '주의가 필요합니다',
+  error: '오류가 발생했습니다',
+}
+
+function ToastItem({ type, content = '' }: Toast) {
   const styles = TOAST_COLORS[type]
+  const title = TOAST_TITLE[type]
 
   return (
     <div
@@ -41,8 +48,8 @@ function ToastItem({ type }: Toast) {
         className={cn('relative bottom-[1.75px] w-[18px]', styles.icon)}
       />
       <div className="flex-1 text-sm">
-        <h4 className={styles.title}>Toast 메시지 제목</h4>
-        <p className={styles.content}>Toast 메시지 내용</p>
+        <h4 className={styles.title}>{title}</h4>
+        <p className={styles.content}>{content}</p>
       </div>
       <X
         className={cn(
