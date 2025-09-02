@@ -34,10 +34,14 @@ interface ModalTriggerProps extends ComponentProps<'div'> {
   children: ReactNode
 }
 
-function ModalTrigger({ children, ...props }: ModalTriggerProps) {
+function ModalTrigger({ children, className, ...props }: ModalTriggerProps) {
   const { open } = useModalContext()
   return (
-    <div onClick={open} {...props} className="hover:cursor-pointer">
+    <div
+      onClick={open}
+      {...props}
+      className={cn('hover:cursor-pointer', className)}
+    >
       {children}
     </div>
   )
@@ -51,10 +55,14 @@ interface ModalCloseProps extends ComponentProps<'div'> {
   children: ReactNode
 }
 
-function ModalClose({ children, ...props }: ModalCloseProps) {
+function ModalClose({ children, className, ...props }: ModalCloseProps) {
   const { close } = useModalContext()
   return (
-    <div onClick={close} {...props} className="hover:cursor-pointer">
+    <div
+      onClick={close}
+      {...props}
+      className={cn('hover:cursor-pointer', className)}
+    >
       {children}
     </div>
   )
