@@ -39,7 +39,7 @@ function ToastItem({ type, content = '' }: Toast) {
   return (
     <div
       className={cn(
-        'flex w-112 justify-between gap-3 rounded-lg border border-solid p-[17px]',
+        'flex justify-between gap-3 rounded-lg border border-solid p-[17px]',
         styles.border,
         styles.bg
       )}

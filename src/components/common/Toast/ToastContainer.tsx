@@ -5,7 +5,7 @@ function ToastContainer() {
   const { toasts } = useToastStore()
 
   return (
-    <div className="fixed top-18 right-2 z-10 space-y-1">
+    <div className="fixed top-18 right-1 z-10 w-112 space-y-1">
       {toasts.map(({ id, type, content }) => (
         <ToastItem key={id} type={type} content={content} />
       ))}
