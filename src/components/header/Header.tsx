@@ -1,34 +1,7 @@
-interface NavProps {
-  label: string
-  event?: React.MouseEventHandler<HTMLButtonElement>
-}
+import { Logo, NavComponent } from '@/components'
+import type { ReactNode } from 'react'
 
-const Logo = () => {
-  return (
-    // 크기 숫자 1당 4px으로 계산
-    <div className="flex h-12 w-36 items-center">
-      <div className="bg-primary-500 text-4 flex h-8 w-8 items-center justify-center rounded-md font-bold text-white">
-        S
-      </div>
-      <div className="text-primary-600 text-heading4 bg-white pl-2 font-bold">
-        StudyHub
-      </div>
-    </div>
-  )
-}
-
-const NavComponent: React.FC<NavProps> = ({ label, event }) => {
-  return (
-    <button
-      className="mx-4 h-6 whitespace-nowrap text-gray-700"
-      onClick={event}
-    >
-      {label}
-    </button>
-  )
-}
-
-const Header: React.FC = () => {
+function Header(): ReactNode {
   return (
     <header className="sticky top-0 z-99 flex h-[65px] items-center justify-between border border-gray-200 bg-white px-8 pb-px">
       <Logo />
