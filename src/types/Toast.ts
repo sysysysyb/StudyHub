@@ -1,5 +1,5 @@
 export interface Toast {
-  id: number
+  id?: number
   type: 'success' | 'warning' | 'error'
   content: string
 }
