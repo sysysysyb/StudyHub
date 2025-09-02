@@ -1,13 +1,4 @@
-import { Card } from '@/components/common/Card/Card'
 import { User as UserIcon } from 'lucide-react'
-
-export default function MyPageSideBar() {
-  return (
-    <Card className="flex flex-col items-center justify-start">
-      <MyPageSideBarProfile />
-    </Card>
-  )
-}
 
 //임시 유저 정보 인터페이스 (추후 삭제)
 interface UserInformation {
@@ -25,7 +16,7 @@ const dummyUserInfo: UserInformation = {
   profileImageUrl: 'https://dummyimage.com/600x400/000/fff',
 }
 
-function MyPageSideBarProfile() {
+export default function MyPageSideBarProfile() {
   //TODO: 나중에 전역상태에서 실제 유저 데이터 불러오기
   const { username, email, signUpDay, profileImageUrl } = dummyUserInfo
 
