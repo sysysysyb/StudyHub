@@ -35,10 +35,10 @@ interface ModalTriggerProps extends ComponentProps<'div'> {
 }
 
 function ModalTrigger({ children, className, ...props }: ModalTriggerProps) {
-  const { open } = useModalContext()
+  const { toggle } = useModalContext()
   return (
     <div
-      onClick={open}
+      onClick={toggle}
       {...props}
       className={cn('hover:cursor-pointer', className)}
     >
