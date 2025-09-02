@@ -1,3 +1,4 @@
+import { useToastStore } from '@/store'
 import type { Toast } from '@/types'
 import { cn } from '@/utils'
 import { CircleAlert, CircleCheck, CircleX, X } from 'lucide-react'
@@ -38,10 +39,15 @@ const TOAST_ICON = {
   error: CircleX,
 }
 
-function ToastItem({ type, content = '' }: Toast) {
+function ToastItem({ id, type, content = '' }: Toast) {
   const styles = TOAST_COLORS[type]
   const title = TOAST_TITLE[type]
   const Icon = TOAST_ICON[type]
+  const { removeToast } = useToastStore()
+
+  const handleClickDelete = () => {
+    removeToast(id)
+  }
 
   return (
     <div
@@ -61,6 +67,7 @@ function ToastItem({ type, content = '' }: Toast) {
           'relative bottom-[1.75px] w-[18px] cursor-pointer',
           styles.icon
         )}
+        onClick={handleClickDelete}
       />
     </div>
   )
