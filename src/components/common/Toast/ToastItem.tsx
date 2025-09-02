@@ -1,4 +1,4 @@
-import type { ToastItemProps } from '@/types/Toast'
+import type { Toast } from '@/types'
 import { cn } from '@/utils'
 import { CircleCheck, X } from 'lucide-react'
 
@@ -26,7 +26,7 @@ const TOAST_COLORS = {
   },
 }
 
-function ToastItem({ type }: ToastItemProps) {
+function ToastItem({ type }: Toast) {
   const styles = TOAST_COLORS[type]
 
   return (

@@ -1,4 +1,4 @@
-import { useToastStore } from '@/store/useToastStore'
+import { useToastStore } from '@/store'
 import ToastItem from './ToastItem'
 
 function ToastContainer() {

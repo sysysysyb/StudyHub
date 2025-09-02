@@ -1,5 +1,5 @@
-import { useToastStore } from '@/store/useToastStore'
-import type { Toast } from '@/types/Toast'
+import { useToastStore } from '@/store'
+import type { Toast } from '@/types'
 
 const TIMEOUT = 3000
 
