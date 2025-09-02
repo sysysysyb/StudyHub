@@ -24,8 +24,6 @@ export function Footer(): ReactNode {
             { label: '구인 공고' },
           ]}
         />
-
-        {/* 지원 */}
         <FooterNavComponent
           category="지원"
           NavButtons={[
