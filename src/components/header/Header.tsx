@@ -1,10 +1,11 @@
-import { Logo, NavComponent } from '@/components'
+import { HeaderLogo } from './HeaderLogo'
+import { NavComponent } from './NavComponent'
 import type { ReactNode } from 'react'
 
 function Header(): ReactNode {
   return (
     <header className="sticky top-0 z-99 flex h-[65px] items-center justify-between border border-gray-200 bg-white px-8 pb-px">
-      <Logo />
+      <HeaderLogo />
       <div className="flex items-center">
         <NavComponent label="강의 목록" />
         <NavComponent label="스터디 그룹" />
