@@ -1,9 +1,3 @@
-const LandingPage = () => {
-  return (
-    <>
-    
-    </>
-  )
-}
+import LandingPage from './LandingPage'
 
-export default LandingPage
+export { LandingPage }

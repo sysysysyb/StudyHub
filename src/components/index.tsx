@@ -6,3 +6,4 @@ import Input from '@/components/common/Input'
 import MyPageSideBar from '@/components/my-page-side-bar/MyPageSideBar'
 
 export { Badge, Button, ImageCard, Input, MyPageSideBar }
+
