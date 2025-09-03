@@ -3,7 +3,7 @@ name: Sync Fork with Upstream
 on:
   schedule:
     - cron: '0 0 * * *' # 매일 자정(UTC 기준) 자동 실행
-  workflow_dispatch # 필요하면 수동 실행도 가능
+  workflow_dispatch: # 필요하면 수동 실행도 가능
 
 jobs:
   sync:
@@ -29,4 +29,5 @@ jobs:
           git merge upstream/main --allow-unrelated-histories || true
 
       - name: Push changes to forked repository
+
         run: git push origin main
