@@ -1,10 +1,11 @@
 import { Routes, Route } from 'react-router'
 import { LandingPage } from '@/pages'
+import { RootLayout } from '@/components'
 
 function App() {
   return (
     <Routes>
-      <Route>
+      <Route element={<RootLayout />}>
         <Route index element={<LandingPage />} />
 
         <Route path="auth">

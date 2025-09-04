@@ -8,6 +8,7 @@ import Header from '@/components/header/Header'
 import { Symbol } from '@/components/common/Symbol'
 import { Logo } from '@/components/common/Logo'
 import ToastContainer from '@/components/common/Toast/ToastContainer'
+import RootLayout from '@/components/layout/RootLayout'
 
 export {
   Badge,
@@ -19,4 +20,5 @@ export {
   Symbol,
   Logo,
   ToastContainer,
+  RootLayout,
 }
