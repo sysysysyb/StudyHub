@@ -1,5 +1,6 @@
 import type { ChatRoomMessages } from '@/types/api-response-types/chat-response-types'
 import { cn } from '@/utils'
+import ChatRoomInput from './ChatRoomInput'
 
 const dummyChatRoomMessages: ChatRoomMessages = {
   next_cursor: 'cursor_2',
@@ -54,7 +55,7 @@ interface ChatRoomProps {
 export default function ChatRoom({ chatRoomId }: ChatRoomProps) {
   return (
     <div>
-      <section className="flex flex-col space-y-3">
+      <section className="flex flex-col space-y-3 pb-[71px]">
         {dummyChatRoomMessages.results.map((result) => {
           const {
             content,
@@ -96,6 +97,7 @@ export default function ChatRoom({ chatRoomId }: ChatRoomProps) {
           )
         })}
       </section>
+      <ChatRoomInput />
     </div>
   )
 }
