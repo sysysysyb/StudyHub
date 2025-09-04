@@ -26,7 +26,7 @@ function EmptyDataState({ onClick, className, ...props }: EmptyDataStateProps) {
       <BaseStateButton
         buttonContent={
           <span className="flex items-center gap-2">
-            <Plus className="size-4" />
+            <Plus aria-hidden="true" className="size-4" />
             새로 만들기
           </span>
         }
