@@ -2,17 +2,17 @@ import { cn } from '@/utils'
 import { Circle } from './SkeletonItem'
 
 const AVATAR_SIZE = {
-  XS: 'w-6',
-  SM: 'w-8',
-  MD: 'w-10',
-  LG: 'w-12',
-  XL: 'w-14',
+  xs: 'w-6',
+  sm: 'w-8',
+  md: 'w-10',
+  lg: 'w-12',
+  xl: 'w-14',
 }
 
 function AvatarSkeleton({
-  size = 'MD',
+  size = 'md',
 }: {
-  size?: 'XS' | 'SM' | 'MD' | 'LG' | 'XL'
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 }) {
   const w = AVATAR_SIZE[size]
 
