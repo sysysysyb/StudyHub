@@ -10,6 +10,7 @@ import { Logo } from '@/components/common/Logo'
 import { Footer } from '@/components/footer/Footer'
 import ToastContainer from '@/components/common/Toast/ToastContainer'
 import RootLayout from '@/components/layout/RootLayout'
+import Chat from '@/components/chat/Chat'
 
 export {
   Badge,
@@ -23,4 +24,5 @@ export {
   Footer,
   ToastContainer,
   RootLayout,
+  Chat,
 }

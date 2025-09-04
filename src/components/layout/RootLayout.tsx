@@ -1,4 +1,4 @@
-import { Header, Footer } from '@/components'
+import { Header, Footer, Chat } from '@/components'
 import { Outlet } from 'react-router'
 
 export default function RootLayout() {
@@ -7,6 +7,7 @@ export default function RootLayout() {
       <Header />
       <Outlet />
       <Footer />
+      <Chat />
     </div>
   )
 }
