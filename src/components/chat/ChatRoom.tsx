@@ -48,6 +48,15 @@ const dummyChatRoomMessages: ChatRoomMessages = {
   ],
 }
 
+const dummyChatRoomUsers: { username: string; isOnline: boolean }[] = [
+  { username: 'Bob', isOnline: true },
+  { username: 'Alice', isOnline: true },
+  { username: 'Eve', isOnline: false },
+  { username: '이재현', isOnline: true },
+  { username: '김승원', isOnline: false },
+  { username: '백서영', isOnline: true },
+]
+
 interface ChatRoomProps {
   chatRoomId: string
 }
