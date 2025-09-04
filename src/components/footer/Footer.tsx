@@ -19,19 +19,18 @@ export function Footer(): ReactNode {
         <FooterNavComponent
           category="서비스"
           NavButtons={[
-            { label: '강의 목록', destination: '/' },
-            { label: '스터디 그룹', destination: '/' },
-            { label: '구인 공고', destination: '/' },
+            { label: '강의 목록' },
+            { label: '스터디 그룹' },
+            { label: '구인 공고' },
           ]}
         />
         <FooterNavComponent
           category="지원"
           NavButtons={[
-            { label: '고객센터', destination: '/' },
-            { label: 'FAQ', destination: '/' },
-            { label: '개인정보처리방침', destination: '/' },
+            { label: '고객센터' },
+            { label: 'FAQ' },
+            { label: '개인정보처리방침' },
           ]}
-          // 라우트 설정 이전이라 루트페이지로만 연동.
         />
       </div>
       {/* 하부 섹션 */}
