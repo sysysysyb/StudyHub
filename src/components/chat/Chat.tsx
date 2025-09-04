@@ -11,7 +11,7 @@ import {
 import { Button } from '@/components'
 import { ArrowLeft, MessageCircle, X } from 'lucide-react'
 import ChatRoomCard from './ChatRoomCard'
-import { useState, type ComponentProps } from 'react'
+import { useEffect, useRef, useState, type ComponentProps } from 'react'
 import ChatRoom from './ChatRoom'
 import { cn } from '@/utils'
 
@@ -56,6 +56,19 @@ const dummyChatroomsData: ComponentProps<typeof ChatRoomCard>[] = [
 
 export default function Chat() {
   const [chatRoomId, setChatRoomId] = useState('')
+  const scrollRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      //채팅방 입장 시 스크롤 가장 아래로
+      if (chatRoomId) {
+        scrollRef.current.scrollTop = scrollRef.current.scrollHeight
+      } else {
+        //채팅방 나올 시 스크롤 가장 위로
+        scrollRef.current.scrollTop = 0
+      }
+    }
+  }, [chatRoomId])
 
   return (
     <Modal isOverlay={false}>
@@ -100,7 +113,7 @@ export default function Chat() {
           )}
         </ModalHeader>
 
-        <ModalMain className="overflow-y-scroll p-0">
+        <ModalMain className="overflow-y-scroll p-0" ref={scrollRef}>
           {chatRoomId ? (
             <ChatRoom chatRoomId={chatRoomId} />
           ) : (
