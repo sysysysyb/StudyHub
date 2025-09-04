@@ -9,10 +9,11 @@ import {
   useModalContext,
 } from '@/components/common/Modal'
 import { Button } from '@/components'
-import { MessageCircle, X } from 'lucide-react'
+import { ArrowLeft, MessageCircle, X } from 'lucide-react'
 import ChatRoomCard from './ChatRoomCard'
 import { useState, type ComponentProps } from 'react'
 import ChatRoom from './ChatRoom'
+import { cn } from '@/utils'
 
 const dummyChatroomsData: ComponentProps<typeof ChatRoomCard>[] = [
   {
@@ -65,13 +66,38 @@ export default function Chat() {
         isPositionCenter={false}
         className="right-5 bottom-24 h-96 w-80 overflow-hidden rounded-lg border border-gray-200 shadow"
       >
-        <ModalHeader className="bg-gray-50">
-          <div>
-            <ModalTitle className="text-base font-semibold">채팅방</ModalTitle>
-            <ModalDescription className="text-primary-600 text-xs">
-              3개의 읽지 않은 메세지
-            </ModalDescription>
-          </div>
+        <ModalHeader className={cn('bg-gray-50', chatRoomId ? 'p-3' : 'p-4')}>
+          {chatRoomId ? (
+            <div className="flex flex-row items-center justify-start space-x-2">
+              <button
+                className="flex size-8 cursor-pointer items-center justify-center"
+                onClick={() => {
+                  setChatRoomId('')
+                }}
+              >
+                <ArrowLeft className="h-6 text-gray-600" />
+              </button>
+
+              <div>
+                <ModalTitle className="text-sm font-semibold">
+                  React 실무 프로젝트 스터디
+                </ModalTitle>
+                <ModalDescription className="text-secondary flex flex-row items-center justify-start space-x-1 text-xs">
+                  <div className="bg-success-500 size-2 rounded-full" />
+                  <span className="text-xs">3명 온라인</span>
+                </ModalDescription>
+              </div>
+            </div>
+          ) : (
+            <div>
+              <ModalTitle className="text-base font-semibold">
+                채팅방
+              </ModalTitle>
+              <ModalDescription className="text-primary-600 text-xs">
+                3개의 읽지 않은 메세지
+              </ModalDescription>
+            </div>
+          )}
         </ModalHeader>
 
         <ModalMain className="overflow-y-scroll p-0">
