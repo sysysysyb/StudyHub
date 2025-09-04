@@ -7,8 +7,8 @@ interface BaseStateProps {
   icon?: LucideIcon
   iconColor?: string
   iconBg?: string
-  title: string
-  description: string
+  title?: string
+  description?: string
   buttonValue?: ReactNode
   buttonType?: 'primary' | 'outline'
   buttonClassName?: string
@@ -38,8 +38,8 @@ function BaseState({
   icon,
   iconColor,
   iconBg,
-  title,
-  description,
+  title = '',
+  description = '',
   buttonValue,
   buttonType,
   buttonClassName,
