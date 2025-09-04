@@ -9,8 +9,6 @@ import { Symbol } from '@/components/common/Symbol'
 import { Logo } from '@/components/common/Logo'
 import { Footer } from '@/components/footer/Footer'
 import ToastContainer from '@/components/common/Toast/ToastContainer'
-import { Footer } from '@/components/footer/Footer'
-
 
 export {
   Badge,
@@ -23,5 +21,4 @@ export {
   Logo,
   Footer,
   ToastContainer,
-  Footer,
 }
