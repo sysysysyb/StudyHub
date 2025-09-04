@@ -1,7 +1,15 @@
 import { Search } from 'lucide-react'
 import BaseState from './BaseState'
 
-function EmptyResultState({ onClick }: { onClick?: () => void }) {
+interface EmptyResultStateProps extends React.HTMLAttributes<HTMLDivElement> {
+  onClick?: () => void
+}
+
+function EmptyResultState({
+  onClick,
+  className,
+  ...props
+}: EmptyResultStateProps) {
   return (
     <BaseState
       icon={Search}
@@ -13,6 +21,8 @@ function EmptyResultState({ onClick }: { onClick?: () => void }) {
       buttonType="outline"
       buttonClassName="bg-gray-50 text-gray-700 transition-colors duration-300 ease-out hover:bg-gray-200"
       onClick={onClick}
+      className={className}
+      {...props}
     />
   )
 }

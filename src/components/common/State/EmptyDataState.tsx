@@ -1,7 +1,11 @@
 import { Inbox, Plus } from 'lucide-react'
 import BaseState from './BaseState'
 
-function EmptyDataState({ onClick }: { onClick?: () => void }) {
+interface EmptyDataStateProps extends React.HTMLAttributes<HTMLDivElement> {
+  onClick?: () => void
+}
+
+function EmptyDataState({ onClick, className, ...props }: EmptyDataStateProps) {
   return (
     <BaseState
       icon={Inbox}
@@ -18,6 +22,8 @@ function EmptyDataState({ onClick }: { onClick?: () => void }) {
       buttonType="primary"
       buttonClassName="px-6 py-3"
       onClick={onClick}
+      className={className}
+      {...props}
     />
   )
 }

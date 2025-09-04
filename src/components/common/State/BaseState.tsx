@@ -3,7 +3,7 @@ import Button from '@/components/common/Button'
 import { cn } from '@/utils'
 import type { ReactNode } from 'react'
 
-interface BaseStateProps {
+interface BaseStateProps extends React.HTMLAttributes<HTMLDivElement> {
   icon?: LucideIcon
   iconColor?: string
   iconBg?: string
@@ -44,9 +44,17 @@ function BaseState({
   buttonType,
   buttonClassName,
   onClick,
+  className,
+  ...props
 }: BaseStateProps) {
   return (
-    <div className="flex size-full flex-col items-center justify-center gap-6 rounded-lg border border-solid border-gray-200 bg-gray-50">
+    <div
+      className={cn(
+        'flex size-full flex-col items-center justify-center gap-6 rounded-lg border border-solid border-gray-200 bg-gray-50',
+        className
+      )}
+      {...props}
+    >
       {icon ? (
         <Icon icon={icon} iconColor={iconColor} iconBg={iconBg} />
       ) : (
