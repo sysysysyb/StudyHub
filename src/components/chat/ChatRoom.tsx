@@ -64,6 +64,7 @@ interface ChatRoomProps {
 export default function ChatRoom({ chatRoomId }: ChatRoomProps) {
   return (
     <div>
+      {/* TODO: 마우스 드래그로 스크롤 할 수 있게 변경 */}
       <section className="sticky top-0 flex items-center justify-start space-x-2 overflow-x-scroll border-b border-gray-200 bg-gray-200 p-2">
         {dummyChatRoomUsers.map(({ username, isOnline }, i) => (
           <div
