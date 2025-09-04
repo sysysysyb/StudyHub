@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router'
 import { LandingPage } from '@/pages'
-import { RootLayout } from '@/components'
+import { RootLayout, MyPageLayout } from '@/components'
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
           <Route path="restore-user" element={<div>restore-user</div>} />
         </Route>
 
-        <Route path="my-page">
+        <Route path="my-page" element={<MyPageLayout />}>
           <Route index element={<div>my-page</div>} />
           <Route
             path="bookmarked-recruitment"
