@@ -61,8 +61,12 @@ function BaseState({
         <Spinner />
       )}
       <div className="flex flex-col items-center justify-center gap-2">
-        <h4 className="text-xl font-semibold text-gray-900">{title}</h4>
-        <p className="text-base/6 font-normal text-gray-500">{description}</p>
+        <h4 className="text:lg font-semibold text-gray-900 sm:text-xl">
+          {title}
+        </h4>
+        <p className="text-sm/6 font-normal text-gray-500 sm:text-base/6">
+          {description}
+        </p>
       </div>
       {buttonValue && (
         <Button
