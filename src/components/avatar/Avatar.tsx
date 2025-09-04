@@ -1,7 +1,7 @@
 import { cva, type VariantProps } from 'class-variance-authority'
 import type { ComponentProps } from 'react'
 import { cn } from '@/utils'
-import { AVATAR_SIZE } from '@/components'
+import { AVATAR_SIZE } from './AvatarSize'
 
 const AvatarImage = cva(
   'text-primary-600 bg-primary-100 rounded-full relative shrink-0 flex items-center justify-center border-primary-200 border',
