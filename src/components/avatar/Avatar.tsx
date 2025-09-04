@@ -1,18 +1,13 @@
 import { cva, type VariantProps } from 'class-variance-authority'
 import type { ComponentProps } from 'react'
 import { cn } from '@/utils'
+import { AVATAR_SIZE } from '@/components'
 
 const AvatarImage = cva(
   'text-primary-600 bg-primary-100 rounded-full relative shrink-0 flex items-center justify-center border-primary-200 border',
   {
     variants: {
-      size: {
-        xs: 'size-6',
-        sm: 'size-8',
-        md: 'size-10',
-        lg: 'size-12',
-        xl: 'size-16',
-      },
+      size: AVATAR_SIZE,
     },
     defaultVariants: {
       size: 'md',
