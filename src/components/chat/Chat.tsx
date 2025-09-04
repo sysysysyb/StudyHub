@@ -11,7 +11,8 @@ import {
 import { Button } from '@/components'
 import { MessageCircle, X } from 'lucide-react'
 import ChatRoomCard from './ChatRoomCard'
-import type { ComponentProps } from 'react'
+import { useState, type ComponentProps } from 'react'
+import ChatRoom from './ChatRoom'
 
 const dummyChatroomsData: ComponentProps<typeof ChatRoomCard>[] = [
   {
@@ -53,6 +54,8 @@ const dummyChatroomsData: ComponentProps<typeof ChatRoomCard>[] = [
 ]
 
 export default function Chat() {
+  const [chatRoomId, setChatRoomId] = useState('')
+
   return (
     <Modal isOverlay={false}>
       <ModalTrigger className="fixed right-5 bottom-5">
@@ -60,7 +63,7 @@ export default function Chat() {
       </ModalTrigger>
       <ModalContent
         isPositionCenter={false}
-        className="right-5 bottom-24 h-96 w-80 rounded-lg border border-gray-200 shadow"
+        className="right-5 bottom-24 h-96 w-80 overflow-hidden rounded-lg border border-gray-200 shadow"
       >
         <ModalHeader className="bg-gray-50">
           <div>
@@ -70,16 +73,30 @@ export default function Chat() {
             </ModalDescription>
           </div>
         </ModalHeader>
+
         <ModalMain className="overflow-y-scroll p-0">
-          {dummyChatroomsData.map(
-            ({ title, lastMessage, unReadedChatCount, lastUpdateTime }, i) => (
-              <ChatRoomCard
-                title={title}
-                lastMessage={lastMessage}
-                unReadedChatCount={unReadedChatCount}
-                lastUpdateTime={lastUpdateTime}
-                key={i}
-              />
+          {chatRoomId ? (
+            <ChatRoom chatRoomId={chatRoomId} />
+          ) : (
+            dummyChatroomsData.map(
+              (
+                { title, lastMessage, unReadedChatCount, lastUpdateTime },
+                i
+              ) => (
+                <div
+                  key={i}
+                  onClick={() => {
+                    setChatRoomId('aaajjjdddccc')
+                  }}
+                >
+                  <ChatRoomCard
+                    title={title}
+                    lastMessage={lastMessage}
+                    unReadedChatCount={unReadedChatCount}
+                    lastUpdateTime={lastUpdateTime}
+                  />
+                </div>
+              )
             )
           )}
         </ModalMain>
