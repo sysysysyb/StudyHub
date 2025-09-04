@@ -64,7 +64,7 @@ interface ChatRoomProps {
 export default function ChatRoom({ chatRoomId }: ChatRoomProps) {
   return (
     <div>
-      <section className="flex flex-col space-y-3 pb-[71px]">
+      <section className="flex flex-col space-y-3">
         {dummyChatRoomMessages.results.map((result) => {
           const {
             content,
