@@ -91,6 +91,26 @@ body {
   }
 }
 
+@theme {
+  --animate-shimmer: shimmer 3.5s infinite linear;
+
+  @keyframes shimmer {
+    0% {
+      background-position: 300% 0;
+    }
+    100% {
+      background-position: -300% 0;
+    }
+  }
+
+  --background-image-gradient-custom: linear-gradient(
+    to right,
+    #e5e7eb 0%,
+    #f3f4f6 50%,
+    #e5e7eb 100%
+  );
+}
+
 @layer utilities {
   .scrollbar-custom::-webkit-scrollbar {
     width: 16px;
