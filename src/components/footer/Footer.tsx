@@ -11,17 +11,10 @@ export function Footer(): ReactNode {
           <div className="pb-4">
             <Logo />
           </div>
-<<<<<<< HEAD
           <p>
             IT 전문가로 성장하는 여정에 함께합니다. 최고의 강의와 스터디
             그룹으로 실무 역량을 키워보세요.
           </p>
-=======
-          <div>
-            IT 전문가로 성장하는 여정에 함께합니다. 최고의 강의와 스터디
-            그룹으로 실무 역량을 키워보세요.
-          </div>
->>>>>>> 052c3b7 (✨ Feature: 루트 레이아웃에 푸터 추가 (#68))
         </div>
         <FooterNavComponent
           category="서비스"
@@ -31,11 +24,6 @@ export function Footer(): ReactNode {
             { label: '구인 공고' },
           ]}
         />
-<<<<<<< HEAD
-=======
-
-        {/* 지원 */}
->>>>>>> 052c3b7 (✨ Feature: 루트 레이아웃에 푸터 추가 (#68))
         <FooterNavComponent
           category="지원"
           NavButtons={[
