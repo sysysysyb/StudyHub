@@ -1,8 +1,9 @@
 import type { ReactNode } from 'react'
+import { Link } from 'react-router-dom'
 
 interface NavButton {
   label: string
-  onClick?: React.MouseEventHandler<HTMLButtonElement>
+  destination: string
 }
 
 interface FooterNavProps {
@@ -15,18 +16,20 @@ export const FooterNavComponent = ({
   NavButtons,
 }: FooterNavProps): ReactNode => {
   return (
-    <div className="flex flex-col items-start gap-2">
-      <p className="pb-2 font-semibold text-white">{category}</p>
-      {NavButtons.map((button, index) => (
-        <button
-          key={index}
-          onClick={button.onClick}
-          className="text-gray-300 hover:opacity-80"
-        >
-          {button.label}
-        </button>
-        // 버튼 태그 대신 a 태그로 링크 네비게이션으로 구현도 추후 고려.
-      ))}
-    </div>
+    <nav className="flex flex-col items-start gap-2">
+      <h2 className="pb-2 font-semibold text-white">{category}</h2>
+      <ul>
+        {NavButtons.map((link, index) => (
+          <li key={index}>
+            <Link
+              to={link.destination}
+              className="text-gray-300 hover:opacity-80"
+            >
+              {link.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
   )
 }

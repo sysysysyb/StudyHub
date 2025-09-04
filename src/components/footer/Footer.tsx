@@ -11,26 +11,27 @@ export function Footer(): ReactNode {
           <div className="pb-4">
             <Logo />
           </div>
-          <div>
+          <p>
             IT 전문가로 성장하는 여정에 함께합니다. 최고의 강의와 스터디
             그룹으로 실무 역량을 키워보세요.
-          </div>
+          </p>
         </div>
         <FooterNavComponent
           category="서비스"
           NavButtons={[
-            { label: '강의 목록' },
-            { label: '스터디 그룹' },
-            { label: '구인 공고' },
+            { label: '강의 목록', destination: '/' },
+            { label: '스터디 그룹', destination: '/' },
+            { label: '구인 공고', destination: '/' },
           ]}
         />
         <FooterNavComponent
           category="지원"
           NavButtons={[
-            { label: '고객센터' },
-            { label: 'FAQ' },
-            { label: '개인정보처리방침' },
+            { label: '고객센터', destination: '/' },
+            { label: 'FAQ', destination: '/' },
+            { label: '개인정보처리방침', destination: '/' },
           ]}
+          // 라우트 설정 이전이라 루트페이지로만 연동.
         />
       </div>
       {/* 하부 섹션 */}
