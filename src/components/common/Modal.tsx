@@ -71,11 +71,16 @@ function ModalClose({ children, className, ...props }: ModalCloseProps) {
 /* --------------------
    ModalHeader
 -------------------- */
+interface ModalHeaderProps extends ComponentProps<'header'> {
+  hasCloseButton?: boolean
+}
+
 function ModalHeader({
   children,
   className,
+  hasCloseButton = true,
   ...props
-}: ComponentProps<'header'>) {
+}: ModalHeaderProps) {
   const { close } = useModalContext()
 
   return (
@@ -87,9 +92,11 @@ function ModalHeader({
       {...props}
     >
       {children ? children : <div />}
-      <button onClick={close} className="cursor-pointer text-gray-400">
-        <X />
-      </button>
+      {hasCloseButton ? (
+        <button onClick={close} className="cursor-pointer text-gray-400">
+          <X />
+        </button>
+      ) : null}
     </header>
   )
 }
