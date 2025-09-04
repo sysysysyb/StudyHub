@@ -12,9 +12,12 @@ import ToastContainer from '@/components/common/Toast/ToastContainer'
 import RootLayout from '@/components/layout/RootLayout'
 import MyPageLayout from '@/components/layout/MyPageLayout'
 import Chat from '@/components/chat/Chat'
+
 import ListItemSkeleton from '@/components/common/Skeleton/ListItemSkeleton'
 import ImageCardSkeleton from '@/components/common/Skeleton/ImageCardSkeleton'
 import AvatarSkeleton from '@/components/common/Skeleton/AvatarSkeleton'
+
+import Avatar from '@/components/common/Avatar'
 
 export {
   Badge,
@@ -33,4 +36,5 @@ export {
   ListItemSkeleton,
   ImageCardSkeleton,
   AvatarSkeleton,
+  Avatar,
 }
