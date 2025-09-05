@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router'
 import { LandingPage } from '@/pages'
 import { RootLayout, MyPageLayout } from '@/components'
+import { AuthLayout } from './components/layout/AuthLayout'
 
 function App() {
   return (
@@ -8,7 +9,7 @@ function App() {
       <Route element={<RootLayout />}>
         <Route index element={<LandingPage />} />
 
-        <Route path="auth">
+        <Route path="auth" element={<AuthLayout />}>
           <Route path="login" element={<div>login</div>} />
           <Route path="signup" element={<div>signup</div>} />
           <Route path="find-email" element={<div>find-email</div>} />
