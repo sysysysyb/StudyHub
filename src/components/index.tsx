@@ -18,6 +18,7 @@ import AvatarSkeleton from '@/components/common/Skeleton/AvatarSkeleton'
 import Avatar from '@/components/avatar/Avatar'
 import AuthLayout from '@/components/layout/AuthLayout'
 import Notification from '@/components/notification/Notification'
+import { UserInfoDescription } from '@/components/mypage/InfoDescription'
 
 export {
   Badge,
@@ -39,4 +40,5 @@ export {
   Avatar,
   AuthLayout,
   Notification,
+  UserInfoDescription,
 }

@@ -1,3 +1,4 @@
-import LandingPage from './LandingPage'
+import LandingPage from '@/pages/LandingPage'
+import { MyInfo } from '@/pages/MyInfo'
 
-export { LandingPage }
+export { LandingPage, MyInfo }

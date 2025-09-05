@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router'
-import { LandingPage } from '@/pages'
+import { LandingPage, MyInfo } from '@/pages'
 import { RootLayout, MyPageLayout, AuthLayout } from '@/components'
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
         </Route>
 
         <Route path="my-page" element={<MyPageLayout />}>
-          <Route index element={<div>my-page</div>} />
+          <Route index element={<MyInfo />} />
           <Route
             path="bookmarked-recruitment"
             element={<div>bookmarked-recruitment</div>}
