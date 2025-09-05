@@ -9,7 +9,7 @@ import {
 } from '@/components/common/Modal'
 import NotificationNavigation from '@/components/notification/NotificationNavigation'
 import type { Notification as NotificationType } from '@/types/api-response-types/notification-response-types'
-import NotificationCard from './NotificationCard'
+import NotificationCard from '@/components/notification/NotificationCard'
 import { useEffect, useState } from 'react'
 import { useNotificationNavigationItemStore } from '@/store'
 
