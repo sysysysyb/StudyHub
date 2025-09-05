@@ -1,7 +1,6 @@
 import { Routes, Route } from 'react-router'
 import { LandingPage } from '@/pages'
-import { RootLayout, MyPageLayout } from '@/components'
-import { AuthLayout } from './components/layout/AuthLayout'
+import { RootLayout, MyPageLayout, AuthLayout } from '@/components'
 
 function App() {
   return (
