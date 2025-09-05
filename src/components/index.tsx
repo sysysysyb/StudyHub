@@ -17,6 +17,7 @@ import ImageCardSkeleton from '@/components/common/Skeleton/ImageCardSkeleton'
 import AvatarSkeleton from '@/components/common/Skeleton/AvatarSkeleton'
 import Avatar from '@/components/avatar/Avatar'
 import AuthLayout from '@/components/layout/AuthLayout'
+import Notification from '@/components/notification/Notification'
 
 export {
   Badge,
@@ -37,4 +38,5 @@ export {
   AvatarSkeleton,
   Avatar,
   AuthLayout,
+  Notification,
 }
