@@ -10,6 +10,8 @@ import {
 import NotificationNavigation from '@/components/notification/NotificationNavigation'
 import type { Notification as NotificationType } from '@/types/api-response-types/notification-response-types'
 import NotificationCard from './NotificationCard'
+import { useEffect, useState } from 'react'
+import { useNotificationNavigationItemStore } from '@/store'
 
 const dummyNotifications: NotificationType[] = [
   {
@@ -95,6 +97,39 @@ const dummyNotifications: NotificationType[] = [
 ]
 
 export default function Notification() {
+  const { notificationNavigationItem } = useNotificationNavigationItemStore(
+    (state) => state
+  )
+
+  const [filteredNotifications, setFilteredNotification] = useState<
+    NotificationType[]
+  >([])
+
+  useEffect(() => {
+    let filtered: NotificationType[] = []
+
+    if (notificationNavigationItem === 'all') {
+      filtered = [...dummyNotifications].sort((a, b) => {
+        // 안 읽은 알림이 먼저
+        if (a.is_read !== b.is_read) {
+          return a.is_read ? 1 : -1
+        }
+        // created_at 최신순
+        return b.created_at.getTime() - a.created_at.getTime()
+      })
+    } else if (notificationNavigationItem === 'readed') {
+      filtered = [...dummyNotifications]
+        .filter((n) => n.is_read)
+        .sort((a, b) => b.created_at.getTime() - a.created_at.getTime())
+    } else {
+      // unReaded
+      filtered = [...dummyNotifications]
+        .filter((n) => !n.is_read)
+        .sort((a, b) => b.created_at.getTime() - a.created_at.getTime())
+    }
+
+    setFilteredNotification(filtered)
+  }, [notificationNavigationItem])
   return (
     <div className="relative">
       <Modal isOverlay={false}>
@@ -113,7 +148,7 @@ export default function Notification() {
           </ModalHeader>
           <ModalMain className="flex flex-col overflow-y-scroll p-0">
             <NotificationNavigation />
-            {dummyNotifications.map((notification) => (
+            {filteredNotifications.map((notification) => (
               <NotificationCard
                 notification={notification}
                 key={notification.notification_id}
