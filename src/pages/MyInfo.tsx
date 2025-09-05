@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react'
-import { Button } from '@/components'
-import { InfoDescription } from './InfoDescription'
+import { Button, UserInfoDescription } from '@/components'
 
 export function MyInfo(): ReactNode {
   return (
@@ -27,7 +26,7 @@ export function MyInfo(): ReactNode {
           </div>
           <figcaption className="text-heading5">프로필 이미지</figcaption>
         </figure>
-        <InfoDescription
+        <UserInfoDescription
           infoList={[
             { title: '이메일', detail: 'kim.dev@example.com' },
             { title: '휴대폰 번호', detail: '' },
@@ -39,7 +38,7 @@ export function MyInfo(): ReactNode {
       </section>
 
       <section
-        className="border-y-[1px] border-gray-200 py-16 pt-8"
+        className="border-y border-gray-200 py-16 pt-8"
         aria-labelledby="passwordChange"
       >
         <header className="flex justify-between">

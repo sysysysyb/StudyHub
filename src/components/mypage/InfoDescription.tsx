@@ -1,22 +1,24 @@
 import type { ReactNode } from 'react'
 
-interface InfoDescriptionProps {
+interface InfoDescription {
   title: string
   detail: string
 }
 
-interface InfoDescriptionList {
-  infoList: InfoDescriptionProps[]
+interface InfoDescriptionProps {
+  infoList: InfoDescription[]
 }
 
-export function InfoDescription({ infoList }: InfoDescriptionList): ReactNode {
+export function UserInfoDescription({
+  infoList,
+}: InfoDescriptionProps): ReactNode {
   return (
     <dl className="grid grid-cols-1 gap-6 md:grid-cols-2">
-      {infoList.map((List, index) => (
+      {infoList.map((list, index) => (
         <div key={index}>
-          <dt className="pb-2 text-sm text-gray-700">{List.title}</dt>
+          <dt className="pb-2 text-sm text-gray-700">{list.title}</dt>
           <dd className="flex h-12 items-center bg-gray-50 p-4 text-gray-900">
-            {List.detail}
+            {list.detail}
           </dd>
         </div>
       ))}
