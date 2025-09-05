@@ -111,6 +111,19 @@ body {
   );
 }
 
+@theme {
+  --animate-loading-state: loading-state 1.5s linear infinite;
+
+  @keyframes loading-state {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
+
 @layer utilities {
   .scrollbar-custom::-webkit-scrollbar {
     width: 16px;
