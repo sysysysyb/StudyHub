@@ -9,11 +9,13 @@ export interface NotificationList {
 
 export type notificationType =
   | 'STUDY_JOIN'
-  | 'STUDY_EXIT'
+  | 'STUDY_NOTE_CREATE'
+  | 'STUDY_REVIEW_REQUEST'
   | 'APPLICATION_ACCEPT'
   | 'APPLICATION_REJECT'
   | 'ADD_APPLICATION'
-  | 'NEW_CHAT_MESSAGE'
+  | 'TODAY_SCHEDULE'
+  | 'UPCOMIG_SCHEDULE'
 
 export interface Notification {
   notification_id: number
