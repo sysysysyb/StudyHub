@@ -2,7 +2,7 @@ import type { ComponentType } from 'react'
 
 type LoaderType = () => Promise<{ default: ComponentType<unknown> }>
 
-const modules = import.meta.glob('../test-pages/**/*Test.tsx') as Record<
+const modules = import.meta.glob('../tests/**/*Test.tsx') as Record<
   string,
   LoaderType
 >
