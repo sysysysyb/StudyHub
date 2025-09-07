@@ -1,10 +1,7 @@
 import { Link } from 'react-router'
-import Button from './common/Button'
 import { cn } from '@/utils'
-import Input from './common/Input'
+import { Button, Input, Badge, Logo } from '@/components'
 import type { ComponentProps } from 'react'
-import Badge from './common/Badge'
-import { Logo } from './common/Logo'
 
 function AuthContainer({
   className,
@@ -64,14 +61,15 @@ function AuthDescription({
   )
 }
 
-interface AuthLinkProps extends ComponentProps<'a'> {
-  path: string
-}
-
-function AuthLink({ path, className, children, ...props }: AuthLinkProps) {
+function AuthLink({
+  to,
+  className,
+  children,
+  ...props
+}: ComponentProps<typeof Link>) {
   return (
     <Link
-      to={path}
+      to={to}
       className={cn('text-primary-600 text-sm', className)}
       {...props}
     >
@@ -84,7 +82,7 @@ function AuthSubmitButton({
   className,
   children,
   ...props
-}: ComponentProps<'button'>) {
+}: ComponentProps<typeof Button>) {
   return (
     <Button
       variant="primary"
@@ -103,7 +101,7 @@ function AuthVerifyButton({
   className,
   children,
   ...props
-}: ComponentProps<'button'>) {
+}: ComponentProps<typeof Button>) {
   return (
     <Button
       variant="primary"
@@ -122,7 +120,7 @@ function AuthSocialLoginButton({
   className,
   children,
   ...props
-}: ComponentProps<'button'>) {
+}: ComponentProps<typeof Button>) {
   return (
     <Button
       className={cn(
@@ -136,11 +134,11 @@ function AuthSocialLoginButton({
   )
 }
 
-function AuthInput({ className, ...props }: ComponentProps<'input'>) {
+function AuthInput({ className, ...props }: ComponentProps<typeof Input>) {
   return <Input className={className} {...props} />
 }
 
-interface AuthBadgeProps extends ComponentProps<'div'> {
+interface AuthBadgeProps extends ComponentProps<typeof Badge> {
   isSelected?: boolean
 }
 
