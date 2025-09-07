@@ -1,5 +1,5 @@
 import { Button } from '@/components'
-import { testPages } from '@/test-hub/registry'
+import { testPages } from '@/utils'
 import { Suspense, useEffect } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router'
 

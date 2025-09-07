@@ -1,5 +1,5 @@
 import TestHub from '@/pages/TestHub'
-import { testPages } from '@/test-hub/registry'
+import { testPages } from '@/utils'
 import { lazy, Suspense } from 'react'
 import { Navigate, Route, Routes } from 'react-router'
 
