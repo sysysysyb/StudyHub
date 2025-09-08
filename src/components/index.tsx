@@ -18,6 +18,7 @@ import Avatar from '@/components/common/Avatar'
 import AuthLayout from '@/components/layout/AuthLayout'
 import Notification from '@/components/notification/Notification'
 import { UserInfoDescription } from '@/components/mypage/InfoDescription'
+import BookmarkedRecruitmentCard from '@/components/mypage/BookmarkedRecruitmentCard'
 
 export {
   Badge,
@@ -39,4 +40,5 @@ export {
   AuthLayout,
   Notification,
   UserInfoDescription,
+  BookmarkedRecruitmentCard,
 }
