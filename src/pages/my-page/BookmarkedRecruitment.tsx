@@ -1,9 +1,13 @@
-import { Input } from '@/components'
+import { Input, ListItemSkeleton } from '@/components'
+import EmptyDataState from '@/components/common/State/EmptyDataState'
+import { useBookmarkedRecruitment } from '@/hooks/api'
 
 export default function BookmarkedRecruitment() {
+  const { data, isPending } = useBookmarkedRecruitment()
+
   return (
     <div>
-      <header className="flex items-center justify-between">
+      <header className="mb-6 flex items-center justify-between gap-2">
         <div className="flex flex-col items-start justify-center gap-2">
           <h1 className="text-heading3 text-gray-900">북마크한 공고</h1>
           <span className="text-gray-600">
@@ -19,6 +23,27 @@ export default function BookmarkedRecruitment() {
           />
         </div>
       </header>
+      <main className="flex flex-col gap-4">
+        {isPending ? (
+          [...Array(5)].map((_, i) => <ListItemSkeleton key={i} />)
+        ) : data && data.results.length > 0 ? (
+          data.results.map((recruitment) => {
+            const { uuid, thumbnail_image_url: thumbnailImageUrl } = recruitment
+
+            return (
+              <div
+                key={uuid}
+                className="flex items-center justify-center gap-6 rounded-xl border border-gray-200 p-6"
+              >
+                <img src={thumbnailImageUrl} className="w-40 rounded-lg" />
+                <div className="flex-1"></div>
+              </div>
+            )
+          })
+        ) : (
+          <EmptyDataState />
+        )}
+      </main>
     </div>
   )
 }
