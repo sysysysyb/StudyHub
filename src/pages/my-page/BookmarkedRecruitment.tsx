@@ -1,9 +1,10 @@
 import { ListItemSkeleton, BookmarkedRecruitmentCard } from '@/components'
-import { Input } from '@/components/common/input'
+import { Input, InputIcon } from '@/components/common/input'
 import EmptyDataState from '@/components/common/State/EmptyDataState'
 import { useBookmarkedRecruitment } from '@/hooks/api'
 import { useDebounce } from '@/hooks/useDebounce'
 import { useEffect, useState } from 'react'
+import { SearchIcon } from 'lucide-react'
 
 export default function BookmarkedRecruitment() {
   const [searchParam, setSearchParam] = useState('')
@@ -27,12 +28,16 @@ export default function BookmarkedRecruitment() {
           </span>
         </div>
         <div className="w-full max-w-80">
-          <Input
-            placeholder="공고 제목으로 검색..."
-            className="w-full max-w-80"
-            value={searchParam}
-            onChange={(e) => setSearchParam(e.target.value)}
-          />
+          <div className="relative">
+            <InputIcon icon={SearchIcon} className="absolute" />
+            <Input
+              hasIcon
+              placeholder="공고 제목으로 검색..."
+              className="w-full max-w-80"
+              value={searchParam}
+              onChange={(e) => setSearchParam(e.target.value)}
+            />
+          </div>
         </div>
       </header>
       <main className="flex flex-col gap-4">
