@@ -2,9 +2,20 @@ import { ListItemSkeleton, BookmarkedRecruitmentCard } from '@/components'
 import { Input } from '@/components/common/input'
 import EmptyDataState from '@/components/common/State/EmptyDataState'
 import { useBookmarkedRecruitment } from '@/hooks/api'
+import { useDebounce } from '@/hooks/useDebounce'
+import { useEffect, useState } from 'react'
 
 export default function BookmarkedRecruitment() {
-  const { data, isPending } = useBookmarkedRecruitment()
+  const [searchParam, setSearchParam] = useState('')
+
+  const debouncedSearchParam = useDebounce(searchParam, 250)
+
+  const { data, isPending, refetch } =
+    useBookmarkedRecruitment(debouncedSearchParam)
+
+  useEffect(() => {
+    refetch()
+  }, [debouncedSearchParam, refetch])
 
   return (
     <div>
@@ -17,10 +28,10 @@ export default function BookmarkedRecruitment() {
         </div>
         <div className="w-full max-w-80">
           <Input
-            hasIcon
-            icon="search"
             placeholder="공고 제목으로 검색..."
             className="w-full max-w-80"
+            value={searchParam}
+            onChange={(e) => setSearchParam(e.target.value)}
           />
         </div>
       </header>

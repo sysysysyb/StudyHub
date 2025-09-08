@@ -4,10 +4,11 @@ import api from '@/utils/axios'
 import { useQuery, type UseQueryOptions } from '@tanstack/react-query'
 
 export default function useBookmarkedRecruitment(
+  searchParam: string = '',
   options?: UseQueryOptions<BookmarkedRecruitments>
 ) {
   return useQuery<BookmarkedRecruitments>({
-    queryKey: ['recruitment', 'bookmarked'],
+    queryKey: ['recruitment', 'bookmarked', searchParam],
     queryFn: async () => {
       const res = await api.get(`${API_BASE_URL}/recruitments/bookmarks/me`)
 
