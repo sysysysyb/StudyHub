@@ -1,6 +1,6 @@
 import { cn } from '@/utils'
 import type { ComponentProps } from 'react'
-import { Logo } from '../common/Logo'
+import { Logo } from '@/components/common/Logo'
 
 export function AuthLogo({ className, ...props }: ComponentProps<'div'>) {
   return (

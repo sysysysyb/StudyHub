@@ -1,5 +1,5 @@
 import type { ComponentProps } from 'react'
-import Button from '../common/Button'
+import Button from '@/components/common/Button'
 import { cn } from '@/utils'
 
 export function AuthSocialLoginButton({

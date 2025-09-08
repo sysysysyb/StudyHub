@@ -1,5 +1,5 @@
 import type { ComponentProps } from 'react'
-import Badge from '../common/Badge'
+import Badge from '@/components/common/Badge'
 import { cn } from '@/utils'
 
 interface AuthBadgeProps extends ComponentProps<typeof Badge> {
