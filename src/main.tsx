@@ -5,6 +5,8 @@ import { createRoot } from 'react-dom/client'
 import '@/index.css'
 import App from '@/App.tsx'
 import { ToastContainer } from '@/components'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 async function enableMocking() {
   if (process.env.NODE_ENV !== 'development') {
@@ -20,13 +22,18 @@ async function enableMocking() {
 
 const root = createRoot(document.getElementById('root')!)
 
+const queryClient = new QueryClient()
+
 enableMocking().then(() => {
   root.render(
     <StrictMode>
-      <BrowserRouter>
-        <App />
-        <ToastContainer />
-      </BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <App />
+          <ToastContainer />
+        </BrowserRouter>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
     </StrictMode>
   )
 })
