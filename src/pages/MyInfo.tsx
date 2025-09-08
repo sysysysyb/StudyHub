@@ -1,5 +1,11 @@
 import type { ReactNode } from 'react'
-import { Button, UserInfoDescription, Avatar, InfoUpdate } from '@/components'
+import {
+  Button,
+  UserInfoDescription,
+  Avatar,
+  InfoUpdate,
+  PasswordChange,
+} from '@/components'
 
 export function MyInfo(): ReactNode {
   return (
@@ -40,12 +46,7 @@ export function MyInfo(): ReactNode {
               보안을 위해 정기적으로 비밀번호를 변경해주세요
             </p>
           </div>
-          <Button
-            size="lg"
-            className="my-auto bg-gray-500 py-2.5 hover:bg-gray-400 active:bg-gray-600"
-          >
-            비밀번호 변경
-          </Button>
+          <PasswordChange />
         </header>
       </section>
       <section className="py-16 pt-8" aria-labelledby="unregister">

@@ -10,7 +10,7 @@ import {
   ModalMain,
   Button,
 } from '@/components'
-import { Input, InputLabel, InputErrorMessage } from '@/components/common/input'
+import { MypageInputField } from './MypageInputField'
 import { useState } from 'react'
 
 export const InfoUpdate = () => {
@@ -46,60 +46,32 @@ export const InfoUpdate = () => {
             /> */}
             <span className="text-primary-600 text-sm">프로필 사진 변경</span>
           </label>
-          <div className="flex flex-col gap-2">
-            <InputLabel htmlFor="nickname" isRequired>
-              닉네임
-            </InputLabel>
-            <Input id="nickname" aria-describedby="nickname-error" />
-            {/* <InputErrorMessage id="nickname-error">
-              닉네임은 필수 입력값입니다.
-            </InputErrorMessage> */}
-          </div>
+          <MypageInputField label="닉네임" id="nickname" isRequired />
 
-          <div className="flex items-end gap-2">
-            <div className="flex flex-col gap-2">
-              <InputLabel htmlFor="phonenumber">휴대폰 번호</InputLabel>
-              <Input id="phonenumber" aria-describedby="phonenumber-error" />
-              {/* <InputErrorMessage id="phonenumber-error">
-              올바른 휴대폰 번호를 입력해주세요.
-            </InputErrorMessage> */}
-            </div>
-
-            {/* 테스트용 임시로직 구현 */}
-            {challengeAuthentication ? (
-              <Button
-                variant="secondary"
-                className="py-3.5"
-                onClick={() => setChallengeAuthentication(false)}
-              >
-                재인증
-              </Button>
-            ) : (
-              <Button
-                variant="secondary"
-                className="py-3.5"
-                onClick={() => setChallengeAuthentication(true)}
-              >
-                인증하기
-              </Button>
-            )}
-          </div>
+          {/* 테스트용 임시로직 구현 */}
+          {challengeAuthentication ? (
+            <MypageInputField
+              label="휴대폰 번호"
+              id="phonenumber"
+              buttonlabel="재인증"
+              buttonvariant="secondary"
+              onClick={() => setChallengeAuthentication(false)}
+            />
+          ) : (
+            <MypageInputField
+              label="휴대폰 번호"
+              id="phonenumber"
+              buttonlabel="인증하기"
+              buttonvariant="secondary"
+              onClick={() => setChallengeAuthentication(true)}
+            />
+          )}
           {challengeAuthentication && (
-            <div className="flex items-end gap-2">
-              <div className="flex flex-col gap-2">
-                <InputLabel htmlFor="authenticationnumber">
-                  인증 번호
-                </InputLabel>
-                <Input
-                  id="authenticationnumber"
-                  aria-describedby="authenticationnumber-error"
-                />
-                {/* <InputErrorMessage id="authenticationnumber-error">
-              올바른 휴대폰 번호를 입력해주세요.
-            </InputErrorMessage> */}
-              </div>
-              <Button className="py-3.5">확인</Button>
-            </div>
+            <MypageInputField
+              label="인증 번호"
+              id="authenticationnumber"
+              buttonlabel="확인"
+            />
           )}
         </ModalMain>
 
@@ -112,7 +84,13 @@ export const InfoUpdate = () => {
               취소
             </Button>
           </ModalClose>
-          <Button>변경하기</Button>
+          {challengeAuthentication ? (
+            <Button variant="secondary" disabled={challengeAuthentication}>
+              변경하기
+            </Button>
+          ) : (
+            <Button>변경하기</Button>
+          )}
         </ModalFooter>
       </ModalContent>
     </Modal>
