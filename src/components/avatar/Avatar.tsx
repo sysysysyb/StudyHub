@@ -1,7 +1,8 @@
 import { cva, type VariantProps } from 'class-variance-authority'
 import type { ComponentProps } from 'react'
 import { cn } from '@/utils'
-import { AVATAR_SIZE } from '@/components/avatar/AvatarSize'
+import { AVATAR_SIZE } from '@/constants/avatar-size'
+import { User as UserIcon } from 'lucide-react'
 
 const AvatarImage = cva(
   'text-primary-600 bg-primary-100 rounded-full relative shrink-0 flex items-center justify-center border-primary-200 border',
@@ -24,6 +25,7 @@ const AvatarState = cva(
         away: 'bg-primary-500',
         dnd: 'bg-danger-500',
         offline: 'bg-gray-400',
+        none: 'display:none',
       },
     },
     defaultVariants: {
@@ -35,9 +37,7 @@ const AvatarState = cva(
 interface AvatarProps
   extends ComponentProps<'img'>,
     VariantProps<typeof AvatarImage>,
-    VariantProps<typeof AvatarState> {
-  alt: string
-}
+    VariantProps<typeof AvatarState> {}
 
 export default function Avatar({
   alt,
@@ -55,8 +55,8 @@ export default function Avatar({
           className="h-full w-full rounded-full object-cover"
         />
       ) : (
-        <span>{alt?.charAt(0) || '김'}</span>
-        // 첫번째 글자만 가져와서 혹은 '김'으로 이미지 대체
+        <span>{alt?.charAt(0) || <UserIcon />}</span>
+        // 마이페이지 사이드바에서 쓰인 아이콘으로 대체.
       )}
       <span aria-hidden="true" className={cn(AvatarState({ state }))} />
     </div>

@@ -1,6 +1,6 @@
 import { cn } from '@/utils'
 import { Circle } from './SkeletonItem'
-import { AVATAR_SIZE } from '@/components/avatar/AvatarSize'
+import { AVATAR_SIZE } from '@/constants/avatar-size'
 
 function AvatarSkeleton({
   size = 'md',

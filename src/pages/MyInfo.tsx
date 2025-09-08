@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { Button, UserInfoDescription } from '@/components'
+import { Button, UserInfoDescription, Avatar } from '@/components'
 
 export function MyInfo(): ReactNode {
   return (
@@ -17,13 +17,7 @@ export function MyInfo(): ReactNode {
           </Button>
         </header>
         <figure className="flex flex-col items-center gap-4">
-          <div className="size-32 overflow-hidden rounded-full">
-            <img
-              src=""
-              alt="사용자 프로필 이미지"
-              className="h-full w-full object-cover object-center"
-            />
-          </div>
+          <Avatar size="3xl" state="none" />
           <figcaption className="text-heading5">프로필 이미지</figcaption>
         </figure>
         <UserInfoDescription

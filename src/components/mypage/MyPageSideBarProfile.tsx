@@ -1,4 +1,4 @@
-import { User as UserIcon } from 'lucide-react'
+import { Avatar } from '@/components'
 
 //임시 유저 정보 인터페이스 (추후 삭제)
 interface UserInformation {
@@ -26,17 +26,7 @@ export default function MyPageSideBarProfile() {
   //16 4 8
   return (
     <div className="flex flex-col items-center justify-start">
-      <div className="bg-primary-200 mb-4 flex size-20 items-center justify-center overflow-hidden rounded-full">
-        {profileImageUrl ? (
-          <img
-            alt="profile-image"
-            src={profileImageUrl}
-            className="h-full w-full object-cover object-center"
-          />
-        ) : (
-          <UserIcon size={60} />
-        )}
-      </div>
+      <Avatar src={profileImageUrl} size="2xl" state="none" className="mb-4" />
       <span className="text-heading5 mb-1 text-gray-900">{username}</span>
       <span className="text-secondary mb-2">{email}</span>
       <span className="text-xs text-gray-500">{`가입일: ${signUpYear}년 ${signUpMonth}월`}</span>
