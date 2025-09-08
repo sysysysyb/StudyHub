@@ -17,7 +17,7 @@ export function MyInfo(): ReactNode {
           </Button>
         </header>
         <figure className="flex flex-col items-center gap-4">
-          <Avatar size="xxxl" state="none" />
+          <Avatar size="3xl" state="none" />
           <figcaption className="text-heading5">프로필 이미지</figcaption>
         </figure>
         <UserInfoDescription

@@ -4,7 +4,7 @@ export const AVATAR_SIZE = {
   md: 'size-10',
   lg: 'size-12',
   xl: 'size-16',
-  xxl: 'size-20',
-  xxxl: 'size-32',
+  '2xl': 'size-20',
+  '3xl': 'size-32',
 } as const
 // 상수는 절대경로 사용이 권장되지 않기에 index.tsx 설정은 제외함.

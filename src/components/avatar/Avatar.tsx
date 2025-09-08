@@ -1,7 +1,7 @@
 import { cva, type VariantProps } from 'class-variance-authority'
 import type { ComponentProps } from 'react'
 import { cn } from '@/utils'
-import { AVATAR_SIZE } from '@/components/avatar/AvatarSize'
+import { AVATAR_SIZE } from '@/constants/AvatarSize'
 import { User as UserIcon } from 'lucide-react'
 
 const AvatarImage = cva(

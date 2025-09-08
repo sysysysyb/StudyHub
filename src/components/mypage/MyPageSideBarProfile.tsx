@@ -26,7 +26,7 @@ export default function MyPageSideBarProfile() {
   //16 4 8
   return (
     <div className="flex flex-col items-center justify-start">
-      <Avatar src={profileImageUrl} size="xxl" state="none" className="mb-4" />
+      <Avatar src={profileImageUrl} size="2xl" state="none" className="mb-4" />
       <span className="text-heading5 mb-1 text-gray-900">{username}</span>
       <span className="text-secondary mb-2">{email}</span>
       <span className="text-xs text-gray-500">{`가입일: ${signUpYear}년 ${signUpMonth}월`}</span>
