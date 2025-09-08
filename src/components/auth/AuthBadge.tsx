@@ -16,10 +16,10 @@ export function AuthBadge({
     <Badge
       size="lg"
       className={cn(
-        'px-7 py-4',
+        'cursor-pointer border border-solid px-8 py-2',
         isSelected
-          ? 'bg-primary-100 border-primary-500 text-primary-500'
-          : 'border-[#bdbdbd] bg-gray-200',
+          ? 'bg-primary-100 border-primary-600 text-primary-600'
+          : 'border-[#cecece] bg-gray-200',
         className
       )}
       {...props}
