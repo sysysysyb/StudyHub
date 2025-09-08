@@ -6,7 +6,8 @@ function MainRoutes() {
   return (
     <Routes>
       <Route element={<RootLayout />}>
-        <Route index element={<LandingPage />} />
+        {/* TODO: /landing -> index로 수정 */}
+        <Route path="landing" element={<LandingPage />} />
 
         <Route path="auth" element={<AuthLayout />}>
           <Route path="login" element={<div>login</div>} />
