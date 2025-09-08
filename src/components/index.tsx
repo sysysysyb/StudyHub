@@ -33,6 +33,7 @@ import {
 } from '@/components/common/Modal'
 import { InfoUpdate } from '@/components/mypage/InfoUpdate'
 import { PasswordChange } from './mypage/PasswordChange'
+import { Withdrawal } from './mypage/Withdrawal'
 
 export {
   Badge,
@@ -66,4 +67,5 @@ export {
   ModalMain,
   InfoUpdate,
   PasswordChange,
+  Withdrawal,
 }

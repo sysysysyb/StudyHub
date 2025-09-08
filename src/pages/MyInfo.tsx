@@ -1,10 +1,10 @@
 import type { ReactNode } from 'react'
 import {
-  Button,
   UserInfoDescription,
   Avatar,
   InfoUpdate,
   PasswordChange,
+  Withdrawal,
 } from '@/components'
 
 export function MyInfo(): ReactNode {
@@ -62,9 +62,7 @@ export function MyInfo(): ReactNode {
               </span>
             </div>
           </div>
-          <Button variant="danger" size="lg" className="my-auto py-2.5">
-            회원 탈퇴
-          </Button>
+          <Withdrawal />
         </header>
       </section>
     </main>

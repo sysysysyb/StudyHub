@@ -53,7 +53,7 @@ export const InfoUpdate = () => {
             <MypageInputField
               label="휴대폰 번호"
               id="phonenumber"
-              buttonlabel="재인증"
+              buttonlabel="재전송"
               buttonvariant="secondary"
               onClick={() => setChallengeAuthentication(false)}
             />
