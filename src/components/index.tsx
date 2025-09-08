@@ -2,7 +2,6 @@
 import Badge from '@/components/common/Badge'
 import Button from '@/components/common/Button'
 import ImageCard from '@/components/common/Card/ImageCard'
-import Input from '@/components/common/Input'
 import MyPageSideBar from '@/components/mypage/MyPageSideBar'
 import Header from '@/components/header/Header'
 import { Symbol } from '@/components/common/Symbol'
@@ -24,7 +23,6 @@ export {
   Badge,
   Button,
   ImageCard,
-  Input,
   MyPageSideBar,
   Header,
   Symbol,
