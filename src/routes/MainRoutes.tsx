@@ -1,5 +1,5 @@
 import { AuthLayout, MyPageLayout, RootLayout } from '@/components'
-import { BookmarkedRecruitment, LandingPage, MyInfo } from '@/pages'
+import { BookmarkedRecruitment, LandingPage, Login, MyInfo } from '@/pages'
 import { Route, Routes } from 'react-router'
 
 function MainRoutes() {
@@ -10,7 +10,7 @@ function MainRoutes() {
         <Route path="landing" element={<LandingPage />} />
 
         <Route path="auth" element={<AuthLayout />}>
-          <Route path="login" element={<div>login</div>} />
+          <Route path="login" element={<Login />} />
           <Route path="signup" element={<div>signup</div>} />
           <Route path="find-email" element={<div>find-email</div>} />
           <Route path="find-password" element={<div>find-password</div>} />
