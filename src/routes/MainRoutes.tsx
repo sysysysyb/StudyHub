@@ -1,6 +1,5 @@
 import { AuthLayout, MyPageLayout, RootLayout } from '@/components'
-import { BookmarkedRecruitment, LandingPage, MyInfo } from '@/pages'
-import Login from '@/pages/Login'
+import { BookmarkedRecruitment, LandingPage, Login, MyInfo } from '@/pages'
 import { Route, Routes } from 'react-router'
 
 function MainRoutes() {
