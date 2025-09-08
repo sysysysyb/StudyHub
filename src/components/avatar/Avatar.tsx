@@ -37,9 +37,7 @@ const AvatarState = cva(
 interface AvatarProps
   extends ComponentProps<'img'>,
     VariantProps<typeof AvatarImage>,
-    VariantProps<typeof AvatarState> {
-  alt: string
-}
+    VariantProps<typeof AvatarState> {}
 
 export default function Avatar({
   alt,
