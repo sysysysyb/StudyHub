@@ -1,5 +1,5 @@
 import { Send as SendIcon } from 'lucide-react'
-import { Input } from '@/components'
+import { Input } from '@/components/common/input'
 
 export default function ChatRoomInput() {
   return (
