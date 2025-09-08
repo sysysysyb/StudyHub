@@ -1,8 +1,5 @@
-import {
-  Input,
-  ListItemSkeleton,
-  BookmarkedRecruitmentCard,
-} from '@/components'
+import { ListItemSkeleton, BookmarkedRecruitmentCard } from '@/components'
+import { Input } from '@/components/common/input'
 import EmptyDataState from '@/components/common/State/EmptyDataState'
 import { useBookmarkedRecruitment } from '@/hooks/api'
 
