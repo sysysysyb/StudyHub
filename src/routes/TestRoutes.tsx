@@ -9,7 +9,7 @@ function Root() {
   return (
     <div className="flex h-screen items-center justify-center gap-10">
       <Button className="px-10 py-6 text-2xl">
-        <Link to="/main">사이트 메인</Link>
+        <Link to="/landing">사이트 메인</Link>
       </Button>
       <Button className="px-10 py-6 text-2xl">
         <Link to="/test-hub">테스트 허브</Link>
@@ -22,7 +22,7 @@ function TestRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Root />} />
-      <Route path="/main/*" element={<MainRoutes />} />
+      <Route path="/*" element={<MainRoutes />} />
       <Route path="/test-hub/*" element={<TestHub />}>
         {testPages.map((p) => {
           const Page = lazy(p.loader)
