@@ -1,4 +1,8 @@
-import { Input, ListItemSkeleton } from '@/components'
+import {
+  Input,
+  ListItemSkeleton,
+  BookmarkedRecruitmentCard,
+} from '@/components'
 import EmptyDataState from '@/components/common/State/EmptyDataState'
 import { useBookmarkedRecruitment } from '@/hooks/api'
 
@@ -27,19 +31,12 @@ export default function BookmarkedRecruitment() {
         {isPending ? (
           [...Array(5)].map((_, i) => <ListItemSkeleton key={i} />)
         ) : data && data.results.length > 0 ? (
-          data.results.map((recruitment) => {
-            const { uuid, thumbnail_image_url: thumbnailImageUrl } = recruitment
-
-            return (
-              <div
-                key={uuid}
-                className="flex items-center justify-center gap-6 rounded-xl border border-gray-200 p-6"
-              >
-                <img src={thumbnailImageUrl} className="w-40 rounded-lg" />
-                <div className="flex-1"></div>
-              </div>
-            )
-          })
+          data.results.map((recruitment) => (
+            <BookmarkedRecruitmentCard
+              recruitment={recruitment}
+              key={recruitment.uuid}
+            />
+          ))
         ) : (
           <EmptyDataState />
         )}
