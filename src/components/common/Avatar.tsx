@@ -55,7 +55,7 @@ export default function Avatar({
           className="h-full w-full rounded-full object-cover"
         />
       ) : (
-        <span>{alt?.charAt(0) || <UserIcon />}</span>
+        <span>{alt?.charAt(0) || <UserIcon size={50} />}</span>
         // 마이페이지 사이드바에서 쓰인 아이콘으로 대체.
       )}
       <span aria-hidden="true" className={cn(AvatarState({ state }))} />

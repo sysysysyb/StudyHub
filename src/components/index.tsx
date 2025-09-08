@@ -18,7 +18,20 @@ import Avatar from '@/components/common/Avatar'
 import AuthLayout from '@/components/layout/AuthLayout'
 import Notification from '@/components/notification/Notification'
 import { UserInfoDescription } from '@/components/mypage/InfoDescription'
+
 import BookmarkedRecruitmentCard from '@/components/mypage/BookmarkedRecruitmentCard'
+import {
+  Modal,
+  ModalContent,
+  ModalTrigger,
+  ModalClose,
+  ModalHeader,
+  ModalFooter,
+  ModalTitle,
+  ModalDescription,
+  ModalMain,
+} from '@/components/common/Modal'
+import { InfoUpdate } from '@/components/mypage/InfoUpdate'
 
 export {
   Badge,
@@ -41,4 +54,14 @@ export {
   Notification,
   UserInfoDescription,
   BookmarkedRecruitmentCard,
+  Modal,
+  ModalContent,
+  ModalTrigger,
+  ModalClose,
+  ModalHeader,
+  ModalFooter,
+  ModalTitle,
+  ModalDescription,
+  ModalMain,
+  InfoUpdate,
 }

@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { Button, UserInfoDescription, Avatar } from '@/components'
+import { Button, UserInfoDescription, Avatar, InfoUpdate } from '@/components'
 
 export function MyInfo(): ReactNode {
   return (
@@ -12,12 +12,10 @@ export function MyInfo(): ReactNode {
               회원 정보를 확인하고 수정할 수 있습니다
             </p>
           </div>
-          <Button size="lg" className="my-auto py-2.5">
-            수정하기
-          </Button>
+          <InfoUpdate />
         </header>
         <figure className="flex flex-col items-center gap-4">
-          <Avatar size="3xl" state="none" />
+          <Avatar size="5xl" state="none" />
           <figcaption className="text-heading5">프로필 이미지</figcaption>
         </figure>
         <UserInfoDescription

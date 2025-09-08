@@ -10,7 +10,7 @@ const buttonVariants = cva(
         primary:
           'text-white bg-primary-500 hover:bg-primary-600 active:bg-primary-700',
         secondary:
-          'text-gray-900 bg-gray-100 hover:bg-gray-200 active:bg-gray-300',
+          'text-white bg-gray-300 hover:bg-gray-400 active:bg-gray-500',
         outline:
           'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50 active:bg-gray-100 active:border-gray-400',
         ghost: 'text-gray-700 bg-white hover:bg-gray-50 active:bg-gray-200',
@@ -41,11 +41,13 @@ export default function Button({
   className,
   children,
   size,
+  onClick,
   ...props
 }: ButtonProps) {
   return (
     <button
       className={cn(buttonVariants({ variant, size }), className)}
+      onClick={onClick}
       {...props}
     >
       {children}
