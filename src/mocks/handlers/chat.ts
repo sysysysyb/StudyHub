@@ -30,10 +30,51 @@ const chatConnection = chat.addEventListener('connection', ({ client }) => {
     )
   }, 5000)
 
+  // ✅ 클라이언트에서 보낸 메시지 수신 처리
+  client.addEventListener('message', async (event) => {
+    try {
+      let raw = event.data
+
+      // Blob일 경우 문자열로 변환
+      if (raw instanceof Blob) {
+        raw = await raw.text()
+      }
+
+      // ArrayBuffer일 경우 문자열로 변환
+      if (raw instanceof ArrayBuffer) {
+        raw = new TextDecoder().decode(raw)
+      }
+
+      const payload = JSON.parse(raw as string)
+
+      if (payload.type === 'send_message') {
+        const userMessage = {
+          message_id: Date.now(), // 임시 ID
+          sender: {
+            user_uuid: 'client-uuid-1234',
+            nickname: '사용자',
+            profile_img_url: '/default.png',
+          },
+          content: payload.data.content,
+          created_at: new Date().toISOString(),
+        }
+
+        // 클라이언트에게 다시 전송 (에코처럼 동작)
+        client.send(
+          JSON.stringify({
+            type: 'chat_message',
+            data: userMessage,
+          })
+        )
+      }
+    } catch (err) {
+      console.error('❌ 클라이언트 메시지 파싱 실패:', err)
+    }
+  })
+
   // 클라이언트가 연결을 끊으면 interval 제거
   client.addEventListener('close', () => {
     clearInterval(intervalId)
-    console.log('WebSocket client disconnected', client)
   })
 })
 

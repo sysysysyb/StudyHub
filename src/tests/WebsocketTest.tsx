@@ -1,4 +1,6 @@
+import { Button } from '@/components'
 import { Card } from '@/components/common/Card/Card'
+import { Input } from '@/components/common/input'
 import {
   ChatSocketEventUnionSchema,
   type Message,
@@ -7,6 +9,8 @@ import { useEffect, useRef, useState } from 'react'
 
 export default function WebsocketTest() {
   const [messages, setMessages] = useState<Message[]>([])
+
+  const [message, setMessage] = useState('')
 
   const webSocket = useRef<WebSocket | null>(null)
   const chatRoomId = 'chat-1111'
@@ -40,6 +44,20 @@ export default function WebsocketTest() {
     }
   }, [messages])
 
+  const handleSendMessage: React.FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault()
+
+    if (webSocket.current && message.trim() !== '') {
+      const data = {
+        type: 'send_message',
+        data: { content: message },
+      }
+
+      webSocket.current.send(JSON.stringify(data))
+      setMessage('')
+    }
+  }
+
   return (
     <div className="flex flex-col gap-2">
       <h1 className="text-heading2">웹소켓 연결 테스트</h1>
@@ -57,6 +75,17 @@ export default function WebsocketTest() {
           </Card>
         ))}
       </div>
+      <form
+        onSubmit={handleSendMessage}
+        className="flex items-center justify-center gap-2"
+      >
+        <Input
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="알람을 입력하세요"
+        />
+        <Button type="submit">전송</Button>
+      </form>
     </div>
   )
 }
