@@ -4,7 +4,7 @@ import {
   InfoUpdate,
   PasswordChange,
   Withdrawal,
-} from '@/components/mypage'
+} from '@/components/my-page'
 import { Avatar } from '@/components'
 
 export function MyInfo(): ReactNode {
