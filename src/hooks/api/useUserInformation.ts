@@ -9,7 +9,7 @@ export default function useUserInformation(
   return useQuery<UserInformation>({
     queryKey: ['userInformation', 'me'],
     queryFn: async () => {
-      const response = await api.get(`${API_BASE_URL}/api/users/me`)
+      const response = await api.get(`${API_BASE_URL}/users/me`)
       const data = response.data
 
       return {
