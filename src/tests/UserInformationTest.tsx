@@ -10,7 +10,7 @@ function UserInformationTest() {
     const mm = date?.substring(5, 7)
     const dd = date?.substring(8, 10)
 
-    return `${yyyy}. ${mm}. ${dd}`
+    return `${yyyy}. ${mm}. ${dd}.`
   }
 
   return (
