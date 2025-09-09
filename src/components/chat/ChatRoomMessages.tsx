@@ -1,4 +1,4 @@
-import type { ChatRoomMessages as ChatRoomMessagesType } from '@/types/api-response-types/chat-response-types'
+import type { ChatRoomMessages as ChatRoomMessagesType } from '@/schemas/api-response-schemas/chat-response.schema'
 import { cn } from '@/utils'
 
 interface ChatRoomMessagesProps {
@@ -11,16 +11,18 @@ export default function ChatRoomMessages({ messages }: ChatRoomMessagesProps) {
       {messages.results.map((result) => {
         const {
           content,
-          created_at: createdAt,
+          created_at: createdAtString,
           sender: { nickname, user_uuid: senderId },
           message_id: id,
         } = result
 
         //현재 로그인 한 아이디
         //추후 실제 아이디와 연결
-        const userId = 'user-2222'
+        const userId = 'user-uuid-2'
 
         const isMine = senderId === userId
+
+        const createdAt = new Date(createdAtString)
 
         const hours = String(createdAt.getHours()).padStart(2, '0')
         const minutes = String(createdAt.getMinutes()).padStart(2, '0')
