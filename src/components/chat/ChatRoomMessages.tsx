@@ -1,4 +1,4 @@
-import type { ChatRoomMessages as ChatRoomMessagesType } from '@/types/api-response-types/chat-response-types'
+import type { ChatRoomMessages as ChatRoomMessagesType } from '@/schemas/api-response-schemas/chat-response.schema'
 import { cn } from '@/utils'
 
 interface ChatRoomMessagesProps {

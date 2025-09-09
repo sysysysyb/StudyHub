@@ -1,7 +1,7 @@
 import type {
   ChatRoomMessages,
   Sender,
-} from '@/types/api-response-types/chat-response-types'
+} from '@/schemas/api-response-schemas/chat-response.schema'
 
 const senders: Sender[] = [
   {
