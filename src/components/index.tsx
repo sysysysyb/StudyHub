@@ -2,7 +2,7 @@
 import Badge from '@/components/common/Badge'
 import Button from '@/components/common/Button'
 import ImageCard from '@/components/common/Card/ImageCard'
-import MyPageSideBar from '@/components/mypage/MyPageSideBar'
+import MyPageSideBar from '@/components/mypage/sidebar/MyPageSideBar'
 import Header from '@/components/header/Header'
 import { Symbol } from '@/components/common/Symbol'
 import { Logo } from '@/components/common/Logo'
