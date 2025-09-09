@@ -2,6 +2,7 @@ import { Input, InputLabel, InputErrorMessage } from '@/components/common/input'
 import { Button } from '@/components'
 import type { ComponentProps } from 'react'
 import { ButtonVariants } from '@/constants/button-variants'
+import type { cn } from '@/utils'
 
 interface MyPageInputProps extends ComponentProps<'button'> {
   label: string
@@ -32,7 +33,7 @@ export const MypageInputField = ({
           <Button
             variant={buttonVariant}
             onClick={onClick}
-            className="whitespace-nowrap"
+            className="w-22 whitespace-nowrap"
           >
             {buttonLabel}
           </Button>

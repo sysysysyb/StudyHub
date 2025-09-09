@@ -16,6 +16,16 @@ import { useState } from 'react'
 export const InfoUpdate = () => {
   const [challengeAuthentication, setChallengeAuthentication] = useState(false)
 
+  const handleAuthentication = () => {
+    setChallengeAuthentication(true)
+    // 여기서 실제 API 요청 (ex: 인증번호 발송) 실행
+  }
+
+  // 인증번호 확인
+  const handleConfirm = () => {
+    // 인증번호 검증 로직
+  }
+
   return (
     <Modal>
       {/* 모달 열기 버튼 */}
@@ -38,28 +48,19 @@ export const InfoUpdate = () => {
           <MypageInputField label="닉네임" id="nickname" isRequired />
 
           {/* 테스트용 임시로직 구현 */}
-          {challengeAuthentication ? (
-            <MypageInputField
-              label="휴대폰 번호"
-              id="phonenumber"
-              buttonLabel="재전송"
-              buttonVariant="secondary"
-              onClick={() => setChallengeAuthentication(false)}
-            />
-          ) : (
-            <MypageInputField
-              label="휴대폰 번호"
-              id="phonenumber"
-              buttonLabel="인증하기"
-              buttonVariant="secondary"
-              onClick={() => setChallengeAuthentication(true)}
-            />
-          )}
+          <MypageInputField
+            label="휴대폰 번호"
+            id="phonenumber"
+            buttonLabel={challengeAuthentication ? '재전송' : '인증하기'}
+            buttonVariant="secondary"
+            onClick={handleAuthentication}
+          />
           {challengeAuthentication && (
             <MypageInputField
               label="인증 번호"
               id="authenticationnumber"
               buttonLabel="확인"
+              onClick={handleConfirm}
             />
           )}
         </ModalMain>
@@ -73,13 +74,12 @@ export const InfoUpdate = () => {
               취소
             </Button>
           </ModalClose>
-          {challengeAuthentication ? (
-            <Button variant="secondary" disabled={challengeAuthentication}>
-              변경하기
-            </Button>
-          ) : (
-            <Button>변경하기</Button>
-          )}
+          <Button
+            variant={challengeAuthentication ? 'secondary' : 'primary'}
+            disabled={challengeAuthentication}
+          >
+            변경하기
+          </Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
