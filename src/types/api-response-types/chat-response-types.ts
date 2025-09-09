@@ -1,9 +1,9 @@
 export interface ChatRoomMessages {
   next_cursor: string
-  results: Result[]
+  results: Message[]
 }
 
-export interface Result {
+export interface Message {
   message_id: number
   sender: Sender
   content: string
@@ -27,4 +27,21 @@ export interface LastMessage {
   sender_nickname: string
   content: string
   created_at: Date
+}
+
+export interface ChatSocketEvent {
+  type: 'chat_message' | 'user_event'
+}
+
+export interface ChatMessageEvent extends ChatSocketEvent {
+  type: 'chat_message'
+  data: Message
+}
+
+export interface ChatUserEvent extends ChatSocketEvent {
+  type: 'user_event'
+  data: {
+    event: 'join' | 'leave'
+    nickname: 'string'
+  }
 }
