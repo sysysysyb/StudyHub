@@ -15,10 +15,11 @@ export const Withdrawal = () => {
   return (
     <Modal>
       {/* 모달 열기 버튼 */}
-      <Button variant="danger" size="lg" className="my-auto py-2.5">
-        <ModalTrigger>회원 탈퇴</ModalTrigger>
-      </Button>
-
+      <ModalTrigger>
+        <Button variant="danger" size="lg">
+          회원 탈퇴
+        </Button>
+      </ModalTrigger>
       {/* 모달 내용 */}
       <ModalContent>
         <ModalHeader>

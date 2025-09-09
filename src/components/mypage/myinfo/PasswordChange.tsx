@@ -15,13 +15,14 @@ export const PasswordChange = () => {
   return (
     <Modal>
       {/* 모달 열기 버튼 */}
-      <Button
-        size="lg"
-        className="my-auto bg-gray-500 py-2.5 hover:bg-gray-400 active:bg-gray-600"
-      >
-        <ModalTrigger>비밀번호 변경</ModalTrigger>
-      </Button>
-
+      <ModalTrigger>
+        <Button
+          size="lg"
+          className="bg-gray-500 hover:bg-gray-400 active:bg-gray-600"
+        >
+          비밀번호 변경
+        </Button>
+      </ModalTrigger>
       {/* 모달 내용 */}
       <ModalContent>
         <ModalHeader>

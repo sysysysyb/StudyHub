@@ -19,9 +19,9 @@ export const InfoUpdate = () => {
   return (
     <Modal>
       {/* 모달 열기 버튼 */}
-      <Button size="lg">
-        <ModalTrigger>수정하기</ModalTrigger>
-      </Button>
+      <ModalTrigger>
+        <Button size="lg">수정하기</Button>
+      </ModalTrigger>
 
       {/* 모달 내용 */}
       <ModalContent>
