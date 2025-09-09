@@ -1,0 +1,32 @@
+export const userInformationMock = [
+  {
+    id: 1,
+    email: 'qwerty@example.com',
+    nickname: 'qwerty',
+    name: 'Alice',
+    phone_number: '01012123434',
+    birthday: '1990-01-01',
+    gender: 'female',
+    profile_image_url: 'https://picsum.photos/id/65/200/300',
+  },
+  {
+    id: 2,
+    email: 'asdfgh@example.com',
+    nickname: 'asdfgh',
+    name: 'Bob',
+    phone_number: '01056567878',
+    birthday: '1990-02-02',
+    gender: 'male',
+    profile_image_url: 'https://picsum.photos/id/30/200/300',
+  },
+  {
+    id: 3,
+    email: 'zxcvbn@example.com',
+    nickname: 'zxcvbn',
+    name: 'Chris',
+    phone_number: '01090900101',
+    birthday: '1990-03-03',
+    gender: 'male',
+    profile_image_url: null,
+  },
+]
