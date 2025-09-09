@@ -1,5 +1,5 @@
 import { API_BASE_URL } from '@/constants/api-constants'
-import { http, HttpResponse } from 'msw'
+import { http, HttpResponse, ws } from 'msw'
 import { chatRoomMessages } from '@/mocks/data/chat-room-messages'
 
 const getChatMessages = http.get<{ study_group_uuid: string }>(
@@ -9,4 +9,10 @@ const getChatMessages = http.get<{ study_group_uuid: string }>(
   }
 )
 
-export const chatHandlers = [getChatMessages]
+const chat = ws.link('ws://example/ws/chat/:study_group_uuid/')
+
+const chatConnection = chat.addEventListener('connection', ({ client }) => {
+  console.log('WebSocket client connecting...', client)
+})
+
+export const chatHandlers = [getChatMessages, chatConnection]
