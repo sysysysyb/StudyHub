@@ -7,8 +7,8 @@ import {
   ModalFooter,
   ModalTitle,
   ModalMain,
-  Button,
-} from '@/components'
+} from '@/components/common/Modal'
+import { Button } from '@/components'
 import { CircleAlert } from 'lucide-react'
 
 export const Withdrawal = () => {

@@ -7,9 +7,9 @@ import {
   ModalFooter,
   ModalTitle,
   ModalMain,
-  Button,
-} from '@/components'
-import { MypageInputField } from './MypageInputField'
+} from '@/components/common/Modal'
+import { Button } from '@/components'
+import { MypageInputField } from '@/components/my-page/my-info/MypageInputField'
 
 export const PasswordChange = () => {
   return (

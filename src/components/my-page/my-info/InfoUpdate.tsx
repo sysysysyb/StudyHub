@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Modal,
   ModalContent,
   ModalTrigger,
@@ -8,8 +7,8 @@ import {
   ModalFooter,
   ModalTitle,
   ModalMain,
-  Button,
-} from '@/components'
+} from '@/components/common/Modal'
+import { Avatar, Button } from '@/components'
 import { MypageInputField } from './MypageInputField'
 import { useState } from 'react'
 

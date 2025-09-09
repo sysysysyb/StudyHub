@@ -1,5 +1,6 @@
-import { ListItemSkeleton, BookmarkedRecruitmentCard } from '@/components'
+import { ListItemSkeleton } from '@/components'
 import { Input, InputIcon } from '@/components/common/input'
+import { BookmarkedRecruitmentCard } from '@/components/my-page'
 import EmptyDataState from '@/components/common/State/EmptyDataState'
 import { useBookmarkedRecruitment } from '@/hooks/api'
 import { useDebounce } from '@/hooks/useDebounce'

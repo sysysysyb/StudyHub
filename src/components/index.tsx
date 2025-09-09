@@ -2,7 +2,6 @@
 import Badge from '@/components/common/Badge'
 import Button from '@/components/common/Button'
 import ImageCard from '@/components/common/Card/ImageCard'
-import MyPageSideBar from '@/components/mypage/sidebar/MyPageSideBar'
 import Header from '@/components/header/Header'
 import { Symbol } from '@/components/common/Symbol'
 import { Logo } from '@/components/common/Logo'
@@ -17,29 +16,11 @@ import AvatarSkeleton from '@/components/common/Skeleton/AvatarSkeleton'
 import Avatar from '@/components/common/Avatar'
 import AuthLayout from '@/components/layout/AuthLayout'
 import Notification from '@/components/notification/Notification'
-import { UserInfoDescription } from '@/components/mypage/myinfo/InfoDescription'
-
-import BookmarkedRecruitmentCard from '@/components/mypage/BookmarkedRecruitmentCard'
-import {
-  Modal,
-  ModalContent,
-  ModalTrigger,
-  ModalClose,
-  ModalHeader,
-  ModalFooter,
-  ModalTitle,
-  ModalDescription,
-  ModalMain,
-} from '@/components/common/Modal'
-import { InfoUpdate } from '@/components/mypage/myinfo/InfoUpdate'
-import { PasswordChange } from './mypage/myinfo/PasswordChange'
-import { Withdrawal } from './mypage/myinfo/Withdrawal'
 
 export {
   Badge,
   Button,
   ImageCard,
-  MyPageSideBar,
   Header,
   Symbol,
   Logo,
@@ -54,18 +35,4 @@ export {
   Avatar,
   AuthLayout,
   Notification,
-  UserInfoDescription,
-  BookmarkedRecruitmentCard,
-  Modal,
-  ModalContent,
-  ModalTrigger,
-  ModalClose,
-  ModalHeader,
-  ModalFooter,
-  ModalTitle,
-  ModalDescription,
-  ModalMain,
-  InfoUpdate,
-  PasswordChange,
-  Withdrawal,
 }
