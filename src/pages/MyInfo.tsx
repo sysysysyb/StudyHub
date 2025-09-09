@@ -1,5 +1,11 @@
 import type { ReactNode } from 'react'
-import { Button, UserInfoDescription, Avatar } from '@/components'
+import {
+  UserInfoDescription,
+  Avatar,
+  InfoUpdate,
+  PasswordChange,
+  Withdrawal,
+} from '@/components'
 
 export function MyInfo(): ReactNode {
   return (
@@ -12,12 +18,10 @@ export function MyInfo(): ReactNode {
               회원 정보를 확인하고 수정할 수 있습니다
             </p>
           </div>
-          <Button size="lg" className="my-auto py-2.5">
-            수정하기
-          </Button>
+          <InfoUpdate />
         </header>
         <figure className="flex flex-col items-center gap-4">
-          <Avatar size="3xl" state="none" />
+          <Avatar size="5xl" state="none" />
           <figcaption className="text-heading5">프로필 이미지</figcaption>
         </figure>
         <UserInfoDescription
@@ -42,12 +46,7 @@ export function MyInfo(): ReactNode {
               보안을 위해 정기적으로 비밀번호를 변경해주세요
             </p>
           </div>
-          <Button
-            size="lg"
-            className="my-auto bg-gray-500 py-2.5 hover:bg-gray-400 active:bg-gray-600"
-          >
-            비밀번호 변경
-          </Button>
+          <PasswordChange />
         </header>
       </section>
       <section className="py-16 pt-8" aria-labelledby="unregister">
@@ -63,9 +62,7 @@ export function MyInfo(): ReactNode {
               </span>
             </div>
           </div>
-          <Button variant="danger" size="lg" className="my-auto py-2.5">
-            회원 탈퇴
-          </Button>
+          <Withdrawal />
         </header>
       </section>
     </main>
