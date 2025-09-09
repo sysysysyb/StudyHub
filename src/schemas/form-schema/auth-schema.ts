@@ -15,11 +15,11 @@ export const authSchema = z
     name: z
       .string()
       .min(1, '이름은 필수로 입력해야 합니다')
-      .max(20, '이름은 최대 20자까지 가능합니다'),
+      .max(30, '이름은 최대 30자까지 가능합니다'),
     nickname: z
       .string()
       .min(2, '닉네임은 최소 2자 이상이어야 합니다')
-      .max(8, '닉네임은 최대 8자까지 가능합니다'),
+      .max(10, '닉네임은 최대 10자까지 가능합니다'),
     birthday: z
       .string()
       .min(1, '생년월일은 필수로 입력해야 합니다')
