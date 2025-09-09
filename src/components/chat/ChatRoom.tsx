@@ -2,6 +2,8 @@ import type { ChatRoomMessages as ChatRoomMessagesType } from '@/types/api-respo
 import ChatRoomInput from './ChatRoomInput'
 import ChatRoomUsers from './ChatRoomUsers'
 import ChatRoomMessages from './ChatRoomMessages'
+import useChatMessages from '@/hooks/api/chat/useChatMessages'
+import LoadingState from '../common/State/LoadingState'
 
 const dummyChatRoomMessages: ChatRoomMessagesType = {
   next_cursor: 'cursor_2',
@@ -63,10 +65,22 @@ interface ChatRoomProps {
 }
 
 export default function ChatRoom({ chatRoomId }: ChatRoomProps) {
+  //1. 현재 유저 정보 받아오기
+  const { data: messages, isPending: isMessagePending } =
+    useChatMessages(chatRoomId)
+
+  //2. 지난 메세지 받아오기
+  //3. 웹소켓 연결하기
+
   return (
     <div>
       <ChatRoomUsers users={dummyChatRoomUsers} />
-      <ChatRoomMessages messages={dummyChatRoomMessages} />
+      {isMessagePending ? (
+        <LoadingState className="p-10">로딩중</LoadingState>
+      ) : messages ? (
+        <ChatRoomMessages messages={messages} />
+      ) : null}
+
       <ChatRoomInput />
     </div>
   )
