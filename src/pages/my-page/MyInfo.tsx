@@ -1,11 +1,11 @@
 import type { ReactNode } from 'react'
 import {
   UserInfoDescription,
-  Avatar,
   InfoUpdate,
   PasswordChange,
   Withdrawal,
-} from '@/components'
+} from '@/components/mypage'
+import { Avatar } from '@/components'
 
 export function MyInfo(): ReactNode {
   return (
