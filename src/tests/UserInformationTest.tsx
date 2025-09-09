@@ -4,8 +4,7 @@ import { useUserInformation } from '@/hooks/api'
 function UserInformationTest() {
   const { data: user } = useUserInformation()
 
-  const birthday = () => {
-    const date = user?.birthday
+  const formatDateWithDots = (date: string) => {
     const yyyy = date?.substring(0, 4)
     const mm = date?.substring(5, 7)
     const dd = date?.substring(8, 10)
@@ -24,7 +23,9 @@ function UserInformationTest() {
         <span>닉네임: {user?.nickname}</span>
         <span>성별: {user?.gender}</span>
         <span>이메일: {user?.email}</span>
-        <span>생년월일: {birthday()}</span>
+        <span>
+          생년월일: {user?.birthday && formatDateWithDots(user.birthday)}
+        </span>
         <span>휴대전화 번호: {user?.phoneNumber}</span>
         <div className="flex items-center gap-3">
           프로필 사진:
