@@ -17,7 +17,7 @@ import AvatarSkeleton from '@/components/common/Skeleton/AvatarSkeleton'
 import Avatar from '@/components/common/Avatar'
 import AuthLayout from '@/components/layout/AuthLayout'
 import Notification from '@/components/notification/Notification'
-import { UserInfoDescription } from '@/components/mypage/InfoDescription'
+import { UserInfoDescription } from '@/components/mypage/myinfo/InfoDescription'
 
 import BookmarkedRecruitmentCard from '@/components/mypage/BookmarkedRecruitmentCard'
 import {
@@ -31,9 +31,9 @@ import {
   ModalDescription,
   ModalMain,
 } from '@/components/common/Modal'
-import { InfoUpdate } from '@/components/mypage/InfoUpdate'
-import { PasswordChange } from './mypage/PasswordChange'
-import { Withdrawal } from './mypage/Withdrawal'
+import { InfoUpdate } from '@/components/mypage/myinfo/InfoUpdate'
+import { PasswordChange } from './mypage/myinfo/PasswordChange'
+import { Withdrawal } from './mypage/myinfo/Withdrawal'
 
 export {
   Badge,

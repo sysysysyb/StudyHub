@@ -32,18 +32,7 @@ export const InfoUpdate = () => {
         <ModalMain className="flex flex-col gap-6">
           <label className="flex cursor-pointer flex-col items-center gap-4">
             <Avatar size="3xl" state="none" />
-            {/* <input
-              type="file"
-              accept="image/*"
-              className="hidden"
-              onChange={(e) => {
-                if (e.target.files && e.target.files[0]) {
-                  const file = e.target.files[0]
-                  console.log('선택된 파일:', file)
-                  // TODO: 파일 미리보기 or 업로드 API 호출
-                }
-              }}
-            /> */}
+            {/* TODO 이미지 업로드 로직 구현 */}
             <span className="text-primary-600 text-sm">프로필 사진 변경</span>
           </label>
           <MypageInputField label="닉네임" id="nickname" isRequired />
@@ -53,16 +42,16 @@ export const InfoUpdate = () => {
             <MypageInputField
               label="휴대폰 번호"
               id="phonenumber"
-              buttonlabel="재전송"
-              buttonvariant="secondary"
+              buttonLabel="재전송"
+              buttonVariant="secondary"
               onClick={() => setChallengeAuthentication(false)}
             />
           ) : (
             <MypageInputField
               label="휴대폰 번호"
               id="phonenumber"
-              buttonlabel="인증하기"
-              buttonvariant="secondary"
+              buttonLabel="인증하기"
+              buttonVariant="secondary"
               onClick={() => setChallengeAuthentication(true)}
             />
           )}
@@ -70,7 +59,7 @@ export const InfoUpdate = () => {
             <MypageInputField
               label="인증 번호"
               id="authenticationnumber"
-              buttonlabel="확인"
+              buttonLabel="확인"
             />
           )}
         </ModalMain>

@@ -31,13 +31,13 @@ export const PasswordChange = () => {
         <ModalMain className="flex flex-col gap-4">
           <MypageInputField
             label="현재 비밀번호"
-            id="currentpassword"
+            id="currentPassword"
             isRequired
           />
-          <MypageInputField label="새 비밀번호" id="newpassword" isRequired />
+          <MypageInputField label="새 비밀번호" id="newPassword" isRequired />
           <MypageInputField
             label="새 비밀번호 확인"
-            id="passwordconfirm"
+            id="passwordConfirm"
             isRequired
           />
         </ModalMain>

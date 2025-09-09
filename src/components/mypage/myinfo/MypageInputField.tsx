@@ -7,18 +7,18 @@ interface MyPageInputProps extends ComponentProps<'button'> {
   label: string
   isRequired?: boolean
   id: string
-  errormessage?: string
-  buttonvariant?: keyof typeof ButtonVariants
-  buttonlabel?: string
+  errorMessage?: string
+  buttonVariant?: keyof typeof ButtonVariants
+  buttonLabel?: string
 }
 
 export const MypageInputField = ({
   label,
   isRequired,
   id,
-  errormessage,
-  buttonvariant,
-  buttonlabel,
+  errorMessage,
+  buttonVariant,
+  buttonLabel,
   onClick,
 }: MyPageInputProps) => {
   return (
@@ -28,18 +28,18 @@ export const MypageInputField = ({
       </InputLabel>
       <div className="flex gap-2">
         <Input id={id} aria-describedby={id} />
-        {buttonlabel && (
+        {buttonLabel && (
           <Button
-            variant={buttonvariant}
+            variant={buttonVariant}
             onClick={onClick}
             className="whitespace-nowrap"
           >
-            {buttonlabel}
+            {buttonLabel}
           </Button>
         )}
       </div>
-      {errormessage && (
-        <InputErrorMessage id={id}>{errormessage}</InputErrorMessage>
+      {errorMessage && (
+        <InputErrorMessage id={id}>{errorMessage}</InputErrorMessage>
       )}
     </div>
   )
