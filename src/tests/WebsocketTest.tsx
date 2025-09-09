@@ -82,7 +82,7 @@ export default function WebsocketTest() {
         <Input
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          placeholder="알람을 입력하세요"
+          placeholder="메세지를 입력하세요"
         />
         <Button type="submit">전송</Button>
       </form>
