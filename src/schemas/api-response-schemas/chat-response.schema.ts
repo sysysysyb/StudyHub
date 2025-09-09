@@ -49,7 +49,10 @@ const ChatUserEventSchema = ChatSocketEventSchema.extend({
     nickname: z.string(),
   }),
 })
-
+const ChatSocketEventUnionSchema = z.union([
+  ChatMessageEventSchema,
+  ChatUserEventSchema,
+])
 // 타입 정의
 
 type Sender = z.infer<typeof SenderSchema>
@@ -60,6 +63,7 @@ type ChatRoom = z.infer<typeof ChatRoomSchema>
 type ChatSocketEvent = z.infer<typeof ChatSocketEventSchema>
 type ChatMessageEvent = z.infer<typeof ChatMessageEventSchema>
 type ChatUserEvent = z.infer<typeof ChatUserEventSchema>
+type ChatSocketEventUnion = z.infer<typeof ChatSocketEventUnionSchema>
 
 export {
   SenderSchema,
@@ -70,6 +74,7 @@ export {
   ChatSocketEventSchema,
   ChatMessageEventSchema,
   ChatUserEventSchema,
+  ChatSocketEventUnionSchema,
 }
 
 export type {
@@ -81,4 +86,5 @@ export type {
   ChatSocketEvent,
   ChatMessageEvent,
   ChatUserEvent,
+  ChatSocketEventUnion,
 }
