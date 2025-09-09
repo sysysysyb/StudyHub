@@ -2,7 +2,6 @@ import { Input, InputLabel, InputErrorMessage } from '@/components/common/input'
 import { Button } from '@/components'
 import type { ComponentProps } from 'react'
 import { ButtonVariants } from '@/constants/button-variants'
-import type { cn } from '@/utils'
 
 interface MyPageInputProps extends ComponentProps<'button'> {
   label: string
@@ -18,7 +17,7 @@ export const MypageInputField = ({
   isRequired,
   id,
   errorMessage,
-  buttonVariant,
+  buttonVariant = 'primary',
   buttonLabel,
   onClick,
 }: MyPageInputProps) => {
