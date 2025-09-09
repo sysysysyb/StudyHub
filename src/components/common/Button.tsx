@@ -30,13 +30,11 @@ export default function Button({
   className,
   children,
   size,
-  onClick,
   ...props
 }: ButtonProps) {
   return (
     <button
       className={cn(buttonVariants({ variant, size }), className)}
-      onClick={onClick}
       {...props}
     >
       {children}
