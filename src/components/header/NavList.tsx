@@ -14,7 +14,11 @@ export function HeaderNavList(): ReactNode {
       <NavComponent label="구인 공고" />
       {/* 이 줄 이후의 요소들만 로그인 시 변경 예정 */}
       <NavComponent label="로그인" event={() => navigate('/auth/login')} />
-      <Button size="sm" className="ml-4 w-full">
+      <Button
+        size="sm"
+        className="ml-4 w-full"
+        onClick={() => navigate('/auth/signup')}
+      >
         회원가입
       </Button>
     </div>
