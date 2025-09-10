@@ -27,13 +27,10 @@ function AuthFormVerificationTest() {
   }
 
   return (
-    <section
-      onSubmit={handleSubmit(onSubmit)}
-      className="flex w-full flex-col gap-10"
-    >
+    <section className="flex w-full flex-col gap-10">
       <h3 className="text-center text-xl font-semibold">유효성 검사 Test</h3>
 
-      <form className="flex flex-col gap-6">
+      <form className="flex flex-col gap-6" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-2">
           <InputLabel isRequired>이메일</InputLabel>
           <Input
