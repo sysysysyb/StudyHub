@@ -277,17 +277,38 @@ function ModalOverlay() {
 interface ModalProps {
   children: ReactNode
   isOverlay?: boolean
+
+  externalModalControl?: ModalContextValue
 }
 
-function Modal({ children, isOverlay = true }: ModalProps) {
+function Modal({
+  children,
+  externalModalControl,
+  isOverlay = true,
+}: ModalProps) {
   const [isOpen, setIsOpen] = useState(false)
 
-  const open = () => setIsOpen(true)
-  const close = () => setIsOpen(false)
-  const toggle = () => setIsOpen((prev) => !prev)
+  const open = externalModalControl
+    ? externalModalControl.open
+    : () => setIsOpen(true)
+
+  const close = externalModalControl
+    ? externalModalControl.close
+    : () => setIsOpen(false)
+
+  const toggle = externalModalControl
+    ? externalModalControl.toggle
+    : () => setIsOpen((prev) => !prev)
 
   return (
-    <ModalContext.Provider value={{ isOpen, open, close, toggle }}>
+    <ModalContext.Provider
+      value={{
+        isOpen: externalModalControl ? externalModalControl.isOpen : isOpen,
+        open,
+        close,
+        toggle,
+      }}
+    >
       {isOverlay ? <ModalOverlay /> : null}
       <div>{children}</div>
     </ModalContext.Provider>
