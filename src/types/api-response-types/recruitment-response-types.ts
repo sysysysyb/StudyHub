@@ -8,7 +8,7 @@ export interface BookmarkedRecruitments {
   results: BookmarkedRecruitment[]
 }
 
-export interface AppliedRecruitment extends Recruitment {
+export interface AppliedRecruitment extends Recruitment, AppliedStatusProps {
   applied_at: Date
 }
 
@@ -16,7 +16,9 @@ export interface BookmarkedRecruitment extends Recruitment {
   views_count: number
   bookmark_count: number
 }
-
+export interface AppliedStatusProps {
+  status: 'waiting' | 'approved' | 'rejected'
+}
 export interface Recruitment {
   uuid: string
   title: string

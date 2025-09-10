@@ -1,4 +1,5 @@
 import type { AppliedRecruitment } from '@/types/api-response-types/recruitment-response-types'
+import { AppliedStatusBadge } from '@/components/my-page'
 import {
   FormattedCloseAt,
   FormattedAppliedAt,
@@ -16,6 +17,7 @@ export default function AppliedRecruitmentCard({
     thumbnail_image_url: thumbnailImageUrl,
     title,
     applied_at: appliedAtString,
+    status: appliedStatus,
     expected_headcount: expectedHeadCount,
     close_at: closeAtString,
     lectures,
@@ -33,9 +35,9 @@ export default function AppliedRecruitmentCard({
           <span className="text-heading5 text-gray-900 hover:underline">
             {title}
           </span>
-          <div className="flex gap-3 pl-4">
+          <div className="text-secondary flex items-center gap-3 pl-4">
             {FormattedAppliedAt(appliedAtString)}
-            {/* 뱃지 컴포넌트 추가필요 */}
+            <AppliedStatusBadge status={appliedStatus} />
           </div>
         </div>
         <div className="text-secondary flex justify-between text-sm">

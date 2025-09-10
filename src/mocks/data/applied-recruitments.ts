@@ -15,6 +15,7 @@ export const appliedRecruitmentsMock: AppliedRecruitments = {
       tags: [{ name: 'Frontend' }, { name: 'JavaScript' }, { name: 'React' }],
       close_at: new Date('2025-09-30T23:59:59'),
       applied_at: new Date('2025-09-30T23:59:59'),
+      status: 'waiting',
     },
     {
       uuid: 'lecture-group-2',
@@ -28,7 +29,9 @@ export const appliedRecruitmentsMock: AppliedRecruitments = {
       tags: [{ name: 'Backend' }, { name: 'Node.js' }, { name: 'Database' }],
       close_at: new Date('2025-10-10T23:59:59'),
       applied_at: new Date('2025-09-30T23:59:59'),
+      status: 'approved',
     },
+
     {
       uuid: 'lecture-group-3',
       title: 'AI & 머신러닝 기초',
@@ -41,6 +44,7 @@ export const appliedRecruitmentsMock: AppliedRecruitments = {
       tags: [{ name: 'AI' }, { name: 'Machine Learning' }, { name: 'Python' }],
       close_at: new Date('2025-11-01T23:59:59'),
       applied_at: new Date('2025-09-30T23:59:59'),
+      status: 'rejected',
     },
     {
       uuid: 'lecture-group-4',
@@ -54,7 +58,9 @@ export const appliedRecruitmentsMock: AppliedRecruitments = {
       tags: [{ name: 'Cloud' }, { name: 'DevOps' }, { name: 'AWS' }],
       close_at: new Date('2025-09-25T23:59:59'),
       applied_at: new Date('2025-09-30T23:59:59'),
+      status: 'rejected',
     },
+
     {
       uuid: 'lecture-group-5',
       title: 'UI/UX 디자인 트렌드',
@@ -67,6 +73,7 @@ export const appliedRecruitmentsMock: AppliedRecruitments = {
       tags: [{ name: 'UI/UX' }, { name: 'Design' }, { name: 'Figma' }],
       close_at: new Date('2025-12-15T23:59:59'),
       applied_at: new Date('2025-09-30T23:59:59'),
+      status: 'rejected',
     },
   ],
 }
