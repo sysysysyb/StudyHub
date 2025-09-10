@@ -1,8 +1,8 @@
 import { ChevronDown, type LucideIcon } from 'lucide-react'
-import Input from './Input'
 import { useState, type ComponentProps } from 'react'
 import { cn } from '@/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
+import { Input } from '@/components/common/input'
 
 const dropdownItemVariants = cva(
   'text-left w-full relative cursor-pointer px-4 py-3 text-base hover:bg-gray-100',
