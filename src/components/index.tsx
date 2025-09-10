@@ -16,6 +16,7 @@ import AvatarSkeleton from '@/components/common/Skeleton/AvatarSkeleton'
 import Avatar from '@/components/common/Avatar'
 import AuthLayout from '@/components/layout/AuthLayout'
 import Notification from '@/components/notification/Notification'
+import Dropdown from '@/components/common/Dropdown'
 
 export {
   Badge,
@@ -35,4 +36,5 @@ export {
   Avatar,
   AuthLayout,
   Notification,
+  Dropdown,
 }
