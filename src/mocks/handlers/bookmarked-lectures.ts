@@ -3,7 +3,7 @@ import { http, HttpResponse } from 'msw'
 import { bookmarkedLecturesMock } from '@/mocks/data/bookmarked-lectures'
 
 const getBookmarkedLectures = http.get(
-  `${API_BASE_URL}/lectures/bookmarks/`,
+  `${API_BASE_URL}/lectures/bookmarks`,
   () => {
     return HttpResponse.json(bookmarkedLecturesMock)
   }
