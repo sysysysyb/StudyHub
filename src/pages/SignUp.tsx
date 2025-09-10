@@ -42,9 +42,25 @@ function Signup() {
         </div>
         <div className={flexColStyle}>
           <InputLabel isRequired>성별</InputLabel>
-          <div className="flex gap-3">
-            <AuthBadge isSelected>남</AuthBadge>
-            <AuthBadge>여</AuthBadge>
+          <div className={flexRowStyle}>
+            <label htmlFor="gender-male">
+              <AuthBadge isSelected>남</AuthBadge>
+            </label>
+            <input
+              id="gender-male"
+              type="radio"
+              value="male"
+              className="hidden"
+            />
+            <label htmlFor="gender-female">
+              <AuthBadge>여</AuthBadge>
+            </label>
+            <input
+              id="gender-female"
+              type="radio"
+              value="female"
+              className="hidden"
+            />
           </div>
         </div>
         <div className={flexColStyle}>
