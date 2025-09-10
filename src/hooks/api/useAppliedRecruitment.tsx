@@ -7,9 +7,9 @@ export default function useAppliedRecruitment(
   options?: UseQueryOptions<AppliedRecruitments>
 ) {
   return useQuery<AppliedRecruitments>({
-    queryKey: ['recruitment', 'applied'],
+    queryKey: ['recruitments', 'applied'],
     queryFn: async () => {
-      const res = await api.get(`${API_BASE_URL}/recruitment/applied/me`)
+      const res = await api.get(`${API_BASE_URL}/recruitments/applied/me`)
       return res.data
     },
     ...options,
