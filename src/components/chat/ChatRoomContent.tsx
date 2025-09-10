@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ComponentProps } from 'react'
+import { useEffect, useRef, type ComponentProps } from 'react'
 import ChatRoomCard from './ChatRoomCard'
 import {
   ModalContent,
