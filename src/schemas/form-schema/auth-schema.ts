@@ -45,6 +45,7 @@ export const authSchema = z
       .string()
       .min(1, '인증코드는 필수로 입력해야 합니다')
       .length(6, '인증코드는 6자리(숫자 + 영문)로 입력해주세요'),
+    gender: z.enum(['male', 'female'], '성별을 선택해주세요'),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: '비밀번호와 일치하지 않습니다',

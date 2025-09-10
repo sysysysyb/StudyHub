@@ -9,6 +9,7 @@ export function AuthSocialLoginButton({
 }: ComponentProps<typeof Button>) {
   return (
     <Button
+      type="button"
       className={cn(
         'flex w-full items-center justify-center gap-1 p-4',
         className

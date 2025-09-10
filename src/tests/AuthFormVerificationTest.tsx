@@ -1,4 +1,4 @@
-import { AuthSubmitButton } from '@/components/auth'
+import { AuthBadge, AuthSubmitButton } from '@/components/auth'
 import { Input, InputErrorMessage, InputLabel } from '@/components/common/input'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -14,6 +14,7 @@ function AuthFormVerificationTest() {
     handleSubmit,
     formState: { errors, isSubmitting },
     reset,
+    watch,
   } = useForm<AuthSchemaType>({
     resolver: zodResolver(authSchema),
   })
@@ -110,6 +111,36 @@ function AuthFormVerificationTest() {
           />
           {errors.verificationCode && (
             <InputErrorMessage>{`${errors.verificationCode.message}`}</InputErrorMessage>
+          )}
+        </div>
+        <div className="flex flex-col gap-2">
+          <InputLabel isRequired>성별</InputLabel>
+          <div className="flex gap-3">
+            <label htmlFor="gender-male">
+              <AuthBadge isSelected={watch('gender') === 'male'}>남</AuthBadge>
+            </label>
+            <input
+              id="gender-male"
+              type="radio"
+              value="male"
+              {...register('gender')}
+              className="hidden"
+            />
+            <label htmlFor="gender-female">
+              <AuthBadge isSelected={watch('gender') === 'female'}>
+                여
+              </AuthBadge>
+            </label>
+            <input
+              id="gender-female"
+              type="radio"
+              value="female"
+              {...register('gender')}
+              className="hidden"
+            />
+          </div>
+          {errors.gender && (
+            <InputErrorMessage>{`${errors.gender.message}`}</InputErrorMessage>
           )}
         </div>
         <AuthSubmitButton disabled={isSubmitting}>Submit</AuthSubmitButton>

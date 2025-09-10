@@ -9,9 +9,10 @@ export function AuthVerifyButton({
 }: ComponentProps<typeof Button>) {
   return (
     <Button
+      type="button"
       variant="primary"
       className={cn(
-        'active:bg-primary-300 bg-primary-100 hover:bg-primary-200 text-primary-500 ring-primary-500 h-[46px] ring disabled:bg-gray-200 disabled:text-[#303030] disabled:ring-[#303030]',
+        'active:bg-primary-300 bg-primary-100 hover:bg-primary-200 text-primary-500 text-sm whitespace-nowrap disabled:bg-gray-200 disabled:text-[#303030]',
         className
       )}
       {...props}
