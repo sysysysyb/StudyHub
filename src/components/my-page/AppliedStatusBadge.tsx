@@ -6,7 +6,7 @@ import type { AppliedStatusProps } from '@/types/api-response-types/recruitment-
 export const AppliedStatusBadge = ({
   status,
 }: AppliedStatusProps): ReactNode => {
-  let label: '대기중' | '승인됨' | '거절됨'
+  let label: '대기중' | '승인됨' | '거절됨' | null
   let badgeVariant: keyof typeof BadgeVariant
   if (status === 'waiting') {
     badgeVariant = 'primary'
@@ -19,7 +19,9 @@ export const AppliedStatusBadge = ({
     label = '거절됨'
   } else {
     badgeVariant = 'default'
-    label = '대기중'
+    label = null
+    // BadgeVariant 객체에 default가 포함되어 있어 설정
+    // 사용되지는 않을 것으로 예상
   }
 
   return <Badge variant={badgeVariant}>{label}</Badge>
