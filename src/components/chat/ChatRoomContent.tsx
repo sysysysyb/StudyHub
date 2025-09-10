@@ -10,6 +10,7 @@ import {
 import { cn } from '@/utils'
 import { ArrowLeft } from 'lucide-react'
 import ChatRoom from './ChatRoom'
+import { useChatRoomStore } from '@/store'
 
 const dummyChatroomsData: ComponentProps<typeof ChatRoomCard>[] = [
   {
@@ -51,7 +52,7 @@ const dummyChatroomsData: ComponentProps<typeof ChatRoomCard>[] = [
 ]
 
 export default function ChatRoomContent() {
-  const [chatRoomId, setChatRoomId] = useState('')
+  const { chatRoomId, setChatRoomId } = useChatRoomStore()
   const scrollRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
