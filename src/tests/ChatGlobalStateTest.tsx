@@ -9,10 +9,8 @@ export default function ChatGlobalStateTest() {
   const handleButtonClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault()
 
-    if (openChatRoom) {
-      setChatRoomId(CHAT_ROOM_ID)
-      openChatRoom()
-    }
+    setChatRoomId(CHAT_ROOM_ID)
+    openChatRoom()
   }
 
   return (
