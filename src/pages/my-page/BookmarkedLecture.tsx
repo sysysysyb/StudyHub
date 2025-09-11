@@ -5,19 +5,22 @@ import BookmarkedLectureCard from '@/components/my-page/bookmarked-lecture/Bookm
 import { useBookmarkedLectures } from '@/hooks/api'
 import { useDebounce } from '@/hooks/useDebounce'
 import { SearchIcon } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useMemo, useState } from 'react'
+
 export default function BookmarkedLecture() {
-  const [searchParam, setSearchParam] = useState('')
+  const [search, setSearch] = useState('')
+  const debouncedSearch = useDebounce(search, 250)
 
-  const debouncedSearchParam = useDebounce(searchParam, 250)
+  const searchParams = useMemo(() => {
+    const params = new URLSearchParams()
+    if (debouncedSearch) {
+      params.set('search', debouncedSearch)
+    }
 
-  const { isPending, data, refetch } = useBookmarkedLectures(
-    `search=${debouncedSearchParam}`
-  )
+    return params
+  }, [debouncedSearch])
 
-  useEffect(() => {
-    refetch()
-  }, [debouncedSearchParam, refetch])
+  const { data, isPending } = useBookmarkedLectures(searchParams)
 
   return (
     <div>
@@ -33,8 +36,8 @@ export default function BookmarkedLecture() {
           <Input
             hasIcon
             placeholder="강의명이나 강사명으로 검색..."
-            value={searchParam}
-            onChange={(e) => setSearchParam(e.target.value)}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
         </div>
       </header>
