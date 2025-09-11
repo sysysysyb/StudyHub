@@ -1,10 +1,23 @@
 import { ListItemSkeleton } from '@/components'
-import { Input } from '@/components/common/input'
+import { Input, InputIcon } from '@/components/common/input'
 import EmptyDataState from '@/components/common/State/EmptyDataState'
 import BookmarkedLectureCard from '@/components/my-page/bookmarked-lecture/BookmarkedLectureCard'
 import { useBookmarkedLectures } from '@/hooks/api'
+import { useDebounce } from '@/hooks/useDebounce'
+import { SearchIcon } from 'lucide-react'
+import { useEffect, useState } from 'react'
 export default function BookmarkedLecture() {
-  const { isPending, data } = useBookmarkedLectures()
+  const [searchParam, setSearchParam] = useState('')
+
+  const debouncedSearchParam = useDebounce(searchParam, 250)
+
+  const { isPending, data, refetch } = useBookmarkedLectures(
+    `search=${debouncedSearchParam}`
+  )
+
+  useEffect(() => {
+    refetch()
+  }, [debouncedSearchParam, refetch])
 
   return (
     <div>
@@ -15,10 +28,15 @@ export default function BookmarkedLecture() {
             나중에 수강할 강의들을 모아두었습니다
           </span>
         </div>
-        <Input
-          className="max-w-80 flex-1"
-          placeholder="강의명이나 강사명으로 검색..."
-        />
+        <div className="relative max-w-80 flex-1">
+          <InputIcon icon={SearchIcon} className="absolute" />
+          <Input
+            hasIcon
+            placeholder="강의명이나 강사명으로 검색..."
+            value={searchParam}
+            onChange={(e) => setSearchParam(e.target.value)}
+          />
+        </div>
       </header>
       <main className="flex flex-col gap-4">
         {isPending ? (
