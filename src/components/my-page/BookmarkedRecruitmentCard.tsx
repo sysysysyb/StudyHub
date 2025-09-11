@@ -3,6 +3,8 @@ import { BookmarkIcon, CalendarIcon, EyeIcon, UsersIcon } from 'lucide-react'
 import { Link } from 'react-router'
 import { Button } from '@/components'
 import { FormattedCloseAt } from '@/utils'
+import useWindowWidth from '@/hooks/useWindowWidth'
+import { LG_WIDTH_PIXEL } from '@/constants/break-points'
 
 interface BookmarkedRecruitmentCardProps {
   recruitment: BookmarkedRecruitment
@@ -22,38 +24,48 @@ export default function BookmarkedRecruitmentCard({
     lectures,
     tags,
   } = recruitment
+
+  const width = useWindowWidth()
+
   return (
     <div
       key={uuid}
       className="flex items-center justify-center gap-6 rounded-xl border border-gray-200 p-6"
     >
-      <img src={thumbnailImageUrl} className="w-full max-w-40 rounded-lg" />
-      <div className="flex h-full w-full flex-1 items-start">
+      <img
+        src={thumbnailImageUrl}
+        className="max-w-16 rounded-lg sm:max-w-32 lg:max-w-40"
+      />
+      <div className="flex h-full w-full flex-1 flex-col lg:flex-row lg:items-start">
         <div className="flex flex-1 flex-col">
-          <span className="text-heading5 mb-2 text-gray-900 hover:underline">
+          <span className="lg:text-heading5 mb-2 text-sm font-bold text-gray-900">
             {title}
           </span>
 
           <div className="mb-3 flex flex-wrap items-center justify-start gap-2">
-            <span className="flex flex-nowrap items-center text-sm text-gray-600">
-              <UsersIcon className="h-3.5" />
+            <span className="flex flex-nowrap items-center text-xs text-gray-600 lg:text-sm">
+              <UsersIcon className="h-3 lg:h-3.5" />
               {`모집 인원: ${expectedHeadCount}명`}
             </span>
-            <span className="flex flex-nowrap items-center text-sm text-gray-600">
-              <CalendarIcon className="h-3.5" />
-              {FormattedCloseAt(closeAtString)}
-            </span>
-            <span className="flex flex-nowrap items-center text-sm text-gray-600">
-              <EyeIcon className="h-3.5" />
+            {width > LG_WIDTH_PIXEL && (
+              <span className="flex flex-nowrap items-center text-sm text-gray-600">
+                <CalendarIcon className="h-3.5" />
+                {FormattedCloseAt(closeAtString)}
+              </span>
+            )}
+            <span className="flex flex-nowrap items-center text-xs text-gray-600 lg:text-sm">
+              <EyeIcon className="h-3 lg:h-3.5" />
               {`조회 ${viewsCount}`}
             </span>
-            <span className="flex flex-nowrap items-center text-sm text-gray-600">
-              <BookmarkIcon className="h-3.5" />
-              {`북마크 ${bookmarkCount}`}
-            </span>
+            {width > LG_WIDTH_PIXEL && (
+              <span className="flex flex-nowrap items-center text-sm text-gray-600">
+                <BookmarkIcon className="h-3.5" />
+                {`북마크 ${bookmarkCount}`}
+              </span>
+            )}
           </div>
 
-          {lectures.length > 0 ? (
+          {lectures.length > 0 && width > LG_WIDTH_PIXEL ? (
             <div className="mb-3">
               <span className="text-sm font-medium text-gray-700">
                 강의 목록:
@@ -69,7 +81,7 @@ export default function BookmarkedRecruitmentCard({
             </div>
           ) : null}
 
-          {tags.length > 0 ? (
+          {tags.length > 0 && width > LG_WIDTH_PIXEL ? (
             <div className="flex items-center gap-2">
               {tags.map(({ name }, i) => (
                 <span
@@ -82,10 +94,15 @@ export default function BookmarkedRecruitmentCard({
             </div>
           ) : null}
         </div>
-        <div className="flex items-center justify-center gap-2">
+        <div className="flex items-center justify-end gap-2">
           <BookmarkIcon className="text-primary-500 h-4" fill="#eab308" />
           <Link to={`/recruitment/${uuid}`}>
-            <Button>공고 보기</Button>
+            <Button
+              size={width > LG_WIDTH_PIXEL ? 'md' : 'sm'}
+              className="text-xs text-nowrap lg:text-sm"
+            >
+              {width > LG_WIDTH_PIXEL ? '공고 보기' : '보기'}
+            </Button>
           </Link>
         </div>
       </div>

@@ -25,24 +25,22 @@ export default function BookmarkedRecruitment() {
 
   return (
     <div>
-      <header className="mb-6 flex items-center justify-between gap-2">
-        <div className="flex flex-col items-start justify-center gap-2">
+      <header className="mb-6 flex w-full flex-col items-center justify-between gap-2 lg:flex-row">
+        <div className="flex w-full flex-col items-start justify-center gap-2 lg:w-auto">
           <h1 className="text-heading3 text-gray-900">북마크한 공고</h1>
           <span className="text-gray-600">
             나중에 지원할 스터디 공고들을 모아두었습니다.
           </span>
         </div>
-        <div className="w-full max-w-80">
-          <div className="relative">
-            <InputIcon icon={SearchIcon} className="absolute" />
-            <Input
-              hasIcon
-              placeholder="공고 제목으로 검색..."
-              className="w-full max-w-80"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </div>
+        <div className="relative w-full lg:max-w-80">
+          <InputIcon icon={SearchIcon} className="absolute" />
+          <Input
+            hasIcon
+            placeholder="공고 제목으로 검색..."
+            className="w-full"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
         </div>
       </header>
       <main className="flex flex-col gap-4">
