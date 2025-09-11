@@ -106,10 +106,10 @@ function AuthFormVerificationTest() {
         <div className="flex flex-col gap-2">
           <InputLabel isRequired>인증번호</InputLabel>
           <Input
-            {...register('verificationCode')}
+            {...register('verificationCode.email')}
             placeholder="인증번호 6자리를 입력해주세요"
           />
-          {errors.verificationCode && (
+          {errors.verificationCode?.email && (
             <InputErrorMessage>{`${errors.verificationCode.message}`}</InputErrorMessage>
           )}
         </div>
