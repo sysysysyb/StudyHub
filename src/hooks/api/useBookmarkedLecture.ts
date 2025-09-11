@@ -4,15 +4,19 @@ import api from '@/utils/axios'
 import { useQuery, type UseQueryOptions } from '@tanstack/react-query'
 
 export default function useBookmarkedLectures(
-  searchParam: string = '',
+  searchParam?: URLSearchParams,
   options?: UseQueryOptions<BookmarkedLectures>
 ) {
   return useQuery<BookmarkedLectures>({
-    queryKey: ['lectures', 'bookmarks', searchParam],
+    queryKey: [
+      'lectures',
+      'bookmarks',
+      searchParam ? searchParam.toString() : '',
+    ],
     queryFn: async () => {
-      const res = await api.get(
-        `${API_BASE_URL}/lectures/bookmarks?${searchParam}`
-      )
+      const res = await api.get(`${API_BASE_URL}/lectures/bookmarks`, {
+        params: searchParam,
+      })
 
       return res.data
     },
