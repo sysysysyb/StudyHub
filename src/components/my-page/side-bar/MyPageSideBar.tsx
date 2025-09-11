@@ -21,13 +21,13 @@ const MY_PAGE_SIDE_BAR_MENU_ITEMS: ComponentProps<typeof MyPageSideBarMenu>[] =
       title: '북마크한 공고',
       description: '저장한 공고 목록',
       icon: BookmarkIcon,
-      url: '/my-page/bookmarked-recruitment',
+      url: '/my-page/bookmarked/recruitment',
     },
     {
       title: '북마크한 강의',
       description: '저장한 강의 목록',
       icon: BookmarkIcon,
-      url: '/my-page/bookmarked-lecture',
+      url: '/my-page/bookmarked/lecture',
     },
     {
       title: '지원 내역',

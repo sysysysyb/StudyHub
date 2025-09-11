@@ -27,14 +27,13 @@ function MainRoutes() {
 
         <Route path="my-page" element={<MyPageLayout />}>
           <Route index element={<MyInfo />} />
-          <Route
-            path="bookmarked-recruitment"
-            element={<BookmarkedRecruitment />}
-          />
           <Route path="applied-study" element={<AppliedRecruitment />} />
-          <Route path="bookmarked-lecture" element={<BookmarkedLecture />} />
-          <Route path="bookmarked" element={<div>Bookmarked</div>} />
           <Route path="completed-study" element={<div>completed-study</div>} />
+          <Route path="bookmarked">
+            <Route index element={<div>Bookmarked</div>} />
+            <Route path="recruitment" element={<BookmarkedRecruitment />} />
+            <Route path="lecture" element={<BookmarkedLecture />} />
+          </Route>
         </Route>
       </Route>
     </Routes>
