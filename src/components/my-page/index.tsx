@@ -6,7 +6,7 @@ import { Withdrawal } from '@/components/my-page/my-info/Withdrawal'
 import { InfoUpdate } from '@/components/my-page/my-info/InfoUpdate'
 import AppliedRecruitmentCard from '@/components/my-page/applied-recruitment/AppliedRecruitmentCard'
 import { AppliedStatusBadge } from '@/components/my-page/applied-recruitment/AppliedStatusBadge'
-import { AppliedRecruitmentDetail } from '@/components/my-page/applied-recruitment/AppliedRecruitmentDetail'
+import { ApplicantDetail } from '@/components/my-page/applied-recruitment/ApplicantDetail'
 
 export {
   MyPageSideBar,
@@ -17,5 +17,5 @@ export {
   InfoUpdate,
   AppliedRecruitmentCard,
   AppliedStatusBadge,
-  AppliedRecruitmentDetail,
+  ApplicantDetail,
 }
