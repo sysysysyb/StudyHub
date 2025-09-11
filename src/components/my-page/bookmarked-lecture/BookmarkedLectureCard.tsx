@@ -1,6 +1,6 @@
 import Button from '@/components/common/Button'
 import type { Lecture } from '@/types/api-response-types/lecture-response-type'
-import { BookmarkIcon } from 'lucide-react'
+import { BookmarkIcon, Clock3Icon } from 'lucide-react'
 import { Link } from 'react-router'
 import DifficultyBadge from './DifficultyBadge'
 import PlatformBadge from './PlatformBadge'
@@ -34,7 +34,9 @@ export default function BookmarkedLectureCard({
           <div className="flex items-center gap-3">
             <PlatformBadge platform={platform} />
             <DifficultyBadge difficulty={difficulty} />
-            <span>{durationHHMM}</span>
+            <span className="flex items-center text-sm text-gray-600">
+              <Clock3Icon className="h-3.5" /> {durationHHMM}
+            </span>
           </div>
         </div>
         <div className="flex flex-col items-end justify-center gap-3">
