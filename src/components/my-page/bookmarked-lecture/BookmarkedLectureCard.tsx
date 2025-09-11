@@ -4,6 +4,8 @@ import { BookmarkIcon, Clock3Icon } from 'lucide-react'
 import { Link } from 'react-router'
 import DifficultyBadge from './DifficultyBadge'
 import PlatformBadge from './PlatformBadge'
+import useWindowWidth from '@/hooks/useWindowWidth'
+import { LG_WIDTH_PIXEL } from '@/constants/break-points'
 
 interface BookmarkedLectureCardProps {
   lecture: Lecture
@@ -24,32 +26,48 @@ export default function BookmarkedLectureCard({
     duration_hhmm: durationHHMM,
   } = lecture
 
+  const width = useWindowWidth()
+
   return (
-    <div className="flex items-center justify-center gap-6 rounded-xl border border-gray-200 p-6">
-      <img src={imageUrl} className="w-full max-w-40 rounded-lg" />
-      <div className="flex flex-1 items-center justify-between">
+    <div className="flex items-start justify-center gap-6 rounded-xl border border-gray-200 p-6 lg:items-center">
+      <img
+        src={imageUrl}
+        className="max-w-16 rounded-lg sm:max-w-32 lg:max-w-40"
+      />
+      <div className="flex flex-1 flex-col items-center justify-between gap-2 lg:flex-row">
         <div className="flex flex-1 flex-col gap-2">
-          <span className="text-heading5 text-gray-900">{title}</span>
-          <span className="text-gray-600">{instructor}</span>
+          <span className="lg:text-heading5 text-sm font-bold text-gray-900">
+            {title}
+          </span>
+          <span className="text-xs text-gray-600 lg:text-base">
+            {instructor}
+          </span>
           <div className="flex items-center gap-3">
             <PlatformBadge platform={platform} />
             <DifficultyBadge difficulty={difficulty} />
-            <span className="flex items-center text-sm text-gray-600">
-              <Clock3Icon className="h-3.5" /> {durationHHMM}
-            </span>
+            {width > LG_WIDTH_PIXEL && (
+              <span className="flex items-center text-sm text-gray-600">
+                <Clock3Icon className="h-3.5" /> {durationHHMM}
+              </span>
+            )}
           </div>
         </div>
-        <div className="flex flex-col items-end justify-center gap-3">
+        <div className="flex w-full items-center justify-end gap-2 lg:w-auto lg:flex-col lg:items-end lg:justify-center">
           <div className="flex flex-col items-end justify-start">
-            <span className="text-lg font-bold text-gray-900">{`₩${(originalPrice - discountPrice).toLocaleString()}`}</span>
+            <span className="text-sm font-bold text-gray-900 lg:text-lg">{`₩${(originalPrice - discountPrice).toLocaleString()}`}</span>
             {discountPrice > 0 ? (
-              <span className="text-sm text-gray-500 line-through">{`₩${originalPrice.toLocaleString()}`}</span>
+              <span className="text-xs text-gray-500 line-through lg:text-sm">{`₩${originalPrice.toLocaleString()}`}</span>
             ) : null}
           </div>
-          <div className="flex items-center justify-center gap-2">
+          <div className="flex items-center justify-center gap-1">
             <BookmarkIcon className="text-primary-500 h-4" fill="#eab308" />
             <Link to={urlLink}>
-              <Button className="text-sm">공고 보기</Button>
+              <Button
+                size={width > LG_WIDTH_PIXEL ? 'md' : 'sm'}
+                className="text-xs text-nowrap lg:text-sm"
+              >
+                {width > LG_WIDTH_PIXEL ? '공고 보기' : '보기'}
+              </Button>
             </Link>
           </div>
         </div>

@@ -14,7 +14,7 @@ const difficultyMap: Record<Difficulty, 'success' | 'primary' | 'danger'> = {
 export default function DifficultyBadge({ difficulty }: DifficultyBadgeProps) {
   return (
     <Badge
-      className="rounded px-2 py-1 font-medium"
+      className="rounded px-2 py-1 text-xs font-medium lg:text-base"
       variant={difficultyMap[difficulty]}
     >
       {difficulty === 'EASY'
