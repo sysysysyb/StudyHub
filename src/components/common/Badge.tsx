@@ -1,22 +1,10 @@
 import { cn } from '@/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
 import type { ComponentProps } from 'react'
+import { BadgeVariant, BadgeSize } from '@/constants/badge-variants'
 
 const badgeVariants = cva('font-normal text-center rounded-full inline-block', {
-  variants: {
-    variant: {
-      default: 'bg-gray-100 text-gray-800',
-      primary: 'bg-primary-100 text-primary-800',
-      success: 'bg-success-100 text-success-600',
-      danger: 'bg-danger-100 text-danger-800',
-    },
-
-    size: {
-      sm: 'px-2 py-0.5  text-xs leading-4',
-      md: 'px-2.5 py-1 text-sm leading-5',
-      lg: 'px-3 py-1.5 text-base leading-6',
-    },
-  },
+  variants: { variant: BadgeVariant, size: BadgeSize },
   defaultVariants: {
     variant: 'default',
     size: 'md',

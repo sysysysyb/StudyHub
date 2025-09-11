@@ -2,6 +2,14 @@ import LandingPage from '@/pages/LandingPage'
 import { MyInfo } from '@/pages/my-page/MyInfo'
 import BookmarkedRecruitment from '@/pages/my-page/BookmarkedRecruitment'
 import Login from '@/pages/Login'
-import Signup from '@/pages/Signup'
+import Signup from '@/pages/SignUp'
+import { AppliedRecruitment } from '@/pages/my-page/AppliedRecruitment'
 
-export { LandingPage, MyInfo, BookmarkedRecruitment, Login, Signup }
+export {
+  LandingPage,
+  MyInfo,
+  BookmarkedRecruitment,
+  Login,
+  Signup,
+  AppliedRecruitment,
+}

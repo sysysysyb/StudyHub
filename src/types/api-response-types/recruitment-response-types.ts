@@ -1,7 +1,23 @@
+export interface AppliedRecruitments {
+  next_cursor: string
+  results: AppliedRecruitment[]
+}
+
 export interface BookmarkedRecruitments {
   next_cursor: string
-  results: Recruitment[]
+  results: BookmarkedRecruitment[]
 }
+
+export interface AppliedRecruitment extends Recruitment {
+  status: AppliedStatus
+  applied_at: Date
+}
+
+export interface BookmarkedRecruitment extends Recruitment {
+  views_count: number
+  bookmark_count: number
+}
+export type AppliedStatus = 'waiting' | 'approved' | 'rejected'
 
 export interface Recruitment {
   uuid: string
@@ -11,8 +27,6 @@ export interface Recruitment {
   lectures: Lecture[]
   tags: Tag[]
   close_at: Date
-  views_count: number
-  bookmark_count: number
 }
 
 export interface Lecture {
