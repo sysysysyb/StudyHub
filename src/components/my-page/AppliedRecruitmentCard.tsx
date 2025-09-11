@@ -37,7 +37,7 @@ export default function AppliedRecruitmentCard({
           </span>
           <div className="text-secondary flex items-center gap-3 pl-4">
             {FormattedAppliedAt(appliedAtString)}
-            <AppliedStatusBadge status={appliedStatus} />
+            {AppliedStatusBadge(appliedStatus)}
           </div>
         </div>
         <div className="text-secondary flex justify-between text-sm">

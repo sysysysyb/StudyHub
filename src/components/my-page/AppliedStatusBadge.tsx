@@ -1,11 +1,9 @@
 import { Badge } from '@/components'
 import type { ReactNode } from 'react'
 import { BadgeVariant } from '@/constants/badge-variants'
-import type { AppliedStatusProps } from '@/types/api-response-types/recruitment-response-types'
+import type { AppliedStatus } from '@/types/api-response-types/recruitment-response-types'
 
-export const AppliedStatusBadge = ({
-  status,
-}: AppliedStatusProps): ReactNode => {
+export const AppliedStatusBadge = (status: AppliedStatus): ReactNode => {
   let label: '대기중' | '승인됨' | '거절됨' | null
   let badgeVariant: keyof typeof BadgeVariant
   if (status === 'waiting') {
