@@ -8,12 +8,88 @@ import {
   AuthTitle,
   AuthVerifyButton,
 } from '@/components/auth'
-import { Input, InputDescription, InputLabel } from '@/components/common/input'
+import {
+  Input,
+  InputDescription,
+  InputErrorMessage,
+  InputLabel,
+} from '@/components/common/input'
+import { useTimer, useToast } from '@/hooks'
+import {
+  authSchema,
+  type AuthSchemaType,
+} from '@/schemas/form-schema/auth-schema'
+import { cn } from '@/utils'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router'
 
 const flexRowStyle = 'flex gap-3'
 const flexColStyle = 'flex flex-col gap-3'
 
 function Signup() {
+  const [isDuplicateChecked, setIsDuplicateChecked] = useState(false)
+  const [isCodeSent, SetIsCodeSent] = useState({
+    email: false,
+    phoneNumber: false,
+  })
+  const [isCodeVerified, SetIsCodeVerified] = useState({
+    email: false,
+    phoneNumber: false,
+  })
+  const {
+    register,
+    handleSubmit,
+    formState: { isValid, errors, isSubmitting },
+    reset,
+    watch,
+    getFieldState,
+  } = useForm<AuthSchemaType>({
+    mode: 'onChange',
+    resolver: zodResolver(authSchema),
+  })
+  const navigate = useNavigate()
+  const { triggerToast } = useToast()
+  const timer = {
+    email: useTimer(180000),
+    phoneNumber: useTimer(180000),
+  }
+
+  const onSubmit = async () => {
+    await new Promise((resolve) => setTimeout(resolve, 500))
+    triggerToast('success', '회원가입이 완료되었습니다!')
+    reset()
+    navigate('/auth/login')
+  }
+
+  const isNicknameNotValid =
+    getFieldState('nickname').invalid || !watch('nickname')
+  const isEmailNotValid = getFieldState('email').invalid || !watch('email')
+  const isPhoneNumberNotValid =
+    getFieldState('phoneNumber').invalid || !watch('phoneNumber')
+
+  const handleDuplicateCheck = async () => {
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+    setIsDuplicateChecked(true)
+    triggerToast('success', '사용 가능한 닉네임입니다.')
+  }
+
+  const handleCodeSend = async (label: 'email' | 'phoneNumber') => {
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+    SetIsCodeSent((prev) => ({ ...prev, [label]: true }))
+    timer[label].startTimer()
+    triggerToast('success', '인증 코드를 전송했습니다.')
+  }
+
+  const handleCodeVerify = async (label: 'email' | 'phoneNumber') => {
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+    SetIsCodeVerified((prev) => ({ ...prev, [label]: true }))
+    SetIsCodeSent((prev) => ({ ...prev, [label]: false }))
+    timer[label].resetTimer()
+    triggerToast('success', '인증을 완료했습니다!')
+  }
+
   return (
     <AuthContainer className="flex flex-col gap-10">
       <div className={flexColStyle}>
@@ -24,70 +100,151 @@ function Signup() {
           <AuthLink to="/auth/login">로그인하기</AuthLink>
         </div>
       </div>
-      <form className="flex flex-col gap-10">
+      <form className="flex flex-col gap-10" onSubmit={handleSubmit(onSubmit)}>
+        {/* 이름 */}
         <div className={flexColStyle}>
           <InputLabel isRequired>이름</InputLabel>
-          <Input placeholder="이름을 입력해주세요" />
+          <Input {...register('name')} placeholder="이름을 입력해주세요" />
+          {errors.name && (
+            <InputErrorMessage>{`${errors.name.message}`}</InputErrorMessage>
+          )}
         </div>
+        {/* 닉네임 */}
         <div className={flexColStyle}>
           <InputLabel isRequired>닉네임</InputLabel>
           <div className={flexRowStyle}>
-            <Input placeholder="닉네임을 입력해주세요" />
-            <AuthVerifyButton>중복확인</AuthVerifyButton>
+            <Input
+              {...register('nickname')}
+              placeholder="닉네임을 입력해주세요"
+            />
+            <AuthVerifyButton
+              disabled={isNicknameNotValid}
+              onClick={handleDuplicateCheck}
+            >
+              중복확인
+            </AuthVerifyButton>
           </div>
+          {errors.nickname && (
+            <InputErrorMessage>{`${errors.nickname.message}`}</InputErrorMessage>
+          )}
         </div>
+        {/* 생년월일 */}
         <div className={flexColStyle}>
           <InputLabel isRequired>생년월일</InputLabel>
-          <Input placeholder="생년월일을 입력해주세요 (ex. 20001004)" />
+          <Input
+            {...register('birthday')}
+            placeholder="생년월일을 입력해주세요 (ex. 20001004)"
+          />
+          {errors.birthday && (
+            <InputErrorMessage>{`${errors.birthday.message}`}</InputErrorMessage>
+          )}
         </div>
+        {/* 성별 */}
         <div className={flexColStyle}>
           <InputLabel isRequired>성별</InputLabel>
           <div className={flexRowStyle}>
             <label htmlFor="gender-male">
-              <AuthBadge isSelected>남</AuthBadge>
+              <AuthBadge isSelected={watch('gender') === 'male'}>남</AuthBadge>
             </label>
             <input
               id="gender-male"
               type="radio"
               value="male"
               className="hidden"
+              {...register('gender')}
             />
             <label htmlFor="gender-female">
-              <AuthBadge>여</AuthBadge>
+              <AuthBadge isSelected={watch('gender') === 'female'}>
+                여
+              </AuthBadge>
             </label>
             <input
               id="gender-female"
               type="radio"
               value="female"
               className="hidden"
+              {...register('gender')}
             />
           </div>
+          {errors.gender && (
+            <InputErrorMessage>{`${errors.gender.message}`}</InputErrorMessage>
+          )}
         </div>
+        {/* 이메일 */}
         <div className={flexColStyle}>
           <div className="flex gap-3">
             <InputLabel isRequired>이메일</InputLabel>
             <InputDescription>로그인 시 아이디로 사용합니다.</InputDescription>
           </div>
           <div className={flexRowStyle}>
-            <Input placeholder="이메일을 입력해주세요" />
-            <AuthVerifyButton>인증코드전송</AuthVerifyButton>
+            <Input {...register('email')} placeholder="이메일을 입력해주세요" />
+            <AuthVerifyButton
+              className={cn(timer.email.isCounting && 'w-44 p-0')}
+              disabled={isEmailNotValid || timer.email.isCounting}
+              onClick={() => handleCodeSend('email')}
+            >
+              {timer.email.isCounting
+                ? `재전송 (${timer.email.formatMMSS(timer.email.remainSecond)})`
+                : '인증코드전송'}
+            </AuthVerifyButton>
           </div>
+          {errors.email && (
+            <InputErrorMessage>{`${errors.email.message}`}</InputErrorMessage>
+          )}
           <div className={flexRowStyle}>
-            <Input placeholder="인증코드 6자리를 입력해주세요" />
-            <AuthVerifyButton disabled>인증코드확인</AuthVerifyButton>
+            <Input
+              {...register('verificationCode.email')}
+              placeholder="인증코드 6자리를 입력해주세요"
+            />
+            <AuthVerifyButton
+              disabled={!isCodeSent.email}
+              onClick={() => handleCodeVerify('email')}
+            >
+              인증코드확인
+            </AuthVerifyButton>
           </div>
+          {errors.verificationCode?.email && (
+            <InputErrorMessage>{`${errors.verificationCode.email.message}`}</InputErrorMessage>
+          )}
         </div>
+        {/* 휴대전화 */}
         <div className={flexColStyle}>
           <InputLabel isRequired>휴대전화</InputLabel>
           <div className="flex gap-3">
-            <Input placeholder="휴대전화 번호를 입력해주세요 (ex. 01012345678)" />
-            <AuthVerifyButton>인증코드전송</AuthVerifyButton>
+            <Input
+              {...register('phoneNumber')}
+              placeholder="휴대전화 번호를 입력해주세요 (ex. 01012345678)"
+            />
+            <AuthVerifyButton
+              className={cn(timer.phoneNumber.isCounting && 'w-44 p-0')}
+              disabled={isPhoneNumberNotValid || timer.phoneNumber.isCounting}
+              onClick={() => handleCodeSend('phoneNumber')}
+            >
+              {timer.phoneNumber.isCounting
+                ? `재전송 (${timer.phoneNumber.formatMMSS(timer.phoneNumber.remainSecond)})`
+                : '인증코드전송'}
+            </AuthVerifyButton>
           </div>
+          {errors.phoneNumber && (
+            <InputErrorMessage>{`${errors.phoneNumber.message}`}</InputErrorMessage>
+          )}
           <div className={flexRowStyle}>
-            <Input placeholder="인증코드 6자리를 입력해주세요" />
-            <AuthVerifyButton disabled>인증코드확인</AuthVerifyButton>
+            <Input
+              {...register('verificationCode.phoneNumber')}
+              placeholder="인증코드 6자리를 입력해주세요"
+            />
+            <AuthVerifyButton
+              disabled={!isCodeSent.phoneNumber}
+              onClick={() => handleCodeVerify('phoneNumber')}
+            >
+              인증코드확인
+            </AuthVerifyButton>
           </div>
+          {errors.verificationCode?.phoneNumber && (
+            <InputErrorMessage>{`${errors.verificationCode.phoneNumber.message}`}</InputErrorMessage>
+          )}
         </div>
+        {/* 비밀번호 */}
         <div className={flexColStyle}>
           <div className={flexRowStyle}>
             <InputLabel isRequired>비밀번호</InputLabel>
@@ -95,10 +252,39 @@ function Signup() {
               8~15자의 영문 대소문자, 숫자, 특수문자 포함
             </InputDescription>
           </div>
-          <Input placeholder="비밀번호를 입력해주세요" />
-          <Input placeholder="비밀번호를 다시 입력해주세요" />
+          <div className={flexColStyle}>
+            <Input
+              {...register('password')}
+              type="password"
+              placeholder="비밀번호를 입력해주세요"
+            />
+            {errors.password && (
+              <InputErrorMessage>{`${errors.password.message}`}</InputErrorMessage>
+            )}
+          </div>
+          <div className={flexColStyle}>
+            <Input
+              {...register('confirmPassword')}
+              type="password"
+              placeholder="비밀번호를 다시 입력해주세요"
+            />
+            {errors.confirmPassword && (
+              <InputErrorMessage>{`${errors.confirmPassword.message}`}</InputErrorMessage>
+            )}
+          </div>
         </div>
-        <AuthSubmitButton>가입하기</AuthSubmitButton>
+        {/* 가입하기 버튼 */}
+        <AuthSubmitButton
+          disabled={
+            !isValid ||
+            isSubmitting ||
+            !isDuplicateChecked ||
+            !isCodeVerified.email ||
+            !isCodeVerified.phoneNumber
+          }
+        >
+          가입하기
+        </AuthSubmitButton>
       </form>
     </AuthContainer>
   )
