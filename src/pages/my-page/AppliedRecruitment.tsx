@@ -1,10 +1,10 @@
 import { ListItemSkeleton } from '@/components'
 import { AppliedRecruitmentCard } from '@/components/my-page'
 import EmptyDataState from '@/components/common/State/EmptyDataState'
-import useAppliedStudy from '@/hooks/api/useAppliedStudy'
+import { useAppliedRecruitment } from '@/hooks/api'
 
-export const AppliedStudy = () => {
-  const { data, isPending } = useAppliedStudy()
+export const AppliedRecruitment = () => {
+  const { data, isPending } = useAppliedRecruitment()
 
   return (
     <main>

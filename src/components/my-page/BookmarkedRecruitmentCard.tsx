@@ -2,7 +2,7 @@ import type { BookmarkedRecruitment } from '@/types/api-response-types/recruitme
 import { BookmarkIcon, CalendarIcon, EyeIcon, UsersIcon } from 'lucide-react'
 import { Link } from 'react-router'
 import { Button } from '@/components'
-import { CloseAt } from '@/constants/formatted-dates'
+import { FormattedCloseAt } from '@/constants/formatted-dates'
 
 interface BookmarkedRecruitmentCardProps {
   recruitment: BookmarkedRecruitment
@@ -41,7 +41,7 @@ export default function BookmarkedRecruitmentCard({
             </span>
             <span className="flex flex-nowrap items-center text-sm text-gray-600">
               <CalendarIcon className="h-3.5" />
-              {CloseAt(closeAtString)}
+              {FormattedCloseAt(closeAtString)}
             </span>
             <span className="flex flex-nowrap items-center text-sm text-gray-600">
               <EyeIcon className="h-3.5" />

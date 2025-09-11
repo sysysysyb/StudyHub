@@ -1,5 +1,8 @@
 import type { AppliedRecruitment } from '@/types/api-response-types/recruitment-response-types'
-import { CloseAt, AppliedAt } from '@/constants/formatted-dates'
+import {
+  FormattedCloseAt,
+  FormattedAppliedAt,
+} from '@/constants/formatted-dates'
 
 interface AppliedRecruitmentCardProps {
   recruitment: AppliedRecruitment
@@ -31,13 +34,13 @@ export default function AppliedRecruitmentCard({
             {title}
           </span>
           <div className="flex gap-3 pl-4">
-            {AppliedAt(appliedAtString)}
+            {FormattedAppliedAt(appliedAtString)}
             {/* 뱃지 컴포넌트 추가필요 */}
           </div>
         </div>
         <div className="text-secondary flex justify-between text-sm">
           <span>{`모집 인원: ${expectedHeadCount}명`}</span>
-          {CloseAt(closeAtString)}
+          {FormattedCloseAt(closeAtString)}
         </div>
 
         {lectures.length > 0 ? (

@@ -3,7 +3,7 @@ import { MyInfo } from '@/pages/my-page/MyInfo'
 import BookmarkedRecruitment from '@/pages/my-page/BookmarkedRecruitment'
 import Login from '@/pages/Login'
 import Signup from '@/pages/SignUp'
-import { AppliedStudy } from '@/pages/my-page/AppliedRecruitment'
+import { AppliedRecruitment } from '@/pages/my-page/AppliedRecruitment'
 
 export {
   LandingPage,
@@ -11,5 +11,5 @@ export {
   BookmarkedRecruitment,
   Login,
   Signup,
-  AppliedStudy,
+  AppliedRecruitment,
 }
