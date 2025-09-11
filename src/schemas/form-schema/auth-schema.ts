@@ -41,10 +41,16 @@ export const authSchema = z
         /^010\d{8}$/,
         '휴대전화 번호는 하이픈(-) 없이 010으로 시작하는 11자리여야 합니다'
       ),
-    verificationCode: z
-      .string()
-      .min(1, '인증코드는 필수로 입력해야 합니다')
-      .length(6, '인증코드는 6자리(숫자 + 영문)로 입력해주세요'),
+    verificationCode: z.object({
+      email: z
+        .string()
+        .min(1, '인증코드는 필수로 입력해야 합니다')
+        .length(6, '인증코드는 6자리(숫자 + 영문)로 입력해주세요'),
+      phoneNumber: z
+        .string()
+        .min(1, '인증코드는 필수로 입력해야 합니다')
+        .length(6, '인증코드는 6자리(숫자 + 영문)로 입력해주세요'),
+    }),
     gender: z.enum(['male', 'female'], '성별을 선택해주세요'),
   })
   .refine((data) => data.password === data.confirmPassword, {
@@ -53,3 +59,7 @@ export const authSchema = z
   })
 
 export type AuthSchemaType = z.infer<typeof authSchema>
+
+export const loginSchema = authSchema.pick({ email: true, password: true })
+
+export type LoginSchemaType = z.infer<typeof loginSchema>
