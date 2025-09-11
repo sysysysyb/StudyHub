@@ -3,6 +3,7 @@ import type { Lecture } from '@/types/api-response-types/lecture-response-type'
 import { BookmarkIcon } from 'lucide-react'
 import { Link } from 'react-router'
 import DifficultyBadge from './DifficultyBadge'
+import PlatformBadge from './PlatformBadge'
 
 interface BookmarkedLectureCardProps {
   lecture: Lecture
@@ -31,7 +32,7 @@ export default function BookmarkedLectureCard({
           <span className="text-heading5 text-gray-900">{title}</span>
           <span className="text-gray-600">{instructor}</span>
           <div className="flex items-center gap-3">
-            <span>{platform}</span>
+            <PlatformBadge platform={platform} />
             <DifficultyBadge difficulty={difficulty} />
             <span>{durationHHMM}</span>
           </div>
