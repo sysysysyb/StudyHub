@@ -4,20 +4,24 @@ import { BookmarkedRecruitmentCard } from '@/components/my-page'
 import EmptyDataState from '@/components/common/State/EmptyDataState'
 import { useBookmarkedRecruitment } from '@/hooks/api'
 import { useDebounce } from '@/hooks/useDebounce'
-import { useEffect, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { SearchIcon } from 'lucide-react'
 
 export default function BookmarkedRecruitment() {
-  const [searchParam, setSearchParam] = useState('')
+  const [search, setSearch] = useState('')
 
-  const debouncedSearchParam = useDebounce(searchParam, 250)
+  const debouncedSearch = useDebounce(search, 250)
 
-  const { data, isPending, refetch } =
-    useBookmarkedRecruitment(debouncedSearchParam)
+  const searchParams = useMemo(() => {
+    const params = new URLSearchParams()
+    if (debouncedSearch) {
+      params.set('search', debouncedSearch)
+    }
 
-  useEffect(() => {
-    refetch()
-  }, [debouncedSearchParam, refetch])
+    return params
+  }, [debouncedSearch])
+
+  const { data, isPending } = useBookmarkedRecruitment(searchParams)
 
   return (
     <div>
@@ -35,8 +39,8 @@ export default function BookmarkedRecruitment() {
               hasIcon
               placeholder="공고 제목으로 검색..."
               className="w-full max-w-80"
-              value={searchParam}
-              onChange={(e) => setSearchParam(e.target.value)}
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
             />
           </div>
         </div>
