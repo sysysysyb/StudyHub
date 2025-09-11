@@ -7,16 +7,39 @@ import {
   AuthSubmitButton,
   AuthTitle,
 } from '@/components/auth'
-import { Input } from '@/components/common/input'
+import { Input, InputErrorMessage } from '@/components/common/input'
 import KakaoIcon from '@/assets/images/KakaoIcon.svg'
 import NaverIcon from '@/assets/images/NaverIcon.svg'
-import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import {
+  loginSchema,
+  type LoginSchemaType,
+} from '@/schemas/form-schema/auth-schema'
+import { useToast } from '@/hooks'
+import { useNavigate } from 'react-router'
 
 const flexStyle = 'flex flex-col gap-3'
 
 function Login() {
-  const [idInputValue, setIdInputValue] = useState('')
-  const [passwordInputValue, setPasswordInputValue] = useState('')
+  const {
+    register,
+    handleSubmit,
+    formState: { isValid, errors, isSubmitting },
+    reset,
+  } = useForm<LoginSchemaType>({
+    mode: 'onChange',
+    resolver: zodResolver(loginSchema),
+  })
+  const { triggerToast } = useToast()
+  const navigate = useNavigate()
+
+  const onSubmit = async () => {
+    await new Promise((resolve) => setTimeout(resolve, 500))
+    triggerToast('success', '로그인이 완료되었습니다!')
+    reset()
+    navigate('/')
+  }
 
   return (
     <AuthContainer className="flex flex-col gap-10">
@@ -39,28 +62,34 @@ function Login() {
           네이버 간편 로그인 / 가입
         </AuthSocialLoginButton>
       </div>
-      <div className={flexStyle}>
+
+      <form className={flexStyle} onSubmit={handleSubmit(onSubmit)}>
         <Input
+          {...register('email')}
           type="email"
           placeholder="아이디 (example@gmail.com)"
-          value={idInputValue}
-          onChange={(event) => setIdInputValue(event.target.value)}
         />
+        {errors.email && (
+          <InputErrorMessage>{`${errors.email.message}`}</InputErrorMessage>
+        )}
         <Input
+          {...register('password')}
           type="password"
           placeholder="비밀번호 (8~15자의 영문 대소문자, 숫자, 특수문자 포함)"
-          value={passwordInputValue}
-          onChange={(event) => setPasswordInputValue(event.target.value)}
         />
+        {errors.password && (
+          <InputErrorMessage>{`${errors.password.message}`}</InputErrorMessage>
+        )}
+
         <div className="flex gap-2">
           <AuthLink to="/auth/find-email">아이디 찾기</AuthLink>
           <span className="text-primary-600">|</span>
           <AuthLink to="/auth/find-password">비밀번호 찾기</AuthLink>
         </div>
-        <AuthSubmitButton disabled={!idInputValue || !passwordInputValue}>
+        <AuthSubmitButton disabled={!isValid || isSubmitting}>
           일반회원 로그인
         </AuthSubmitButton>
-      </div>
+      </form>
     </AuthContainer>
   )
 }
