@@ -24,14 +24,14 @@ export default function BookmarkedLecture() {
 
   return (
     <div>
-      <header className="mb-6 flex items-center justify-between gap-2">
-        <div className="flex flex-col gap-2">
+      <header className="mb-6 flex flex-col items-center justify-between gap-2 lg:flex-row">
+        <div className="flex w-full flex-col gap-2 lg:w-auto">
           <h1 className="text-heading3 text-gray-900">북마크한 강의</h1>
           <span className="font-medium text-gray-600">
             나중에 수강할 강의들을 모아두었습니다
           </span>
         </div>
-        <div className="relative max-w-80 flex-1">
+        <div className="relative w-full flex-1 lg:max-w-80">
           <InputIcon icon={SearchIcon} className="absolute" />
           <Input
             hasIcon

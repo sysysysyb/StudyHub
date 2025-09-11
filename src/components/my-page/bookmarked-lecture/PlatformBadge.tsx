@@ -12,7 +12,7 @@ const platformMap: Record<Platform, 'success'> = {
 export default function PlatformBadge({ platform }: PlatformBadgeProps) {
   return (
     <Badge
-      className="rounded px-2 py-1 font-medium"
+      className="rounded px-2 py-1 text-xs font-medium lg:text-base"
       variant={platformMap[platform]}
     >
       {platform}
