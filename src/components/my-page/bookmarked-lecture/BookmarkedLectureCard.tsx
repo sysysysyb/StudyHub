@@ -2,6 +2,7 @@ import Button from '@/components/common/Button'
 import type { Lecture } from '@/types/api-response-types/lecture-response-type'
 import { BookmarkIcon } from 'lucide-react'
 import { Link } from 'react-router'
+import DifficultyBadge from './DifficultyBadge'
 
 interface BookmarkedLectureCardProps {
   lecture: Lecture
@@ -26,12 +27,12 @@ export default function BookmarkedLectureCard({
     <div className="flex items-center justify-center gap-6 rounded-xl border border-gray-200 p-6">
       <img src={imageUrl} className="w-full max-w-40 rounded-lg" />
       <div className="flex flex-1 items-center justify-between">
-        <div className="flex flex-1 flex-col">
+        <div className="flex flex-1 flex-col gap-2">
           <span className="text-heading5 text-gray-900">{title}</span>
           <span className="text-gray-600">{instructor}</span>
           <div className="flex items-center gap-3">
             <span>{platform}</span>
-            <span>{difficulty}</span>
+            <DifficultyBadge difficulty={difficulty} />
             <span>{durationHHMM}</span>
           </div>
         </div>
