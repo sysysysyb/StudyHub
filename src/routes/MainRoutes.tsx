@@ -33,6 +33,7 @@ function MainRoutes() {
           />
           <Route path="applied-study" element={<AppliedRecruitment />} />
           <Route path="bookmarked-lecture" element={<BookmarkedLecture />} />
+          <Route path="bookmarked" element={<div>Bookmarked</div>} />
           <Route path="completed-study" element={<div>completed-study</div>} />
         </Route>
       </Route>
