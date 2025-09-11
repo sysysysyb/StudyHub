@@ -19,6 +19,7 @@ import {
   authSchema,
   type AuthSchemaType,
 } from '@/schemas/form-schema/auth-schema'
+import { cn } from '@/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -178,7 +179,7 @@ function Signup() {
           <div className={flexRowStyle}>
             <Input {...register('email')} placeholder="이메일을 입력해주세요" />
             <AuthVerifyButton
-              className="w-39 p-0"
+              className={cn(timer.email.isCounting && 'w-44 p-0')}
               disabled={isEmailNotValid || timer.email.isCounting}
               onClick={() => handleCodeSend('email')}
             >
@@ -215,6 +216,7 @@ function Signup() {
               placeholder="휴대전화 번호를 입력해주세요 (ex. 01012345678)"
             />
             <AuthVerifyButton
+              className={cn(timer.phoneNumber.isCounting && 'w-44 p-0')}
               disabled={isPhoneNumberNotValid || timer.phoneNumber.isCounting}
               onClick={() => handleCodeSend('phoneNumber')}
             >
