@@ -2,7 +2,7 @@ import type { BookmarkedRecruitment } from '@/types/api-response-types/recruitme
 import { BookmarkIcon, CalendarIcon, EyeIcon, UsersIcon } from 'lucide-react'
 import { Link } from 'react-router'
 import { Button } from '@/components'
-import { FormattedCloseAt } from '@/constants/formatted-dates'
+import { FormattedCloseAt } from '@/utils'
 
 interface BookmarkedRecruitmentCardProps {
   recruitment: BookmarkedRecruitment

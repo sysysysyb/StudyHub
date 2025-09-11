@@ -1,9 +1,6 @@
 import type { AppliedRecruitment } from '@/types/api-response-types/recruitment-response-types'
 import { AppliedStatusBadge } from '@/components/my-page'
-import {
-  FormattedCloseAt,
-  FormattedAppliedAt,
-} from '@/constants/formatted-dates'
+import { FormattedCloseAt, FormattedAppliedAt } from '@/utils'
 
 interface AppliedRecruitmentCardProps {
   recruitment: AppliedRecruitment
