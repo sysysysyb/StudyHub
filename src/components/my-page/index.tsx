@@ -4,6 +4,7 @@ import BookmarkedRecruitmentCard from '@/components/my-page/BookmarkedRecruitmen
 import { PasswordChange } from '@/components/my-page/my-info/PasswordChange'
 import { Withdrawal } from '@/components/my-page/my-info/Withdrawal'
 import { InfoUpdate } from '@/components/my-page/my-info/InfoUpdate'
+import AppliedRecruitmentCard from '@/components/my-page/AppliedRecruitmentCard'
 
 export {
   MyPageSideBar,
@@ -12,4 +13,5 @@ export {
   PasswordChange,
   Withdrawal,
   InfoUpdate,
+  AppliedRecruitmentCard,
 }

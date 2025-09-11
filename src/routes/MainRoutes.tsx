@@ -1,5 +1,6 @@
 import { AuthLayout, MyPageLayout, RootLayout } from '@/components'
 import {
+  AppliedStudy,
   BookmarkedRecruitment,
   LandingPage,
   Login,
@@ -33,7 +34,7 @@ function MainRoutes() {
             path="bookmarked-lecture"
             element={<div>bookmarked-lecture</div>}
           />
-          <Route path="applied-study" element={<div>applied-study</div>} />
+          <Route path="applied-study" element={<AppliedStudy />} />
           <Route path="completed-study" element={<div>completed-study</div>} />
         </Route>
       </Route>

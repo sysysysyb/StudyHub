@@ -1,10 +1,11 @@
-import type { Recruitment } from '@/types/api-response-types/recruitment-response-types'
+import type { BookmarkedRecruitment } from '@/types/api-response-types/recruitment-response-types'
 import { BookmarkIcon, CalendarIcon, EyeIcon, UsersIcon } from 'lucide-react'
 import { Link } from 'react-router'
 import { Button } from '@/components'
+import { CloseAt } from '@/constants/formatted-dates'
 
 interface BookmarkedRecruitmentCardProps {
-  recruitment: Recruitment
+  recruitment: BookmarkedRecruitment
 }
 
 export default function BookmarkedRecruitmentCard({
@@ -21,12 +22,6 @@ export default function BookmarkedRecruitmentCard({
     lectures,
     tags,
   } = recruitment
-  const closeAt = new Date(closeAtString)
-
-  const closeAtYear = closeAt.getFullYear()
-  const closeAtMonth = closeAt.getMonth()
-  const closeAtDate = closeAt.getDate()
-
   return (
     <div
       key={uuid}
@@ -46,7 +41,7 @@ export default function BookmarkedRecruitmentCard({
             </span>
             <span className="flex flex-nowrap items-center text-sm text-gray-600">
               <CalendarIcon className="h-3.5" />
-              {`마감일: ${closeAtYear}.${closeAtMonth}.${closeAtDate}.`}
+              {CloseAt(closeAtString)}
             </span>
             <span className="flex flex-nowrap items-center text-sm text-gray-600">
               <EyeIcon className="h-3.5" />
