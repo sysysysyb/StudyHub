@@ -8,7 +8,7 @@ import { useDebounce } from '@/hooks/useDebounce'
 import { SearchIcon } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 
-const INITIAL_DROPDWON_OPTION = '전체'
+const INITIAL_DROPDOWN_OPTION = '전체'
 const ENTIRE = '전체'
 const RECRUITMENT = '공고'
 const LECTURE = '강의'
@@ -20,7 +20,7 @@ export default function BookmarkedContent() {
   )
 
   const [search, setSearch] = useState('')
-  const [selectedOption, setSelectedOption] = useState(INITIAL_DROPDWON_OPTION)
+  const [selectedOption, setSelectedOption] = useState(INITIAL_DROPDOWN_OPTION)
 
   const debouncedSearch = useDebounce(search, 250)
 
@@ -51,7 +51,7 @@ export default function BookmarkedContent() {
     if (recruitments && lectures) {
       const temp = `${ENTIRE} (${lectures.results.length + recruitments.results.length})`
       bookmarkedDropdownOption[0].label = temp
-      if (selectedOption === INITIAL_DROPDWON_OPTION) {
+      if (selectedOption === INITIAL_DROPDOWN_OPTION) {
         setSelectedOption(temp)
       }
     }
