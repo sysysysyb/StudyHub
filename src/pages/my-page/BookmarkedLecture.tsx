@@ -1,5 +1,5 @@
 import { ListItemSkeleton } from '@/components'
-import { Input, InputIcon } from '@/components/common/input'
+import { Input } from '@/components/common/input'
 import EmptyDataState from '@/components/common/State/EmptyDataState'
 import BookmarkedLectureCard from '@/components/my-page/bookmarked-lecture/BookmarkedLectureCard'
 import { useBookmarkedLectures } from '@/hooks/api'
@@ -31,11 +31,11 @@ export default function BookmarkedLecture() {
             나중에 수강할 강의들을 모아두었습니다
           </span>
         </div>
-        <div className="relative w-full flex-1 lg:max-w-80">
-          <InputIcon icon={SearchIcon} className="absolute" />
+        <div className="w-full flex-1 lg:max-w-80">
           <Input
-            hasIcon
             placeholder="강의명이나 강사명으로 검색..."
+            icon={SearchIcon}
+            iconPosition="start"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
