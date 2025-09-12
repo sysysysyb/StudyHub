@@ -8,10 +8,10 @@ import { useDebounce } from '@/hooks/useDebounce'
 import { SearchIcon } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 
-const INITIAL_DROPDOWN_OPTION = '전체'
 const ENTIRE = '전체'
 const RECRUITMENT = '공고'
 const LECTURE = '강의'
+const INITIAL_DROPDOWN_OPTION = ENTIRE
 
 export default function BookmarkedContent() {
   const bookmarkedDropdownOption: { label: string }[] = useMemo(
@@ -39,6 +39,7 @@ export default function BookmarkedContent() {
   const { data: lectures, isPending: isLecturePending } =
     useBookmarkedLectures(searchParams)
 
+  //북마크한 공고와 강의 개수를 메뉴에 표시
   useEffect(() => {
     if (recruitments) {
       bookmarkedDropdownOption[1].label = `${RECRUITMENT} (${recruitments.results.length})`
