@@ -26,6 +26,11 @@ export interface BookmarkedRecruitment extends Recruitment {
   bookmark_count: number
 }
 
+export interface ApplicationBase {
+  status: AppliedStatus
+  applied_at: Date
+}
+
 export enum AppliedStatus {
   Waiting = 'waiting',
   Approved = 'approved',
@@ -38,11 +43,6 @@ export interface Recruitment extends RecruitmentBase {
   lectures: Lecture[]
   tags: Tag[]
   close_at: Date
-}
-
-export interface ApplicationBase {
-  status: AppliedStatus
-  applied_at: Date
 }
 
 export interface RecruitmentBase {
