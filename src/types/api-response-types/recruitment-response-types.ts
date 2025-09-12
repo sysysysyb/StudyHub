@@ -8,26 +8,49 @@ export interface BookmarkedRecruitments {
   results: BookmarkedRecruitment[]
 }
 
-export interface AppliedRecruitment extends Recruitment {
-  status: AppliedStatus
-  applied_at: Date
+export interface ApplicantDetail extends ApplicationBase {
+  introduction: string
+  motivation: string
+  goal: string
+  available_time: string
+  has_study_experience: StudyExperience
+  study_experience_description: string
+}
+
+export interface AppliedRecruitment extends Recruitment, ApplicationBase {
+  applicant: ApplicantDetail
 }
 
 export interface BookmarkedRecruitment extends Recruitment {
   views_count: number
   bookmark_count: number
 }
-export type AppliedStatus = 'waiting' | 'approved' | 'rejected'
 
-export interface Recruitment {
-  uuid: string
-  title: string
+export enum AppliedStatus {
+  Waiting = 'waiting',
+  Approved = 'approved',
+  Rejected = 'rejected',
+}
+
+export interface Recruitment extends RecruitmentBase {
   thumbnail_image_url: string
   expected_headcount: number
   lectures: Lecture[]
   tags: Tag[]
   close_at: Date
 }
+
+export interface ApplicationBase {
+  status: AppliedStatus
+  applied_at: Date
+}
+
+export interface RecruitmentBase {
+  uuid: string
+  title: string
+}
+
+export type StudyExperience = boolean
 
 export interface Lecture {
   name: string

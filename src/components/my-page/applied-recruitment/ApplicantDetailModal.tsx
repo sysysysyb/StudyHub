@@ -14,22 +14,39 @@ import { DescriptionComponent } from './ApplicantDescription'
 import { AppliedStatusBadge } from './AppliedStatusBadge'
 import { FormattedAppliedAt } from '@/utils'
 import { StudyExperienceBadge } from './StudyExperienceBadge'
+import type { ApplicantDetail } from '@/types/api-response-types/recruitment-response-types'
 
-export const ApplicantDetail = () => {
-  const titleDescription = '프론트엔드 DevOps 스터디'
-  const appliedAtForTest = new Date('2025-09-30T23:59:59')
+interface ApplicantDetailModalProps {
+  applicant: ApplicantDetail
+  title: string
+  trigger: React.ReactNode
+}
+
+export const ApplicantDetailModal = ({
+  applicant,
+  title,
+  trigger,
+}: ApplicantDetailModalProps) => {
+  const {
+    applied_at: appliedAtString,
+    status: appliedStatus,
+    introduction,
+    motivation,
+    goal,
+    available_time,
+    has_study_experience: StudyExperience,
+    study_experience_description,
+  } = applicant
+
   return (
     <Modal>
-      <ModalTrigger>
-        <Button>모달 생성</Button>
-        {/* 카드 클릭시 모달 생성 로직 필요 */}
-      </ModalTrigger>
+      <ModalTrigger>{trigger}</ModalTrigger>
       {/* 모달 내용 */}
       <ModalContent className="max-w-md min-w-xs">
         <ModalHeader className="flex justify-between">
           <div className="flex flex-col gap-1">
             <ModalTitle>지원 상세 정보</ModalTitle>
-            <ModalDescription>{titleDescription}</ModalDescription>
+            <ModalDescription>{title}</ModalDescription>
           </div>
         </ModalHeader>
 
@@ -37,35 +54,31 @@ export const ApplicantDetail = () => {
           <DescriptionComponent className="justify-between">
             <div className="flex flex-col items-start gap-1">
               <span>지원 상태</span>
-              {AppliedStatusBadge('waiting')}
+              {AppliedStatusBadge(appliedStatus)}
             </div>
             <div className="flex flex-col items-end gap-1">
               <span>지원 일시</span>
-              {FormattedAppliedAt(appliedAtForTest)}
+              {FormattedAppliedAt(appliedAtString)}
             </div>
           </DescriptionComponent>
           <DescriptionComponent label="자기소개">
-            자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개
+            {introduction}
           </DescriptionComponent>
           <DescriptionComponent label="지원동기">
-            지원동기지원동기지원동기지원동기지원동기지원동기지원동기지원동기
+            {motivation}
           </DescriptionComponent>
           <DescriptionComponent label="스터디 목표">
-            스터디 목표스터디 목표스터디 목표스터디 목표스터디 목표스터디
-            목표스터디 목표스터디 목표
+            {goal}
           </DescriptionComponent>
           <DescriptionComponent label="가능한 시간대">
-            가능한 시간대가능한 시간대가능한 시간대가능한 시간대가능한
-            시간대가능한 시간대가능한 시간대가능한 시간대
+            {available_time}
           </DescriptionComponent>
           <DescriptionComponent
             label="스터디 경험"
             className="flex-col items-start"
           >
-            {StudyExperienceBadge()}
-            {StudyExperienceBadge(true)}
-            스터디 경험스터디 경험스터디 경험스터디 경험스터디 경험스터디
-            경험스터디 경험스터디 경험
+            {StudyExperienceBadge(StudyExperience)}
+            {study_experience_description}
           </DescriptionComponent>
         </ModalMain>
 
