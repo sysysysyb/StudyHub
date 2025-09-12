@@ -57,13 +57,14 @@ export default function BookmarkedContent() {
     }
   }, [recruitments, lectures, bookmarkedDropdownOption, selectedOption])
 
+  //공고 데이터 여부
   const hasRecruitment = recruitments && recruitments.results.length > 0
-
+  //강의 데이터 여부
   const hasLecture = lectures && lectures.results.length > 0
-
+  //공고를 선택했는지 여부
   const isRecruitmentSelected =
     selectedOption.startsWith(ENTIRE) || selectedOption.startsWith(RECRUITMENT)
-
+  //강의를 선택했는지 여부
   const isLectureSelected =
     selectedOption.startsWith(ENTIRE) || selectedOption.startsWith(LECTURE)
 
@@ -99,6 +100,7 @@ export default function BookmarkedContent() {
         </div>
       </header>
       <main className="flex flex-col gap-4">
+        {/* 공고 렌더링 */}
         {(() => {
           if (!isRecruitmentSelected) return null
 
@@ -117,7 +119,7 @@ export default function BookmarkedContent() {
             return <EmptyDataState />
           }
         })()}
-
+        {/* 강의 렌더링 */}
         {(() => {
           if (!isLectureSelected) return null
 
