@@ -99,33 +99,40 @@ export default function BookmarkedContent() {
         </div>
       </header>
       <main className="flex flex-col gap-4">
-        {isRecruitmentSelected ? (
-          isRecruitmentPending ? (
-            [...Array(5)].map((_, i) => <ListItemSkeleton key={i} />)
-          ) : hasRecruitment ? (
-            recruitments.results.map((recruitment) => (
+        {(() => {
+          if (!isRecruitmentSelected) return null
+
+          if (isRecruitmentPending) {
+            return [...Array(5)].map((_, i) => <ListItemSkeleton key={i} />)
+          }
+
+          if (hasRecruitment) {
+            return recruitments.results.map((recruitment) => (
               <BookmarkedRecruitmentCard
                 recruitment={recruitment}
                 key={recruitment.uuid}
               />
             ))
-          ) : (
-            <EmptyDataState />
-          )
-        ) : null}
+          } else {
+            return <EmptyDataState />
+          }
+        })()}
 
-        {isLectureSelected ? (
-          isLecturePending ? (
-            [...Array(5)].map((_, i) => <ListItemSkeleton key={i} />)
-          ) : hasLecture ? (
-            lectures.results.map((lecture, i) => (
+        {(() => {
+          if (!isLectureSelected) return null
+
+          if (isLecturePending) {
+            return [...Array(5)].map((_, i) => <ListItemSkeleton key={i} />)
+          }
+
+          if (hasLecture) {
+            return lectures.results.map((lecture, i) => (
               <BookmarkedLectureCard lecture={lecture} key={i} />
             ))
-          ) : (
-            <EmptyDataState />
-          )
-        ) : null}
-        {}
+          } else {
+            return <EmptyDataState />
+          }
+        })()}
       </main>
     </div>
   )
