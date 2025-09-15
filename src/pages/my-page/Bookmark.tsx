@@ -12,7 +12,14 @@ export default function Bookmark() {
   const { content } = useParams()
 
   if (windowWidth < MD_WIDTH_PIXEL) {
-    return <BookmarkedContent />
+    const option =
+      content === 'recruitment'
+        ? 'recruitment'
+        : content === 'lecture'
+          ? 'lecture'
+          : 'entire'
+
+    return <BookmarkedContent initialOption={option} />
   } else {
     if (content === 'recruitment') {
       return <BookmarkedRecruitment />
