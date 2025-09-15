@@ -1,5 +1,5 @@
 import { Dropdown, ListItemSkeleton } from '@/components'
-import { Input, InputIcon } from '@/components/common/input'
+import { Input } from '@/components/common/input'
 import EmptyDataState from '@/components/common/State/EmptyDataState'
 import { BookmarkedRecruitmentCard } from '@/components/my-page'
 import BookmarkedLectureCard from '@/components/my-page/bookmarked-lecture/BookmarkedLectureCard'
@@ -88,10 +88,10 @@ export default function BookmarkedContent() {
             />
           </div>
 
-          <div className="relative w-full lg:max-w-80">
-            <InputIcon icon={SearchIcon} className="absolute" />
+          <div className="w-full lg:max-w-80">
             <Input
-              hasIcon
+              icon={SearchIcon}
+              iconPosition="start"
               placeholder="공고 및 강의 검색..."
               className="w-full"
               value={search}

@@ -1,5 +1,5 @@
 import { ListItemSkeleton } from '@/components'
-import { Input, InputIcon } from '@/components/common/input'
+import { Input } from '@/components/common/input'
 import { BookmarkedRecruitmentCard } from '@/components/my-page'
 import EmptyDataState from '@/components/common/State/EmptyDataState'
 import { useBookmarkedRecruitment } from '@/hooks/api'
@@ -32,12 +32,12 @@ export default function BookmarkedRecruitment() {
             나중에 지원할 스터디 공고들을 모아두었습니다.
           </span>
         </div>
-        <div className="relative w-full lg:max-w-80">
-          <InputIcon icon={SearchIcon} className="absolute" />
+        <div className="w-full lg:max-w-80">
           <Input
-            hasIcon
             placeholder="공고 제목으로 검색..."
             className="w-full"
+            icon={SearchIcon}
+            iconPosition="start"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />

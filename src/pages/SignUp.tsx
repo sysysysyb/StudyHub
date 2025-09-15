@@ -13,6 +13,7 @@ import {
   InputDescription,
   InputErrorMessage,
   InputLabel,
+  PasswordInput,
 } from '@/components/common/input'
 import { useTimer, useToast } from '@/hooks'
 import {
@@ -253,9 +254,8 @@ function Signup() {
             </InputDescription>
           </div>
           <div className={flexColStyle}>
-            <Input
+            <PasswordInput
               {...register('password')}
-              type="password"
               placeholder="비밀번호를 입력해주세요"
             />
             {errors.password && (
@@ -263,9 +263,8 @@ function Signup() {
             )}
           </div>
           <div className={flexColStyle}>
-            <Input
+            <PasswordInput
               {...register('confirmPassword')}
-              type="password"
               placeholder="비밀번호를 다시 입력해주세요"
             />
             {errors.confirmPassword && (

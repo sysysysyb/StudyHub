@@ -1,4 +1,5 @@
 // types
-import type { Toast } from '@/types/Toast'
+import type { Toast } from '@/types/components/toast'
+import type { InputProps } from '@/types/components/input'
 
-export type { Toast }
+export type { Toast, InputProps }
