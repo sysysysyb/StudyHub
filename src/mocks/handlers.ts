@@ -1,7 +1,7 @@
 import { API_BASE_URL } from '@/constants/api-constants'
 import { http, HttpResponse } from 'msw'
 import { bookmarkedRecruitmentsHandlers } from '@/mocks/handlers/bookmarked-recruitments'
-import { appliedRecruitmentsHandlers } from '@/mocks/handlers/applied-recruitments'
+import { appliedRecruitmentsHandlers } from '@/mocks/handlers/applied-recruitments-handler'
 import { userInformationHandlers } from '@/mocks/handlers/user-information'
 import { chatHandlers } from '@/mocks/handlers/chat'
 import { bookmarkedLecturesHandlers } from '@/mocks/handlers/bookmarked-lectures'

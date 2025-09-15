@@ -1,10 +1,13 @@
-import type { AppliedRecruitments } from '@/types/api-response-types/recruitment-response-types'
+import {
+  AppliedStatus,
+  type AppliedRecruitments,
+} from '@/types/api-response-types/recruitment-response-types'
 
 export const appliedRecruitmentsMock: AppliedRecruitments = {
-  next_cursor: 'cursor_123',
+  next_cursor: 'a1b2c3d4e5',
   results: [
     {
-      uuid: 'lecture-group-1',
+      uuid: 'applied-recruitment-1',
       title: '프론트엔드 마스터 클래스',
       thumbnail_image_url: 'https://placehold.co/600x400?text=Frontend',
       expected_headcount: 100,
@@ -15,10 +18,10 @@ export const appliedRecruitmentsMock: AppliedRecruitments = {
       tags: [{ name: 'Frontend' }, { name: 'JavaScript' }, { name: 'React' }],
       close_at: new Date('2025-09-30T23:59:59'),
       applied_at: new Date('2025-09-30T23:59:59'),
-      status: 'waiting',
+      status: AppliedStatus.PENDING,
     },
     {
-      uuid: 'lecture-group-2',
+      uuid: 'applied-recruitment-2',
       title: '백엔드 실전 프로젝트',
       thumbnail_image_url: 'https://placehold.co/600x400?text=Backend',
       expected_headcount: 80,
@@ -29,11 +32,10 @@ export const appliedRecruitmentsMock: AppliedRecruitments = {
       tags: [{ name: 'Backend' }, { name: 'Node.js' }, { name: 'Database' }],
       close_at: new Date('2025-10-10T23:59:59'),
       applied_at: new Date('2025-09-30T23:59:59'),
-      status: 'approved',
+      status: AppliedStatus.ACCEPTED,
     },
-
     {
-      uuid: 'lecture-group-3',
+      uuid: 'applied-recruitment-3',
       title: 'AI & 머신러닝 기초',
       thumbnail_image_url: 'https://placehold.co/600x400?text=AI',
       expected_headcount: 120,
@@ -44,10 +46,10 @@ export const appliedRecruitmentsMock: AppliedRecruitments = {
       tags: [{ name: 'AI' }, { name: 'Machine Learning' }, { name: 'Python' }],
       close_at: new Date('2025-11-01T23:59:59'),
       applied_at: new Date('2025-09-30T23:59:59'),
-      status: 'rejected',
+      status: AppliedStatus.CANCELED,
     },
     {
-      uuid: 'lecture-group-4',
+      uuid: 'applied-recruitment-4',
       title: '클라우드 & DevOps 워크숍',
       thumbnail_image_url: 'https://placehold.co/600x400?text=Cloud',
       expected_headcount: 60,
@@ -58,11 +60,10 @@ export const appliedRecruitmentsMock: AppliedRecruitments = {
       tags: [{ name: 'Cloud' }, { name: 'DevOps' }, { name: 'AWS' }],
       close_at: new Date('2025-09-25T23:59:59'),
       applied_at: new Date('2025-09-30T23:59:59'),
-      status: 'rejected',
+      status: AppliedStatus.REJECTED,
     },
-
     {
-      uuid: 'lecture-group-5',
+      uuid: 'applied-recruitment-5',
       title: 'UI/UX 디자인 트렌드',
       thumbnail_image_url: 'https://placehold.co/600x400?text=UIUX',
       expected_headcount: 150,
@@ -73,7 +74,7 @@ export const appliedRecruitmentsMock: AppliedRecruitments = {
       tags: [{ name: 'UI/UX' }, { name: 'Design' }, { name: 'Figma' }],
       close_at: new Date('2025-12-15T23:59:59'),
       applied_at: new Date('2025-09-30T23:59:59'),
-      status: 'rejected',
+      status: AppliedStatus.REJECTED,
     },
   ],
 }

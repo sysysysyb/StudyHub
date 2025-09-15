@@ -1,7 +1,7 @@
 export const FormattedCloseAt = (closeAtString: Date) => {
   const closeAt = new Date(closeAtString)
   const closeAtYear = closeAt.getFullYear()
-  const closeAtMonth = closeAt.getMonth()
+  const closeAtMonth = closeAt.getMonth() + 1
   const closeAtDate = closeAt.getDate()
   return `마감일: ${closeAtYear}.${closeAtMonth}.${closeAtDate}.`
 }

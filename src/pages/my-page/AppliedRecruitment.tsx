@@ -1,7 +1,10 @@
 import { ListItemSkeleton } from '@/components'
-import { AppliedRecruitmentCard } from '@/components/my-page'
 import EmptyDataState from '@/components/common/State/EmptyDataState'
 import { useAppliedRecruitment } from '@/hooks/api'
+import {
+  AppliedRecruitmentCard,
+  ApplicationDetailModal,
+} from '@/components/my-page'
 
 export const AppliedRecruitment = () => {
   const { data, isPending } = useAppliedRecruitment()
@@ -18,12 +21,14 @@ export const AppliedRecruitment = () => {
       <section className="flex flex-col gap-4">
         {isPending ? (
           [...Array(5)].map((_, i) => <ListItemSkeleton key={i} />)
-        ) : data && data.results.length > 0 ? (
+        ) : data?.results.length ? (
           data.results.map((recruitment) => (
-            <AppliedRecruitmentCard
+            <ApplicationDetailModal
               key={recruitment.uuid}
-              recruitment={recruitment}
-            />
+              uuid={recruitment.uuid}
+            >
+              <AppliedRecruitmentCard recruitment={recruitment} />
+            </ApplicationDetailModal>
           ))
         ) : (
           <EmptyDataState />
