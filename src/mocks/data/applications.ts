@@ -1,11 +1,11 @@
 import {
-  type ApplicantDetail,
+  type ApplicationDetail,
   AppliedStatus,
 } from '@/types/api-response-types/recruitment-response-types'
 
-export const applicationsMock: ApplicantDetail[] = [
+export const applicationsMock: ApplicationDetail[] = [
   {
-    uuid: 'lecture-group-1',
+    uuid: 'applied-recruitment-1',
     title: '프론트엔드 마스터 클래스',
     applied_at: new Date('2025-09-30T23:59:59'),
     status: AppliedStatus.PENDING,
@@ -21,7 +21,7 @@ export const applicationsMock: ApplicantDetail[] = [
       '사내 스터디에서 Next.js와 타입스크립트 학습을 주도한 경험이 있습니다.',
   },
   {
-    uuid: 'lecture-group-2',
+    uuid: 'applied-recruitment-2',
     title: '백엔드 실전 프로젝트',
     applied_at: new Date('2025-09-30T23:59:59'),
     status: AppliedStatus.ACCEPTED,
@@ -37,10 +37,10 @@ export const applicationsMock: ApplicantDetail[] = [
       '사내 프로젝트에서 MySQL과 Redis를 활용해 캐싱 구조를 설계한 경험이 있습니다.',
   },
   {
-    uuid: 'lecture-group-3',
+    uuid: 'applied-recruitment-3',
     title: 'AI & 머신러닝 기초',
     applied_at: new Date('2025-09-30T23:59:59'),
-    status: AppliedStatus.REJECTED,
+    status: AppliedStatus.CANCELED,
     self_introduction:
       '데이터 분석을 주로 해왔으며, 머신러닝에 대한 기초 지식을 쌓고 싶습니다.',
     motivation:
@@ -54,7 +54,7 @@ export const applicationsMock: ApplicantDetail[] = [
       '기존에는 머신러닝 학습 경험이 없지만, 데이터 분석 경험을 기반으로 배우고자 합니다.',
   },
   {
-    uuid: 'lecture-group-4',
+    uuid: 'applied-recruitment-4',
     title: '클라우드 & DevOps 워크숍',
     applied_at: new Date('2025-09-30T23:59:59'),
     status: AppliedStatus.REJECTED,
@@ -71,7 +71,7 @@ export const applicationsMock: ApplicantDetail[] = [
       'Docker와 GitHub Actions를 활용한 간단한 CI/CD 환경을 구성한 경험이 있습니다.',
   },
   {
-    uuid: 'lecture-group-5',
+    uuid: 'applied-recruitment-5',
     title: 'UI/UX 디자인 트렌드',
     applied_at: new Date('2025-09-30T23:59:59'),
     status: AppliedStatus.REJECTED,

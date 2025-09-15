@@ -1,22 +1,21 @@
 import { API_BASE_URL } from '@/constants/api-constants'
 import { http, HttpResponse } from 'msw'
-import { appliedRecruitmentsMock } from '@/mocks/data/applied-recruitments'
+import { appliedRecruitmentsMock } from '@/mocks/data/applied-recruitments-data'
+import { applicationsMock } from '@/mocks/data/applications'
 
 const getAppliedRecruitments = http.get(
-  `${API_BASE_URL}/recruitments/applied/me`,
+  `${API_BASE_URL}/applications/me`,
   () => {
     return HttpResponse.json(appliedRecruitmentsMock)
   }
 )
 
-const getApplicantDetail = http.get(
-  `${API_BASE_URL}/recruitments/applied/me/:recruitmentId`,
+const getApplication = http.get(
+  `${API_BASE_URL}/applications/me/:application_id`,
   ({ params }) => {
-    const { recruitmentId } = params
+    const { application_id } = params
 
-    const recruitment = appliedRecruitmentsMock.results.find(
-      (r) => r.uuid === recruitmentId
-    )
+    const recruitment = applicationsMock.find((r) => r.uuid === application_id)
 
     if (!recruitment) {
       return HttpResponse.json(
@@ -25,11 +24,11 @@ const getApplicantDetail = http.get(
       )
     }
 
-    return HttpResponse.json(recruitment.applicant)
+    return HttpResponse.json(recruitment)
   }
 )
 
 export const appliedRecruitmentsHandlers = [
   getAppliedRecruitments,
-  getApplicantDetail,
+  getApplication,
 ]

@@ -8,12 +8,12 @@ export interface BookmarkedRecruitments {
   results: BookmarkedRecruitment[]
 }
 
-export interface ApplicantDetail extends ApplicationBase, RecruitmentBase {
+export interface ApplicationDetail extends ApplicationBase, RecruitmentBase {
   self_introduction: string
   motivation: string
   objective: string
   available_time: string
-  has_study_experience: StudyExperience
+  has_study_experience: boolean
   study_experience: string
 }
 
@@ -23,7 +23,7 @@ export interface BookmarkedRecruitment extends Recruitment {
   views_count: number
   bookmark_count: number
 }
-
+//지원내역 목록과 지원 상세정보에 동시 사용을 위해 분리선언.
 export interface ApplicationBase {
   status: AppliedStatus
   applied_at: Date
@@ -45,13 +45,11 @@ export interface Recruitment extends RecruitmentBase {
   tags: Tag[]
   close_at: Date
 }
-
+// 지원상세정보 모달에 타입 전달을 위해 분리선언.
 export interface RecruitmentBase {
   uuid: string
   title: string
 }
-
-export type StudyExperience = boolean
 
 export interface Lecture {
   name: string

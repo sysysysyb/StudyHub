@@ -33,7 +33,7 @@ const MY_PAGE_SIDE_BAR_MENU_ITEMS: ComponentProps<typeof MyPageSideBarMenu>[] =
       title: '지원 내역',
       description: '스터디 지원 현황',
       icon: NewspaperIcon,
-      url: '/my-page/applied-study',
+      url: '/my-page/applications',
     },
     {
       title: '완료한 스터디',

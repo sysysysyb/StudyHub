@@ -1,13 +1,13 @@
 import { API_BASE_URL } from '@/constants/api-constants'
-import type { ApplicantDetail } from '@/types/api-response-types/recruitment-response-types'
+import type { ApplicationDetail } from '@/types/api-response-types/recruitment-response-types'
 import api from '@/utils/axios'
 import { useQuery, type UseQueryOptions } from '@tanstack/react-query'
 
-export function useApplicantDetail(
+export function useApplicationDetail(
   application_id: string,
-  options?: UseQueryOptions<ApplicantDetail>
+  options?: UseQueryOptions<ApplicationDetail>
 ) {
-  return useQuery<ApplicantDetail>({
+  return useQuery<ApplicationDetail>({
     queryKey: ['applications', application_id],
     queryFn: async () => {
       const res = await api.get(

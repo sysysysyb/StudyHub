@@ -20,7 +20,7 @@ function MainRoutes() {
 
         <Route path="my-page" element={<MyPageLayout />}>
           <Route index element={<MyInfo />} />
-          <Route path="applied-study" element={<AppliedRecruitment />} />
+          <Route path="applications" element={<AppliedRecruitment />} />
           <Route path="completed-study" element={<div>completed-study</div>} />
           <Route path="bookmarked/" element={<Bookmark />} />
           <Route path="bookmarked/:content" element={<Bookmark />} />
