@@ -3,8 +3,9 @@ import { Input } from '@/components/common/input'
 import EmptyDataState from '@/components/common/State/EmptyDataState'
 import { BookmarkedRecruitmentCard } from '@/components/my-page'
 import BookmarkedLectureCard from '@/components/my-page/bookmarked-lecture/BookmarkedLectureCard'
-import { useBookmarkedLectures, useBookmarkedRecruitment } from '@/hooks/api'
-import { useDebounce } from '@/hooks/useDebounce'
+import type { BookmarkedLectures } from '@/types/api-response-types/lecture-response-type'
+import type { BookmarkedRecruitments } from '@/types/api-response-types/recruitment-response-types'
+import type { UseQueryResult } from '@tanstack/react-query'
 import { SearchIcon } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router'
@@ -24,37 +25,38 @@ const OPTION_MAP: Record<optionKey, optionValue> = {
 
 interface BookmarkedContentProps {
   initialOption?: optionKey
+
+  bookmarkedRecruitmentQueryResult: UseQueryResult<
+    BookmarkedRecruitments,
+    Error
+  >
+  bookmarkedLecturesQueryResult: UseQueryResult<BookmarkedLectures, Error>
+
+  searchState: string
+  setSearchState: React.Dispatch<React.SetStateAction<string>>
 }
 
 export default function BookmarkedContent({
   initialOption = 'entire',
+  bookmarkedLecturesQueryResult,
+  bookmarkedRecruitmentQueryResult,
+  searchState,
+  setSearchState,
 }: BookmarkedContentProps) {
   const bookmarkedDropdownOption: { label: string }[] = useMemo(
     () => [{ label: ENTIRE }, { label: RECRUITMENT }, { label: LECTURE }],
     []
   )
 
-  const [search, setSearch] = useState('')
   const [selectedOption, setSelectedOption] = useState<string>(
     OPTION_MAP[initialOption]
   )
 
-  const debouncedSearch = useDebounce(search, 250)
-
-  const searchParams = useMemo(() => {
-    const params = new URLSearchParams()
-    if (debouncedSearch) {
-      params.set('search', debouncedSearch)
-    }
-
-    return params
-  }, [debouncedSearch])
-
   const { data: recruitments, isPending: isRecruitmentPending } =
-    useBookmarkedRecruitment(searchParams)
+    bookmarkedRecruitmentQueryResult
 
   const { data: lectures, isPending: isLecturePending } =
-    useBookmarkedLectures(searchParams)
+    bookmarkedLecturesQueryResult
 
   //북마크한 공고와 강의 개수를 메뉴에 표시
   useEffect(() => {
@@ -132,8 +134,8 @@ export default function BookmarkedContent({
               iconPosition="start"
               placeholder="공고 및 강의 검색..."
               className="w-full"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              value={searchState}
+              onChange={(e) => setSearchState(e.target.value)}
             />
           </div>
         </div>

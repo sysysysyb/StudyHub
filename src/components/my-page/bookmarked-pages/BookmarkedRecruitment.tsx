@@ -2,26 +2,25 @@ import { ListItemSkeleton } from '@/components'
 import { Input } from '@/components/common/input'
 import { BookmarkedRecruitmentCard } from '@/components/my-page'
 import EmptyDataState from '@/components/common/State/EmptyDataState'
-import { useBookmarkedRecruitment } from '@/hooks/api'
-import { useDebounce } from '@/hooks/useDebounce'
-import { useMemo, useState } from 'react'
 import { SearchIcon } from 'lucide-react'
+import type { UseQueryResult } from '@tanstack/react-query'
+import type { BookmarkedRecruitments } from '@/types/api-response-types/recruitment-response-types'
 
-export default function BookmarkedRecruitment() {
-  const [search, setSearch] = useState('')
+interface BookmarkedRecruitmentProps {
+  bookmarkedRecruitmentQueryResult: UseQueryResult<
+    BookmarkedRecruitments,
+    Error
+  >
+  searchState: string
+  setSearchState: React.Dispatch<React.SetStateAction<string>>
+}
 
-  const debouncedSearch = useDebounce(search, 250)
-
-  const searchParams = useMemo(() => {
-    const params = new URLSearchParams()
-    if (debouncedSearch) {
-      params.set('search', debouncedSearch)
-    }
-
-    return params
-  }, [debouncedSearch])
-
-  const { data, isPending } = useBookmarkedRecruitment(searchParams)
+export default function BookmarkedRecruitment({
+  bookmarkedRecruitmentQueryResult,
+  searchState,
+  setSearchState,
+}: BookmarkedRecruitmentProps) {
+  const { data, isPending } = bookmarkedRecruitmentQueryResult
 
   return (
     <div>
@@ -38,8 +37,8 @@ export default function BookmarkedRecruitment() {
             className="w-full"
             icon={SearchIcon}
             iconPosition="start"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            value={searchState}
+            onChange={(e) => setSearchState(e.target.value)}
           />
         </div>
       </header>
