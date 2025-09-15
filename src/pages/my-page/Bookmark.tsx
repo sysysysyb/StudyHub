@@ -11,12 +11,14 @@ import type { lectureSearchParams, recruitmentSearchParams } from '@/types'
 import { useMemo, useState } from 'react'
 import { useParams } from 'react-router'
 
+const DEBOUNCE_TIME_MS = 250
+
 export default function Bookmark() {
   const windowWidth = useWindowWidth()
   const { content } = useParams()
 
   const [search, setSearch] = useState('')
-  const debouncedSearch = useDebounce(search, 250)
+  const debouncedSearch = useDebounce(search, DEBOUNCE_TIME_MS)
 
   const recruitmentSearchParams = useMemo(() => {
     const params: recruitmentSearchParams = {}
