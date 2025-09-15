@@ -8,7 +8,7 @@ export interface BookmarkedRecruitments {
   results: BookmarkedRecruitment[]
 }
 
-export interface ApplicantDetail extends ApplicationBase {
+export interface ApplicantDetail extends ApplicationBase, RecruitmentBase {
   self_introduction: string
   motivation: string
   objective: string
@@ -17,9 +17,7 @@ export interface ApplicantDetail extends ApplicationBase {
   study_experience: string
 }
 
-export interface AppliedRecruitment extends Recruitment, ApplicationBase {
-  applicant: ApplicantDetail
-}
+export interface AppliedRecruitment extends Recruitment, ApplicationBase {}
 
 export interface BookmarkedRecruitment extends Recruitment {
   views_count: number
