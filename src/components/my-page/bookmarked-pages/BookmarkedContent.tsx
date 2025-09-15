@@ -7,20 +7,37 @@ import { useBookmarkedLectures, useBookmarkedRecruitment } from '@/hooks/api'
 import { useDebounce } from '@/hooks/useDebounce'
 import { SearchIcon } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
+import { useNavigate } from 'react-router'
 
 const ENTIRE = '전체'
 const RECRUITMENT = '공고'
 const LECTURE = '강의'
-const INITIAL_DROPDOWN_OPTION = ENTIRE
 
-export default function BookmarkedContent() {
+type optionKey = 'entire' | 'lecture' | 'recruitment'
+type optionValue = typeof ENTIRE | typeof RECRUITMENT | typeof LECTURE
+
+const OPTION_MAP: Record<optionKey, optionValue> = {
+  entire: ENTIRE,
+  lecture: LECTURE,
+  recruitment: RECRUITMENT,
+}
+
+interface BookmarkedContentProps {
+  initialOption?: optionKey
+}
+
+export default function BookmarkedContent({
+  initialOption = 'entire',
+}: BookmarkedContentProps) {
   const bookmarkedDropdownOption: { label: string }[] = useMemo(
     () => [{ label: ENTIRE }, { label: RECRUITMENT }, { label: LECTURE }],
     []
   )
 
   const [search, setSearch] = useState('')
-  const [selectedOption, setSelectedOption] = useState(INITIAL_DROPDOWN_OPTION)
+  const [selectedOption, setSelectedOption] = useState<string>(
+    OPTION_MAP[initialOption]
+  )
 
   const debouncedSearch = useDebounce(search, 250)
 
@@ -42,21 +59,42 @@ export default function BookmarkedContent() {
   //북마크한 공고와 강의 개수를 메뉴에 표시
   useEffect(() => {
     if (recruitments) {
-      bookmarkedDropdownOption[1].label = `${RECRUITMENT} (${recruitments.results.length})`
+      const temp = `${RECRUITMENT} (${recruitments.results.length})`
+      bookmarkedDropdownOption[1].label = temp
+
+      if (selectedOption === RECRUITMENT) {
+        setSelectedOption(temp)
+      }
     }
 
     if (lectures) {
-      bookmarkedDropdownOption[2].label = `${LECTURE} (${lectures.results.length})`
+      const temp = `${LECTURE} (${lectures.results.length})`
+      bookmarkedDropdownOption[2].label = temp
     }
 
     if (recruitments && lectures) {
       const temp = `${ENTIRE} (${lectures.results.length + recruitments.results.length})`
       bookmarkedDropdownOption[0].label = temp
-      if (selectedOption === INITIAL_DROPDOWN_OPTION) {
+
+      if (selectedOption === ENTIRE) {
         setSelectedOption(temp)
       }
     }
   }, [recruitments, lectures, bookmarkedDropdownOption, selectedOption])
+
+  const navigate = useNavigate()
+
+  const handleDropdownSelect = (label: string) => {
+    setSelectedOption(label)
+
+    if (label.startsWith(RECRUITMENT)) {
+      navigate('/my-page/bookmarked/recruitment')
+    } else if (label.startsWith(LECTURE)) {
+      navigate('/my-page/bookmarked/lecture')
+    } else {
+      navigate('/my-page/bookmarked')
+    }
+  }
 
   //공고 데이터 여부
   const hasRecruitment = recruitments && recruitments.results.length > 0
@@ -83,7 +121,7 @@ export default function BookmarkedContent() {
           <div className="w-full lg:max-w-80">
             <Dropdown
               value={selectedOption}
-              onSelect={setSelectedOption}
+              onSelect={handleDropdownSelect}
               options={bookmarkedDropdownOption}
             />
           </div>
