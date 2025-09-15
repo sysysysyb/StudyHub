@@ -13,8 +13,6 @@ const ENTIRE = '전체'
 const RECRUITMENT = '공고'
 const LECTURE = '강의'
 
-type options = 'entire' | 'lecture' | 'recruitment'
-
 type optionKey = 'entire' | 'lecture' | 'recruitment'
 type optionValue = typeof ENTIRE | typeof RECRUITMENT | typeof LECTURE
 
@@ -25,14 +23,14 @@ const OPTION_MAP: Record<optionKey, optionValue> = {
 }
 
 interface BookmarkedContentProps {
-  initialOption?: options
+  initialOption?: optionKey
 }
 
 export default function BookmarkedContent({
   initialOption = 'entire',
 }: BookmarkedContentProps) {
   const bookmarkedDropdownOption: { label: string }[] = useMemo(
-    () => [{ label: 'entire' }, { label: RECRUITMENT }, { label: LECTURE }],
+    () => [{ label: ENTIRE }, { label: RECRUITMENT }, { label: LECTURE }],
     []
   )
 
