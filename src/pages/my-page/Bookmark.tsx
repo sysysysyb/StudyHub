@@ -20,25 +20,13 @@ export default function Bookmark() {
   const [search, setSearch] = useState('')
   const debouncedSearch = useDebounce(search, DEBOUNCE_TIME_MS)
 
-  const recruitmentSearchParams = useMemo(() => {
-    const params: recruitmentSearchParams = {}
+  const recruitmentSearchParams: recruitmentSearchParams = {
+    title: debouncedSearch,
+  }
 
-    if (debouncedSearch) {
-      params.title = debouncedSearch
-    }
-
-    return params
-  }, [debouncedSearch])
-
-  const lectureSearchParams = useMemo(() => {
-    const params: lectureSearchParams = {}
-
-    if (debouncedSearch) {
-      params.search = debouncedSearch
-    }
-
-    return params
-  }, [debouncedSearch])
+  const lectureSearchParams: lectureSearchParams = {
+    search: debouncedSearch,
+  }
 
   const bookmarkedRecruitmentQueryResult = useBookmarkedRecruitment(
     recruitmentSearchParams
