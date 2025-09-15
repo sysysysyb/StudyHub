@@ -2,34 +2,7 @@ import type { InputProps } from '@/types'
 import { cn } from '@/utils'
 import { useState } from 'react'
 import { Eye, EyeOff } from 'lucide-react'
-import {
-  IconBase,
-  IconPosition,
-  InputBase,
-  InputError,
-  InputIconPosition,
-} from './input.styles'
-import { cva } from 'class-variance-authority'
-
-const inputVariants = cva(InputBase, {
-  variants: {
-    isError: InputError,
-    iconPosition: InputIconPosition,
-  },
-  defaultVariants: {
-    isError: false,
-    iconPosition: 'none',
-  },
-})
-
-const iconVariants = cva(IconBase, {
-  variants: {
-    iconPosition: IconPosition,
-  },
-  defaultVariants: {
-    iconPosition: 'none',
-  },
-})
+import { iconVariants, inputVariants } from './input.styles'
 
 function PasswordInput({ isError = false, className, ...props }: InputProps) {
   const [isClicked, setIsClicked] = useState(false)

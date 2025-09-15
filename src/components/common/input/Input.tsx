@@ -1,33 +1,6 @@
 import type { InputProps } from '@/types'
 import { cn } from '@/utils'
-import { cva } from 'class-variance-authority'
-import {
-  IconBase,
-  IconPosition,
-  InputBase,
-  InputError,
-  InputIconPosition,
-} from './input.styles'
-
-const inputVariants = cva(InputBase, {
-  variants: {
-    isError: InputError,
-    iconPosition: InputIconPosition,
-  },
-  defaultVariants: {
-    isError: false,
-    iconPosition: 'none',
-  },
-})
-
-const iconVariants = cva(IconBase, {
-  variants: {
-    iconPosition: IconPosition,
-  },
-  defaultVariants: {
-    iconPosition: 'none',
-  },
-})
+import { iconVariants, inputVariants } from './input.styles'
 
 function Input({
   isError = false,
