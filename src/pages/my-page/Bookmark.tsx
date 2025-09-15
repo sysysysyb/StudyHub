@@ -7,6 +7,7 @@ import { MD_WIDTH_PIXEL } from '@/constants/break-points'
 import { useBookmarkedLectures, useBookmarkedRecruitment } from '@/hooks/api'
 import { useDebounce } from '@/hooks/useDebounce'
 import useWindowWidth from '@/hooks/useWindowWidth'
+import type { lectureSearchParams, recruitmentSearchParams } from '@/types'
 import { useMemo, useState } from 'react'
 import { useParams } from 'react-router'
 
@@ -17,19 +18,32 @@ export default function Bookmark() {
   const [search, setSearch] = useState('')
   const debouncedSearch = useDebounce(search, 250)
 
-  const searchParams = useMemo(() => {
-    const params = new URLSearchParams()
+  const recruitmentSearchParams = useMemo(() => {
+    const params: recruitmentSearchParams = {}
+
     if (debouncedSearch) {
-      params.set('search', debouncedSearch)
+      params.title = debouncedSearch
     }
 
     return params
   }, [debouncedSearch])
 
-  const bookmarkedRecruitmentQueryResult =
-    useBookmarkedRecruitment(searchParams)
+  const lectureSearchParams = useMemo(() => {
+    const params: lectureSearchParams = {}
 
-  const bookmarkedLecturesQueryResult = useBookmarkedLectures(searchParams)
+    if (debouncedSearch) {
+      params.search = debouncedSearch
+    }
+
+    return params
+  }, [debouncedSearch])
+
+  const bookmarkedRecruitmentQueryResult = useBookmarkedRecruitment(
+    recruitmentSearchParams
+  )
+
+  const bookmarkedLecturesQueryResult =
+    useBookmarkedLectures(lectureSearchParams)
 
   if (windowWidth < MD_WIDTH_PIXEL) {
     const option =
