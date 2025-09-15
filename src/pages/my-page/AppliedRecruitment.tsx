@@ -1,7 +1,10 @@
 import { ListItemSkeleton } from '@/components'
-import { AppliedRecruitmentCard } from '@/components/my-page'
 import EmptyDataState from '@/components/common/State/EmptyDataState'
 import { useAppliedRecruitment } from '@/hooks/api'
+import {
+  ApplicantDetailModal,
+  AppliedRecruitmentCard,
+} from '@/components/my-page'
 
 export const AppliedRecruitment = () => {
   const { data, isPending } = useAppliedRecruitment()
@@ -20,9 +23,11 @@ export const AppliedRecruitment = () => {
           [...Array(5)].map((_, i) => <ListItemSkeleton key={i} />)
         ) : data && data.results.length > 0 ? (
           data.results.map((recruitment) => (
-            <AppliedRecruitmentCard
+            <ApplicantDetailModal
               key={recruitment.uuid}
-              recruitment={recruitment}
+              title={recruitment.title}
+              applicant={recruitment.applicant}
+              trigger={<AppliedRecruitmentCard recruitment={recruitment} />}
             />
           ))
         ) : (
