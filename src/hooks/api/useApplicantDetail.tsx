@@ -4,18 +4,18 @@ import api from '@/utils/axios'
 import { useQuery, type UseQueryOptions } from '@tanstack/react-query'
 
 export function useApplicantDetail(
-  recruitmentId: string,
+  application_id: string,
   options?: UseQueryOptions<ApplicantDetail>
 ) {
   return useQuery<ApplicantDetail>({
-    queryKey: ['recruitments', 'applied', recruitmentId],
+    queryKey: ['applications', application_id],
     queryFn: async () => {
       const res = await api.get(
-        `${API_BASE_URL}/recruitments/applied/me/${recruitmentId}`
+        `${API_BASE_URL}/applications/me/${application_id}`
       )
       return res.data
     },
-    enabled: !!recruitmentId, // id 없으면 호출 불가
+    enabled: !!application_id, // id 없으면 호출 불가
     ...options,
   })
 }
