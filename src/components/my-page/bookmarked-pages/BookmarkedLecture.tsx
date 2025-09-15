@@ -2,25 +2,23 @@ import { ListItemSkeleton } from '@/components'
 import { Input } from '@/components/common/input'
 import EmptyDataState from '@/components/common/State/EmptyDataState'
 import BookmarkedLectureCard from '@/components/my-page/bookmarked-lecture/BookmarkedLectureCard'
-import { useBookmarkedLectures } from '@/hooks/api'
-import { useDebounce } from '@/hooks/useDebounce'
+import type { BookmarkedLectures } from '@/types/api-response-types/lecture-response-type'
+import type { UseQueryResult } from '@tanstack/react-query'
 import { SearchIcon } from 'lucide-react'
-import { useMemo, useState } from 'react'
 
-export default function BookmarkedLecture() {
-  const [search, setSearch] = useState('')
-  const debouncedSearch = useDebounce(search, 250)
+interface BookmarkedLectureProps {
+  bookmarkedLecturesQueryResult: UseQueryResult<BookmarkedLectures, Error>
 
-  const searchParams = useMemo(() => {
-    const params = new URLSearchParams()
-    if (debouncedSearch) {
-      params.set('search', debouncedSearch)
-    }
+  searchState: string
+  setSearchState: React.Dispatch<React.SetStateAction<string>>
+}
 
-    return params
-  }, [debouncedSearch])
-
-  const { data, isPending } = useBookmarkedLectures(searchParams)
+export default function BookmarkedLecture({
+  bookmarkedLecturesQueryResult,
+  searchState,
+  setSearchState,
+}: BookmarkedLectureProps) {
+  const { data, isPending } = bookmarkedLecturesQueryResult
 
   return (
     <div>
@@ -36,8 +34,8 @@ export default function BookmarkedLecture() {
             placeholder="강의명이나 강사명으로 검색..."
             icon={SearchIcon}
             iconPosition="start"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            value={searchState}
+            onChange={(e) => setSearchState(e.target.value)}
           />
         </div>
       </header>
