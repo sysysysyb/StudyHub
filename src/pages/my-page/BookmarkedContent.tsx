@@ -88,7 +88,7 @@ export default function BookmarkedContent() {
             />
           </div>
 
-          <div className="relative w-full lg:max-w-80">
+          <div className="w-full lg:max-w-80">
             <Input
               icon={SearchIcon}
               iconPosition="start"
