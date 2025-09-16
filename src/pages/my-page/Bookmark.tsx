@@ -8,7 +8,7 @@ import { useBookmarkedLectures, useBookmarkedRecruitment } from '@/hooks/api'
 import { useDebounce } from '@/hooks/useDebounce'
 import useWindowWidth from '@/hooks/useWindowWidth'
 import type { lectureSearchParams, recruitmentSearchParams } from '@/types'
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { useParams } from 'react-router'
 
 const DEBOUNCE_TIME_MS = 250
