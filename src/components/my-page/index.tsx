@@ -7,6 +7,7 @@ import { InfoUpdate } from '@/components/my-page/my-info/InfoUpdate'
 import AppliedRecruitmentCard from '@/components/my-page/applied-recruitment/AppliedRecruitmentCard'
 import { AppliedStatusBadge } from '@/components/my-page/applied-recruitment/AppliedStatusBadge'
 import { ApplicationDetailModal } from '@/components/my-page/applied-recruitment/ApplicationDetailModal'
+import { CompletedStudyImageCard } from '@/components/my-page/completed-study/CompletedStudyImageCard'
 
 export {
   MyPageSideBar,
@@ -18,4 +19,5 @@ export {
   AppliedRecruitmentCard,
   AppliedStatusBadge,
   ApplicationDetailModal,
+  CompletedStudyImageCard,
 }
