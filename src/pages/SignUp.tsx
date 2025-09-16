@@ -15,7 +15,7 @@ import {
   InputLabel,
   PasswordInput,
 } from '@/components/common/input'
-import { useTimer, useToast } from '@/hooks'
+import { useCode, useToast } from '@/hooks'
 import {
   authSchema,
   type AuthSchemaType,
@@ -31,14 +31,6 @@ const flexColStyle = 'flex flex-col gap-3'
 
 function Signup() {
   const [isDuplicateChecked, setIsDuplicateChecked] = useState(false)
-  const [isCodeSent, SetIsCodeSent] = useState({
-    email: false,
-    phoneNumber: false,
-  })
-  const [isCodeVerified, SetIsCodeVerified] = useState({
-    email: false,
-    phoneNumber: false,
-  })
   const {
     register,
     handleSubmit,
@@ -52,10 +44,13 @@ function Signup() {
   })
   const navigate = useNavigate()
   const { triggerToast } = useToast()
-  const timer = {
-    email: useTimer(180000),
-    phoneNumber: useTimer(180000),
-  }
+  const {
+    isCodeSent,
+    isCodeVerified,
+    timer,
+    handleCodeSend,
+    handleCodeVerify,
+  } = useCode()
 
   const onSubmit = async () => {
     await new Promise((resolve) => setTimeout(resolve, 500))
@@ -74,21 +69,6 @@ function Signup() {
     await new Promise((resolve) => setTimeout(resolve, 1000))
     setIsDuplicateChecked(true)
     triggerToast('success', '사용 가능한 닉네임입니다.')
-  }
-
-  const handleCodeSend = async (label: 'email' | 'phoneNumber') => {
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-    SetIsCodeSent((prev) => ({ ...prev, [label]: true }))
-    timer[label].startTimer()
-    triggerToast('success', '인증 코드를 전송했습니다.')
-  }
-
-  const handleCodeVerify = async (label: 'email' | 'phoneNumber') => {
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-    SetIsCodeVerified((prev) => ({ ...prev, [label]: true }))
-    SetIsCodeSent((prev) => ({ ...prev, [label]: false }))
-    timer[label].resetTimer()
-    triggerToast('success', '인증을 완료했습니다!')
   }
 
   return (
