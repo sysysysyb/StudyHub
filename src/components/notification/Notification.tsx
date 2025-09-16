@@ -46,6 +46,21 @@ export default function Notification() {
     setFilteredNotification(filtered)
   }, [notificationNavigationItem, notifcationList])
 
+  const handleClickReadAll: React.MouseEventHandler<HTMLButtonElement> = (
+    e
+  ) => {
+    e.preventDefault()
+    //optimistic UI 적용
+    setFilteredNotification((prev) =>
+      prev.map((notification) => ({
+        ...notification,
+        is_read: true,
+      }))
+    )
+
+    //TODO: 실제 api 연결
+  }
+
   return (
     <div className="relative">
       <Modal isOverlay={false}>
@@ -58,7 +73,10 @@ export default function Notification() {
         >
           <ModalHeader className="p-4" hasCloseButton={false}>
             <ModalTitle>알림</ModalTitle>
-            <button className="text-primary-600 cursor-pointer">
+            <button
+              className="text-primary-600 cursor-pointer"
+              onClick={handleClickReadAll}
+            >
               모두 읽음
             </button>
           </ModalHeader>
