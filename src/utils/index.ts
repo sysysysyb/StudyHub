@@ -5,6 +5,6 @@ import {
   FormattedAppliedAt,
   FormattedCloseAt,
   FormattedEndDate,
-} from './formatted-dates'
+} from '@/utils/formatted-dates'
 
 export { cn, testPages, FormattedAppliedAt, FormattedCloseAt, FormattedEndDate }
