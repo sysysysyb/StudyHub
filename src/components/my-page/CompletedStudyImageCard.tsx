@@ -5,29 +5,29 @@ import { FormattedEndDate } from '@/utils'
 interface CompletedStudyImageCardProps {
   imageUrl: string
   title: string
-  peroid: string
+  period: string
   endDate: Date
   participants: number
   isReviewed: boolean
-  Rating: number
-  Comment: string
+  rating: number
+  comment: string
 }
 
 export const CompletedStudyImageCard = ({
   imageUrl,
   title,
-  peroid,
+  period,
   endDate,
   participants,
   isReviewed,
-  Rating,
-  Comment,
+  rating,
+  comment,
 }: CompletedStudyImageCardProps) => {
   return (
     <ImageCard imageUrl={imageUrl}>
       <h3>{title}</h3>
       <p>
-        <Clock /> 기간: {peroid}
+        <Clock /> 기간: {period}
       </p>
       <p>
         <Calendar /> 종료: {FormattedEndDate(endDate)}
@@ -39,11 +39,11 @@ export const CompletedStudyImageCard = ({
           <div className="flex justify-between">
             <div className="flex">
               <Star />
-              {Rating}
+              {rating}
             </div>
             <EditButton />
           </div>
-          <p>{Comment}</p>
+          <p>{comment}</p>
         </>
       ) : (
         <div className="flex flex-col gap-4">
