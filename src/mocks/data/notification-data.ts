@@ -9,7 +9,7 @@ export const mockNotificationList: NotificationList = {
       content: '스터디에 새로운 멤버가 가입했습니다.',
       type: 'STUDY_JOIN',
       is_read: true,
-      redirect_url: '/my-page/applied-study',
+      redirect_url: '/my-page/applications',
       created_at: new Date('2025-09-12T17:59:29.371936'),
     },
     {
@@ -18,7 +18,7 @@ export const mockNotificationList: NotificationList = {
       content: '스터디에 새로운 멤버가 가입했습니다.',
       type: 'STUDY_JOIN',
       is_read: false,
-      redirect_url: '/my-page/applied-study',
+      redirect_url: '/my-page/applications',
       created_at: new Date('2025-08-19T03:38:38.371963'),
     },
 
@@ -69,7 +69,7 @@ export const mockNotificationList: NotificationList = {
       content: '스터디 지원이 승인되었습니다.',
       type: 'APPLICATION_ACCEPT',
       is_read: true,
-      redirect_url: '/my-page/applied-study',
+      redirect_url: '/my-page/applications',
       created_at: new Date('2025-09-01T02:02:27.372002'),
     },
     {
@@ -78,7 +78,7 @@ export const mockNotificationList: NotificationList = {
       content: '스터디 지원이 승인되었습니다.',
       type: 'APPLICATION_ACCEPT',
       is_read: false,
-      redirect_url: '/my-page/applied-study',
+      redirect_url: '/my-page/applications',
       created_at: new Date('2025-09-03T02:10:27.372007'),
     },
 
@@ -89,7 +89,7 @@ export const mockNotificationList: NotificationList = {
       content: '스터디 지원이 거절되었습니다.',
       type: 'APPLICATION_REJECT',
       is_read: true,
-      redirect_url: '/my-page/applied-study',
+      redirect_url: '/my-page/applications',
       created_at: new Date('2025-08-21T05:22:59.372013'),
     },
     {
@@ -98,7 +98,7 @@ export const mockNotificationList: NotificationList = {
       content: '스터디 지원이 거절되었습니다.',
       type: 'APPLICATION_REJECT',
       is_read: false,
-      redirect_url: '/my-page/applied-study',
+      redirect_url: '/my-page/applications',
       created_at: new Date('2025-08-24T10:30:02.372017'),
     },
 
@@ -109,7 +109,7 @@ export const mockNotificationList: NotificationList = {
       content: '새로운 지원서가 추가되었습니다.',
       type: 'ADD_APPLICATION',
       is_read: true,
-      redirect_url: '/my-page/applied-study',
+      redirect_url: '/my-page/applications',
       created_at: new Date('2025-09-12T02:57:39.372021'),
     },
     {
@@ -118,7 +118,7 @@ export const mockNotificationList: NotificationList = {
       content: '새로운 지원서가 추가되었습니다.',
       type: 'ADD_APPLICATION',
       is_read: false,
-      redirect_url: '/my-page/applied-study',
+      redirect_url: '/my-page/applications',
       created_at: new Date('2025-09-12T10:53:23.372025'),
     },
 
