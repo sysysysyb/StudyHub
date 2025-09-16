@@ -1,7 +1,7 @@
 import { API_BASE_URL } from '@/constants/api-constants'
 import { http, HttpResponse } from 'msw'
 import { appliedRecruitmentsMock } from '@/mocks/data/applied-recruitments-data'
-import { applicationsMock } from '@/mocks/data/applications'
+import { applicationsMock } from '@/mocks/data/applications-data'
 
 const getAppliedRecruitments = http.get<{ application_id: string }>(
   `${API_BASE_URL}/applications/me`,
