@@ -1,11 +1,14 @@
 import { Avatar, Button } from '@/components'
 import { useUserInformation } from '@/hooks/api'
 import useLogin from '@/hooks/api/auth/useLogin'
+import useLogout from '@/hooks/api/auth/useLogout'
 
 function UserInformationTest() {
   const login = useLogin()
+  const logout = useLogout()
   const { data: user } = useUserInformation({
     enabled: login.isSuccess,
+    retry: false,
     queryKey: ['users', 'me'],
   })
 
@@ -13,7 +16,9 @@ function UserInformationTest() {
     login.mutate({ email: 'qwerty@test.com', password: 'Qwer1234!!' })
   }
 
-  const handleLogout = () => {}
+  const handleLogout = () => {
+    logout.mutate()
+  }
 
   const formatDateWithDots = (date: string) => {
     const yyyy = date?.substring(0, 4)
