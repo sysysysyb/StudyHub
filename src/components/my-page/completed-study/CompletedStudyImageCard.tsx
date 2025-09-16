@@ -1,7 +1,8 @@
 import { ImageCard, Button } from '@/components'
-import { Clock, Calendar, SquarePen as EditButton, Users } from 'lucide-react'
+import { Clock, Calendar, SquarePen as EditButton } from 'lucide-react'
 import { FormattedEndDate } from '@/utils'
 import { RatingStars } from './RatingStars'
+import GroupIcon from '@/assets/images/GroupIcon.svg'
 
 interface CompletedStudyImageCardProps {
   imageUrl: string
@@ -37,8 +38,8 @@ export const CompletedStudyImageCard = ({
           <Calendar size={iconSize} /> 종료: {FormattedEndDate(endDate)}
         </p>
         <p className={paragraphCn}>
-          <Users size={iconSize} />
-          {/* 일치하는 아이콘 찾아서 수정필요 */}
+          <img src={GroupIcon} className="size-4" />
+          {/* lucide에 일치하는 아이콘이 없어 대체 */}
           참여자: {participants}명
         </p>
       </div>
