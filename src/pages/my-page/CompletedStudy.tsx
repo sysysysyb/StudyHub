@@ -1,7 +1,7 @@
 import { CompletedStudyImageCard } from '@/components/my-page'
 
 export const CompletedStudy = () => {
-  const exampleDatas = [
+  const exampleData = [
     {
       imageUrl: 'https://picsum.photos/seed/react/400/250',
       title: 'React 심화 스터디',
@@ -53,7 +53,7 @@ export const CompletedStudy = () => {
         </span>
       </header>
       <section className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        {exampleDatas.map((data, index) => (
+        {exampleData.map((data, index) => (
           <CompletedStudyImageCard
             key={index}
             imageUrl={data.imageUrl}
