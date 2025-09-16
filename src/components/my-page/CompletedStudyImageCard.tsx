@@ -1,5 +1,11 @@
 import { ImageCard, Button } from '@/components'
-import { Clock, Calendar, Star, SquarePen as EditButton } from 'lucide-react'
+import {
+  Clock,
+  Calendar,
+  Star,
+  SquarePen as EditButton,
+  Users,
+} from 'lucide-react'
 import { FormattedEndDate } from '@/utils'
 
 interface CompletedStudyImageCardProps {
@@ -23,31 +29,41 @@ export const CompletedStudyImageCard = ({
   rating,
   comment,
 }: CompletedStudyImageCardProps) => {
+  const paragraphCn = 'flex items-center gap-2'
+  const iconSize = 14
   return (
     <ImageCard imageUrl={imageUrl}>
-      <h3>{title}</h3>
-      <p>
-        <Clock /> 기간: {period}
-      </p>
-      <p>
-        <Calendar /> 종료: {FormattedEndDate(endDate)}
-      </p>
-      <p>{participants}</p>
+      <h3 className="text-heading5 mb-3 text-gray-900">{title}</h3>
+      <div className="mb-4 flex flex-col gap-2 text-sm text-gray-600">
+        <p className={paragraphCn}>
+          <Clock size={iconSize} /> 기간: {period}
+        </p>
+        <p className={paragraphCn}>
+          <Calendar size={iconSize} /> 종료: {FormattedEndDate(endDate)}
+        </p>
+        <p className={paragraphCn}>
+          <Users size={iconSize} />
+          {/* 일치하는 아이콘 찾아서 수정필요 */}
+          참여자: {participants}명
+        </p>
+      </div>
 
       {isReviewed ? (
-        <>
-          <div className="flex justify-between">
-            <div className="flex">
-              <Star />
+        <div className="bg-gray-50 p-4 text-gray-600">
+          <div className="mb-2 flex items-center justify-between">
+            <div className={paragraphCn}>
+              <Star size={iconSize} />
+              {/* rating을 반영하여 별의 색이 채워지는 컴포넌트 생성 및 호출 필요 */}
               {rating}
             </div>
-            <EditButton />
+            <EditButton size={iconSize} className="cursor-pointer" />
+            {/* 리뷰작성 모달에 기존 데이터가 이미 존재하는 수정버전으로 로직 구현 후 onClick으로 연동 필요 */}
           </div>
-          <p>{comment}</p>
-        </>
+          <p className="">{comment}</p>
+        </div>
       ) : (
         <div className="flex flex-col gap-4">
-          <div className="bg-primary-50 text-primary-800 rounded-md p-4">
+          <div className="bg-primary-50 text-primary-800 flex w-full justify-center rounded-md p-4">
             아직 리뷰를 작성하지 않았습니다.
           </div>
           <Button className="w-full">리뷰 작성</Button>
