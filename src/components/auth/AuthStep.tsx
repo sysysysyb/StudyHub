@@ -1,15 +1,23 @@
 import { cn } from '@/utils'
+import { Fragment } from 'react/jsx-runtime'
 
-const isStepReached = (stepIndex, currentIndex) => stepIndex <= currentIndex
+const isStepReached = (stepIndex: number, currentIndex: number) =>
+  stepIndex <= currentIndex
 
-function AuthStepDot({ stepIndex, currentIndex }) {
+function AuthStepDot({
+  stepIndex,
+  currentIndex,
+}: {
+  stepIndex: number
+  currentIndex: number
+}) {
   return (
     <div
       className={cn(
         'flex size-8 items-center justify-center rounded-full transition-colors duration-200 ease-out',
         isStepReached(stepIndex, currentIndex)
-          ? 'bg-primary-500'
-          : 'bg-gray-200'
+          ? 'bg-primary-500 text-white'
+          : 'bg-gray-200 text-gray-500'
       )}
     >
       {stepIndex}
@@ -17,7 +25,13 @@ function AuthStepDot({ stepIndex, currentIndex }) {
   )
 }
 
-function AuthStepLine({ stepIndex, currentIndex }) {
+function AuthStepLine({
+  stepIndex,
+  currentIndex,
+}: {
+  stepIndex: number
+  currentIndex: number
+}) {
   return (
     <div
       className={cn(
@@ -30,14 +44,25 @@ function AuthStepLine({ stepIndex, currentIndex }) {
   )
 }
 
-function AuthStep({ currentIndex }) {
+function AuthStep({
+  totalIndex,
+  currentIndex,
+}: {
+  totalIndex: number
+  currentIndex: number
+}) {
+  const steps = Array.from({ length: totalIndex }, (_, idx) => idx + 1)
+
   return (
     <div className="flex items-center gap-2">
-      <AuthStepDot stepIndex="1" currentIndex={currentIndex} />
-      <AuthStepLine stepIndex="2" currentIndex={currentIndex} />
-      <AuthStepDot stepIndex="2" currentIndex={currentIndex} />
-      <AuthStepLine stepIndex="3" currentIndex={currentIndex} />
-      <AuthStepDot stepIndex="3" currentIndex={currentIndex} />
+      {steps.map((step) => (
+        <Fragment key={step}>
+          {step > 1 && (
+            <AuthStepLine stepIndex={step} currentIndex={currentIndex} />
+          )}
+          <AuthStepDot stepIndex={step} currentIndex={currentIndex} />
+        </Fragment>
+      ))}
     </div>
   )
 }
