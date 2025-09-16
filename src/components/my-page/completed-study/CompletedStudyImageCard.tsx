@@ -1,8 +1,12 @@
 import { ImageCard, Button } from '@/components'
-import { Clock, Calendar, SquarePen as EditButton } from 'lucide-react'
+import {
+  Clock,
+  Calendar,
+  SquarePen as EditButton,
+  UsersRound,
+} from 'lucide-react'
 import { FormattedEndDate } from '@/utils'
 import { RatingStars } from './RatingStars'
-import GroupIcon from '@/assets/images/GroupIcon.svg'
 
 interface CompletedStudyImageCardProps {
   imageUrl: string
@@ -38,20 +42,20 @@ export const CompletedStudyImageCard = ({
           <Calendar size={iconSize} /> 종료: {FormattedEndDate(endDate)}
         </p>
         <p className={paragraphCn}>
-          <img src={GroupIcon} className="size-4" />
+          <UsersRound size={iconSize} />
           {/* lucide에 일치하는 아이콘이 없어 대체 */}
           참여자: {participants}명
         </p>
       </div>
 
       {isReviewed ? (
-        <div className="bg-gray-50 p-4 text-gray-600">
-          <div className="mb-2 flex items-center justify-between">
+        <div className="flex flex-col gap-2 bg-gray-50 p-4 text-gray-600">
+          <div className="flex items-center justify-between">
             <RatingStars rating={rating} size={iconSize} />
             <EditButton size={iconSize} className="cursor-pointer" />
             {/* 리뷰작성 모달에 기존 데이터가 이미 존재하는 수정버전으로 로직 구현 후 onClick으로 연동 필요 */}
           </div>
-          <p className="">{comment}</p>
+          <p className="text-sm">{comment}</p>
         </div>
       ) : (
         <div className="flex flex-col gap-2">

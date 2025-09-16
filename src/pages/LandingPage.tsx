@@ -2,8 +2,7 @@ import { Button, ImageCard } from '@/components'
 import { BenefitCard } from '@/components/common/Card/BenefitCard'
 import { CardTitle } from '@/components/common/Card/Card'
 import LandingPageImage from '@/assets/images/LandingPageImage.jpg'
-import GroupIconGreen from '@/assets/images/GroupIconGreen.svg'
-import { BookOpen, Award, ArrowRight } from 'lucide-react'
+import { BookOpen, Award, ArrowRight, UsersRound } from 'lucide-react'
 
 const LandingPage = () => {
   return (
@@ -64,7 +63,7 @@ const LandingPage = () => {
             />
             <BenefitCard
               iconbgcolor="bg-green-100"
-              icon={<img src={GroupIconGreen} className="size-6" />}
+              icon={<UsersRound className="text-green-600" />}
               // icon의 green-600 색상 부여 필요
               title="스터디 그룹"
               comments={[
