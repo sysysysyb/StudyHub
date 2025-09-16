@@ -1,10 +1,7 @@
 export interface NotificationList {
   results: Notification[]
-  page: number
-  size: number
-  total: number
-  has_next: boolean
-  sort: string
+  next: string
+  previous: string
 }
 
 export type notificationType =
@@ -19,6 +16,7 @@ export type notificationType =
 
 export interface Notification {
   notification_id: number
+  user_id: number
   content: string
   type: notificationType
   is_read: boolean
