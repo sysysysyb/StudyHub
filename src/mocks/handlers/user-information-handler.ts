@@ -1,6 +1,6 @@
 import { API_BASE_URL } from '@/constants/api-constants'
 import { http, HttpResponse, passthrough } from 'msw'
-import { userInformationMock } from '@/mocks/data/user-information'
+import { userInformationMock } from '@/mocks/data/user-information-data'
 
 const getUserInformation = http.get(`${API_BASE_URL}/users/me`, () => {
   const randomIndex = Math.floor(Math.random() * 3)
