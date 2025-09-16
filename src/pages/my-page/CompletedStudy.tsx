@@ -47,9 +47,9 @@ export const CompletedStudy = () => {
   return (
     <main>
       <header className="gap-2 pb-6">
-        <h3 className="text-heading3">지원 내역</h3>
+        <h3 className="text-heading3">완료된 스터디</h3>
         <span className="text-secondary">
-          내가 지원한 스터디 구인 공고들을 확인하세요
+          종료된 스터디 그룹에 대한 리뷰를 작성해보세요
         </span>
       </header>
       <section className="grid grid-cols-1 gap-4 sm:grid-cols-2">
