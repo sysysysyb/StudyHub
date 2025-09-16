@@ -21,17 +21,20 @@ export default function Notification() {
 
   const { data: notifcationList } = useNotification()
 
+  const [unReadedCount, setUnReadedCount] = useState(0)
+
   const [filteredNotifications, setFilteredNotification] = useState<
     NotificationType[]
   >([])
 
+  //읽은 알림, 안 읽은 알림 필터링
   useEffect(() => {
     if (!notifcationList) return
 
     let filtered: NotificationType[] = []
 
     if (notificationNavigationItem === 'all') {
-      filtered = [...notifcationList.results].sort((a, b) => {
+      filtered = [...notifcationList.results].sort((a) => {
         // 안 읽은 알림이 먼저
 
         return a.is_read ? 1 : -1
@@ -46,6 +49,42 @@ export default function Notification() {
     setFilteredNotification(filtered)
   }, [notificationNavigationItem, notifcationList])
 
+  //읽은 알림 개수 새기
+  useEffect(() => {
+    if (!notifcationList) return
+
+    const temp = notifcationList.results.reduce((acc, notification) => {
+      if (notification.is_read) {
+        return acc
+      } else {
+        return acc + 1
+      }
+    }, 0)
+
+    setUnReadedCount(temp)
+  }, [notifcationList])
+
+  const handleClickReadAll: React.MouseEventHandler<HTMLButtonElement> = (
+    e
+  ) => {
+    e.preventDefault()
+    //optimistic UI 적용
+    setFilteredNotification((prev) =>
+      prev.map((notification) => ({
+        ...notification,
+        is_read: true,
+      }))
+    )
+
+    setUnReadedCount(0)
+
+    //TODO: 실제 api 연결
+  }
+
+  const readedCount = notifcationList
+    ? notifcationList?.results.length - unReadedCount
+    : 0
+
   return (
     <div className="relative">
       <Modal isOverlay={false}>
@@ -58,12 +97,18 @@ export default function Notification() {
         >
           <ModalHeader className="p-4" hasCloseButton={false}>
             <ModalTitle>알림</ModalTitle>
-            <button className="text-primary-600 cursor-pointer">
+            <button
+              className="text-primary-600 cursor-pointer"
+              onClick={handleClickReadAll}
+            >
               모두 읽음
             </button>
           </ModalHeader>
           <ModalMain className="flex flex-col overflow-y-scroll p-0">
-            <NotificationNavigation />
+            <NotificationNavigation
+              readedCount={readedCount}
+              unReadedCount={unReadedCount}
+            />
             {filteredNotifications.map((notification) => (
               <NotificationCard
                 notification={notification}

@@ -1,7 +1,8 @@
 import type { Notification } from '@/types/api-response-types/notification-response-types'
 import { cn } from '@/utils'
-import { Link } from 'react-router'
 import NotificationIcon from '@/components/notification/NotificationIcon'
+import { useNavigate } from 'react-router'
+import { useChatRoomStore } from '@/store'
 
 interface NotificationCardProps {
   notification: Notification
@@ -15,6 +16,7 @@ export default function NotificationCard({
     type,
     is_read: isRead,
     created_at: createdAtString,
+    redirect_url: redirectUrl,
   } = notification
 
   const createdAt = new Date(createdAtString)
@@ -22,13 +24,27 @@ export default function NotificationCard({
   const createdMonth = createdAt.getMonth()
   const createdDate = createdAt.getDate()
 
+  const navigate = useNavigate()
+  const { setChatRoomId, openChatRoom } = useChatRoomStore()
+
+  const handleCardClick: React.MouseEventHandler<HTMLDivElement> = (e) => {
+    e.preventDefault()
+
+    if (type === 'STUDY_JOIN') {
+      setChatRoomId('aaajjjdddccc')
+      openChatRoom()
+    } else {
+      navigate(redirectUrl)
+    }
+  }
+
   return (
-    <Link
-      to="#"
+    <div
       className={cn(
-        'flex w-full items-center justify-start gap-3 p-4',
+        'flex w-full cursor-pointer items-center justify-start gap-3 p-4',
         isRead ? 'bg-white' : 'bg-primary-50'
       )}
+      onClick={handleCardClick}
     >
       <NotificationIcon notificationType={type} />
       <div className="flex flex-1 flex-col items-start justify-center">
@@ -36,6 +52,6 @@ export default function NotificationCard({
         <span className="text-xs text-gray-500">{`${createdMonth}월 ${createdDate}일`}</span>
       </div>
       {isRead || <div className="bg-primary-500 size-2 rounded-full" />}
-    </Link>
+    </div>
   )
 }
