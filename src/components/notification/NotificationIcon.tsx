@@ -9,14 +9,14 @@ const notificationIconVariants = cva(
     variants: {
       //TODO: 와이어프레임 업데이트 되면 수정
       notificationType: {
-        STUDY_JOIN: 'bg-blue-500',
-        STUDY_NOTE_CREATE: 'bg-green-500',
-        STUDY_REVIEW_REQUEST: 'bg-yellow-500',
-        APPLICATION_ACCEPT: 'bg-teal-500',
-        APPLICATION_REJECT: 'bg-red-500',
-        ADD_APPLICATION: 'bg-purple-500',
-        TODAY_SCHEDULE: 'bg-orange-500',
-        UPCOMIG_SCHEDULE: 'bg-pink-500',
+        STUDY_JOIN: ' bg-[#DBEAFE] text-[#2563EB]',
+        APPLICATION_ACCEPT: 'bg-[#DCFCE7] text-[#16A34A] ',
+        APPLICATION_REJECT: 'bg-[#FEE2E2] text-[#DC2626]',
+        ADD_APPLICATION: 'bg-[#F3E8ff] text-[#9333EA]',
+        STUDY_REVIEW_REQUEST: 'bg-[#FFEDD5] text-[#EA580C]',
+        UPCOMIG_SCHEDULE: 'bg-[#E0E7FF] text-[#4F46E5]',
+        TODAY_SCHEDULE: 'bg-[#FCE7F3] text-[#DB2777]',
+        STUDY_NOTE_CREATE: 'bg-[#CCFBF1] text-[#0D9488]',
       } satisfies Record<notificationType, string>,
     },
   }
