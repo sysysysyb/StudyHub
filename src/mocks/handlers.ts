@@ -5,6 +5,7 @@ import { appliedRecruitmentsHandlers } from '@/mocks/handlers/applied-recruitmen
 import { userInformationHandlers } from '@/mocks/handlers/user-information'
 import { chatHandlers } from '@/mocks/handlers/chat'
 import { bookmarkedLecturesHandlers } from '@/mocks/handlers/bookmarked-lectures'
+import { notificationHandlers } from '@/mocks/handlers/notification'
 
 const getTestMSW = http.get(`${API_BASE_URL}/`, () => {
   return HttpResponse.text('msw is working!')
@@ -17,4 +18,5 @@ export const handlers = [
   ...userInformationHandlers,
   ...chatHandlers,
   ...bookmarkedLecturesHandlers,
+  ...notificationHandlers,
 ]
