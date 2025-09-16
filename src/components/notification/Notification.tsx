@@ -31,7 +31,7 @@ export default function Notification() {
     let filtered: NotificationType[] = []
 
     if (notificationNavigationItem === 'all') {
-      filtered = [...notifcationList.results].sort((a, b) => {
+      filtered = [...notifcationList.results].sort((a) => {
         // 안 읽은 알림이 먼저
 
         return a.is_read ? 1 : -1
