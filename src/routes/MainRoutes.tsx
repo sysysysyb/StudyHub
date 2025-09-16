@@ -1,6 +1,13 @@
 import { AuthLayout, MyPageLayout, RootLayout } from '@/components'
-import { AppliedRecruitment, LandingPage, Login, MyInfo, Signup } from '@/pages'
-import Bookmark from '@/pages/my-page/Bookmark'
+import {
+  AppliedRecruitment,
+  LandingPage,
+  Login,
+  MyInfo,
+  Signup,
+  CompletedStudy,
+  Bookmark,
+} from '@/pages'
 import { Route, Routes } from 'react-router'
 
 function MainRoutes() {
@@ -21,7 +28,7 @@ function MainRoutes() {
         <Route path="my-page" element={<MyPageLayout />}>
           <Route index element={<MyInfo />} />
           <Route path="applications" element={<AppliedRecruitment />} />
-          <Route path="completed-study" element={<div>completed-study</div>} />
+          <Route path="completed-study" element={<CompletedStudy />} />
           <Route path="bookmarked/" element={<Bookmark />} />
           <Route path="bookmarked/:content" element={<Bookmark />} />
         </Route>

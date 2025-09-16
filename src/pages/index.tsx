@@ -4,5 +4,14 @@ import Login from '@/pages/Login'
 import Signup from '@/pages/SignUp'
 import { AppliedRecruitment } from '@/pages/my-page/AppliedRecruitment'
 import Bookmark from '@/pages/my-page/Bookmark'
+import { CompletedStudy } from './my-page/CompletedStudy'
 
-export { LandingPage, MyInfo, Login, Signup, AppliedRecruitment, Bookmark }
+export {
+  LandingPage,
+  MyInfo,
+  Login,
+  Signup,
+  AppliedRecruitment,
+  Bookmark,
+  CompletedStudy,
+}
