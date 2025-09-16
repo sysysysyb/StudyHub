@@ -1,8 +1,19 @@
-import { Avatar } from '@/components'
+import { Avatar, Button } from '@/components'
 import { useUserInformation } from '@/hooks/api'
+import useLogin from '@/hooks/api/auth/useLogin'
 
 function UserInformationTest() {
-  const { data: user } = useUserInformation()
+  const login = useLogin()
+  const { data: user } = useUserInformation({
+    enabled: login.isSuccess,
+    queryKey: ['users', 'me'],
+  })
+
+  const handleLogin = () => {
+    login.mutate({ email: 'qwerty@test.com', password: 'Qwer1234!!' })
+  }
+
+  const handleLogout = () => {}
 
   const formatDateWithDots = (date: string) => {
     const yyyy = date?.substring(0, 4)
@@ -17,6 +28,12 @@ function UserInformationTest() {
       <h3 className="text-center text-xl font-semibold">
         사용자 정보 가져오기 Test
       </h3>
+      {user ? (
+        <Button onClick={handleLogout}>로그아웃</Button>
+      ) : (
+        <Button onClick={handleLogin}>로그인</Button>
+      )}
+
       <div className="flex w-fit flex-col gap-4">
         <span>유저 ID: {user?.id}</span>
         <span>이름: {user?.name}</span>
