@@ -1,5 +1,5 @@
 import { API_BASE_URL } from '@/constants/api-constants'
-import type { UserInformation } from '@/types/user-information'
+import type { UserInformation } from '@/types/api-response-types/auth'
 import api from '@/utils/axios'
 import { useQuery, type UseQueryOptions } from '@tanstack/react-query'
 
@@ -7,7 +7,8 @@ export default function useUserInformation(
   options?: UseQueryOptions<UserInformation>
 ) {
   return useQuery<UserInformation>({
-    queryKey: ['userInformation', 'me'],
+    ...options,
+    queryKey: ['users', 'me'],
     queryFn: async () => {
       const response = await api.get(`${API_BASE_URL}/users/me`)
       const data = response.data
@@ -18,6 +19,5 @@ export default function useUserInformation(
         profileImageUrl: data.profile_image_url,
       }
     },
-    ...options,
   })
 }
