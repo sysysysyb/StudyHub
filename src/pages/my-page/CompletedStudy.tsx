@@ -9,7 +9,7 @@ export const CompletedStudy = () => {
       endDate: '2025-03-15',
       participants: 5,
       isReviewed: true,
-      rating: 4.5,
+      rating: 4.6,
       comment: 'React Hooks와 상태 관리에 대해 깊이 배울 수 있었습니다.',
     },
     {
@@ -29,7 +29,7 @@ export const CompletedStudy = () => {
       endDate: '2025-08-30',
       participants: 4,
       isReviewed: true,
-      rating: 5.0,
+      rating: 4.1,
       comment: '꾸준히 문제를 풀면서 코딩 실력이 확실히 늘었습니다.',
     },
     {
@@ -39,7 +39,7 @@ export const CompletedStudy = () => {
       endDate: '2025-10-25',
       participants: 8,
       isReviewed: true,
-      rating: 4.0,
+      rating: 3.7,
       comment: '피그마 활용 능력이 크게 향상되었습니다.',
     },
   ]

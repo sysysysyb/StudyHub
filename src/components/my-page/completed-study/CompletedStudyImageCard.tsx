@@ -1,12 +1,7 @@
 import { ImageCard, Button } from '@/components'
-import {
-  Clock,
-  Calendar,
-  Star,
-  SquarePen as EditButton,
-  Users,
-} from 'lucide-react'
+import { Clock, Calendar, SquarePen as EditButton, Users } from 'lucide-react'
 import { FormattedEndDate } from '@/utils'
+import { RatingStars } from './RatingStars'
 
 interface CompletedStudyImageCardProps {
   imageUrl: string
@@ -51,18 +46,14 @@ export const CompletedStudyImageCard = ({
       {isReviewed ? (
         <div className="bg-gray-50 p-4 text-gray-600">
           <div className="mb-2 flex items-center justify-between">
-            <div className={paragraphCn}>
-              <Star size={iconSize} />
-              {/* rating을 반영하여 별의 색이 채워지는 컴포넌트 생성 및 호출 필요 */}
-              {rating}
-            </div>
+            <RatingStars rating={rating} size={iconSize} />
             <EditButton size={iconSize} className="cursor-pointer" />
             {/* 리뷰작성 모달에 기존 데이터가 이미 존재하는 수정버전으로 로직 구현 후 onClick으로 연동 필요 */}
           </div>
           <p className="">{comment}</p>
         </div>
       ) : (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-2">
           <div className="bg-primary-50 text-primary-800 flex w-full justify-center rounded-md p-4">
             아직 리뷰를 작성하지 않았습니다.
           </div>
