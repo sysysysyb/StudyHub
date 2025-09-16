@@ -10,7 +10,14 @@ interface NotificationCardProps {
 export default function NotificationCard({
   notification,
 }: NotificationCardProps) {
-  const { content, type, is_read: isRead, created_at: createdAt } = notification
+  const {
+    content,
+    type,
+    is_read: isRead,
+    created_at: createdAtString,
+  } = notification
+
+  const createdAt = new Date(createdAtString)
 
   const createdMonth = createdAt.getMonth()
   const createdDate = createdAt.getDate()
