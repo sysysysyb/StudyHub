@@ -23,3 +23,10 @@ export const FormattedAppliedAt = (appliedAtString: Date) => {
   // 최종 지원시기 전달양식
   return `${appliedAtYear}.${appliedAtMonth}.${appliedAtDate}. ${appliedAtAmPM} ${appliedAtSplittedHours}:${appliedAtMinutes}`
 }
+
+export const FormattedEndDate = (endDateString: Date) => {
+  const endDate = new Date(endDateString)
+  const endDateYear = endDate.getFullYear()
+  const endDateMonth = endDate.getMonth() + 1
+  return `${endDateYear}년 ${endDateMonth}월`
+}

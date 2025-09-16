@@ -1,5 +1,6 @@
 import { ImageCard, Button } from '@/components'
 import { Clock, Calendar, Star, SquarePen as EditButton } from 'lucide-react'
+import { FormattedEndDate } from '@/utils'
 
 interface CompletedStudyImageCardProps {
   imageUrl: string
@@ -29,7 +30,7 @@ export const CompletedStudyImageCard = ({
         <Clock /> 기간: {peroid}
       </p>
       <p>
-        <Calendar /> 종료: {endDate}
+        <Calendar /> 종료: {FormattedEndDate(endDate)}
       </p>
       <p>{participants}</p>
 
