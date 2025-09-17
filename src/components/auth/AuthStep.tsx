@@ -1,21 +1,21 @@
 import { cn } from '@/utils'
 import { Fragment } from 'react/jsx-runtime'
 
-const isStepReached = (stepIndex: number, currentIndex: number) =>
-  stepIndex <= currentIndex
+const isStepReached = (stepIndex: number, currentStep: number) =>
+  stepIndex <= currentStep
 
 function AuthStepDot({
   stepIndex,
-  currentIndex,
+  currentStep,
 }: {
   stepIndex: number
-  currentIndex: number
+  currentStep: number
 }) {
   return (
     <div
       className={cn(
         'flex size-8 items-center justify-center rounded-full transition-colors duration-200 ease-out',
-        isStepReached(stepIndex, currentIndex)
+        isStepReached(stepIndex, currentStep)
           ? 'bg-primary-500 text-white'
           : 'bg-gray-200 text-gray-500'
       )}
@@ -27,40 +27,38 @@ function AuthStepDot({
 
 function AuthStepLine({
   stepIndex,
-  currentIndex,
+  currentStep,
 }: {
   stepIndex: number
-  currentIndex: number
+  currentStep: number
 }) {
   return (
     <div
       className={cn(
         'h-1 flex-1 rounded-sm transition-colors duration-200 ease-out',
-        isStepReached(stepIndex, currentIndex)
-          ? 'bg-primary-500'
-          : 'bg-gray-200'
+        isStepReached(stepIndex, currentStep) ? 'bg-primary-500' : 'bg-gray-200'
       )}
     />
   )
 }
 
 function AuthStep({
-  totalIndex,
-  currentIndex,
+  totalStep,
+  currentStep,
 }: {
-  totalIndex: number
-  currentIndex: number
+  totalStep: number
+  currentStep: number
 }) {
-  const steps = Array.from({ length: totalIndex }, (_, idx) => idx + 1)
+  const steps = Array.from({ length: totalStep }, (_, idx) => idx + 1)
 
   return (
     <div className="flex items-center gap-2">
       {steps.map((step) => (
         <Fragment key={step}>
           {step > 1 && (
-            <AuthStepLine stepIndex={step} currentIndex={currentIndex} />
+            <AuthStepLine stepIndex={step} currentStep={currentStep} />
           )}
-          <AuthStepDot stepIndex={step} currentIndex={currentIndex} />
+          <AuthStepDot stepIndex={step} currentStep={currentStep} />
         </Fragment>
       ))}
     </div>

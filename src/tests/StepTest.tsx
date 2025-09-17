@@ -108,7 +108,7 @@ function StepTest() {
 
   return (
     <div className="flex flex-col gap-10">
-      <AuthStep totalIndex={3} currentIndex={currentStep} />
+      <AuthStep totalStep={3} currentStep={currentStep} />
       {currentStep === 1 && (
         <FirstStep
           defaultValues={stepHistory.step1}
