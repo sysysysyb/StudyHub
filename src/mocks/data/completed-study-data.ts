@@ -1,4 +1,4 @@
-export const exampleData = [
+export const completedStudyMock = [
   {
     imageUrl: 'https://picsum.photos/seed/react/400/250',
     title: 'React 심화 스터디',

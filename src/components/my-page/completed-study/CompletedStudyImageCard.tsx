@@ -7,28 +7,25 @@ import {
 } from 'lucide-react'
 import { FormattedEndDate } from '@/utils'
 import { RatingStars } from './RatingStars'
+import type { CompletedStudy } from '@/types/api-response-types/completed-study-type'
 
 interface CompletedStudyImageCardProps {
-  imageUrl: string
-  title: string
-  period: string
-  endDate: Date
-  participants: number
-  isReviewed: boolean
-  rating: number
-  comment: string
+  completedStudy: CompletedStudy
 }
 
 export const CompletedStudyImageCard = ({
-  imageUrl,
-  title,
-  period,
-  endDate,
-  participants,
-  isReviewed,
-  rating,
-  comment,
+  completedStudy,
 }: CompletedStudyImageCardProps) => {
+  const {
+    imageUrl,
+    title,
+    period,
+    endDate,
+    participants,
+    isReviewed = false,
+    rating,
+    comment,
+  } = completedStudy
   const paragraphCn = 'flex items-center gap-2'
   const iconSize = 14
   return (
