@@ -15,7 +15,7 @@ import {
   InputLabel,
   PasswordInput,
 } from '@/components/common/input'
-import { useCode, useToast } from '@/hooks'
+import { useToast, useVerificationCode } from '@/hooks'
 import {
   authSchema,
   type AuthSchemaType,
@@ -50,7 +50,7 @@ function Signup() {
     timer,
     handleCodeSend,
     handleCodeVerify,
-  } = useCode()
+  } = useVerificationCode()
 
   const onSubmit = async () => {
     await new Promise((resolve) => setTimeout(resolve, 500))

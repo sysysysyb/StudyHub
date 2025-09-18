@@ -2,7 +2,7 @@ import { Button } from '@/components'
 import { AuthSubmitButton, AuthVerifyButton } from '@/components/auth'
 import AuthStep from '@/components/auth/AuthStep'
 import { Input, InputErrorMessage } from '@/components/common/input'
-import { useCode } from '@/hooks'
+import { useVerificationCode } from '@/hooks'
 import {
   FindEmailStep1Schema,
   FindEmailStep2Schema,
@@ -63,7 +63,7 @@ function SecondStep({ defaultValues, onPrev, onNext }: SecondStepProps) {
     defaultValues,
   })
   const { isCodeSent, isCodeVerified, handleCodeSend, handleCodeVerify } =
-    useCode()
+    useVerificationCode()
 
   const onSubmit = (value: FindEmailStep2Type) => onNext(value)
 
