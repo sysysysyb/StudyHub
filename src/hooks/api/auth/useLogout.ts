@@ -1,4 +1,5 @@
 import useToast from '@/hooks/useToast'
+import { clearIsLoggedIn } from '@/utils'
 import api from '@/utils/axios'
 import {
   useMutation,
@@ -11,12 +12,12 @@ export default function useLogout(options?: UseMutationOptions) {
   const { triggerToast } = useToast()
 
   return useMutation({
-    mutationKey: ['users', 'auth', 'logout'],
+    mutationKey: ['users', 'logout'],
     mutationFn: async () => {
-      await api.post(`/users/auth/logout`)
+      await api.post(`/users/logout`)
     },
     onSuccess: async () => {
-      await qc.cancelQueries()
+      clearIsLoggedIn()
       qc.removeQueries({ queryKey: ['users', 'me'] })
       triggerToast('success', '로그아웃 성공')
     },
