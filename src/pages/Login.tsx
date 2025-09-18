@@ -8,8 +8,6 @@ import {
   AuthTitle,
 } from '@/components/auth'
 import { Input, InputErrorMessage } from '@/components/common/input'
-import KakaoIcon from '@/assets/images/KakaoIcon.svg'
-import NaverIcon from '@/assets/images/NaverIcon.svg'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
@@ -53,14 +51,8 @@ function Login() {
       </div>
 
       <div className={flexStyle}>
-        <AuthSocialLoginButton className="bg-[#FEE500] text-[#391c1a] hover:bg-[#FEE500] active:bg-[#FEE500]">
-          <img src={KakaoIcon} alt="Kakao Login" />
-          카카오 간편 로그인 / 가입
-        </AuthSocialLoginButton>
-        <AuthSocialLoginButton className="bg-[#03C75A] hover:bg-[#03C75A] active:bg-[#03C75A]">
-          <img src={NaverIcon} alt="Naver Login" />
-          네이버 간편 로그인 / 가입
-        </AuthSocialLoginButton>
+        <AuthSocialLoginButton socialType="kakao" />
+        <AuthSocialLoginButton socialType="naver" />
       </div>
 
       <form className={flexStyle} onSubmit={handleSubmit(onSubmit)}>

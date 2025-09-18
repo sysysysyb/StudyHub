@@ -1,4 +1,5 @@
 import { Avatar, Button } from '@/components'
+import { AuthSocialLoginButton } from '@/components/auth'
 import { Input, InputLabel } from '@/components/common/input'
 import { useUserInformation } from '@/hooks/api'
 import useLogin from '@/hooks/api/auth/useLogin'
@@ -34,8 +35,8 @@ function UserInformationTest() {
       {user ? (
         <Button onClick={handleLogout}>로그아웃</Button>
       ) : (
-        <div className="flex flex-col items-center gap-6">
-          <div className="flex flex-col gap-2">
+        <div className="flex w-full flex-col items-center gap-6">
+          <div className="flex w-full flex-col gap-2">
             <InputLabel>이메일</InputLabel>
             <Input
               placeholder="이메일을 입력하세요"
@@ -51,14 +52,9 @@ function UserInformationTest() {
             <Button onClick={handleLogin}>로그인</Button>
           </div>
 
-          <div className="flex items-center gap-2">
-            <Button className="bg-[#FEE500]">카카오 로그인</Button>
-            <span className="text-sm text-gray-500">(연결 전)</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <Button className="bg-[#03C75A]">네이버 로그인</Button>
-            <span className="text-sm text-gray-500">(연결 전)</span>
-          </div>
+          <AuthSocialLoginButton socialType="kakao" />
+
+          <AuthSocialLoginButton socialType="naver" />
         </div>
       )}
 
