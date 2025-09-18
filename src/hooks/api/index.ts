@@ -3,7 +3,7 @@ import useUserInformation from '@/hooks/api/useUserInformation'
 import useChatMessages from '@/hooks/api/chat/useChatMessages'
 import useAppliedRecruitment from '@/hooks/api/useAppliedRecruitment'
 import useBookmarkedLectures from '@/hooks/api/useBookmarkedLecture'
-import useCompletedStudy from './useCompletedStudy'
+import useCompletedStudy from '@/hooks/api/useCompletedStudy'
 
 export {
   useBookmarkedRecruitment,
