@@ -1,7 +1,5 @@
 import useToast from '@/hooks/useToast'
 import type { UserLogin } from '@/types/api-request-types/auth-request-types'
-
-import { setIsLoggedIn } from '@/utils'
 import api from '@/utils/axios'
 import {
   useMutation,
@@ -21,7 +19,6 @@ export default function useLogin(
       await api.post(`/auth/email/login`, payload)
     },
     onSuccess: async () => {
-      setIsLoggedIn()
       await qc.invalidateQueries({ queryKey: ['users', 'me'] })
       triggerToast('success', '로그인 성공')
     },
