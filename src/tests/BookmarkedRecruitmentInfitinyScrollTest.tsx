@@ -1,5 +1,5 @@
 import { BookmarkedRecruitmentCard } from '@/components/my-page'
-import useInfiniteBookmarkedRecruitment from '@/hooks/api/bookmarked/useInfiniteBookmarkedRecruitment'
+import { useInfiniteBookmarkedRecruitment } from '@/hooks/api/'
 import React from 'react'
 
 export default function BookmarkedRecruitmentInfitinyScrollTest() {
