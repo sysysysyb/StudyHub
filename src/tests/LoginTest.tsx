@@ -1,15 +1,19 @@
 import { Avatar, Button } from '@/components'
+import { Input, InputLabel } from '@/components/common/input'
 import { useUserInformation } from '@/hooks/api'
 import useLogin from '@/hooks/api/auth/useLogin'
 import useLogout from '@/hooks/api/auth/useLogout'
+import { useState } from 'react'
 
 function UserInformationTest() {
+  const [emailValue, setEmailValue] = useState('qwerty@test.com')
+  const [passwordValue, setPasswordValue] = useState('Qwer1234!!')
   const login = useLogin()
   const logout = useLogout()
   const { data: user } = useUserInformation()
 
   const handleLogin = () => {
-    login.mutate({ email: 'qwerty@test.com', password: 'Qwer1234!!' })
+    login.mutate({ email: emailValue, password: passwordValue })
   }
 
   const handleLogout = () => {
@@ -30,8 +34,23 @@ function UserInformationTest() {
       {user ? (
         <Button onClick={handleLogout}>로그아웃</Button>
       ) : (
-        <div className="flex flex-col gap-2">
-          <Button onClick={handleLogin}>로그인</Button>
+        <div className="flex flex-col items-center gap-6">
+          <div className="flex flex-col gap-2">
+            <InputLabel>이메일</InputLabel>
+            <Input
+              placeholder="이메일을 입력하세요"
+              value={emailValue}
+              onChange={(e) => setEmailValue(e.target.value)}
+            />
+            <InputLabel>비밀번호</InputLabel>
+            <Input
+              placeholder="비밀번호를 입력하세요"
+              value={passwordValue}
+              onChange={(e) => setPasswordValue(e.target.value)}
+            />
+            <Button onClick={handleLogin}>로그인</Button>
+          </div>
+
           <div className="flex items-center gap-2">
             <Button className="bg-[#FEE500]">카카오 로그인</Button>
             <span className="text-sm text-gray-500">(연결 전)</span>
