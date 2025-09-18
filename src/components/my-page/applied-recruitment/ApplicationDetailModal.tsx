@@ -14,7 +14,7 @@ import { DescriptionComponent } from './ApplicantDescription'
 import { AppliedStatusBadge } from './AppliedStatusBadge'
 import { FormattedAppliedAt } from '@/utils'
 import { StudyExperienceBadge } from './StudyExperienceBadge'
-import { useApplicationDetail } from '@/hooks/api/useApplicationDetail'
+import { useApplicationDetail } from '@/hooks/api'
 import { ListItemSkeleton } from '@/components'
 
 interface ApplicationDetailModalProps {

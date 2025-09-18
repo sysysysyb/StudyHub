@@ -8,7 +8,7 @@ import {
 
 export const AppliedRecruitment = () => {
   const { data, isPending } = useAppliedRecruitment()
-
+  if (!isPending && !data) return <EmptyDataState />
   return (
     <main>
       <header className="gap-2 pb-6">
@@ -19,20 +19,16 @@ export const AppliedRecruitment = () => {
       </header>
 
       <section className="flex flex-col gap-4">
-        {isPending ? (
-          [...Array(5)].map((_, i) => <ListItemSkeleton key={i} />)
-        ) : data?.results.length ? (
-          data.results.map((recruitment) => (
-            <ApplicationDetailModal
-              key={recruitment.uuid}
-              uuid={recruitment.uuid}
-            >
-              <AppliedRecruitmentCard recruitment={recruitment} />
-            </ApplicationDetailModal>
-          ))
-        ) : (
-          <EmptyDataState />
-        )}
+        {isPending
+          ? [...Array(5)].map((_, i) => <ListItemSkeleton key={i} />)
+          : data.results.map((recruitment) => (
+              <ApplicationDetailModal
+                key={recruitment.uuid}
+                uuid={recruitment.uuid}
+              >
+                <AppliedRecruitmentCard recruitment={recruitment} />
+              </ApplicationDetailModal>
+            ))}
       </section>
     </main>
   )

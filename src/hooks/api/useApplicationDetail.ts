@@ -3,7 +3,7 @@ import type { ApplicationDetail } from '@/types/api-response-types/recruitment-r
 import api from '@/utils/axios'
 import { useQuery, type UseQueryOptions } from '@tanstack/react-query'
 
-export function useApplicationDetail(
+export default function useApplicationDetail(
   application_id: string,
   options?: UseQueryOptions<ApplicationDetail>
 ) {
@@ -15,7 +15,6 @@ export function useApplicationDetail(
       )
       return res.data
     },
-    enabled: !!application_id, // id 없으면 호출 불가
     ...options,
   })
 }
