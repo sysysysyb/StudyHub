@@ -1,6 +1,5 @@
 import { API_BASE_URL } from '@/constants/api-constants'
 import type { UserInformation } from '@/types/api-response-types/auth-response-types'
-import { getIsLoggedIn } from '@/utils'
 import api from '@/utils/axios'
 import { useQuery, type UseQueryOptions } from '@tanstack/react-query'
 
@@ -20,6 +19,6 @@ export default function useUserInformation(
         profileImageUrl: data.profile_image_url,
       }
     },
-    enabled: getIsLoggedIn(),
+    retry: false,
   })
 }
