@@ -1,10 +1,12 @@
-import useBookmarkedRecruitment from '@/hooks/api/useBookmarkedRecruitments'
+import useBookmarkedRecruitment from '@/hooks/api/bookmarked/useBookmarkedRecruitments'
 import useUserInformation from '@/hooks/api/useUserInformation'
 import useChatMessages from '@/hooks/api/chat/useChatMessages'
 import useAppliedRecruitment from '@/hooks/api/useAppliedRecruitment'
-import useBookmarkedLectures from '@/hooks/api/useBookmarkedLecture'
 import useCompletedStudy from '@/hooks/api/useCompletedStudy'
 import useApplicationDetail from '@/hooks/api/useApplicationDetail'
+import useBookmarkedLectures from '@/hooks/api/bookmarked/useBookmarkedLecture'
+import useInfiniteBookmarkedRecruitment from '@/hooks/api/bookmarked/useInfiniteBookmarkedRecruitment'
+import useInfiniteBookmarkedLecture from '@/hooks/api/bookmarked/useInfiniteBookmarkedLecture'
 
 export {
   useBookmarkedRecruitment,
@@ -14,4 +16,6 @@ export {
   useBookmarkedLectures,
   useCompletedStudy,
   useApplicationDetail,
+  useInfiniteBookmarkedRecruitment,
+  useInfiniteBookmarkedLecture,
 }
