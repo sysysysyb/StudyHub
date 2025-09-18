@@ -3,14 +3,14 @@ import { http, HttpResponse } from 'msw'
 import { appliedRecruitmentsMock } from '@/mocks/data/applied-recruitments-data'
 import { applicationsMock } from '@/mocks/data/applications-data'
 
-const getAppliedRecruitments = http.get<{ application_id: string }>(
+const getAppliedRecruitments = http.get(
   `${API_BASE_URL}/applications/me`,
   () => {
     return HttpResponse.json(appliedRecruitmentsMock)
   }
 )
 
-const getApplication = http.get(
+const getApplication = http.get<{ application_id: string }>(
   `${API_BASE_URL}/applications/me/:application_id`,
   ({ params }) => {
     const { application_id } = params
