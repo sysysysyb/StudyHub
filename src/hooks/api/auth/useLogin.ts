@@ -1,5 +1,6 @@
 import useToast from '@/hooks/useToast'
-import type { UserLogin } from '@/types/api-response-types/auth'
+import type { UserLogin } from '@/types/api-request-types/auth-request-types'
+
 import { setIsLoggedIn } from '@/utils'
 import api from '@/utils/axios'
 import {
