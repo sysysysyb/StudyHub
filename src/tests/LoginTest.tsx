@@ -12,7 +12,7 @@ function UserInformationTest() {
   const [passwordValue, setPasswordValue] = useState('Qwer1234!!')
   const login = useLogin()
   const logout = useLogout()
-  const { data: user } = useUserInformation()
+  const { data: user, isError: isUserInformationError } = useUserInformation()
 
   const handleLogin = () => {
     login.mutate({ email: emailValue, password: passwordValue })
@@ -25,7 +25,7 @@ function UserInformationTest() {
   return (
     <div className="flex flex-col items-center gap-10">
       <h3 className="text-center text-xl font-semibold">로그인 Test</h3>
-      {user ? (
+      {!isUserInformationError ? (
         <Button onClick={handleLogout}>로그아웃</Button>
       ) : (
         <div className="flex w-full flex-col items-center gap-6">
