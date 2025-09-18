@@ -2,7 +2,11 @@ import { useState } from 'react'
 import { useTimer } from './useTimer'
 import useToast from './useToast'
 
-function useCode() {
+const TIMER_DURATION_MS = 180000
+
+function useVerificationCode() {
+  const { triggerToast } = useToast()
+
   const [isCodeSent, SetIsCodeSent] = useState({
     email: false,
     phoneNumber: false,
@@ -12,10 +16,19 @@ function useCode() {
     phoneNumber: false,
   })
   const timer = {
-    email: useTimer(180000),
-    phoneNumber: useTimer(180000),
+    email: useTimer(TIMER_DURATION_MS, () =>
+      triggerToast(
+        'warning',
+        '이메일 인증 시간이 만료되었습니다. 다시 시도해주세요.'
+      )
+    ),
+    phoneNumber: useTimer(TIMER_DURATION_MS, () =>
+      triggerToast(
+        'warning',
+        '휴대전화 번호 인증 시간이 만료되었습니다. 다시 시도해주세요.'
+      )
+    ),
   }
-  const { triggerToast } = useToast()
 
   const handleCodeSend = async (label: 'email' | 'phoneNumber') => {
     await new Promise((resolve) => setTimeout(resolve, 1000))
@@ -35,4 +48,4 @@ function useCode() {
   return { isCodeSent, isCodeVerified, timer, handleCodeSend, handleCodeVerify }
 }
 
-export default useCode
+export default useVerificationCode
