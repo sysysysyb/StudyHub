@@ -1,21 +1,45 @@
 import { API_BASE_URL } from '@/constants/api-constants'
 import { http, HttpResponse, passthrough } from 'msw'
 import { userInformationMock } from '@/mocks/data/user-information-data'
+import { getIsLoggedIn } from '@/utils'
+import { loginSchema } from '@/schemas/form-schema/auth-schema'
 
-let isLoggedIn = false
+const login = http.post(
+  `${API_BASE_URL}/auth/email/login`,
+  async ({ request }) => {
+    const body = await request.json()
+    const parsedBody = loginSchema.safeParse(body)
 
-const login = http.post(`${API_BASE_URL}/users/auth/login`, () => {
-  isLoggedIn = true
-  return HttpResponse.json({ message: 'Login successful' }, { status: 200 })
-})
+    if (!parsedBody.success) {
+      return HttpResponse.json(
+        {
+          error: 'Invalid credentials.',
+        },
+        { status: 400 }
+      )
+    }
 
-const logout = http.post(`${API_BASE_URL}/users/auth/logout`, () => {
-  isLoggedIn = false
+    const data = parsedBody.data
+
+    if (data.email === 'qwerty@test.com' && data.password === 'Qwer1234!!') {
+      return HttpResponse.json({ message: 'Login successful' }, { status: 200 })
+    } else {
+      return HttpResponse.json(
+        {
+          error: 'Invalid credentials.',
+        },
+        { status: 400 }
+      )
+    }
+  }
+)
+
+const logout = http.post(`${API_BASE_URL}/users/logout`, () => {
   return HttpResponse.json({ message: 'Logout successful' }, { status: 200 })
 })
 
 const getUserInformation = http.get(`${API_BASE_URL}/users/me`, () => {
-  if (!isLoggedIn) {
+  if (!getIsLoggedIn()) {
     return HttpResponse.json(
       { message: 'Authentication required.' },
       { status: 401 }
