@@ -15,7 +15,7 @@ function TestHub() {
 
   return (
     <main className="flex h-dvh">
-      <aside className="bg-gray-200 p-10">
+      <aside className="overflow-auto bg-gray-200 p-10">
         <h2 className="py-5 text-center text-2xl font-bold">Test Hub</h2>
         <div className="flex flex-col gap-5">
           {testPages &&

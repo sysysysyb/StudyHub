@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import { useInterval } from './useInterval'
 
-export function useTimer(defaultMs = 1800000) {
+export function useTimer(defaultMs = 1800000, onExpire: () => void) {
   const [remainSecond, setRemainSecond] = useState(0)
   const [isCounting, setIsCounting] = useState(false)
   const endAtRef = useRef(0)
@@ -30,7 +30,10 @@ export function useTimer(defaultMs = 1800000) {
         Math.ceil((endAtRef.current - Date.now()) / 1000)
       )
       setRemainSecond(leftSecond)
-      if (leftSecond === 0) resetTimer()
+      if (leftSecond === 0) {
+        onExpire?.()
+        resetTimer()
+      }
     },
     isCounting ? 1000 : null
   )
