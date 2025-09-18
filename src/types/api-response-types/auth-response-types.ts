@@ -8,8 +8,3 @@ export interface UserInformation {
   gender: 'male' | 'female'
   profileImageUrl?: string
 }
-
-export interface UserLogin {
-  email: string
-  password: string
-}
