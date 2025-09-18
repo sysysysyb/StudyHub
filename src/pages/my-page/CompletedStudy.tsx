@@ -16,7 +16,7 @@ export const CompletedStudy = () => {
       </header>
       <section className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {isPending
-          ? [...Array(5)].map((_, i) => <ImageCardSkeleton key={i} />)
+          ? [...Array(4)].map((_, i) => <ImageCardSkeleton key={i} />)
           : data.map((card) => (
               <CompletedStudyImageCard key={card.title} completedStudy={card} />
             ))}

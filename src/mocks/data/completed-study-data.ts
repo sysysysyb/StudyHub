@@ -1,6 +1,8 @@
 import type { CompletedStudy } from '@/types/api-response-types/completed-study-type'
 
-export const completedStudyMock: CompletedStudy[] = [
+export const completedStudyMock: CompletedStudy[] | null = [
+  // 실제 api 호출에서 데이터가 없을 경우도 테스트하기 위해 null 타입 추가.
+  // 유지하는 편이 실제와 유사할 것으로 판단함.
   {
     imageUrl: 'https://picsum.photos/seed/react/400/250',
     title: 'React 심화 스터디',
