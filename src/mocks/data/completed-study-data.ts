@@ -1,9 +1,11 @@
-export const completedStudyMock = [
+import type { CompletedStudy } from '@/types/api-response-types/completed-study-type'
+
+export const completedStudyMock: CompletedStudy[] = [
   {
     imageUrl: 'https://picsum.photos/seed/react/400/250',
     title: 'React 심화 스터디',
     period: '2025.01 - 2025.03',
-    endDate: '2025-03-15',
+    endDate: new Date('2025-03-15'),
     participants: 5,
     isReviewed: true,
     rating: 4.6,
@@ -13,7 +15,7 @@ export const completedStudyMock = [
     imageUrl: 'https://picsum.photos/seed/nextjs/400/250',
     title: 'Next.js 프로젝트 스터디',
     period: '2025.04 - 2025.06',
-    endDate: '2025-06-20',
+    endDate: new Date('2025-06-20'),
     participants: 6,
     isReviewed: false,
     rating: 0,
@@ -23,7 +25,7 @@ export const completedStudyMock = [
     imageUrl: 'https://picsum.photos/seed/algorithm/400/250',
     title: '알고리즘 문제풀이 스터디',
     period: '2025.07 - 2025.08',
-    endDate: '2025-08-30',
+    endDate: new Date('2025-08-30'),
     participants: 4,
     isReviewed: true,
     rating: 4.1,
@@ -33,7 +35,7 @@ export const completedStudyMock = [
     imageUrl: 'https://picsum.photos/seed/design/400/250',
     title: 'UI/UX 디자인 스터디',
     period: '2025.09 - 2025.10',
-    endDate: '2025-10-25',
+    endDate: new Date('2025-10-25'),
     participants: 8,
     isReviewed: true,
     rating: 3.7,

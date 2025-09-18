@@ -3,10 +3,10 @@ import type { CompletedStudy } from '@/types/api-response-types/completed-study-
 import api from '@/utils/axios'
 import { useQuery, type UseQueryOptions } from '@tanstack/react-query'
 
-export function useApplicationDetail(
-  options?: UseQueryOptions<CompletedStudy>
+export default function useCompletedStudy(
+  options?: UseQueryOptions<CompletedStudy[]>
 ) {
-  return useQuery<CompletedStudy>({
+  return useQuery<CompletedStudy[]>({
     queryKey: ['completed'],
     queryFn: async () => {
       const res = await api.get(`${API_BASE_URL}/completed/me/`)
