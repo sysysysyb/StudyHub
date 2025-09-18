@@ -1,9 +1,29 @@
 import { BookmarkedRecruitmentCard } from '@/components/my-page'
 import { useInfiniteBookmarkedRecruitment } from '@/hooks/api/'
-import React from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
 
 export default function BookmarkedRecruitmentInfitinyScrollTest() {
-  const { data, fetchNextPage } = useInfiniteBookmarkedRecruitment()
+  const { data, fetchNextPage, hasNextPage } =
+    useInfiniteBookmarkedRecruitment()
+
+  const observerRef = useRef(null)
+
+  const onIntersection: IntersectionObserverCallback = useCallback(
+    (entries) => {
+      if (entries[0].isIntersecting && hasNextPage) {
+        fetchNextPage()
+      }
+    },
+    [fetchNextPage, hasNextPage]
+  )
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(onIntersection)
+
+    if (observerRef.current) {
+      observer.observe(observerRef.current)
+    }
+  }, [onIntersection])
 
   return (
     <div className="flex flex-col gap-2">
@@ -19,13 +39,7 @@ export default function BookmarkedRecruitmentInfitinyScrollTest() {
             </React.Fragment>
           ))
         : '로딩중'}
-      <button
-        onClick={() => {
-          fetchNextPage()
-        }}
-      >
-        새 페이지
-      </button>
+      <span ref={observerRef}>옵저버</span>
     </div>
   )
 }
