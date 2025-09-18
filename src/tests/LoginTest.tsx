@@ -4,6 +4,7 @@ import { Input, InputLabel } from '@/components/common/input'
 import { useUserInformation } from '@/hooks/api'
 import useLogin from '@/hooks/api/auth/useLogin'
 import useLogout from '@/hooks/api/auth/useLogout'
+import { FormattedDateWithDots } from '@/utils/formatted-dates'
 import { useState } from 'react'
 
 function UserInformationTest() {
@@ -19,14 +20,6 @@ function UserInformationTest() {
 
   const handleLogout = () => {
     logout.mutate()
-  }
-
-  const formatDateWithDots = (date: string) => {
-    const yyyy = date?.substring(0, 4)
-    const mm = date?.substring(5, 7)
-    const dd = date?.substring(8, 10)
-
-    return `${yyyy}. ${mm}. ${dd}.`
   }
 
   return (
@@ -65,7 +58,7 @@ function UserInformationTest() {
         <span>성별: {user?.gender}</span>
         <span>이메일: {user?.email}</span>
         <span>
-          생년월일: {user?.birthday && formatDateWithDots(user.birthday)}
+          생년월일: {user?.birthday && FormattedDateWithDots(user.birthday)}
         </span>
         <span>휴대전화 번호: {user?.phoneNumber}</span>
         <div className="flex items-center gap-3">
