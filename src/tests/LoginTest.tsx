@@ -6,11 +6,7 @@ import useLogout from '@/hooks/api/auth/useLogout'
 function UserInformationTest() {
   const login = useLogin()
   const logout = useLogout()
-  const { data: user } = useUserInformation({
-    enabled: login.isSuccess,
-    retry: false,
-    queryKey: ['users', 'me'],
-  })
+  const { data: user } = useUserInformation()
 
   const handleLogin = () => {
     login.mutate({ email: 'qwerty@test.com', password: 'Qwer1234!!' })
@@ -30,13 +26,21 @@ function UserInformationTest() {
 
   return (
     <div className="flex flex-col items-center gap-10">
-      <h3 className="text-center text-xl font-semibold">
-        사용자 정보 가져오기 Test
-      </h3>
+      <h3 className="text-center text-xl font-semibold">로그인 Test</h3>
       {user ? (
         <Button onClick={handleLogout}>로그아웃</Button>
       ) : (
-        <Button onClick={handleLogin}>로그인</Button>
+        <div className="flex flex-col gap-2">
+          <Button onClick={handleLogin}>로그인</Button>
+          <div className="flex items-center gap-2">
+            <Button className="bg-[#FEE500]">카카오 로그인</Button>
+            <span className="text-sm text-gray-500">(연결 전)</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Button className="bg-[#03C75A]">네이버 로그인</Button>
+            <span className="text-sm text-gray-500">(연결 전)</span>
+          </div>
+        </div>
       )}
 
       <div className="flex w-fit flex-col gap-4">
