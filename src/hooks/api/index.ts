@@ -6,6 +6,7 @@ import useCompletedStudy from '@/hooks/api/useCompletedStudy'
 import useApplicationDetail from '@/hooks/api/useApplicationDetail'
 import useBookmarkedLectures from '@/hooks/api/bookmarked/useBookmarkedLecture'
 import useInfiniteBookmarkedRecruitment from '@/hooks/api/bookmarked/useInfiniteBookmarkedRecruitment'
+import useInfiniteBookmarkedLecture from '@/hooks/api/bookmarked/useInfiniteBookmarkedLecture'
 
 export {
   useBookmarkedRecruitment,
@@ -16,4 +17,5 @@ export {
   useCompletedStudy,
   useApplicationDetail,
   useInfiniteBookmarkedRecruitment,
+  useInfiniteBookmarkedLecture,
 }
