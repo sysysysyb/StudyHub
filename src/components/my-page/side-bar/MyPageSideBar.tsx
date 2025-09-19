@@ -1,4 +1,4 @@
-import { Card } from '@/components/common/Card/Card'
+import { Card } from '@/components/common/card/Card'
 import MyPageSideBarProfile from './MyPageSideBarProfile'
 import MyPageSideBarMenu from './MyPageSideBarMenu'
 import type { ComponentProps } from 'react'

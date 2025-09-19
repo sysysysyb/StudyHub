@@ -1,5 +1,5 @@
 import { Button } from '@/components'
-import { Card } from '@/components/common/Card/Card'
+import { Card } from '@/components/common/card/Card'
 import { Input } from '@/components/common/input'
 import {
   ChatSocketEventUnionSchema,
