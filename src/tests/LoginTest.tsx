@@ -4,6 +4,7 @@ import { Input, InputLabel } from '@/components/common/input'
 import { useUserInformation } from '@/hooks/api'
 import useLogin from '@/hooks/api/auth/useLogin'
 import useLogout from '@/hooks/api/auth/useLogout'
+import { useLoginStore } from '@/store/useLoginStore'
 import { formattedDateWithDots } from '@/utils/formatted-dates'
 import { useState } from 'react'
 
@@ -12,7 +13,8 @@ function UserInformationTest() {
   const [passwordValue, setPasswordValue] = useState('Qwer1234!!')
   const login = useLogin()
   const logout = useLogout()
-  const { data: user, isError: isUserInformationError } = useUserInformation()
+  const { data: user } = useUserInformation()
+  const { isLoggedIn } = useLoginStore()
 
   const handleLogin = () => {
     login.mutate({ email: emailValue, password: passwordValue })
@@ -25,7 +27,7 @@ function UserInformationTest() {
   return (
     <div className="flex flex-col items-center gap-10">
       <h3 className="text-center text-xl font-semibold">로그인 Test</h3>
-      {!isUserInformationError ? (
+      {isLoggedIn ? (
         <Button onClick={handleLogout}>로그아웃</Button>
       ) : (
         <div className="flex w-full flex-col items-center gap-6">
