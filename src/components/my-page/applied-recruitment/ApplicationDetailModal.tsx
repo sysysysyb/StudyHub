@@ -12,7 +12,7 @@ import {
 import Button from '@/components/common/Button'
 import { DescriptionComponent } from './ApplicantDescription'
 import { AppliedStatusBadge } from './AppliedStatusBadge'
-import { FormattedAppliedAt } from '@/utils'
+import { formattedAppliedAt } from '@/utils'
 import { StudyExperienceBadge } from './StudyExperienceBadge'
 import { useApplicationDetail } from '@/hooks/api'
 import { ListItemSkeleton } from '@/components'
@@ -51,7 +51,7 @@ export const ApplicationDetailModal = ({
                     </div>
                     <div className="flex flex-col items-end gap-1">
                       <span>지원 일시</span>
-                      {FormattedAppliedAt(application.applied_at)}
+                      {formattedAppliedAt(application.applied_at)}
                     </div>
                   </DescriptionComponent>
                   <DescriptionComponent label="자기소개">

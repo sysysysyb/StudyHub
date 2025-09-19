@@ -2,7 +2,7 @@ import type { BookmarkedRecruitment } from '@/types/api-response-types/recruitme
 import { BookmarkIcon, CalendarIcon, EyeIcon, UsersIcon } from 'lucide-react'
 import { Link } from 'react-router'
 import { Button } from '@/components'
-import { FormattedCloseAt } from '@/utils'
+import { formattedCloseAt } from '@/utils'
 import useWindowWidth from '@/hooks/useWindowWidth'
 import { LG_WIDTH_PIXEL } from '@/constants/break-points'
 
@@ -50,7 +50,7 @@ export default function BookmarkedRecruitmentCard({
             {width > LG_WIDTH_PIXEL && (
               <span className="flex flex-nowrap items-center text-sm text-gray-600">
                 <CalendarIcon className="h-3.5" />
-                {FormattedCloseAt(closeAtString)}
+                {formattedCloseAt(closeAtString)}
               </span>
             )}
             <span className="flex flex-nowrap items-center text-xs text-gray-600 lg:text-sm">

@@ -4,7 +4,7 @@ import { Input, InputLabel } from '@/components/common/input'
 import { useUserInformation } from '@/hooks/api'
 import useLogin from '@/hooks/api/auth/useLogin'
 import useLogout from '@/hooks/api/auth/useLogout'
-import { FormattedDateWithDots } from '@/utils/formatted-dates'
+import { formattedDateWithDots } from '@/utils/formatted-dates'
 import { useState } from 'react'
 
 function UserInformationTest() {
@@ -58,7 +58,7 @@ function UserInformationTest() {
         <span>성별: {user?.gender}</span>
         <span>이메일: {user?.email}</span>
         <span>
-          생년월일: {user?.birthday && FormattedDateWithDots(user.birthday)}
+          생년월일: {user?.birthday && formattedDateWithDots(user.birthday)}
         </span>
         <span>휴대전화 번호: {user?.phoneNumber}</span>
         <div className="flex items-center gap-3">
