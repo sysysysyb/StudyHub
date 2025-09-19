@@ -4,12 +4,12 @@ import type { UserInformation } from '@/types/api-response-types/auth-response-t
 import api from '@/utils/axios'
 import { useQuery, type UseQueryOptions } from '@tanstack/react-query'
 
-export default function useUserInformation(
-  options?: UseQueryOptions<UserInformation>
+export default function useUserInformation<T = UserInformation>(
+  options?: UseQueryOptions<UserInformation, Error, T>
 ) {
   const { isLoggedIn } = useLoginStore()
 
-  return useQuery<UserInformation>({
+  return useQuery<UserInformation, Error, T>({
     ...options,
     queryKey: ['users', 'me'],
     queryFn: async () => {
