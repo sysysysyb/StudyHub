@@ -8,6 +8,7 @@ import AppliedRecruitmentCard from '@/components/my-page/applied-recruitment/App
 import { AppliedStatusBadge } from '@/components/my-page/applied-recruitment/AppliedStatusBadge'
 import { ApplicationDetailModal } from '@/components/my-page/applied-recruitment/ApplicationDetailModal'
 import { CompletedStudyImageCard } from '@/components/my-page/completed-study/CompletedStudyImageCard'
+import { ReviewModal } from '@/components/my-page/completed-study/ReviewModal'
 
 export {
   MyPageSideBar,
@@ -20,4 +21,5 @@ export {
   AppliedStatusBadge,
   ApplicationDetailModal,
   CompletedStudyImageCard,
+  ReviewModal,
 }
