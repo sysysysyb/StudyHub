@@ -1,4 +1,5 @@
 import { API_BASE_URL } from '@/constants/api-constants'
+import { useLoginStore } from '@/store/useLoginStore'
 import type { UserInformation } from '@/types/api-response-types/auth-response-types'
 import api from '@/utils/axios'
 import { useQuery, type UseQueryOptions } from '@tanstack/react-query'
@@ -6,6 +7,8 @@ import { useQuery, type UseQueryOptions } from '@tanstack/react-query'
 export default function useUserInformation(
   options?: UseQueryOptions<UserInformation>
 ) {
+  const { isLoggedIn } = useLoginStore()
+
   return useQuery<UserInformation>({
     ...options,
     queryKey: ['users', 'me'],
@@ -19,6 +22,6 @@ export default function useUserInformation(
         profileImageUrl: data.profile_image_url,
       }
     },
-    retry: false,
+    enabled: isLoggedIn,
   })
 }
