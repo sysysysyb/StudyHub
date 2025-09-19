@@ -7,6 +7,7 @@ import useBookmarkedLectures from '@/hooks/api/bookmarked/useBookmarkedLecture'
 import useInfiniteBookmarkedRecruitment from '@/hooks/api/bookmarked/useInfiniteBookmarkedRecruitment'
 import useInfiniteBookmarkedLecture from '@/hooks/api/bookmarked/useInfiniteBookmarkedLecture'
 import useLogin from '@/hooks/api/auth/useLogin'
+import useBookmarkedRecruitment from '@/hooks/api/bookmarked/useBookmarkedRecruitments'
 
 export {
   useUserInformation,
@@ -18,4 +19,5 @@ export {
   useInfiniteBookmarkedRecruitment,
   useInfiniteBookmarkedLecture,
   useLogin,
+  useBookmarkedRecruitment,
 }
