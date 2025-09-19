@@ -9,13 +9,33 @@ const api = axios.create({
   withCredentials: true,
 })
 
-api.interceptors.response.use(
-  (res) => res,
-  async (error) => {
-    const originalRequest = error.config
-    const isNotTokenRefresh = originalRequest.url?.includes('/token/refresh')
+api.interceptors.request.use((config) => {
+  const accessToken = localStorage.getItem('access-token')
 
-    if (error.response?.status === 401 && isNotTokenRefresh) {
+  if (accessToken) {
+    config.headers.Authorization = `Bearer ${accessToken}`
+  }
+
+  return config
+})
+
+api.interceptors.response.use(
+  (response) => {
+    const { config, data } = response
+    const isLogin = config.url?.includes('auth/email/login')
+    const accessToken = data?.access_token
+
+    if (isLogin && accessToken) {
+      localStorage.setItem('access-token', accessToken)
+    }
+
+    return response
+  },
+  async (error) => {
+    const { config } = error
+    const isTokenRefreshRequest = config.url?.includes('/token/refresh')
+
+    if (error.response?.status === 401 && !isTokenRefreshRequest) {
       try {
         await api.post(`${API_BASE_URL}/token/refresh`)
         return api(error.config)
