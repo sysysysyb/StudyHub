@@ -50,39 +50,47 @@ export default function VirtualListTest() {
     virtualizer.getVirtualItems(),
   ])
 
+  const items = virtualizer.getVirtualItems()
+
   return (
     <div ref={parentRef} className="h-[700px] overflow-y-auto">
       <div
         className={cn(`h-[${virtualizer.getTotalSize()}px]`, 'relative w-full')}
       >
-        {virtualizer.getVirtualItems().map((virtualRow) => {
-          const isLoaderRow = virtualRow.index > allRecruitments.length - 1
-          const recruitment = allRecruitments[virtualRow.index]
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            transform: `translateY(${items[0]?.start ?? 0}px)`,
+          }}
+        >
+          {items.map((virtualRow) => {
+            const isLoaderRow = virtualRow.index > allRecruitments.length - 1
+            const recruitment = allRecruitments[virtualRow.index]
 
-          return (
-            <div
-              key={virtualRow.key}
-              style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: `${virtualRow.size}px`,
-                transform: `translateY(${virtualRow.start}px)`,
-              }}
-            >
-              {isLoaderRow ? (
-                hasNextPage ? (
-                  '로딩중'
-                ) : (
-                  '데이터 없음'
-                )
-              ) : (
-                <BookmarkedRecruitmentCard recruitment={recruitment} />
-              )}
-            </div>
-          )
-        })}
+            return (
+              <div
+                key={virtualRow.key}
+                data-index={virtualRow.index}
+                ref={virtualizer.measureElement}
+              >
+                <div className="mb-2">
+                  {isLoaderRow ? (
+                    hasNextPage ? (
+                      '로딩중'
+                    ) : (
+                      '데이터 없음'
+                    )
+                  ) : (
+                    <BookmarkedRecruitmentCard recruitment={recruitment} />
+                  )}
+                </div>
+              </div>
+            )
+          })}
+        </div>
       </div>
     </div>
   )
