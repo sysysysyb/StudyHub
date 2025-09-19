@@ -1,5 +1,5 @@
 import { ImageCardSkeleton } from '@/components'
-import EmptyDataState from '@/components/common/stateTemp/EmptyDataState'
+import EmptyDataState from '@/components/common/state/EmptyDataState'
 import { useCompletedStudy } from '@/hooks/api'
 import { CompletedStudyImageCard } from '@/components/my-page'
 

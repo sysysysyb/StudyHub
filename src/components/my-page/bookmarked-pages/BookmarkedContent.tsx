@@ -1,6 +1,6 @@
 import { Dropdown, ListItemSkeleton } from '@/components'
 import { Input } from '@/components/common/input'
-import EmptyDataState from '@/components/common/stateTemp/EmptyDataState'
+import EmptyDataState from '@/components/common/state/EmptyDataState'
 import { BookmarkedRecruitmentCard } from '@/components/my-page'
 import BookmarkedLectureCard from '@/components/my-page/bookmarked-lecture/BookmarkedLectureCard'
 import type { BookmarkedLectures } from '@/types/api-response-types/lecture-response-type'
