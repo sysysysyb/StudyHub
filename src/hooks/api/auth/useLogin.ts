@@ -1,4 +1,5 @@
-import useToast from '@/hooks/useToast'
+import { useToast } from '@/hooks'
+import { useLoginStore } from '@/store/useLoginStore'
 import type { UserLogin } from '@/types/api-request-types/auth-request-types'
 import api from '@/utils/axios'
 import {
@@ -12,6 +13,7 @@ export default function useLogin(
 ) {
   const qc = useQueryClient()
   const { triggerToast } = useToast()
+  const { setLoggedIn } = useLoginStore()
 
   return useMutation<void, Error, UserLogin>({
     mutationKey: ['auth', 'email', 'login'],
@@ -20,6 +22,7 @@ export default function useLogin(
     },
     onSuccess: async () => {
       await qc.invalidateQueries({ queryKey: ['users', 'me'] })
+      setLoggedIn()
       triggerToast('success', '로그인에 성공했습니다.')
     },
     onError: () => {
