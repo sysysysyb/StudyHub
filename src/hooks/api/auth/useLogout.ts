@@ -15,7 +15,7 @@ export default function useLogout(options?: UseMutationOptions) {
     mutationFn: async () => {
       await api.post(`/users/logout`)
     },
-    onSuccess: async () => {
+    onSuccess: () => {
       qc.removeQueries({ queryKey: ['users', 'me'] })
       triggerToast('success', '로그아웃 성공')
     },
