@@ -20,7 +20,7 @@ export default function useLogin(
     },
     onSuccess: async () => {
       await qc.invalidateQueries({ queryKey: ['users', 'me'] })
-      triggerToast('success', '로그인 성공')
+      triggerToast('success', '로그인에 성공했습니다.')
     },
     onError: () => {
       triggerToast('error', '잘못된 이메일 또는 비밀번호 입니다.')
