@@ -1,7 +1,7 @@
 import { ListItemSkeleton } from '@/components'
 import { Input } from '@/components/common/input'
 import { BookmarkedRecruitmentCard } from '@/components/my-page'
-import EmptyDataState from '@/components/common/state/EmptyDataState'
+import EmptyDataState from '@/components/common/stateTemp/EmptyDataState'
 import { SearchIcon } from 'lucide-react'
 import type { UseQueryResult } from '@tanstack/react-query'
 import type { BookmarkedRecruitments } from '@/types/api-response-types/recruitment-response-types'

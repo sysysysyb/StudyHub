@@ -2,7 +2,7 @@ import ChatRoomInput from './ChatRoomInput'
 import ChatRoomUsers from './ChatRoomUsers'
 import ChatRoomMessages from './ChatRoomMessages'
 import useChatMessages from '@/hooks/api/chat/useChatMessages'
-import LoadingState from '@/components/common/state/LoadingState'
+import LoadingState from '@/components/common/stateTemp/LoadingState'
 import { useEffect, useRef } from 'react'
 
 const dummyChatRoomUsers: { username: string; isOnline: boolean }[] = [
