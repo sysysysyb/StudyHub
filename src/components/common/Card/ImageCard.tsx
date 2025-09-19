@@ -1,4 +1,4 @@
-import { Card, type CardProps } from '@/components/common/Card/Card'
+import { Card, type CardProps } from '@/components/common/card/Card'
 import { cn } from '@/utils'
 
 interface ImageCardProps extends CardProps {

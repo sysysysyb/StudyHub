@@ -1,4 +1,4 @@
-export const FormattedCloseAt = (closeAtString: Date) => {
+export const formattedCloseAt = (closeAtString: Date) => {
   const closeAt = new Date(closeAtString)
   const closeAtYear = closeAt.getFullYear()
   const closeAtMonth = closeAt.getMonth() + 1
@@ -6,7 +6,7 @@ export const FormattedCloseAt = (closeAtString: Date) => {
   return `마감일: ${closeAtYear}.${closeAtMonth}.${closeAtDate}.`
 }
 
-export const FormattedAppliedAt = (appliedAtString: Date) => {
+export const formattedAppliedAt = (appliedAtString: Date) => {
   const appliedAt = new Date(appliedAtString)
   const appliedAtYear = appliedAt.getFullYear()
   // padStart(targetLength, padString)은 지정된 길이가 충족되지 않아 생긴 빈 공간에 지정된 문자(padString)를 채워서 지정한 길이가 되도록 만들어 줍니다.
@@ -24,14 +24,14 @@ export const FormattedAppliedAt = (appliedAtString: Date) => {
   return `${appliedAtYear}.${appliedAtMonth}.${appliedAtDate}. ${appliedAtAmPM} ${appliedAtSplittedHours}:${appliedAtMinutes}`
 }
 
-export const FormattedEndDate = (endDateString: Date) => {
+export const formattedEndDate = (endDateString: Date) => {
   const endDate = new Date(endDateString)
   const endDateYear = endDate.getFullYear()
   const endDateMonth = endDate.getMonth() + 1
   return `${endDateYear}년 ${endDateMonth}월`
 }
 
-export const FormattedDateWithDots = (date: string) => {
+export const formattedDateWithDots = (date: string) => {
   const yyyy = date?.substring(0, 4)
   const mm = date?.substring(5, 7)
   const dd = date?.substring(8, 10)

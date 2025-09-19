@@ -5,7 +5,7 @@ import {
   SquarePen as EditButton,
   UsersRound,
 } from 'lucide-react'
-import { FormattedEndDate } from '@/utils'
+import { formattedEndDate } from '@/utils'
 import { RatingStars } from './RatingStars'
 import type { CompletedStudy } from '@/types/api-response-types/completed-study-type'
 
@@ -36,7 +36,7 @@ export const CompletedStudyImageCard = ({
           <Clock size={iconSize} /> 기간: {period}
         </p>
         <p className={paragraphCn}>
-          <Calendar size={iconSize} /> 종료: {FormattedEndDate(endDate)}
+          <Calendar size={iconSize} /> 종료: {formattedEndDate(endDate)}
         </p>
         <p className={paragraphCn}>
           <UsersRound size={iconSize} />

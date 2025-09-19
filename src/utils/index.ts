@@ -2,9 +2,9 @@
 import { cn } from '@/utils/utils'
 import { testPages } from '@/utils/registryTestPages'
 import {
-  FormattedAppliedAt,
-  FormattedCloseAt,
-  FormattedEndDate,
+  formattedAppliedAt,
+  formattedCloseAt,
+  formattedEndDate,
 } from '@/utils/formatted-dates'
 
-export { cn, testPages, FormattedAppliedAt, FormattedCloseAt, FormattedEndDate }
+export { cn, testPages, formattedAppliedAt, formattedCloseAt, formattedEndDate }

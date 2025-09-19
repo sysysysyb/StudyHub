@@ -1,4 +1,4 @@
-import { Card, CardContent, CardTitle } from '@/components/common/Card/Card'
+import { Card, CardContent, CardTitle } from '@/components/common/card/Card'
 import { cn } from '@/utils'
 import type { LucideIcon } from 'lucide-react'
 import { Link, useLocation } from 'react-router'

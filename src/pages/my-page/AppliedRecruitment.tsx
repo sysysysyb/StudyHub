@@ -1,5 +1,5 @@
 import { ListItemSkeleton } from '@/components'
-import EmptyDataState from '@/components/common/State/EmptyDataState'
+import EmptyDataState from '@/components/common/state/EmptyDataState'
 import { useAppliedRecruitment } from '@/hooks/api'
 import {
   AppliedRecruitmentCard,
