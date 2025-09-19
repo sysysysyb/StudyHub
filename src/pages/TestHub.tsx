@@ -33,7 +33,7 @@ function TestHub() {
       </aside>
       <main className="w-full overflow-auto p-20">
         <Suspense fallback={<div>Loading...</div>}>
-          <Outlet />
+          <Outlet key={pathname} />
         </Suspense>
       </main>
     </main>
