@@ -30,3 +30,11 @@ export const FormattedEndDate = (endDateString: Date) => {
   const endDateMonth = endDate.getMonth() + 1
   return `${endDateYear}년 ${endDateMonth}월`
 }
+
+export const FormattedDateWithDots = (date: string) => {
+  const yyyy = date?.substring(0, 4)
+  const mm = date?.substring(5, 7)
+  const dd = date?.substring(8, 10)
+
+  return `${yyyy}. ${mm}. ${dd}.`
+}
