@@ -3,8 +3,11 @@ import { BenefitCard } from '@/components/common/card/BenefitCard'
 import { CardTitle } from '@/components/common/card/Card'
 import LandingPageImage from '@/assets/images/LandingPageImage.jpg'
 import { BookOpen, Award, ArrowRight, UsersRound } from 'lucide-react'
+import { useLoginStore } from '@/store/useLoginStore'
 
 const LandingPage = () => {
+  const { isLoggedIn } = useLoginStore()
+
   return (
     <div className="mx-auto flex max-w-[1440px] flex-col">
       {/* 1번 섹션 */}
@@ -153,18 +156,20 @@ const LandingPage = () => {
             수백 개의 강의와 활발한 스터디 그룹이 여러분을 기다리고 있습니다.
           </div>
           <div className="flex gap-4">
-            {/* TODO: 전역상태로 로그인 상태받아 조건부 렌더링 추가 */}
-            {/* 비 로그인 시에는 무료로 시작하기만 존재하는 게 맞는 것 같음 */}
-            <Button variant="reverse" size="lg" className="bg-white">
-              무료로 시작하기
-            </Button>
-            {/* 로그인 시 아래 버튼으로 변경 */}
-            {/* <Button variant="reverse" size="lg" className="bg-white">
-              스터디 그룹 참여하기
-            </Button> */}
-            <Button size="lg" className="border-[2px] border-white">
-              스터디 그룹 만들기
-            </Button>
+            {isLoggedIn ? (
+              <>
+                <Button variant="reverse" size="lg" className="bg-white">
+                  스터디 그룹 참여하기
+                </Button>
+                <Button size="lg" className="border-[2px] border-white">
+                  스터디 그룹 만들기
+                </Button>
+              </>
+            ) : (
+              <Button variant="reverse" size="lg" className="bg-white">
+                무료로 시작하기
+              </Button>
+            )}
           </div>
         </div>
       </div>
