@@ -1,9 +1,5 @@
-import type {
-  AxiosError,
-  AxiosResponse,
-  InternalAxiosRequestConfig,
-} from 'axios'
-import { getAccessToken, isPublicEndpoint, setAccessToken } from '@/utils'
+import type { AxiosError, InternalAxiosRequestConfig } from 'axios'
+import { getAccessToken, isPublicEndpoint } from '@/utils'
 import api from '@/utils/axios'
 import { useEffect } from 'react'
 import useTokenRefresh from '@/hooks/api/auth/useTokenRefresh'
@@ -33,19 +29,6 @@ export default function useAxiosInterceptor() {
     return config
   }
 
-  const responseHandler = (response: AxiosResponse) => {
-    const { config, data } = response
-    const isLogin = config.url?.includes('auth/email/login')
-    const isTokenRefresh = config.url?.includes('token/refresh')
-    const accessToken = data?.access_token
-
-    if ((isLogin || isTokenRefresh) && accessToken) {
-      setAccessToken(accessToken)
-    }
-
-    return response
-  }
-
   const errorHandler = (error: AxiosError) => {
     const { config, response } = error
     const isTokenRefresh = config?.url?.includes('token/refresh')
@@ -62,7 +45,7 @@ export default function useAxiosInterceptor() {
   const requestInterceptor = api.interceptors.request.use(requestHandler)
 
   const responseInterceptor = api.interceptors.response.use(
-    (response) => responseHandler(response),
+    (response) => response,
     (error) => errorHandler(error)
   )
 
