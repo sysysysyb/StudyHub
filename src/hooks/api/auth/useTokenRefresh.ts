@@ -1,4 +1,5 @@
 import { useLoginStore } from '@/store/useLoginStore'
+import { setAccessToken } from '@/utils'
 import api from '@/utils/axios'
 import {
   useMutation,
@@ -8,7 +9,7 @@ import {
 
 export default function useTokenRefresh(options?: UseMutationOptions) {
   const qc = useQueryClient()
-  const { setLoggedOut } = useLoginStore()
+  const { setIsLoggedIn } = useLoginStore()
 
   return useMutation({
     ...options,
@@ -18,8 +19,13 @@ export default function useTokenRefresh(options?: UseMutationOptions) {
       const newAccessToken = response.data.access_token
       return newAccessToken
     },
+    onSuccess: (newAccessToken: string) => {
+      setAccessToken(newAccessToken)
+      setIsLoggedIn(true)
+      qc.invalidateQueries({ queryKey: ['users', 'me'] })
+    },
     onError: () => {
-      setLoggedOut()
+      setIsLoggedIn(false)
       qc.removeQueries({ queryKey: ['users', 'me'] })
     },
   })
