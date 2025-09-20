@@ -11,7 +11,7 @@ import {
 export default function useLogout(options?: UseMutationOptions) {
   const qc = useQueryClient()
   const { triggerToast } = useToast()
-  const { setLoggedOut } = useLoginStore()
+  const { setIsLoggedIn } = useLoginStore()
 
   return useMutation({
     mutationKey: ['users', 'logout'],
@@ -19,10 +19,10 @@ export default function useLogout(options?: UseMutationOptions) {
       await api.post(`/users/logout`)
     },
     onSuccess: () => {
-      setLoggedOut()
+      setIsLoggedIn(false)
       clearAccessToken()
       qc.removeQueries({ queryKey: ['users', 'me'] })
-      triggerToast('success', '로그아웃 성공')
+      triggerToast('success', '로그아웃이 완료되었습니다.')
     },
     ...options,
   })
