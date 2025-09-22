@@ -5,8 +5,6 @@ import {
 } from '@/components/my-page/bookmarked-pages'
 import { MD_WIDTH_PIXEL } from '@/constants/break-points'
 import {
-  useBookmarkedLectures,
-  useBookmarkedRecruitment,
   useInfiniteBookmarkedLecture,
   useInfiniteBookmarkedRecruitment,
 } from '@/hooks/api'
@@ -33,13 +31,6 @@ export default function Bookmark() {
     search: debouncedSearch,
   }
 
-  const bookmarkedRecruitmentQueryResult = useBookmarkedRecruitment(
-    recruitmentSearchParams
-  )
-
-  const bookmarkedLecturesQueryResult =
-    useBookmarkedLectures(lectureSearchParams)
-
   const bookmarkedLecturesInfinityQueryResult =
     useInfiniteBookmarkedLecture(lectureSearchParams)
 
@@ -57,8 +48,12 @@ export default function Bookmark() {
     return (
       <BookmarkedContent
         initialOption={option}
-        bookmarkedLecturesQueryResult={bookmarkedLecturesQueryResult}
-        bookmarkedRecruitmentQueryResult={bookmarkedRecruitmentQueryResult}
+        bookmarkedRecruitmentInfinteQueryResult={
+          bookmarkedRecruitmentInfiniteQueryResult
+        }
+        bookmarkedLecturesInfiniteQueryResult={
+          bookmarkedLecturesInfinityQueryResult
+        }
         searchState={search}
         setSearchState={setSearch}
       />

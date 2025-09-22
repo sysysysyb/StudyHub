@@ -5,7 +5,11 @@ import { BookmarkedRecruitmentCard } from '@/components/my-page'
 import BookmarkedLectureCard from '@/components/my-page/bookmarked-lecture/BookmarkedLectureCard'
 import type { BookmarkedLectures } from '@/types/api-response-types/lecture-response-type'
 import type { BookmarkedRecruitments } from '@/types/api-response-types/recruitment-response-types'
-import type { UseQueryResult } from '@tanstack/react-query'
+import type {
+  InfiniteData,
+  UseInfiniteQueryResult,
+  UseQueryResult,
+} from '@tanstack/react-query'
 import { SearchIcon } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router'
@@ -25,21 +29,22 @@ const OPTION_MAP: Record<optionKey, optionValue> = {
 
 interface BookmarkedContentProps {
   initialOption?: optionKey
-
-  bookmarkedRecruitmentQueryResult: UseQueryResult<
-    BookmarkedRecruitments,
+  bookmarkedRecruitmentInfinteQueryResult: UseInfiniteQueryResult<
+    InfiniteData<BookmarkedRecruitments, unknown>,
     Error
   >
-  bookmarkedLecturesQueryResult: UseQueryResult<BookmarkedLectures, Error>
-
+  bookmarkedLecturesInfiniteQueryResult: UseInfiniteQueryResult<
+    InfiniteData<BookmarkedLectures, unknown>,
+    Error
+  >
   searchState: string
   setSearchState: React.Dispatch<React.SetStateAction<string>>
 }
 
 export default function BookmarkedContent({
   initialOption = 'entire',
-  bookmarkedLecturesQueryResult,
-  bookmarkedRecruitmentQueryResult,
+  bookmarkedRecruitmentInfinteQueryResult,
+  bookmarkedLecturesInfiniteQueryResult,
   searchState,
   setSearchState,
 }: BookmarkedContentProps) {
@@ -52,16 +57,38 @@ export default function BookmarkedContent({
     OPTION_MAP[initialOption]
   )
 
-  const { data: recruitments, isPending: isRecruitmentPending } =
-    bookmarkedRecruitmentQueryResult
+  const {
+    data: recruitmentsInfiniteData,
+    isFetchingNextPage: isFetchingNextRecruitments,
+    fetchNextPage: fetchNextRecruitments,
+  } = bookmarkedRecruitmentInfinteQueryResult
 
-  const { data: lectures, isPending: isLecturePending } =
-    bookmarkedLecturesQueryResult
+  const {
+    data: lecturesInfiniteData,
+    isFetchingNextPage: isFetchingNextLectures,
+    fetchNextPage: fetchNextLectures,
+  } = bookmarkedLecturesInfiniteQueryResult
+
+  const lectures = useMemo(
+    () =>
+      lecturesInfiniteData
+        ? lecturesInfiniteData.pages.flatMap((page) => page.results)
+        : [],
+    [lecturesInfiniteData]
+  )
+
+  const recruitments = useMemo(
+    () =>
+      recruitmentsInfiniteData
+        ? recruitmentsInfiniteData.pages.flatMap((page) => page.results)
+        : [],
+    [recruitmentsInfiniteData]
+  )
 
   //북마크한 공고와 강의 개수를 메뉴에 표시
   useEffect(() => {
     if (recruitments) {
-      const temp = `${RECRUITMENT} (${recruitments.results.length})`
+      const temp = `${RECRUITMENT} (${recruitments.length})`
       bookmarkedDropdownOption[1].label = temp
 
       if (selectedOption === RECRUITMENT) {
@@ -70,19 +97,19 @@ export default function BookmarkedContent({
     }
 
     if (lectures) {
-      const temp = `${LECTURE} (${lectures.results.length})`
+      const temp = `${LECTURE} (${lectures.length})`
       bookmarkedDropdownOption[2].label = temp
     }
 
     if (recruitments && lectures) {
-      const temp = `${ENTIRE} (${lectures.results.length + recruitments.results.length})`
+      const temp = `${ENTIRE} (${lectures.length + recruitments.length})`
       bookmarkedDropdownOption[0].label = temp
 
       if (selectedOption === ENTIRE) {
         setSelectedOption(temp)
       }
     }
-  }, [recruitments, lectures, bookmarkedDropdownOption, selectedOption])
+  }, [bookmarkedDropdownOption, selectedOption, recruitments, lectures])
 
   const navigate = useNavigate()
 
@@ -99,9 +126,9 @@ export default function BookmarkedContent({
   }
 
   //공고 데이터 여부
-  const hasRecruitment = recruitments && recruitments.results.length > 0
+  const hasRecruitment = recruitments.length > 0
   //강의 데이터 여부
-  const hasLecture = lectures && lectures.results.length > 0
+  const hasLecture = lectures.length > 0
   //공고를 선택했는지 여부
   const isRecruitmentSelected =
     selectedOption.startsWith(ENTIRE) || selectedOption.startsWith(RECRUITMENT)
@@ -145,12 +172,8 @@ export default function BookmarkedContent({
         {(() => {
           if (!isRecruitmentSelected) return null
 
-          if (isRecruitmentPending) {
-            return [...Array(5)].map((_, i) => <ListItemSkeleton key={i} />)
-          }
-
           if (hasRecruitment) {
-            return recruitments.results.map((recruitment) => (
+            return recruitments.map((recruitment) => (
               <BookmarkedRecruitmentCard
                 recruitment={recruitment}
                 key={recruitment.uuid}
@@ -164,18 +187,26 @@ export default function BookmarkedContent({
         {(() => {
           if (!isLectureSelected) return null
 
-          if (isLecturePending) {
-            return [...Array(5)].map((_, i) => <ListItemSkeleton key={i} />)
-          }
-
           if (hasLecture) {
-            return lectures.results.map((lecture, i) => (
+            return lectures.map((lecture, i) => (
               <BookmarkedLectureCard lecture={lecture} key={i} />
             ))
           } else {
             return <EmptyDataState />
           }
         })()}
+        {isFetchingNextLectures || isFetchingNextRecruitments
+          ? [...Array(5)].map((_, i) => <ListItemSkeleton key={i} />)
+          : null}
+        <button
+          onClick={() => {
+            if (isRecruitmentSelected) fetchNextRecruitments()
+
+            if (isLectureSelected) fetchNextLectures()
+          }}
+        >
+          더보기
+        </button>
       </main>
     </div>
   )
