@@ -8,6 +8,7 @@ import {
   useQueryClient,
   type UseMutationOptions,
 } from '@tanstack/react-query'
+import { useNavigate } from 'react-router'
 
 export default function useLogin(
   options?: UseMutationOptions<string, Error, UserLogin>
@@ -15,6 +16,7 @@ export default function useLogin(
   const qc = useQueryClient()
   const { triggerToast } = useToast()
   const { setIsLoggedIn } = useLoginStore()
+  const navigate = useNavigate()
 
   return useMutation<string, Error, UserLogin>({
     ...options,
@@ -29,6 +31,7 @@ export default function useLogin(
       setIsLoggedIn(true)
       await qc.invalidateQueries({ queryKey: ['users', 'me'] })
       triggerToast('success', '로그인이 완료되었습니다.')
+      navigate('/')
     },
     onError: () => {
       triggerToast('error', '잘못된 이메일 또는 비밀번호 입니다.')
