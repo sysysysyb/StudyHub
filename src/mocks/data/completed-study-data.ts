@@ -1,12 +1,11 @@
 import type { CompletedStudy } from '@/types/api-response-types/completed-study-type'
 
-export const completedStudyMock: CompletedStudy[] | null = [
-  // 실제 api 호출에서 데이터가 없을 경우도 테스트하기 위해 null 타입 추가.
-  // 유지하는 편이 실제와 유사할 것으로 판단함.
+export const completedStudyMock: CompletedStudy[] = [
+  // 추후 Post API를 위해 null 타입 삭제.
   {
     imageUrl: 'https://picsum.photos/seed/react/400/250',
     title: 'React 심화 스터디',
-    period: '2025.01 - 2025.03',
+    period: '3개월',
     endDate: new Date('2025-03-15'),
     participants: 5,
     isReviewed: true,
@@ -16,7 +15,7 @@ export const completedStudyMock: CompletedStudy[] | null = [
   {
     imageUrl: 'https://picsum.photos/seed/nextjs/400/250',
     title: 'Next.js 프로젝트 스터디',
-    period: '2025.04 - 2025.06',
+    period: '3개월',
     endDate: new Date('2025-06-20'),
     participants: 6,
     isReviewed: false,
@@ -26,7 +25,7 @@ export const completedStudyMock: CompletedStudy[] | null = [
   {
     imageUrl: 'https://picsum.photos/seed/algorithm/400/250',
     title: '알고리즘 문제풀이 스터디',
-    period: '2025.07 - 2025.08',
+    period: '2개월',
     endDate: new Date('2025-08-30'),
     participants: 4,
     isReviewed: true,
@@ -36,7 +35,7 @@ export const completedStudyMock: CompletedStudy[] | null = [
   {
     imageUrl: 'https://picsum.photos/seed/design/400/250',
     title: 'UI/UX 디자인 스터디',
-    period: '2025.09 - 2025.10',
+    period: '2개월',
     endDate: new Date('2025-10-25'),
     participants: 8,
     isReviewed: true,
