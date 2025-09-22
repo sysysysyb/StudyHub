@@ -9,6 +9,7 @@ import {
   Bookmark,
 } from '@/pages'
 import FindEmail from '@/pages/auth/find-email/FindEmail'
+import FindPassword from '@/pages/auth/find-password/FindPassword'
 import { Route, Routes } from 'react-router'
 
 function MainRoutes() {
@@ -22,7 +23,7 @@ function MainRoutes() {
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
           <Route path="find-email" element={<FindEmail />} />
-          <Route path="find-password" element={<div>find-password</div>} />
+          <Route path="find-password" element={<FindPassword />} />
           <Route path="restore-user" element={<div>restore-user</div>} />
         </Route>
 
