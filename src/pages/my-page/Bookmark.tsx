@@ -4,7 +4,11 @@ import {
   BookmarkedRecruitment,
 } from '@/components/my-page/bookmarked-pages'
 import { MD_WIDTH_PIXEL } from '@/constants/break-points'
-import { useBookmarkedLectures, useBookmarkedRecruitment } from '@/hooks/api'
+import {
+  useBookmarkedLectures,
+  useBookmarkedRecruitment,
+  useInfiniteBookmarkedLecture,
+} from '@/hooks/api'
 import { useDebounce } from '@/hooks/useDebounce'
 import useWindowWidth from '@/hooks/useWindowWidth'
 import type { lectureSearchParams, recruitmentSearchParams } from '@/types'
@@ -35,6 +39,9 @@ export default function Bookmark() {
   const bookmarkedLecturesQueryResult =
     useBookmarkedLectures(lectureSearchParams)
 
+  const bookmarkedLecturesInfinityQueryResult =
+    useInfiniteBookmarkedLecture(lectureSearchParams)
+
   if (windowWidth < MD_WIDTH_PIXEL) {
     const option =
       content === 'recruitment'
@@ -64,7 +71,9 @@ export default function Bookmark() {
     } else {
       return (
         <BookmarkedLecture
-          bookmarkedLecturesQueryResult={bookmarkedLecturesQueryResult}
+          bookmarkedLecturesInfiniteQueryResult={
+            bookmarkedLecturesInfinityQueryResult
+          }
           searchState={search}
           setSearchState={setSearch}
         />

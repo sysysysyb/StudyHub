@@ -3,22 +3,31 @@ import { Input } from '@/components/common/input'
 import EmptyDataState from '@/components/common/state/EmptyDataState'
 import BookmarkedLectureCard from '@/components/my-page/bookmarked-lecture/BookmarkedLectureCard'
 import type { BookmarkedLectures } from '@/types/api-response-types/lecture-response-type'
-import type { UseQueryResult } from '@tanstack/react-query'
+import type {
+  InfiniteData,
+  UseInfiniteQueryResult,
+} from '@tanstack/react-query'
 import { SearchIcon } from 'lucide-react'
 
 interface BookmarkedLectureProps {
-  bookmarkedLecturesQueryResult: UseQueryResult<BookmarkedLectures, Error>
+  bookmarkedLecturesInfiniteQueryResult: UseInfiniteQueryResult<
+    InfiniteData<BookmarkedLectures, unknown>,
+    Error
+  >
 
   searchState: string
   setSearchState: React.Dispatch<React.SetStateAction<string>>
 }
 
 export default function BookmarkedLecture({
-  bookmarkedLecturesQueryResult,
+  bookmarkedLecturesInfiniteQueryResult,
   searchState,
   setSearchState,
 }: BookmarkedLectureProps) {
-  const { data, isPending } = bookmarkedLecturesQueryResult
+  const { data, isFetchingNextPage, fetchNextPage } =
+    bookmarkedLecturesInfiniteQueryResult
+
+  const recruitments = data ? data.pages.flatMap((page) => page.results) : []
 
   return (
     <div>
@@ -40,15 +49,23 @@ export default function BookmarkedLecture({
         </div>
       </header>
       <main className="flex flex-col gap-4">
-        {isPending ? (
-          [...Array(5)].map((_, i) => <ListItemSkeleton key={i} />)
-        ) : data && data.results.length > 0 ? (
-          data.results.map((lecture, i) => (
+        {recruitments.length > 0 ? (
+          recruitments.map((lecture, i) => (
             <BookmarkedLectureCard lecture={lecture} key={i} />
           ))
         ) : (
           <EmptyDataState />
         )}
+        {isFetchingNextPage
+          ? [...Array(5)].map((_, i) => <ListItemSkeleton key={i} />)
+          : null}
+        <button
+          onClick={() => {
+            fetchNextPage()
+          }}
+        >
+          더보기
+        </button>
       </main>
     </div>
   )
