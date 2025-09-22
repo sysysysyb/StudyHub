@@ -8,11 +8,8 @@ import AppliedRecruitmentCard from '@/components/my-page/applied-recruitment/App
 import { AppliedStatusBadge } from '@/components/my-page/applied-recruitment/AppliedStatusBadge'
 import { ApplicationDetailModal } from '@/components/my-page/applied-recruitment/ApplicationDetailModal'
 import { CompletedStudyImageCard } from '@/components/my-page/completed-study/CompletedStudyImageCard'
-<<<<<<< HEAD
 import { ReviewInputModal } from '@/components/my-page/completed-study/ReviewInputModal'
-=======
 import { RatingStars } from '@/components/my-page/completed-study/RatingStars'
->>>>>>> cb5ae4b (✨ Feature: 인기강의카드 컴포넌트 생성, 카드 배럴파일 생성 및 연동 (#206))
 
 export {
   MyPageSideBar,
@@ -25,9 +22,6 @@ export {
   AppliedStatusBadge,
   ApplicationDetailModal,
   CompletedStudyImageCard,
-<<<<<<< HEAD
   ReviewInputModal,
-=======
   RatingStars,
->>>>>>> cb5ae4b (✨ Feature: 인기강의카드 컴포넌트 생성, 카드 배럴파일 생성 및 연동 (#206))
 }
