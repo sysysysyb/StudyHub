@@ -8,7 +8,6 @@ import type { BookmarkedRecruitments } from '@/types/api-response-types/recruitm
 import type {
   InfiniteData,
   UseInfiniteQueryResult,
-  UseQueryResult,
 } from '@tanstack/react-query'
 import { SearchIcon } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
@@ -168,6 +167,7 @@ export default function BookmarkedContent({
         </div>
       </header>
       <main className="flex flex-col gap-4">
+        {/* TODO: 북마크와 공고 통합으로 시간 순 렌더링 */}
         {/* 공고 렌더링 */}
         {(() => {
           if (!isRecruitmentSelected) return null
