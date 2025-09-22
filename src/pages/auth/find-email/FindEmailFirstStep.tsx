@@ -32,7 +32,7 @@ function FindEmailFirstStep({
   const onSubmit = (value: FindEmailStep1Type) => onNext(value)
 
   return (
-    <div className="flex flex-col gap-12">
+    <article className="flex flex-col gap-12">
       <div className="flex flex-col items-center">
         <AuthIcon Icon={UserRoundSearch} />
         <AuthTitle className="pt-4 pb-2 text-lg font-semibold">
@@ -43,15 +43,18 @@ function FindEmailFirstStep({
         </AuthDescription>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
-        <Input placeholder="이름" {...register('name')} />
-        {errors.name && (
-          <InputErrorMessage>{`${errors.name.message}`}</InputErrorMessage>
-        )}
-        <Input placeholder="휴대전화 번호" {...register('phoneNumber')} />
-        {errors.phoneNumber && (
-          <InputErrorMessage>{`${errors.phoneNumber.message}`}</InputErrorMessage>
-        )}
-
+        <div className="flex flex-col gap-2">
+          <Input placeholder="이름" {...register('name')} />
+          {errors.name && (
+            <InputErrorMessage>{`${errors.name.message}`}</InputErrorMessage>
+          )}
+        </div>
+        <div className="flex flex-col gap-2">
+          <Input placeholder="휴대전화 번호" {...register('phoneNumber')} />
+          {errors.phoneNumber && (
+            <InputErrorMessage>{`${errors.phoneNumber.message}`}</InputErrorMessage>
+          )}
+        </div>
         <AuthSubmitButton disabled={!isValid}>다음 단계</AuthSubmitButton>
         <Link
           to="/auth/login"
@@ -60,7 +63,7 @@ function FindEmailFirstStep({
           로그인으로 돌아가기
         </Link>
       </form>
-    </div>
+    </article>
   )
 }
 

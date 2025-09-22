@@ -11,7 +11,7 @@ interface FindEmailThirdStepProps {
 
 function FindEmailThirdStep({ email, createdAt }: FindEmailThirdStepProps) {
   return (
-    <div className="flex flex-col gap-12">
+    <article className="flex flex-col gap-12">
       <div className="flex flex-col items-center">
         <AuthIcon
           Icon={Check}
@@ -39,7 +39,7 @@ function FindEmailThirdStep({ email, createdAt }: FindEmailThirdStepProps) {
           <Link to="/auth/find-password">비밀번호 찾기</Link>
         </Button>
       </div>
-    </div>
+    </article>
   )
 }
 

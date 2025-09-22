@@ -50,7 +50,7 @@ function FindEmailSecondStep({
   }, [])
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
+    <article className="flex flex-col gap-12">
       <div className="flex flex-col items-center">
         <AuthIcon Icon={Phone} />
         <AuthTitle className="pt-4 pb-2 text-lg font-semibold">
@@ -60,28 +60,33 @@ function FindEmailSecondStep({
           {phoneNumber}로 인증코드를 발송했습니다.
         </AuthDescription>
       </div>
-      <div className="flex gap-2">
-        <Input
-          {...register('code')}
-          placeholder="인증코드 6자리를 입력해주세요"
-        />
-        <AuthVerifyButton
-          disabled={!isCodeSent.phoneNumber}
-          onClick={() => handleCodeVerify('phoneNumber')}
-        >
-          인증코드확인
-        </AuthVerifyButton>
-      </div>
-      {errors.code && (
-        <InputErrorMessage>{`${errors.code.message}`}</InputErrorMessage>
-      )}
-      <AuthSubmitButton disabled={!isValid || !isCodeVerified.phoneNumber}>
-        인증하기
-      </AuthSubmitButton>
-      <Button variant="outline" onClick={onPrev} className="w-full py-4">
-        이전 단계
-      </Button>
-    </form>
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
+        <div className="flex flex-col gap-2">
+          <div className="flex gap-2">
+            <Input
+              {...register('code')}
+              placeholder="인증코드 6자리를 입력해주세요"
+            />
+            <AuthVerifyButton
+              disabled={!isCodeSent.phoneNumber}
+              onClick={() => handleCodeVerify('phoneNumber')}
+            >
+              인증코드확인
+            </AuthVerifyButton>
+          </div>
+          {errors.code && (
+            <InputErrorMessage>{`${errors.code.message}`}</InputErrorMessage>
+          )}
+        </div>
+
+        <AuthSubmitButton disabled={!isValid || !isCodeVerified.phoneNumber}>
+          인증하기
+        </AuthSubmitButton>
+        <Button variant="outline" onClick={onPrev} className="w-full py-4">
+          이전 단계
+        </Button>
+      </form>
+    </article>
   )
 }
 
