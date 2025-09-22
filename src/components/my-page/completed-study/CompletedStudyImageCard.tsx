@@ -8,6 +8,7 @@ import {
 import { formattedEndDate } from '@/utils'
 import { RatingStars } from './RatingStars'
 import type { CompletedStudy } from '@/types/api-response-types/completed-study-type'
+import { ReviewModal } from './ReviewModal'
 
 interface CompletedStudyImageCardProps {
   completedStudy: CompletedStudy
@@ -40,7 +41,6 @@ export const CompletedStudyImageCard = ({
         </p>
         <p className={paragraphCn}>
           <UsersRound size={iconSize} />
-          {/* lucide에 일치하는 아이콘이 없어 대체 */}
           참여자: {participants}명
         </p>
       </div>
@@ -49,7 +49,10 @@ export const CompletedStudyImageCard = ({
         <div className="flex flex-col gap-2 bg-gray-50 p-4 text-gray-600">
           <div className="flex items-center justify-between">
             <RatingStars rating={rating} size={iconSize} />
-            <EditButton size={iconSize} className="cursor-pointer" />
+            <ReviewModal completedStudy={completedStudy}>
+              <EditButton size={iconSize} className="cursor-pointer" />
+            </ReviewModal>
+
             {/* 리뷰작성 모달에 기존 데이터가 이미 존재하는 수정버전으로 로직 구현 후 onClick으로 연동 필요 */}
           </div>
           <p className="text-sm">{comment}</p>
@@ -59,7 +62,9 @@ export const CompletedStudyImageCard = ({
           <div className="bg-primary-50 text-primary-800 flex w-full justify-center rounded-md p-4">
             아직 리뷰를 작성하지 않았습니다.
           </div>
-          <Button className="w-full">리뷰 작성</Button>
+          <ReviewModal completedStudy={completedStudy}>
+            <Button className="w-full">리뷰 작성</Button>
+          </ReviewModal>
         </div>
       )}
     </ImageCard>
