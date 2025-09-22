@@ -16,9 +16,14 @@ export const FindPasswordStep2Schema = z.object({
 
 export type FindPasswordStep2Type = z.infer<typeof FindPasswordStep2Schema>
 
-export const FindPasswordStep3Schema = authSchema.pick({
-  password: true,
-  confirmPassword: true,
-})
+export const FindPasswordStep3Schema = authSchema
+  .pick({
+    password: true,
+    confirmPassword: true,
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: '비밀번호와 일치하지 않습니다',
+    path: ['confirmPassword'],
+  })
 
-export type FindPasswordStep3Type = z.infer<typeof FindPasswordStep2Schema>
+export type FindPasswordStep3Type = z.infer<typeof FindPasswordStep3Schema>
