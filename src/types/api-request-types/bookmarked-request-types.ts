@@ -5,7 +5,7 @@ export interface recruitmentSearchParams {
 }
 
 export interface lectureSearchParams {
-  page?: string
+  cursor?: string
   pageSize?: string
   search?: string
 }
