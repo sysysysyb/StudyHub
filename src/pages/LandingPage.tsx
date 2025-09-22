@@ -11,13 +11,13 @@ const LandingPage = () => {
   return (
     <div className="mx-auto flex max-w-[1440px] flex-col">
       {/* 1번 섹션 */}
-      <div className="bg-primary-50 flex items-center px-5 py-20 sm:px-14 md:px-21 xl:px-28">
+      <section className="bg-primary-50 flex items-center px-5 py-20 sm:px-14 md:px-21 xl:px-28">
         <div className="mx-auto flex max-w-[1280px] gap-4 sm:gap-12">
           <div>
-            <div className="sm:text-heading2 text-heading3 flex flex-col pb-6 font-bold lg:text-4xl xl:text-5xl">
+            <h3 className="sm:text-heading2 text-heading3 flex flex-col pb-6 font-bold lg:text-4xl xl:text-5xl">
               <span className="text-gray-900">IT 전문 지식을</span>
               <span className="text-primary-600">함께 배워나가세요</span>
-            </div>
+            </h3>
             <div className="sm:text-heading5 lg:text-heading4 text-secondary text-md pb-4 font-semibold sm:pb-8 sm:leading-7">
               최고의 강사진과 함께하는 IT 강의와 스터디 그룹으로 실무 역량을
               키워보세요.
@@ -50,14 +50,14 @@ const LandingPage = () => {
             className="aspect-[3/2] w-[45vw] max-w-146 rounded-lg object-contain"
           />
         </div>
-      </div>
+      </section>
       {/* 2번 섹션 */}
-      <div className="bg-white px-4 py-16 md:px-8 lg:px-20 xl:px-28">
+      <section className="bg-white px-4 py-16 md:px-8 lg:px-20 xl:px-28">
         <div className="flex max-w-[1280px] flex-col">
           <div className="pb-12">
-            <div className="text-heading2 flex justify-center pb-4 text-gray-900">
+            <h3 className="text-heading2 flex justify-center pb-4 text-gray-900">
               왜 StudyHub을 선택해야 할까요?
-            </div>
+            </h3>
             <span className="text-heading5 text-secondary flex justify-center">
               체계적인 학습과 실무경험을 동시에 얻을 수 있는 최적의
               플랫폼입니다.
@@ -93,12 +93,12 @@ const LandingPage = () => {
             />
           </div>
         </div>
-      </div>
+      </section>
       {/* 3번 섹션 */}
-      <div className="flex flex-col bg-gray-50 px-4 py-16 md:px-8 lg:px-20 xl:px-28">
+      <section className="flex flex-col bg-gray-50 px-4 py-16 md:px-8 lg:px-20 xl:px-28">
         <div className="flex items-center justify-between pb-8">
           <div className="flex flex-col gap-2">
-            <p className="text-heading2">인기 강의</p>
+            <h3 className="text-heading2">인기 강의</h3>
             <p className="text-secondary">
               지금 가장 많은 사람들이 수강하는 강의들
             </p>
@@ -143,13 +143,13 @@ const LandingPage = () => {
             originalPrice={100000}
           />
         </div>
-      </div>
+      </section>
       {/* 4번 섹션 */}
-      <div className="bg-primary-500 px-4 py-16 md:px-8 lg:px-20 xl:px-28">
+      <section className="bg-primary-500 px-4 py-16 md:px-8 lg:px-20 xl:px-28">
         <div className="flex max-w-[1280px] flex-col items-center">
-          <div className="text-heading3 sm:text-heading2 pb-4 text-white">
+          <h3 className="text-heading3 sm:text-heading2 pb-4 text-white">
             지금 시작하여 IT 전문가가 되어보세요!
-          </div>
+          </h3>
           <div className="text-md sm:text-heading4 text-primary-100 pb-8 font-semibold">
             수백 개의 강의와 활발한 스터디 그룹이 여러분을 기다리고 있습니다.
           </div>
@@ -188,7 +188,7 @@ const LandingPage = () => {
             )}
           </div>
         </div>
-      </div>
+      </section>
     </div>
   )
 }
