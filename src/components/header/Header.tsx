@@ -15,7 +15,7 @@ function Header(): ReactNode {
   return isMobile ? (
     <MobileHeader />
   ) : (
-    <header className="sticky top-0 z-99 flex h-[65px] items-center justify-between border border-gray-200 bg-white px-6 pb-px md:px-8">
+    <header className="sticky top-0 z-99 flex h-16 items-center justify-between border border-gray-200 bg-white px-6 pb-px md:px-8">
       <HeaderLogo />
       <HeaderNavList />
     </header>

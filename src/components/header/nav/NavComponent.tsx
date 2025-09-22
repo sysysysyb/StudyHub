@@ -9,7 +9,7 @@ export function NavComponent({ to, label }: NavComponentProps): ReactNode {
   return (
     <NavLink
       to={to}
-      className="mx-2.5 h-6 cursor-pointer whitespace-nowrap text-gray-700 hover:opacity-80 lg:mx-4"
+      className="h-6 cursor-pointer whitespace-nowrap text-gray-700 hover:opacity-80"
     >
       {label}
     </NavLink>
