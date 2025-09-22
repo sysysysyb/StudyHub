@@ -26,7 +26,7 @@ export function HeaderNavList(): ReactNode {
         <NavProfile onProfileClick={handleProfileClick} />
       </div>
       {isProfileClicked && (
-        <div className="absolute top-14.5 right-0 flex h-30 w-30 flex-col justify-evenly rounded-b-lg bg-white">
+        <div className="absolute top-14.5 right-0 flex h-30 w-30 flex-col justify-evenly rounded-b-lg border-r border-b border-l border-gray-200 bg-white">
           <Link
             to="/my-page"
             className="text-center text-gray-700 hover:opacity-80"
