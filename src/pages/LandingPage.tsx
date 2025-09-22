@@ -4,6 +4,8 @@ import { CardTitle } from '@/components/common/card/Card'
 import LandingPageImage from '@/assets/images/LandingPageImage.jpg'
 import { BookOpen, Award, ArrowRight, UsersRound } from 'lucide-react'
 import { useLoginStore } from '@/store/useLoginStore'
+import { API_BASE_URL } from '@/constants/api-constants'
+import { Link } from 'react-router'
 
 const LandingPage = () => {
   const { isLoggedIn } = useLoginStore()
@@ -23,13 +25,22 @@ const LandingPage = () => {
               키워보세요.
             </div>
             <div className="flex gap-4">
-              <Button size="sm" className="sm:px-6 sm:py-3 sm:leading-6">
+              <Button
+                size="sm"
+                className="sm:px-6 sm:py-3 sm:leading-6"
+                onClick={() => {
+                  window.location.href = `${API_BASE_URL}/lectures/list`
+                }}
+              >
                 강의 둘러보기
               </Button>
               <Button
                 variant="reverse"
                 size="sm"
                 className="sm:px-6 sm:py-3 sm:leading-6"
+                onClick={() => {
+                  window.location.href = `${API_BASE_URL}/study-group`
+                }}
               >
                 스터디 그룹 참여
               </Button>
@@ -96,7 +107,9 @@ const LandingPage = () => {
             </p>
           </div>
           <button className="text-primary-600 flex whitespace-nowrap">
-            <span>모든 강의 보기</span>
+            <a href={`${API_BASE_URL}/lectures/list`} target="_self">
+              모든 강의 보기
+            </a>
             <ArrowRight className="pl-1" />
           </button>
         </div>
@@ -158,16 +171,34 @@ const LandingPage = () => {
           <div className="flex gap-4">
             {isLoggedIn ? (
               <>
-                <Button variant="reverse" size="lg" className="bg-white">
+                <Button
+                  variant="reverse"
+                  size="lg"
+                  className="bg-white"
+                  onClick={() => {
+                    window.location.href = `${API_BASE_URL}/lectures/list`
+                  }}
+                >
                   스터디 그룹 참여하기
                 </Button>
-                <Button size="lg" className="border-[2px] border-white">
+                <Button
+                  size="lg"
+                  className="border-[2px] border-white"
+                  onClick={() => {
+                    window.location.href = `${API_BASE_URL}/lectures/create`
+                  }}
+                >
                   스터디 그룹 만들기
                 </Button>
               </>
             ) : (
               <Button variant="reverse" size="lg" className="bg-white">
-                무료로 시작하기
+                <Link
+                  to="/auth/login"
+                  className="flex h-full w-full items-center justify-center"
+                >
+                  무료로 시작하기
+                </Link>
               </Button>
             )}
           </div>
