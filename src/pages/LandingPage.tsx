@@ -113,7 +113,7 @@ const LandingPage = () => {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {/* 임시로 만든 강의목록 카드 */}
           <PopularLectureCard
-            lecture_id="1"
+            lectureId="1"
             imgUrl={LandingPageImage}
             title="타이틀"
             provider="제공자"
@@ -123,7 +123,7 @@ const LandingPage = () => {
             originalPrice={100000}
           />
           <PopularLectureCard
-            lecture_id="1"
+            lectureId="1"
             imgUrl={LandingPageImage}
             title="타이틀"
             provider="제공자"
@@ -133,7 +133,7 @@ const LandingPage = () => {
             originalPrice={100000}
           />
           <PopularLectureCard
-            lecture_id="1"
+            lectureId="1"
             imgUrl={LandingPageImage}
             title="타이틀"
             provider="제공자"

@@ -3,7 +3,7 @@ import { RatingStars } from '@/components/my-page'
 import { LEARN_BASE_URL } from '@/constants/url-constants'
 
 export interface PopularLectureCardProps {
-  lecture_id: string
+  lectureId: string
   imgUrl: string
   title: string
   provider: string
@@ -14,7 +14,7 @@ export interface PopularLectureCardProps {
 }
 
 export const PopularLectureCard = ({
-  lecture_id,
+  lectureId,
   imgUrl,
   title,
   provider,
@@ -28,7 +28,7 @@ export const PopularLectureCard = ({
       imageUrl={imgUrl}
       variant="elevate"
       onClick={() => {
-        window.location.href = `${LEARN_BASE_URL}/lectures/list/${lecture_id}`
+        window.location.href = `${LEARN_BASE_URL}/lectures/list/${lectureId}`
         // 우선 하위 도메인은 명세서 상의 주소로 유지, 추후에 확인 필요.
       }}
       className="cursor-pointer"
