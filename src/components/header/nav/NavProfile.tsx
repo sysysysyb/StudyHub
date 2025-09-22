@@ -58,7 +58,7 @@ function NavProfile({ onProfileClick }: { onProfileClick: () => void }) {
       </div>
       {user && (
         <button
-          className="flex cursor-pointer items-center gap-2 bg-amber-200"
+          className="flex cursor-pointer items-center gap-2"
           onClick={onProfileClick}
         >
           <Avatar
