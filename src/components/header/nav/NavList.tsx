@@ -3,6 +3,7 @@ import { NavComponent } from './NavComponent'
 import NavProfile from './NavProfile'
 import { Link } from 'react-router'
 import useLogout from '@/hooks/api/auth/useLogout'
+import { LogOut, User } from 'lucide-react'
 
 export function HeaderNavList(): ReactNode {
   const [isProfileClicked, setIsProfileClicked] = useState(false)
@@ -26,19 +27,21 @@ export function HeaderNavList(): ReactNode {
         <NavProfile onProfileClick={handleProfileClick} />
       </div>
       {isProfileClicked && (
-        <div className="absolute top-14.5 right-0 flex h-30 w-30 flex-col justify-evenly rounded-b-lg border-r border-b border-l border-gray-200 bg-white">
+        <div className="absolute top-12 right-0 flex w-48 flex-col gap-2 rounded-lg border border-gray-200 bg-white py-2 shadow-lg">
           <Link
             to="/my-page"
-            className="text-center text-gray-700 hover:opacity-80"
+            className="flex items-center gap-3 px-4 py-2 text-gray-700 hover:opacity-80"
             onClick={handleProfileClick}
           >
-            마이페이지
+            <User className="size-4" />
+            <span className="text-sm font-normal">마이페이지</span>
           </Link>
           <button
-            className="text-danger-600 cursor-pointer hover:opacity-80"
+            className="text-danger-600 flex cursor-pointer items-center gap-3 px-4 py-2 hover:opacity-80"
             onClick={handleLogoutClick}
           >
-            로그아웃
+            <LogOut className="size-4" />
+            <span className="text-sm font-normal">로그아웃</span>
           </button>
         </div>
       )}
