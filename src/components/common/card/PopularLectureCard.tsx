@@ -1,7 +1,7 @@
 import { CardTitle, CardContent, ImageCard } from '@/components/common/card'
 import { RatingStars } from '@/components/my-page'
 
-interface PopularLectureCardProps {
+export interface PopularLectureCardProps {
   imgUrl: string
   title: string
   provider: string

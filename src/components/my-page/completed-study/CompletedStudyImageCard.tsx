@@ -1,4 +1,5 @@
-import { ImageCard, Button } from '@/components'
+import { Button } from '@/components'
+import { ImageCard } from '@/components/common/card'
 import {
   Clock,
   Calendar,

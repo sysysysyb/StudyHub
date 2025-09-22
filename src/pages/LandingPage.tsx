@@ -8,7 +8,6 @@ import { Link } from 'react-router'
 
 const LandingPage = () => {
   const { isLoggedIn } = useLoginStore()
-
   return (
     <div className="mx-auto flex max-w-[1440px] flex-col">
       {/* 1번 섹션 */}
@@ -114,48 +113,33 @@ const LandingPage = () => {
         </div>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {/* 임시로 만든 강의목록 카드 */}
-          <ImageCard imageUrl={LandingPageImage} variant="elevate">
-            <CardTitle className="pb-2 text-lg font-bold">타이틀</CardTitle>
-            <div>
-              <p className="text-secondary pb-3">제공자</p>
-              <div className="text-secondary flex pb-3">
-                <span className="text-primary-500">별점 컴포넌트</span>
-                <span className="pl-2">별점 텍스트 (리뷰어 수)</span>
-              </div>
-              <div>
-                <span className="text-heading5">Final Price</span>
-                <s className="text-secondary pl-2">original price</s>
-              </div>
-            </div>
-          </ImageCard>
-          <ImageCard imageUrl={LandingPageImage} variant="elevate">
-            <CardTitle className="pb-2 text-lg font-bold">타이틀</CardTitle>
-            <div>
-              <p className="text-secondary pb-3">제공자</p>
-              <div className="text-secondary flex pb-3">
-                <span className="text-primary-500">별점 컴포넌트</span>
-                <span className="pl-2">별점 텍스트 (리뷰어 수)</span>
-              </div>
-              <div>
-                <span className="text-heading5">Final Price</span>
-                <s className="text-secondary pl-2">original price</s>
-              </div>
-            </div>
-          </ImageCard>
-          <ImageCard imageUrl={LandingPageImage} variant="elevate">
-            <CardTitle className="pb-2 text-lg font-bold">타이틀</CardTitle>
-            <div>
-              <p className="text-secondary pb-3">제공자</p>
-              <div className="text-secondary flex pb-3">
-                <span className="text-primary-500">별점 컴포넌트</span>
-                <span className="pl-2">별점 텍스트 (리뷰어 수)</span>
-              </div>
-              <div>
-                <span className="text-heading5">Final Price</span>
-                <s className="text-secondary pl-2">original price</s>
-              </div>
-            </div>
-          </ImageCard>
+          <PopularLectureCard
+            imgUrl={LandingPageImage}
+            title="타이틀"
+            provider="제공자"
+            rating={4.5}
+            reviewers={13}
+            finalPrice={70000}
+            originalPrice={100000}
+          />
+          <PopularLectureCard
+            imgUrl={LandingPageImage}
+            title="타이틀"
+            provider="제공자"
+            rating={4.5}
+            reviewers={13}
+            finalPrice={70000}
+            originalPrice={100000}
+          />
+          <PopularLectureCard
+            imgUrl={LandingPageImage}
+            title="타이틀"
+            provider="제공자"
+            rating={4.5}
+            reviewers={13}
+            finalPrice={70000}
+            originalPrice={100000}
+          />
         </div>
       </div>
       {/* 4번 섹션 */}
