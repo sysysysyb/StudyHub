@@ -1,7 +1,9 @@
 import { CardTitle, CardContent, ImageCard } from '@/components/common/card'
 import { RatingStars } from '@/components/my-page'
+import { API_BASE_URL } from '@/constants/api-constants'
 
 export interface PopularLectureCardProps {
+  lecture_id: string
   imgUrl: string
   title: string
   provider: string
@@ -12,6 +14,7 @@ export interface PopularLectureCardProps {
 }
 
 export const PopularLectureCard = ({
+  lecture_id,
   imgUrl,
   title,
   provider,
@@ -21,7 +24,14 @@ export const PopularLectureCard = ({
   finalPrice,
 }: PopularLectureCardProps) => {
   return (
-    <ImageCard imageUrl={imgUrl} variant="elevate">
+    <ImageCard
+      imageUrl={imgUrl}
+      variant="elevate"
+      onClick={() => {
+        window.location.href = `${API_BASE_URL}/lectures/list/${lecture_id}`
+      }}
+      className="cursor-pointer"
+    >
       <CardTitle className="pb-2 text-lg font-bold">{title}</CardTitle>
       <CardContent>
         <p className="text-secondary pb-3">{provider}</p>
