@@ -1,21 +1,28 @@
 import { Dropdown, ListItemSkeleton } from '@/components'
 import { Input } from '@/components/common/input'
-import EmptyDataState from '@/components/common/state/EmptyDataState'
 import { BookmarkedRecruitmentCard } from '@/components/my-page'
 import BookmarkedLectureCard from '@/components/my-page/bookmarked-lecture/BookmarkedLectureCard'
+import { useWindowHeight } from '@/hooks'
+import useWindowWidth from '@/hooks/useWindowWidth'
 import type { BookmarkedLectures } from '@/types/api-response-types/lecture-response-type'
 import type { BookmarkedRecruitments } from '@/types/api-response-types/recruitment-response-types'
+import { cn } from '@/utils'
 import type {
   InfiniteData,
   UseInfiniteQueryResult,
 } from '@tanstack/react-query'
+import { useVirtualizer } from '@tanstack/react-virtual'
 import { SearchIcon } from 'lucide-react'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router'
 
 const ENTIRE = '전체'
 const RECRUITMENT = '공고'
 const LECTURE = '강의'
+
+const ESTIMATE_CARD_SIZE_PX = 260
+const OVER_SCAN = 3
+const FOOTER_SPACE = 1000 //완벽히 footer 사이즈에 맞춘게 아니고 적당히 보이게 설정
 
 type optionKey = 'entire' | 'lecture' | 'recruitment'
 type optionValue = typeof ENTIRE | typeof RECRUITMENT | typeof LECTURE
@@ -60,12 +67,14 @@ export default function BookmarkedContent({
     data: recruitmentsInfiniteData,
     isFetchingNextPage: isFetchingNextRecruitments,
     fetchNextPage: fetchNextRecruitments,
+    hasNextPage: hasNextRecruitment,
   } = bookmarkedRecruitmentInfinteQueryResult
 
   const {
     data: lecturesInfiniteData,
     isFetchingNextPage: isFetchingNextLectures,
     fetchNextPage: fetchNextLectures,
+    hasNextPage: hasNextLecture,
   } = bookmarkedLecturesInfiniteQueryResult
 
   const lectures = useMemo(
@@ -84,9 +93,68 @@ export default function BookmarkedContent({
     [recruitmentsInfiniteData]
   )
 
+  const contents = useMemo(
+    () => [...recruitments, ...lectures],
+    [recruitments, lectures]
+  )
+
+  const additionalVirtualItemCount =
+    (hasNextRecruitment ? 1 : 0) + (hasNextLecture ? 1 : 0)
+
+  //버추얼리스트 스크롤 대상
+  const parentRef = useRef<HTMLDivElement>(null)
+  //가상화 인스턴스
+  const virtualizer = useVirtualizer({
+    count: contents.length + additionalVirtualItemCount,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => ESTIMATE_CARD_SIZE_PX,
+    overscan: OVER_SCAN,
+  })
+
+  //무한 스크롤 트리거
+  useEffect(() => {
+    const [lastItem] = [...virtualizer.getVirtualItems()].reverse()
+
+    if (!lastItem) {
+      return
+    }
+
+    if (
+      lastItem.index >= contents.length - 1 &&
+      hasNextRecruitment &&
+      !isFetchingNextRecruitments
+    ) {
+      fetchNextRecruitments()
+    }
+
+    if (
+      lastItem.index >= contents.length - 1 &&
+      hasNextLecture &&
+      !isFetchingNextLectures
+    ) {
+      fetchNextLectures()
+    }
+  }, [
+    contents.length,
+    fetchNextLectures,
+    fetchNextRecruitments,
+    hasNextLecture,
+    hasNextRecruitment,
+    isFetchingNextLectures,
+    isFetchingNextRecruitments,
+    virtualizer,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    virtualizer.getVirtualItems(),
+  ])
+
+  const windowHeight = useWindowHeight()
+  const windowWidth = useWindowWidth()
+
+  const items = virtualizer.getVirtualItems()
+
   //북마크한 공고와 강의 개수를 메뉴에 표시
   useEffect(() => {
-    if (recruitments) {
+    if (recruitments.length > 0) {
       const temp = `${RECRUITMENT} (${recruitments.length})`
       bookmarkedDropdownOption[1].label = temp
 
@@ -95,12 +163,12 @@ export default function BookmarkedContent({
       }
     }
 
-    if (lectures) {
+    if (lectures.length > 0) {
       const temp = `${LECTURE} (${lectures.length})`
       bookmarkedDropdownOption[2].label = temp
     }
 
-    if (recruitments && lectures) {
+    if (recruitments.length > 0 || lectures.length > 0) {
       const temp = `${ENTIRE} (${lectures.length + recruitments.length})`
       bookmarkedDropdownOption[0].label = temp
 
@@ -124,10 +192,6 @@ export default function BookmarkedContent({
     }
   }
 
-  //공고 데이터 여부
-  const hasRecruitment = recruitments.length > 0
-  //강의 데이터 여부
-  const hasLecture = lectures.length > 0
   //공고를 선택했는지 여부
   const isRecruitmentSelected =
     selectedOption.startsWith(ENTIRE) || selectedOption.startsWith(RECRUITMENT)
@@ -166,47 +230,84 @@ export default function BookmarkedContent({
           </div>
         </div>
       </header>
-      <main className="flex flex-col gap-4">
-        {/* TODO: 북마크와 공고 통합으로 시간 순 렌더링 */}
-        {/* 공고 렌더링 */}
-        {(() => {
-          if (!isRecruitmentSelected) return null
-
-          if (hasRecruitment) {
-            return recruitments.map((recruitment) => (
-              <BookmarkedRecruitmentCard
-                recruitment={recruitment}
-                key={recruitment.uuid}
-              />
-            ))
-          } else {
-            return <EmptyDataState />
-          }
-        })()}
-        {/* 강의 렌더링 */}
-        {(() => {
-          if (!isLectureSelected) return null
-
-          if (hasLecture) {
-            return lectures.map((lecture, i) => (
-              <BookmarkedLectureCard lecture={lecture} key={i} />
-            ))
-          } else {
-            return <EmptyDataState />
-          }
-        })()}
-        {isFetchingNextLectures || isFetchingNextRecruitments
-          ? [...Array(5)].map((_, i) => <ListItemSkeleton key={i} />)
-          : null}
-        <button
-          onClick={() => {
-            if (isRecruitmentSelected) fetchNextRecruitments()
-
-            if (isLectureSelected) fetchNextLectures()
-          }}
+      <main
+        className="overflow-y-auto"
+        ref={parentRef}
+        style={{
+          height: `${windowHeight - FOOTER_SPACE}px`,
+          width: `${(windowWidth * 7) / 10}px`,
+        }}
+      >
+        <div
+          className={cn(
+            `h-[${virtualizer.getTotalSize()}px]`,
+            'relative w-full'
+          )}
         >
-          더보기
-        </button>
+          <div
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              transform: `translateY(${items[0]?.start ?? 0}px)`,
+            }}
+          >
+            {items.map((virtualRow) => {
+              const isLoaderRow = virtualRow.index > contents.length - 1
+              const content = contents[virtualRow.index]
+
+              if (
+                isLoaderRow &&
+                (isFetchingNextLectures || isFetchingNextRecruitments)
+              ) {
+                return (
+                  <div
+                    key={virtualRow.key}
+                    data-index={virtualRow.index}
+                    ref={virtualizer.measureElement}
+                  >
+                    {[...Array(5)].map((_, i) => (
+                      <div key={i} className="mb-2">
+                        <ListItemSkeleton />
+                      </div>
+                    ))}
+                  </div>
+                )
+              }
+
+              if (!content) return null
+
+              //content type === lecture -> lecture card
+              if ('instructor' in content && isLectureSelected) {
+                return (
+                  <div
+                    key={virtualRow.key}
+                    data-index={virtualRow.index}
+                    ref={virtualizer.measureElement}
+                    className="mb-2"
+                  >
+                    <BookmarkedLectureCard lecture={content} />
+                  </div>
+                )
+              }
+
+              //content type === recruitment -> recruitment card
+              if ('tags' in content && isRecruitmentSelected) {
+                return (
+                  <div
+                    key={virtualRow.key}
+                    data-index={virtualRow.index}
+                    ref={virtualizer.measureElement}
+                    className="mb-2"
+                  >
+                    <BookmarkedRecruitmentCard recruitment={content} />
+                  </div>
+                )
+              }
+            })}
+          </div>
+        </div>
       </main>
     </div>
   )
