@@ -3,12 +3,15 @@ import { Input } from '@/components/common/input'
 import { BookmarkedRecruitmentCard } from '@/components/my-page'
 import EmptyDataState from '@/components/common/state/EmptyDataState'
 import { SearchIcon } from 'lucide-react'
-import type { UseQueryResult } from '@tanstack/react-query'
+import type {
+  InfiniteData,
+  UseInfiniteQueryResult,
+} from '@tanstack/react-query'
 import type { BookmarkedRecruitments } from '@/types/api-response-types/recruitment-response-types'
 
 interface BookmarkedRecruitmentProps {
-  bookmarkedRecruitmentQueryResult: UseQueryResult<
-    BookmarkedRecruitments,
+  bookmarkedRecruitmentInfinteQueryResult: UseInfiniteQueryResult<
+    InfiniteData<BookmarkedRecruitments, unknown>,
     Error
   >
   searchState: string
@@ -16,11 +19,14 @@ interface BookmarkedRecruitmentProps {
 }
 
 export default function BookmarkedRecruitment({
-  bookmarkedRecruitmentQueryResult,
+  bookmarkedRecruitmentInfinteQueryResult,
   searchState,
   setSearchState,
 }: BookmarkedRecruitmentProps) {
-  const { data, isPending } = bookmarkedRecruitmentQueryResult
+  const { data, isFetchingNextPage, fetchNextPage } =
+    bookmarkedRecruitmentInfinteQueryResult
+
+  const recruitments = data ? data.pages.flatMap((page) => page.results) : []
 
   return (
     <div>
@@ -43,10 +49,8 @@ export default function BookmarkedRecruitment({
         </div>
       </header>
       <main className="flex flex-col gap-4">
-        {isPending ? (
-          [...Array(5)].map((_, i) => <ListItemSkeleton key={i} />)
-        ) : data && data.results.length > 0 ? (
-          data.results.map((recruitment) => (
+        {recruitments.length > 0 ? (
+          recruitments.map((recruitment) => (
             <BookmarkedRecruitmentCard
               recruitment={recruitment}
               key={recruitment.uuid}
@@ -55,6 +59,16 @@ export default function BookmarkedRecruitment({
         ) : (
           <EmptyDataState />
         )}
+        {isFetchingNextPage
+          ? [...Array(5)].map((_, i) => <ListItemSkeleton key={i} />)
+          : null}
+        <button
+          onClick={() => {
+            fetchNextPage()
+          }}
+        >
+          더보기
+        </button>
       </main>
     </div>
   )

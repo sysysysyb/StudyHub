@@ -8,6 +8,7 @@ import {
   useBookmarkedLectures,
   useBookmarkedRecruitment,
   useInfiniteBookmarkedLecture,
+  useInfiniteBookmarkedRecruitment,
 } from '@/hooks/api'
 import { useDebounce } from '@/hooks/useDebounce'
 import useWindowWidth from '@/hooks/useWindowWidth'
@@ -42,6 +43,9 @@ export default function Bookmark() {
   const bookmarkedLecturesInfinityQueryResult =
     useInfiniteBookmarkedLecture(lectureSearchParams)
 
+  const bookmarkedRecruitmentInfiniteQueryResult =
+    useInfiniteBookmarkedRecruitment(recruitmentSearchParams)
+
   if (windowWidth < MD_WIDTH_PIXEL) {
     const option =
       content === 'recruitment'
@@ -63,7 +67,9 @@ export default function Bookmark() {
     if (content === 'recruitment') {
       return (
         <BookmarkedRecruitment
-          bookmarkedRecruitmentQueryResult={bookmarkedRecruitmentQueryResult}
+          bookmarkedRecruitmentInfinteQueryResult={
+            bookmarkedRecruitmentInfiniteQueryResult
+          }
           searchState={search}
           setSearchState={setSearch}
         />
