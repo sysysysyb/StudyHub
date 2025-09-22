@@ -1,6 +1,6 @@
 import { CardTitle, CardContent, ImageCard } from '@/components/common/card'
 import { RatingStars } from '@/components/my-page'
-import { API_BASE_URL } from '@/constants/url-constants'
+import { LEARN_BASE_URL } from '@/constants/url-constants'
 
 export interface PopularLectureCardProps {
   lecture_id: string
@@ -28,7 +28,8 @@ export const PopularLectureCard = ({
       imageUrl={imgUrl}
       variant="elevate"
       onClick={() => {
-        window.location.href = `${API_BASE_URL}/lectures/list/${lecture_id}`
+        window.location.href = `${LEARN_BASE_URL}/lectures/list/${lecture_id}`
+        // 우선 하위 도메인은 명세서 상의 주소로 유지, 추후에 확인 필요.
       }}
       className="cursor-pointer"
     >
