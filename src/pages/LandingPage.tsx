@@ -3,7 +3,7 @@ import { BenefitCard, PopularLectureCard } from '@/components/common/card'
 import LandingPageImage from '@/assets/images/LandingPageImage.jpg'
 import { BookOpen, Award, ArrowRight, UsersRound } from 'lucide-react'
 import { useLoginStore } from '@/store/useLoginStore'
-import { API_BASE_URL } from '@/constants/url-constants'
+import { LEARN_BASE_URL, STUDY_BASE_URL } from '@/constants/url-constants'
 import { Link } from 'react-router'
 
 const LandingPage = () => {
@@ -27,7 +27,7 @@ const LandingPage = () => {
                 size="sm"
                 className="sm:px-6 sm:py-3 sm:leading-6"
                 onClick={() => {
-                  window.location.href = `${API_BASE_URL}/lectures/list`
+                  window.location.href = `${LEARN_BASE_URL}/lecture`
                 }}
               >
                 강의 둘러보기
@@ -37,7 +37,7 @@ const LandingPage = () => {
                 size="sm"
                 className="sm:px-6 sm:py-3 sm:leading-6"
                 onClick={() => {
-                  window.location.href = `${API_BASE_URL}/study-group`
+                  window.location.href = STUDY_BASE_URL
                 }}
               >
                 스터디 그룹 참여
@@ -76,7 +76,6 @@ const LandingPage = () => {
             <BenefitCard
               iconbgcolor="bg-green-100"
               icon={<UsersRound className="text-green-600" />}
-              // icon의 green-600 색상 부여 필요
               title="스터디 그룹"
               comments={[
                 '같은 목표를 가진 사람들과 함께 학습하며',
@@ -105,7 +104,7 @@ const LandingPage = () => {
             </p>
           </div>
           <button className="text-primary-600 flex whitespace-nowrap">
-            <a href={`${API_BASE_URL}/lectures/list`} target="_self">
+            <a href={`${LEARN_BASE_URL}/lecture`} target="_self">
               모든 강의 보기
             </a>
             <ArrowRight className="pl-1" />
@@ -162,16 +161,16 @@ const LandingPage = () => {
                   size="lg"
                   className="bg-white"
                   onClick={() => {
-                    window.location.href = `${API_BASE_URL}/lectures/list`
+                    window.location.href = STUDY_BASE_URL
                   }}
                 >
-                  스터디 그룹 참여하기
+                  스터디 그룹 둘러보기
                 </Button>
                 <Button
                   size="lg"
                   className="border-[2px] border-white"
                   onClick={() => {
-                    window.location.href = `${API_BASE_URL}/lectures/create`
+                    window.location.href = `${STUDY_BASE_URL}/create`
                   }}
                 >
                   스터디 그룹 만들기
