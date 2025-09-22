@@ -1,6 +1,6 @@
 import { CardTitle, CardContent, ImageCard } from '@/components/common/card'
 import { RatingStars } from '@/components/my-page'
-import { API_BASE_URL } from '@/constants/api-constants'
+import { API_BASE_URL } from '@/constants/url-constants'
 
 export interface PopularLectureCardProps {
   lecture_id: string

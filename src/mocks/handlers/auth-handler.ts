@@ -1,4 +1,4 @@
-import { API_BASE_URL } from '@/constants/api-constants'
+import { API_BASE_URL } from '@/constants/url-constants'
 import { http, HttpResponse, passthrough } from 'msw'
 import { userInformationMock } from '@/mocks/data/user-information-data'
 import { loginSchema } from '@/schemas/form-schema/auth-schema'

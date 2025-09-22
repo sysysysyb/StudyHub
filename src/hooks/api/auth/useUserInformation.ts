@@ -1,4 +1,4 @@
-import { API_BASE_URL } from '@/constants/api-constants'
+import { API_BASE_URL } from '@/constants/url-constants'
 import { useLoginStore } from '@/store/useLoginStore'
 import type { UserInformation } from '@/types/api-response-types/auth-response-types'
 import api from '@/utils/axios'

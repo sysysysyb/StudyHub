@@ -1,4 +1,4 @@
-import { API_BASE_URL } from '@/constants/api-constants'
+import { API_BASE_URL } from '@/constants/url-constants'
 import { http, HttpResponse } from 'msw'
 import { appliedRecruitmentsMock } from '@/mocks/data/applied-recruitments-data'
 import { applicationsMock } from '@/mocks/data/applications-data'

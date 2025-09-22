@@ -3,7 +3,7 @@ import { BenefitCard, PopularLectureCard } from '@/components/common/card'
 import LandingPageImage from '@/assets/images/LandingPageImage.jpg'
 import { BookOpen, Award, ArrowRight, UsersRound } from 'lucide-react'
 import { useLoginStore } from '@/store/useLoginStore'
-import { API_BASE_URL } from '@/constants/api-constants'
+import { API_BASE_URL } from '@/constants/url-constants'
 import { Link } from 'react-router'
 
 const LandingPage = () => {

@@ -1,4 +1,4 @@
-import { API_BASE_URL } from '@/constants/api-constants'
+import { API_BASE_URL } from '@/constants/url-constants'
 import type { ChatRoomMessages } from '@/schemas/api-response-schemas/chat-response.schema'
 import api from '@/utils/axios'
 import { useQuery, type UseQueryOptions } from '@tanstack/react-query'

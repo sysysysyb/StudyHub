@@ -1,4 +1,4 @@
-import { API_BASE_URL } from '@/constants/api-constants'
+import { API_BASE_URL } from '@/constants/url-constants'
 import { http, HttpResponse } from 'msw'
 import { bookmarkedRecruitmentsHandlers } from '@/mocks/handlers/bookmarked-recruitments-handler'
 import { appliedRecruitmentsHandlers } from '@/mocks/handlers/applied-recruitments-handler'

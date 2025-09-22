@@ -1,4 +1,4 @@
-import { API_BASE_URL } from '@/constants/api-constants'
+import { API_BASE_URL } from '@/constants/url-constants'
 import { http, HttpResponse } from 'msw'
 import { bookmarkedLecturesMock } from '@/mocks/data/bookmarked-lectures-data'
 
