@@ -2,7 +2,8 @@ export type Platform = 'Inflearn'
 export type Difficulty = 'EASY' | 'MIDDLE' | 'HARD'
 
 export interface BookmarkedLectures {
-  count: number
+  next_cursor: string | null
+  previous_cursor: string | null
   results: Lecture[]
 }
 

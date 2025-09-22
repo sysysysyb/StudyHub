@@ -17,7 +17,7 @@ export default function useBookmarkedLectures(
     queryFn: async () => {
       const res = await api.get(`${API_BASE_URL}/lectures/bookmarks`, {
         params: {
-          page: searchParam?.page,
+          cursor: searchParam?.cursor,
           page_size: searchParam?.pageSize,
           search: searchParam?.search,
         },

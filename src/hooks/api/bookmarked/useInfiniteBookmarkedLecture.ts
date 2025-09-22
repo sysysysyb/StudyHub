@@ -17,7 +17,7 @@ export default function useInfiniteBookmarkedLecture(
     Error,
     InfiniteData<BookmarkedLectures>,
     readonly unknown[],
-    number | null
+    string | null
   >
 ) {
   return useInfiniteQuery({
@@ -25,7 +25,7 @@ export default function useInfiniteBookmarkedLecture(
     queryFn: async ({ pageParam }) => {
       const res = await api.get(`${API_BASE_URL}/lectures/bookmarks`, {
         params: {
-          page: pageParam,
+          cursor: pageParam,
           page_size: PAGE_SIZE,
           search: searchParam?.search,
         },
@@ -33,14 +33,8 @@ export default function useInfiniteBookmarkedLecture(
 
       return res.data
     },
-    getNextPageParam: (lastPage, _, lastPageParam) => {
-      if (lastPage.count < PAGE_SIZE) {
-        return undefined
-      }
-
-      return lastPageParam ? lastPageParam + 1 : 1
-    },
-    initialPageParam: 0,
+    getNextPageParam: (lastPage) => lastPage.next_cursor,
+    initialPageParam: '',
     ...options,
   })
 }
