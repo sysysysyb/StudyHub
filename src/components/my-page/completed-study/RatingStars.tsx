@@ -3,9 +3,14 @@ import { Star } from 'lucide-react'
 interface RatingStarsProps {
   rating: number // 0 ~ 5, 소수점 한 자리
   size?: number
+  includeMax?: boolean
 }
 
-export function RatingStars({ rating, size = 14 }: RatingStarsProps) {
+export function RatingStars({
+  rating,
+  size = 14,
+  includeMax = false,
+}: RatingStarsProps) {
   return (
     <div className="flex items-center gap-1">
       {Array.from({ length: 5 }).map((_, i) => {
@@ -31,7 +36,8 @@ export function RatingStars({ rating, size = 14 }: RatingStarsProps) {
         )
       })}
       <span className="ml-2 text-sm text-gray-600">
-        {rating.toFixed(1)} / 5
+        {rating.toFixed(1)}
+        {includeMax && ' / 5'}
       </span>
     </div>
   )

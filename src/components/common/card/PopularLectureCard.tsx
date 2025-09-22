@@ -29,7 +29,7 @@ export const PopularLectureCard = ({
           <span className="text-primary-500">
             <RatingStars rating={rating} />
           </span>
-          <span className="pl-2">{reviewers}명</span>
+          <span className="pl-2">({reviewers}명)</span>
         </div>
         <div>
           <span className="text-heading5">{finalPrice}</span>

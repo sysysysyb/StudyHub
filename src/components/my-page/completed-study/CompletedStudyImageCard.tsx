@@ -49,11 +49,16 @@ export const CompletedStudyImageCard = ({
       {isReviewed ? (
         <div className="flex flex-col gap-2 bg-gray-50 p-4 text-gray-600">
           <div className="flex items-center justify-between">
+<<<<<<< HEAD
             <RatingStars rating={rating} size={iconSize} />
             <ReviewInputModal completedStudy={completedStudy}>
               <EditButton size={iconSize} className="cursor-pointer" />
             </ReviewInputModal>
 
+=======
+            <RatingStars rating={rating} size={iconSize} includeMax />
+            <EditButton size={iconSize} className="cursor-pointer" />
+>>>>>>> af74fd8 (♻️ Refactor: 최대별점( / 5) 표시 여부 boolean 타입 추가 , 호출 props 수정 (#206))
             {/* 리뷰작성 모달에 기존 데이터가 이미 존재하는 수정버전으로 로직 구현 후 onClick으로 연동 필요 */}
           </div>
           <p className="text-sm">{comment}</p>
