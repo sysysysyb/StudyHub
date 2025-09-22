@@ -26,13 +26,13 @@ const login = http.post(
 
     if (data.email === 'qwerty@test.com' && data.password === 'Qwer1234!!') {
       return HttpResponse.json(
-        { message: 'Login successful' },
+        {
+          detail: 'Login successful',
+          access_token: `${ACCESS_TOKEN} Max-Age=10`,
+        },
         {
           status: 200,
-          headers: [
-            ['Set-Cookie', `${ACCESS_TOKEN} Max-Age=10`],
-            ['Set-Cookie', `${REFRESH_TOKEN} Max-Age=360000`],
-          ],
+          headers: { 'Set-Cookie': `${REFRESH_TOKEN} Max-Age=360000` },
         }
       )
     } else {
@@ -48,29 +48,31 @@ const login = http.post(
 
 const logout = http.post(`${API_BASE_URL}/users/logout`, () => {
   return HttpResponse.json(
-    { message: 'Logout successful' },
+    { detail: 'Logout successful' },
     {
       status: 200,
-      headers: [
-        ['Set-Cookie', `${ACCESS_TOKEN} MAX-Age=0`],
-        ['Set-Cookie', `${REFRESH_TOKEN} MAX-Age=0`],
-      ],
+      headers: { 'Set-Cookie': `${REFRESH_TOKEN} Max-Age=0` },
     }
   )
 })
 
-const getUserInformation = http.get(`${API_BASE_URL}/users/me`, () => {
-  const currentCookie = document.cookie
-  const isAccessTokenRemain = currentCookie.includes('access-token')
+const getUserInformation = http.get(
+  `${API_BASE_URL}/users/me`,
+  ({ request }) => {
+    const header = request.headers.get('Authorization')
+    const hasBearerToken = header
+      ?.substring(7)
+      .includes('msw-access-token=access-token-test;')
 
-  if (!isAccessTokenRemain) {
-    return HttpResponse.json(
-      { message: 'Authentication required.' },
-      { status: 401 }
-    )
+    if (!hasBearerToken) {
+      return HttpResponse.json(
+        { detail: 'Authentication required.' },
+        { status: 401 }
+      )
+    }
+    return HttpResponse.json(userInformationMock[0])
   }
-  return HttpResponse.json(userInformationMock[0])
-})
+)
 
 const getRefreshToken = http.post(`${API_BASE_URL}/token/refresh`, () => {
   const currentCookie = document.cookie
@@ -78,16 +80,18 @@ const getRefreshToken = http.post(`${API_BASE_URL}/token/refresh`, () => {
 
   if (!isRefreshTokenRemain) {
     return HttpResponse.json(
-      { message: '리프레시 토큰이 만료됐습니다' },
+      { detail: '리프레시 토큰이 만료됐습니다' },
       { status: 401 }
     )
   }
 
   return HttpResponse.json(
-    { message: '새로운 액세스 토큰을 발급했습니다' },
+    {
+      detail: '새로운 액세스 토큰을 발급했습니다',
+      access_token: `${ACCESS_TOKEN} Max-Age=10`,
+    },
     {
       status: 200,
-      headers: [['Set-Cookie', ACCESS_TOKEN]],
     }
   )
 })

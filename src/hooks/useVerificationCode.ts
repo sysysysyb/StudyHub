@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useTimer } from './useTimer'
-import useToast from './useToast'
+import { useToast } from '@/hooks'
 
 const TIMER_DURATION_MS = 180000
 
