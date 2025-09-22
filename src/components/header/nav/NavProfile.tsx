@@ -62,6 +62,7 @@ function NavProfile({ onProfileClick }: { onProfileClick: () => void }) {
           onClick={onProfileClick}
         >
           <Avatar
+            size="sm"
             state="none"
             src={user.profileImageUrl}
             alt={`
