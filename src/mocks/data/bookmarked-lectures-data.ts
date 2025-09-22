@@ -1,7 +1,8 @@
 import type { BookmarkedLectures } from '@/types/api-response-types/lecture-response-type'
 
 export const bookmarkedLecturesMock: BookmarkedLectures = {
-  count: 5,
+  next_cursor: 'cursor-111',
+  previous_cursor: null,
   results: [
     {
       title: '프론트엔드 개발자를 위한 React 완벽 가이드',
