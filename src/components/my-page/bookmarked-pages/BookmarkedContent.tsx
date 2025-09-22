@@ -92,10 +92,17 @@ export default function BookmarkedContent({
     [recruitmentsInfiniteData]
   )
 
-  const contents = useMemo(
-    () => [...recruitments, ...lectures],
-    [recruitments, lectures]
-  )
+  const contents = useMemo(() => {
+    if (selectedOption.startsWith(LECTURE)) {
+      return [...lectures]
+    }
+
+    if (selectedOption.startsWith(RECRUITMENT)) {
+      return [...recruitments]
+    }
+
+    return [...recruitments, ...lectures]
+  }, [selectedOption, recruitments, lectures])
 
   const additionalVirtualItemCount =
     (hasNextRecruitment ? 1 : 0) + (hasNextLecture ? 1 : 0)
@@ -157,7 +164,7 @@ export default function BookmarkedContent({
       const temp = `${RECRUITMENT} (${recruitments.length})`
       bookmarkedDropdownOption[1].label = temp
 
-      if (selectedOption === RECRUITMENT) {
+      if (selectedOption.startsWith(RECRUITMENT)) {
         setSelectedOption(temp)
       }
     }
@@ -165,13 +172,17 @@ export default function BookmarkedContent({
     if (lectures.length > 0) {
       const temp = `${LECTURE} (${lectures.length})`
       bookmarkedDropdownOption[2].label = temp
+
+      if (selectedOption.startsWith(LECTURE)) {
+        setSelectedOption(temp)
+      }
     }
 
     if (recruitments.length > 0 || lectures.length > 0) {
       const temp = `${ENTIRE} (${lectures.length + recruitments.length})`
       bookmarkedDropdownOption[0].label = temp
 
-      if (selectedOption === ENTIRE) {
+      if (selectedOption.startsWith(ENTIRE)) {
         setSelectedOption(temp)
       }
     }
