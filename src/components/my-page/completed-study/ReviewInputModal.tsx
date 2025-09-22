@@ -18,7 +18,10 @@ interface ReviewModalProps {
 }
 import { RatingStarsInput } from './RatingStarInput'
 
-export const ReviewModal = ({ children, completedStudy }: ReviewModalProps) => {
+export const ReviewInputModal = ({
+  children,
+  completedStudy,
+}: ReviewModalProps) => {
   const { title, period, endDate } = completedStudy
   const [isRated, setIsRated] = useState(false)
   const [rating, setRating] = useState(0)
