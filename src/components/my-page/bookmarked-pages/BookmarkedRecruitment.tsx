@@ -1,14 +1,24 @@
 import { ListItemSkeleton } from '@/components'
 import { Input } from '@/components/common/input'
 import { BookmarkedRecruitmentCard } from '@/components/my-page'
-import EmptyDataState from '@/components/common/state/EmptyDataState'
 import { SearchIcon } from 'lucide-react'
-import type { UseQueryResult } from '@tanstack/react-query'
+import type {
+  InfiniteData,
+  UseInfiniteQueryResult,
+} from '@tanstack/react-query'
 import type { BookmarkedRecruitments } from '@/types/api-response-types/recruitment-response-types'
+import { useEffect, useRef } from 'react'
+import { useVirtualizer } from '@tanstack/react-virtual'
+import { cn } from '@/utils'
+import { useWindowHeight } from '@/hooks'
+
+const ESTIMATE_CARD_SIZE_PX = 260
+const OVER_SCAN = 3
+const FOOTER_SPACE = 500 //완벽히 footer 사이즈에 맞춘게 아니고 적당히 보이게 설정
 
 interface BookmarkedRecruitmentProps {
-  bookmarkedRecruitmentQueryResult: UseQueryResult<
-    BookmarkedRecruitments,
+  bookmarkedRecruitmentInfinteQueryResult: UseInfiniteQueryResult<
+    InfiniteData<BookmarkedRecruitments, unknown>,
     Error
   >
   searchState: string
@@ -16,12 +26,53 @@ interface BookmarkedRecruitmentProps {
 }
 
 export default function BookmarkedRecruitment({
-  bookmarkedRecruitmentQueryResult,
+  bookmarkedRecruitmentInfinteQueryResult,
   searchState,
   setSearchState,
 }: BookmarkedRecruitmentProps) {
-  const { data, isPending } = bookmarkedRecruitmentQueryResult
+  const { data, isFetchingNextPage, fetchNextPage, hasNextPage } =
+    bookmarkedRecruitmentInfinteQueryResult
 
+  const windowHeight = useWindowHeight()
+
+  const recruitments = data ? data.pages.flatMap((page) => page.results) : []
+
+  //버추얼리스트 스크롤 대상
+  const parentRef = useRef<HTMLDivElement>(null)
+  //가상화 인스턴스
+  const virtualizer = useVirtualizer({
+    count: hasNextPage ? recruitments.length + 1 : recruitments.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => ESTIMATE_CARD_SIZE_PX,
+    overscan: OVER_SCAN,
+  })
+
+  //무한 스크롤 트리거
+  useEffect(() => {
+    const [lastItem] = [...virtualizer.getVirtualItems()].reverse()
+
+    if (!lastItem) {
+      return
+    }
+
+    if (
+      lastItem.index >= recruitments.length - 1 &&
+      hasNextPage &&
+      !isFetchingNextPage
+    ) {
+      fetchNextPage()
+    }
+  }, [
+    recruitments.length,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    virtualizer,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    virtualizer.getVirtualItems(),
+  ])
+
+  const items = virtualizer.getVirtualItems()
   return (
     <div>
       <header className="mb-6 flex w-full flex-col items-center justify-between gap-2 lg:flex-row">
@@ -42,19 +93,63 @@ export default function BookmarkedRecruitment({
           />
         </div>
       </header>
-      <main className="flex flex-col gap-4">
-        {isPending ? (
-          [...Array(5)].map((_, i) => <ListItemSkeleton key={i} />)
-        ) : data && data.results.length > 0 ? (
-          data.results.map((recruitment) => (
-            <BookmarkedRecruitmentCard
-              recruitment={recruitment}
-              key={recruitment.uuid}
-            />
-          ))
-        ) : (
-          <EmptyDataState />
-        )}
+      <main
+        className="overflow-y-auto"
+        ref={parentRef}
+        style={{ height: `${windowHeight - FOOTER_SPACE}px` }}
+      >
+        <div
+          className={cn(
+            `h-[${virtualizer.getTotalSize()}px]`,
+            'relative w-full'
+          )}
+        >
+          <div
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              transform: `translateY(${items[0]?.start ?? 0}px)`,
+            }}
+          >
+            {items.map((virtualRow) => {
+              const isLoaderRow = virtualRow.index > recruitments.length - 1
+              const recruitment = recruitments[virtualRow.index]
+
+              if (isLoaderRow && isFetchingNextPage) {
+                return (
+                  <div
+                    key={virtualRow.key}
+                    data-index={virtualRow.index}
+                    ref={virtualizer.measureElement}
+                  >
+                    {[...Array(5)].map((_, i) => (
+                      <div key={i} className="mb-2">
+                        <ListItemSkeleton />
+                      </div>
+                    ))}
+                  </div>
+                )
+              }
+
+              if (recruitment) {
+                return (
+                  <div
+                    key={virtualRow.key}
+                    data-index={virtualRow.index}
+                    ref={virtualizer.measureElement}
+                    className="mb-2"
+                  >
+                    <BookmarkedRecruitmentCard recruitment={recruitment} />
+                  </div>
+                )
+              }
+
+              return null
+            })}
+          </div>
+        </div>
       </main>
     </div>
   )

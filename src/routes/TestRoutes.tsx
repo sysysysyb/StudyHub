@@ -12,6 +12,9 @@ function Root() {
         <Link to="/landing">사이트 메인</Link>
       </Button>
       <Button className="px-10 py-6 text-2xl">
+        <Link to="/my-page">마이 페이지</Link>
+      </Button>
+      <Button className="px-10 py-6 text-2xl">
         <Link to="/test-hub">테스트 허브</Link>
       </Button>
     </div>

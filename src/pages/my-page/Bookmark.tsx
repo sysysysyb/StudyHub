@@ -4,7 +4,10 @@ import {
   BookmarkedRecruitment,
 } from '@/components/my-page/bookmarked-pages'
 import { MD_WIDTH_PIXEL } from '@/constants/break-points'
-import { useBookmarkedLectures, useBookmarkedRecruitment } from '@/hooks/api'
+import {
+  useInfiniteBookmarkedLecture,
+  useInfiniteBookmarkedRecruitment,
+} from '@/hooks/api'
 import { useDebounce } from '@/hooks/useDebounce'
 import useWindowWidth from '@/hooks/useWindowWidth'
 import type { lectureSearchParams, recruitmentSearchParams } from '@/types'
@@ -28,12 +31,11 @@ export default function Bookmark() {
     search: debouncedSearch,
   }
 
-  const bookmarkedRecruitmentQueryResult = useBookmarkedRecruitment(
-    recruitmentSearchParams
-  )
+  const bookmarkedLecturesInfinityQueryResult =
+    useInfiniteBookmarkedLecture(lectureSearchParams)
 
-  const bookmarkedLecturesQueryResult =
-    useBookmarkedLectures(lectureSearchParams)
+  const bookmarkedRecruitmentInfiniteQueryResult =
+    useInfiniteBookmarkedRecruitment(recruitmentSearchParams)
 
   if (windowWidth < MD_WIDTH_PIXEL) {
     const option =
@@ -46,8 +48,12 @@ export default function Bookmark() {
     return (
       <BookmarkedContent
         initialOption={option}
-        bookmarkedLecturesQueryResult={bookmarkedLecturesQueryResult}
-        bookmarkedRecruitmentQueryResult={bookmarkedRecruitmentQueryResult}
+        bookmarkedRecruitmentInfinteQueryResult={
+          bookmarkedRecruitmentInfiniteQueryResult
+        }
+        bookmarkedLecturesInfiniteQueryResult={
+          bookmarkedLecturesInfinityQueryResult
+        }
         searchState={search}
         setSearchState={setSearch}
       />
@@ -56,7 +62,9 @@ export default function Bookmark() {
     if (content === 'recruitment') {
       return (
         <BookmarkedRecruitment
-          bookmarkedRecruitmentQueryResult={bookmarkedRecruitmentQueryResult}
+          bookmarkedRecruitmentInfinteQueryResult={
+            bookmarkedRecruitmentInfiniteQueryResult
+          }
           searchState={search}
           setSearchState={setSearch}
         />
@@ -64,7 +72,9 @@ export default function Bookmark() {
     } else {
       return (
         <BookmarkedLecture
-          bookmarkedLecturesQueryResult={bookmarkedLecturesQueryResult}
+          bookmarkedLecturesInfiniteQueryResult={
+            bookmarkedLecturesInfinityQueryResult
+          }
           searchState={search}
           setSearchState={setSearch}
         />
