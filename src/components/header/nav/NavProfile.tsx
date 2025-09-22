@@ -1,13 +1,14 @@
 import Avatar from '@/components/common/Avatar'
 import Button from '@/components/common/Button'
-import { SkeletonRectangle } from '@/components/common/Skeleton/SkeletonItem'
+import { SkeletonRectangle } from '@/components/common/skeleton/SkeletonItem'
 import { useUserInformation } from '@/hooks/api'
+import { useLoginStore } from '@/store/useLoginStore'
 import type { UserInformation } from '@/types'
 import { Bell } from 'lucide-react'
 import { Link } from 'react-router'
 
-function NavProfile() {
-  const isLoggedIn = false // TODO: 로그인 여부 전역 상태 추가 예정
+function NavProfile({ onProfileClick }: { onProfileClick: () => void }) {
+  const { isLoggedIn } = useLoginStore()
   const { data: user } = useUserInformation<
     Pick<UserInformation, 'name' | 'profileImageUrl'>
   >({
@@ -42,19 +43,24 @@ function NavProfile() {
     return (
       <div className="flex items-center gap-4">
         <div className="p-3">
-          <Bell className="h-7 text-gray-700" />
+          <Bell className="h-7 cursor-pointer text-gray-700" />
         </div>
-        <SkeletonRectangle width={150} height={50} />
+        <div className="w-25">
+          <SkeletonRectangle width={100} height={30} />
+        </div>
       </div>
     )
 
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex items-center gap-2.5 lg:gap-4">
       <div className="p-3">
-        <Bell className="h-7 text-gray-700" />
+        <Bell className="h-7 cursor-pointer text-gray-700" />
       </div>
       {user && (
-        <div className="flex items-center gap-4">
+        <button
+          className="flex cursor-pointer items-center gap-2 bg-amber-200"
+          onClick={onProfileClick}
+        >
           <Avatar
             state="none"
             src={user.profileImageUrl}
@@ -64,7 +70,7 @@ function NavProfile() {
           <span className="text-primary-600 text-base font-medium">
             {user.name}
           </span>
-        </div>
+        </button>
       )}
     </div>
   )
