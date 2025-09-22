@@ -16,10 +16,12 @@ interface ReviewModalProps {
   children: React.ReactNode
   completedStudy: CompletedStudy
 }
+import { RatingStarsInput } from './RatingStarInput'
 
 export const ReviewModal = ({ children, completedStudy }: ReviewModalProps) => {
   const { title, period, endDate } = completedStudy
   const [isRated, setIsRated] = useState(false)
+  const [rating, setRating] = useState(0)
   const [isCommented, setIsCommented] = useState(false)
   const [comment, setComment] = useState('')
 
@@ -31,6 +33,7 @@ export const ReviewModal = ({ children, completedStudy }: ReviewModalProps) => {
 
   const resetForm = () => {
     setComment('')
+    setRating(0)
     setIsRated(false)
     setIsCommented(false)
   }
@@ -57,7 +60,10 @@ export const ReviewModal = ({ children, completedStudy }: ReviewModalProps) => {
               }}
               className="flex cursor-pointer justify-start"
             >
-              별 별 별 별 별{/* RatingStarsInput 컴포넌트 새로 제작 후 추가 */}
+              <RatingStarsInput
+                rating={rating}
+                onChange={(newRating) => setRating(newRating)}
+              />
             </button>
           </div>
           <div className="flex flex-col gap-2">
