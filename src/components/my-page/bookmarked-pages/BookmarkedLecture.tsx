@@ -27,7 +27,7 @@ export default function BookmarkedLecture({
   const { data, isFetchingNextPage, fetchNextPage } =
     bookmarkedLecturesInfiniteQueryResult
 
-  const recruitments = data ? data.pages.flatMap((page) => page.results) : []
+  const lectures = data ? data.pages.flatMap((page) => page.results) : []
 
   return (
     <div>
@@ -49,8 +49,8 @@ export default function BookmarkedLecture({
         </div>
       </header>
       <main className="flex flex-col gap-4">
-        {recruitments.length > 0 ? (
-          recruitments.map((lecture, i) => (
+        {lectures.length > 0 ? (
+          lectures.map((lecture, i) => (
             <BookmarkedLectureCard lecture={lecture} key={i} />
           ))
         ) : (
