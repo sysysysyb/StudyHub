@@ -1,6 +1,5 @@
-import { Button, ImageCard } from '@/components'
-import { BenefitCard } from '@/components/common/card/BenefitCard'
-import { CardTitle } from '@/components/common/card/Card'
+import { Button } from '@/components'
+import { BenefitCard, PopularLectureCard } from '@/components/common/card'
 import LandingPageImage from '@/assets/images/LandingPageImage.jpg'
 import { BookOpen, Award, ArrowRight, UsersRound } from 'lucide-react'
 import { useLoginStore } from '@/store/useLoginStore'
