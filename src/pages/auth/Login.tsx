@@ -2,7 +2,6 @@ import {
   AuthContainer,
   AuthDescription,
   AuthLink,
-  AuthLogo,
   AuthSocialLoginButton,
   AuthSubmitButton,
   AuthTitle,
@@ -39,8 +38,7 @@ function Login() {
 
   return (
     <AuthContainer className="flex flex-col gap-10">
-      <div className={InputGroupStyle}>
-        <AuthLogo />
+      <div className={InputFieldColStyle}>
         <AuthTitle>로그인</AuthTitle>
         <div className="flex justify-center gap-1">
           <AuthDescription>아직 계정이 없으신가요?</AuthDescription>

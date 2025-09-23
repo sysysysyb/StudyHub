@@ -3,7 +3,6 @@ import {
   AuthContainer,
   AuthDescription,
   AuthLink,
-  AuthLogo,
   AuthSubmitButton,
   AuthTitle,
   AuthVerifyButton,
@@ -75,7 +74,6 @@ function Signup() {
   return (
     <AuthContainer className="flex flex-col gap-10">
       <div className={InputFieldColStyle}>
-        <AuthLogo />
         <AuthTitle>회원가입</AuthTitle>
         <div className="flex justify-center gap-1">
           <AuthDescription>이미 계정이 있으신가요?</AuthDescription>
