@@ -135,3 +135,51 @@ jobs:
 
       - name: Push main
         run: git push origin main
+
+  # 4) main 병합 성공 시 프로덕션 배포
+  deploy_production:
+    needs: update_main
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: main
+  
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+  
+      - name: Install deps
+        run: npm ci
+  
+      # 환경 동기화 (Production)
+      - name: Vercel Pull (production env)
+        run: |
+          VERCEL_PROJECT_ID=${{ secrets.VERCEL_PROJECT_ID }} \
+          VERCEL_ORG_ID=${{ secrets.VERCEL_ORG_ID }} \
+          npx vercel pull --environment=production \
+            --token ${{ secrets.VERCEL_TOKEN }} \
+            --yes
+  
+      # 로컬에서 vercel 방식으로 빌드 (.vercel/output 생성)
+      - name: Vercel Build (local, production)
+        run: |
+          VERCEL_PROJECT_ID=${{ secrets.VERCEL_PROJECT_ID }} \
+          VERCEL_ORG_ID=${{ secrets.VERCEL_ORG_ID }} \
+          npx vercel build \
+            --token ${{ secrets.VERCEL_TOKEN }} \
+            --yes
+  
+      # 프리빌트 결과를 프로덕션으로 배포
+      - name: Deploy to Vercel (Production, prebuilt)
+        run: |
+          VERCEL_PROJECT_ID=${{ secrets.VERCEL_PROJECT_ID }} \
+          VERCEL_ORG_ID=${{ secrets.VERCEL_ORG_ID }} \
+          npx vercel deploy --prebuilt --prod \
+            --token ${{ secrets.VERCEL_TOKEN }} \
+            --yes \
+            --debug
