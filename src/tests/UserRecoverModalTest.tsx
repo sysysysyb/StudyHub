@@ -3,14 +3,33 @@ import { AuthVerifyButton } from '@/components/auth/common'
 import { Input, InputLabel } from '@/components/common/input'
 import {
   Modal,
+  ModalClose,
   ModalContent,
   ModalFooter,
   ModalHeader,
   ModalMain,
   ModalTrigger,
+  type ModalContextValue,
 } from '@/components/common/Modal'
 import { MehIcon, RotateCwIcon } from 'lucide-react'
+import { useState } from 'react'
 export default function UserRecoverModalTest() {
+  const [isUserRecoverFormModalOpen, setIsUserRecoverFormModalOpen] =
+    useState(false)
+
+  const userRecoverFormModalControl: ModalContextValue = {
+    isOpen: isUserRecoverFormModalOpen,
+    open: () => {
+      setIsUserRecoverFormModalOpen(true)
+    },
+    close: () => {
+      setIsUserRecoverFormModalOpen(false)
+    },
+    toggle: () => {
+      setIsUserRecoverFormModalOpen((prev) => !prev)
+    },
+  }
+
   return (
     <div className="flex flex-col gap-2">
       <Modal>
@@ -35,13 +54,22 @@ export default function UserRecoverModalTest() {
               </p>
             </div>
             <ModalFooter className="flex w-full justify-center border-none">
-              <Button className="w-[90%] max-w-sm">계정 다시 사용하기</Button>
+              <ModalClose className="flex w-full justify-center">
+                <Button
+                  onClick={() => {
+                    userRecoverFormModalControl.open()
+                  }}
+                  className="w-[90%] max-w-sm"
+                >
+                  계정 다시 사용하기
+                </Button>
+              </ModalClose>
             </ModalFooter>
           </ModalMain>
         </ModalContent>
       </Modal>
 
-      <Modal>
+      <Modal externalModalControl={userRecoverFormModalControl}>
         <ModalTrigger>
           <Button>계정 복구 폼 모달</Button>
         </ModalTrigger>
