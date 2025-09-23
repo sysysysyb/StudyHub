@@ -18,14 +18,9 @@ export const FooterNavComponent = ({
       <ul className="flex flex-col items-start gap-2">
         {NavButtons.map((link, index) => (
           <li key={index}>
-            <button
-              className="whitespace-nowrap"
-              onClick={() => {
-                window.location.href = link.url
-              }}
-            >
+            <a className="whitespace-nowrap" href={link.url}>
               {link.label}
-            </button>
+            </a>
           </li>
         ))}
       </ul>
