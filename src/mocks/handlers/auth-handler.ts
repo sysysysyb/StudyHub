@@ -7,6 +7,7 @@ const ACCESS_TOKEN = `msw-access-token=access-token-test; Path=/; SameSite=Stric
 const REFRESH_TOKEN =
   'msw-refresh-token=refresh-token-test; Path=/; SameSite=Strict;'
 
+// 로그인
 const login = http.post(
   `${MSW_BASE_URL}/auth/email/login`,
   async ({ request }) => {
@@ -56,6 +57,7 @@ const logout = http.post(`${MSW_BASE_URL}/users/logout`, () => {
   )
 })
 
+// 사용자 정보 조회
 const getUserInformation = http.get(
   `${MSW_BASE_URL}/users/me`,
   ({ request }) => {
@@ -96,6 +98,7 @@ const getRefreshToken = http.post(`${MSW_BASE_URL}/token/refresh`, () => {
   )
 })
 
+// 외부 이미지 api
 const passthroughPiscumPhotos = http.get(
   `https://picsum.photos/id/:rest*`,
   () => {
