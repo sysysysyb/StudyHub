@@ -5,9 +5,9 @@ import {
   AuthStep,
 } from '@/components/auth/common'
 import { useState } from 'react'
-import FindEmailFirstStep from './FindEmailFirstStep'
-import FindEmailSecondStep from './FindEmailSecondStep'
-import FindEmailThirdStep from './FindEmailThirdStep'
+import FindEmailFirstStep from '@/components/auth/find-email/FindEmailFirstStep'
+import FindEmailSecondStep from '@/components/auth/find-email/FindEmailSecondStep'
+import FindEmailThirdStep from '@/components/auth/find-email/FindEmailThirdStep'
 
 const FIND_EMAIL_STEP_LIST = ['정보입력', '휴대폰인증', '결과확인']
 

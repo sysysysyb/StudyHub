@@ -5,9 +5,9 @@ import {
   AuthStep,
 } from '@/components/auth/common'
 import { useState } from 'react'
-import FindPasswordFirstStep from './FindPasswordFirstStep'
-import FindPasswordSecondStep from './FindPasswordSecondStep'
-import FindPasswordThirdStep from './FindPasswordThirdStep'
+import FindPasswordFirstStep from '@/components/auth/find-password/FindPasswordFirstStep'
+import FindPasswordSecondStep from '@/components/auth/find-password/FindPasswordSecondStep'
+import FindPasswordThirdStep from '@/components/auth/find-password/FindPasswordThirdStep'
 import { useNavigate } from 'react-router'
 import { useToast } from '@/hooks'
 
