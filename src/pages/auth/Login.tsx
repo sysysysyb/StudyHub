@@ -15,8 +15,11 @@ import {
   type LoginSchemaType,
 } from '@/schemas/form-schema/auth-schema'
 import { useLogin } from '@/hooks/api'
-
-const flexStyle = 'flex flex-col gap-4'
+import {
+  InputFieldColStyle,
+  InputFieldRowStyle,
+  InputGroupStyle,
+} from '@/constants/auth-variants'
 
 function Login() {
   const {
@@ -36,7 +39,7 @@ function Login() {
 
   return (
     <AuthContainer className="flex flex-col gap-10">
-      <div className={flexStyle}>
+      <div className={InputGroupStyle}>
         <AuthLogo />
         <AuthTitle>로그인</AuthTitle>
         <div className="flex justify-center gap-1">
@@ -45,13 +48,13 @@ function Login() {
         </div>
       </div>
 
-      <div className={flexStyle}>
+      <div className={InputGroupStyle}>
         <AuthSocialLoginButton socialType="kakao" />
         <AuthSocialLoginButton socialType="naver" />
       </div>
 
-      <form className={flexStyle} onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex flex-col gap-2">
+      <form className={InputGroupStyle} onSubmit={handleSubmit(onSubmit)}>
+        <div className={InputFieldColStyle}>
           <Input
             {...register('email')}
             type="email"
@@ -61,7 +64,7 @@ function Login() {
             <InputErrorMessage>{`${errors.email.message}`}</InputErrorMessage>
           )}
         </div>
-        <div className="flex flex-col gap-2">
+        <div className={InputFieldColStyle}>
           <Input
             {...register('password')}
             type="password"
@@ -71,7 +74,7 @@ function Login() {
             <InputErrorMessage>{`${errors.password.message}`}</InputErrorMessage>
           )}
         </div>
-        <div className="flex gap-2">
+        <div className={InputFieldRowStyle}>
           <AuthLink to="/auth/find-email">아이디 찾기</AuthLink>
           <span className="text-primary-600">|</span>
           <AuthLink to="/auth/find-password">비밀번호 찾기</AuthLink>

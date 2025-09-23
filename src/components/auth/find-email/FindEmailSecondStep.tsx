@@ -7,6 +7,11 @@ import {
   AuthVerifyButton,
 } from '@/components/auth/common'
 import { Input, InputErrorMessage } from '@/components/common/input'
+import {
+  InputFieldColStyle,
+  InputFieldRowStyle,
+  InputGroupStyle,
+} from '@/constants/auth-variants'
 import { useVerificationCode } from '@/hooks'
 import {
   FindEmailStep2Schema,
@@ -60,9 +65,9 @@ function FindEmailSecondStep({
           {phoneNumber}로 인증코드를 발송했습니다.
         </AuthDescription>
       </div>
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
-        <div className="flex flex-col gap-2">
-          <div className="flex gap-2">
+      <form onSubmit={handleSubmit(onSubmit)} className={InputGroupStyle}>
+        <div className={InputFieldColStyle}>
+          <div className={InputFieldRowStyle}>
             <Input
               {...register('code')}
               placeholder="인증코드 6자리를 입력해주세요"

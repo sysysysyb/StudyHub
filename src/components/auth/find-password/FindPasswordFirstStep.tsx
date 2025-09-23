@@ -5,6 +5,7 @@ import {
   AuthIcon,
 } from '@/components/auth/common'
 import { Input, InputErrorMessage } from '@/components/common/input'
+import { InputFieldColStyle, InputGroupStyle } from '@/constants/auth-variants'
 import {
   FindPasswordStep1Schema,
   type FindPasswordStep1Type,
@@ -46,8 +47,8 @@ function FindPasswordFirstStep({
           가입하신 이메일을 입력하면 인증코드를 보내드립니다
         </AuthDescription>
       </div>
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
-        <div className="flex flex-col gap-2">
+      <form onSubmit={handleSubmit(onSubmit)} className={InputGroupStyle}>
+        <div className={InputFieldColStyle}>
           <Input placeholder="이메일" {...register('email')} />
           {errors.email && (
             <InputErrorMessage>{`${errors.email.message}`}</InputErrorMessage>
