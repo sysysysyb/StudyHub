@@ -22,7 +22,7 @@ export function HeaderNavList(): ReactNode {
   return (
     <div className="relative">
       <div className="flex items-center gap-5 lg:gap-8">
-        <NavComponent href="*" label="강의 목록" />
+        <NavComponent href={`${LEARN_BASE_URL}/lecture`} label="강의 목록" />
         <NavComponent href={STUDY_BASE_URL} label="스터디 그룹" />
         <NavComponent
           href={`${LEARN_BASE_URL}/recruitment`}
