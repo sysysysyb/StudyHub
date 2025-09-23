@@ -15,8 +15,14 @@ function ToastContainer() {
 
   return (
     <div className="fixed top-18 right-1 z-10 w-112 space-y-1">
-      {renderedToasts.map(({ id, type, content }) => (
-        <ToastItem key={id} id={id} type={type} content={content} />
+      {renderedToasts.map(({ id, type, title, content }) => (
+        <ToastItem
+          key={id}
+          id={id}
+          type={type}
+          title={title}
+          content={content}
+        />
       ))}
     </div>
   )
