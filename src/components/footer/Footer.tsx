@@ -29,6 +29,7 @@ export function Footer(): ReactNode {
             { label: '고객센터', url: `${LEARN_BASE_URL}/lecture` },
             { label: 'FAQ', url: `${LEARN_BASE_URL}/lecture` },
             { label: '개인정보처리방침', url: `${LEARN_BASE_URL}/lecture` },
+            // URL 확인 후 일치하도록 수정 필요.
           ]}
         />
       </section>
