@@ -1,4 +1,4 @@
-import { AuthVerifyButton } from '@/components/auth'
+import { AuthVerifyButton } from '@/components/auth/common'
 import {
   Input,
   InputDescription,
