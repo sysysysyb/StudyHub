@@ -7,9 +7,9 @@ import {
   Signup,
   CompletedStudy,
   Bookmark,
+  FindEmail,
+  FindPassword,
 } from '@/pages'
-import FindEmail from '@/pages/auth/find-email/FindEmail'
-import FindPassword from '@/pages/auth/find-password/FindPassword'
 import { Route, Routes } from 'react-router'
 
 function MainRoutes() {
