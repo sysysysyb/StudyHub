@@ -38,9 +38,7 @@ export default function UserRecoverFormModal({
             </p>
           </div>
           <form className="flex w-full flex-col items-start gap-5">
-            <InputLabel>
-              이메일 <span className="text-danger-500">*</span>
-            </InputLabel>
+            <InputLabel isRequired>이메일</InputLabel>
             <div className="flex w-full gap-2">
               <Input
                 placeholder="가입한 이메일을 입력해주세요."
