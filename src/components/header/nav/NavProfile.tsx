@@ -1,5 +1,4 @@
-import Avatar from '@/components/common/Avatar'
-import Button from '@/components/common/Button'
+import { Button, Avatar } from '@/components'
 import { SkeletonRectangle } from '@/components/common/skeleton/SkeletonItem'
 import { useUserInformation } from '@/hooks/api'
 import { useLoginStore } from '@/store/useLoginStore'
