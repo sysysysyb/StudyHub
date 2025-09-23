@@ -4,6 +4,7 @@ import NavProfile from './NavProfile'
 import { Link } from 'react-router'
 import useLogout from '@/hooks/api/auth/useLogout'
 import { LogOut, User } from 'lucide-react'
+import { LEARN_BASE_URL, STUDY_BASE_URL } from '@/constants/url-constants'
 
 export function HeaderNavList(): ReactNode {
   const [isProfileClicked, setIsProfileClicked] = useState(false)
@@ -21,9 +22,12 @@ export function HeaderNavList(): ReactNode {
   return (
     <div className="relative">
       <div className="flex items-center gap-5 lg:gap-8">
-        <NavComponent to="*" label="강의 목록" />
-        <NavComponent to="*" label="스터디 그룹" />
-        <NavComponent to="*" label="구인 공고" />
+        <NavComponent href="*" label="강의 목록" />
+        <NavComponent href={STUDY_BASE_URL} label="스터디 그룹" />
+        <NavComponent
+          href={`${LEARN_BASE_URL}/recruitment`}
+          label="구인 공고"
+        />
         <NavProfile onProfileClick={handleProfileClick} />
       </div>
       {isProfileClicked && (
