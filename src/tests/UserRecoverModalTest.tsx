@@ -1,5 +1,5 @@
 import { Button } from '@/components'
-import { AuthVerifyButton } from '@/components/auth'
+import { AuthVerifyButton } from '@/components/auth/common'
 import { Input, InputLabel } from '@/components/common/input'
 import {
   Modal,
@@ -17,7 +17,7 @@ export default function UserRecoverModalTest() {
         <ModalTrigger>
           <Button>탈퇴 안내 모달</Button>
         </ModalTrigger>
-        <ModalContent className="w-[90%]">
+        <ModalContent className="w-[90%] max-w-lg">
           <ModalHeader className="border-none" />
           <ModalMain className="flex flex-col items-center gap-5">
             <div className="bg-primary-100 text-primary-500 flex size-7 items-center justify-center rounded-full">
