@@ -326,4 +326,5 @@ export {
   ModalDescription,
   ModalMain,
   useModalContext,
+  type ModalContextValue,
 }
