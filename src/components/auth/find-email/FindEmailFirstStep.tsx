@@ -5,6 +5,7 @@ import {
   AuthIcon,
 } from '@/components/auth/common'
 import { Input, InputErrorMessage } from '@/components/common/input'
+import { InputFieldColStyle, InputGroupStyle } from '@/constants/auth-variants'
 import {
   FindEmailStep1Schema,
   type FindEmailStep1Type,
@@ -46,14 +47,14 @@ function FindEmailFirstStep({
           가입 시 입력한 이름과 휴대폰 번호를 입력해주세요
         </AuthDescription>
       </div>
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
-        <div className="flex flex-col gap-2">
+      <form onSubmit={handleSubmit(onSubmit)} className={InputGroupStyle}>
+        <div className={InputFieldColStyle}>
           <Input placeholder="이름" {...register('name')} />
           {errors.name && (
             <InputErrorMessage>{`${errors.name.message}`}</InputErrorMessage>
           )}
         </div>
-        <div className="flex flex-col gap-2">
+        <div className={InputFieldColStyle}>
           <Input placeholder="휴대전화 번호" {...register('phoneNumber')} />
           {errors.phoneNumber && (
             <InputErrorMessage>{`${errors.phoneNumber.message}`}</InputErrorMessage>

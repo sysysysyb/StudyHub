@@ -3,7 +3,6 @@ import {
   AuthContainer,
   AuthDescription,
   AuthLink,
-  AuthLogo,
   AuthSubmitButton,
   AuthTitle,
   AuthVerifyButton,
@@ -15,6 +14,10 @@ import {
   InputLabel,
   PasswordInput,
 } from '@/components/common/input'
+import {
+  InputFieldColStyle,
+  InputFieldRowStyle,
+} from '@/constants/auth-variants'
 import { useToast, useVerificationCode } from '@/hooks'
 import {
   authSchema,
@@ -25,9 +28,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router'
-
-const flexRowStyle = 'flex gap-3'
-const flexColStyle = 'flex flex-col gap-3'
 
 function Signup() {
   const [isDuplicateChecked, setIsDuplicateChecked] = useState(false)
@@ -73,8 +73,7 @@ function Signup() {
 
   return (
     <AuthContainer className="flex flex-col gap-10">
-      <div className={flexColStyle}>
-        <AuthLogo />
+      <div className={InputFieldColStyle}>
         <AuthTitle>회원가입</AuthTitle>
         <div className="flex justify-center gap-1">
           <AuthDescription>이미 계정이 있으신가요?</AuthDescription>
@@ -83,7 +82,7 @@ function Signup() {
       </div>
       <form className="flex flex-col gap-10" onSubmit={handleSubmit(onSubmit)}>
         {/* 이름 */}
-        <div className={flexColStyle}>
+        <div className={InputFieldColStyle}>
           <InputLabel isRequired>이름</InputLabel>
           <Input {...register('name')} placeholder="이름을 입력해주세요" />
           {errors.name && (
@@ -91,9 +90,9 @@ function Signup() {
           )}
         </div>
         {/* 닉네임 */}
-        <div className={flexColStyle}>
+        <div className={InputFieldColStyle}>
           <InputLabel isRequired>닉네임</InputLabel>
-          <div className={flexRowStyle}>
+          <div className={InputFieldRowStyle}>
             <Input
               {...register('nickname')}
               placeholder="닉네임을 입력해주세요"
@@ -110,7 +109,7 @@ function Signup() {
           )}
         </div>
         {/* 생년월일 */}
-        <div className={flexColStyle}>
+        <div className={InputFieldColStyle}>
           <InputLabel isRequired>생년월일</InputLabel>
           <Input
             {...register('birthday')}
@@ -121,9 +120,9 @@ function Signup() {
           )}
         </div>
         {/* 성별 */}
-        <div className={flexColStyle}>
+        <div className={InputFieldColStyle}>
           <InputLabel isRequired>성별</InputLabel>
-          <div className={flexRowStyle}>
+          <div className={InputFieldRowStyle}>
             <label htmlFor="gender-male">
               <AuthBadge isSelected={watch('gender') === 'male'}>남</AuthBadge>
             </label>
@@ -152,12 +151,12 @@ function Signup() {
           )}
         </div>
         {/* 이메일 */}
-        <div className={flexColStyle}>
+        <div className={InputFieldColStyle}>
           <div className="flex gap-3">
             <InputLabel isRequired>이메일</InputLabel>
             <InputDescription>로그인 시 아이디로 사용합니다.</InputDescription>
           </div>
-          <div className={flexRowStyle}>
+          <div className={InputFieldRowStyle}>
             <Input {...register('email')} placeholder="이메일을 입력해주세요" />
             <AuthVerifyButton
               className={cn(timer.email.isCounting && 'w-44 p-0')}
@@ -172,7 +171,7 @@ function Signup() {
           {errors.email && (
             <InputErrorMessage>{`${errors.email.message}`}</InputErrorMessage>
           )}
-          <div className={flexRowStyle}>
+          <div className={InputFieldRowStyle}>
             <Input
               {...register('verificationCode.email')}
               placeholder="인증코드 6자리를 입력해주세요"
@@ -189,7 +188,7 @@ function Signup() {
           )}
         </div>
         {/* 휴대전화 */}
-        <div className={flexColStyle}>
+        <div className={InputFieldColStyle}>
           <InputLabel isRequired>휴대전화</InputLabel>
           <div className="flex gap-3">
             <Input
@@ -209,7 +208,7 @@ function Signup() {
           {errors.phoneNumber && (
             <InputErrorMessage>{`${errors.phoneNumber.message}`}</InputErrorMessage>
           )}
-          <div className={flexRowStyle}>
+          <div className={InputFieldRowStyle}>
             <Input
               {...register('verificationCode.phoneNumber')}
               placeholder="인증코드 6자리를 입력해주세요"
@@ -226,14 +225,14 @@ function Signup() {
           )}
         </div>
         {/* 비밀번호 */}
-        <div className={flexColStyle}>
-          <div className={flexRowStyle}>
+        <div className={InputFieldColStyle}>
+          <div className={InputFieldRowStyle}>
             <InputLabel isRequired>비밀번호</InputLabel>
             <InputDescription>
               8~15자의 영문 대소문자, 숫자, 특수문자 포함
             </InputDescription>
           </div>
-          <div className={flexColStyle}>
+          <div className={InputFieldColStyle}>
             <PasswordInput
               {...register('password')}
               placeholder="비밀번호를 입력해주세요"
@@ -242,7 +241,7 @@ function Signup() {
               <InputErrorMessage>{`${errors.password.message}`}</InputErrorMessage>
             )}
           </div>
-          <div className={flexColStyle}>
+          <div className={InputFieldColStyle}>
             <PasswordInput
               {...register('confirmPassword')}
               placeholder="비밀번호를 다시 입력해주세요"

@@ -5,6 +5,7 @@ import {
   AuthIcon,
 } from '@/components/auth/common'
 import { InputErrorMessage, PasswordInput } from '@/components/common/input'
+import { InputFieldColStyle, InputGroupStyle } from '@/constants/auth-variants'
 import {
   FindPasswordStep3Schema,
   type FindPasswordStep3Type,
@@ -47,14 +48,14 @@ function FindPasswordThirdStep({
         </AuthTitle>
         <AuthDescription>새로운 비밀번호를 입력해주세요</AuthDescription>
       </div>
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
-        <div className="flex flex-col gap-2">
+      <form onSubmit={handleSubmit(onSubmit)} className={InputGroupStyle}>
+        <div className={InputFieldColStyle}>
           <PasswordInput placeholder="새 비밀번호" {...register('password')} />
           {errors.password && (
             <InputErrorMessage>{`${errors.password.message}`}</InputErrorMessage>
           )}
         </div>
-        <div className="flex flex-col gap-2">
+        <div className={InputFieldColStyle}>
           <PasswordInput
             placeholder="비밀번호 확인"
             {...register('confirmPassword')}

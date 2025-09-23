@@ -10,6 +10,8 @@ import FindPasswordSecondStep from '@/components/auth/find-password/FindPassword
 import FindPasswordThirdStep from '@/components/auth/find-password/FindPasswordThirdStep'
 import { useNavigate } from 'react-router'
 import { useToast } from '@/hooks'
+import { InputFieldColStyle } from '@/constants/auth-variants'
+import { cn } from '@/utils'
 
 const FIND_EMAIL_STEP_LIST = ['이메일입력', '이메일인증', '비밀번호재설정']
 
@@ -25,7 +27,7 @@ function FindPassword() {
 
   return (
     <AuthContainer className="flex flex-col gap-10">
-      <div className="flex flex-col items-center gap-1">
+      <div className={cn(InputFieldColStyle, 'text-center')}>
         <AuthTitle>비밀번호 찾기</AuthTitle>
         <AuthDescription>
           가입한 이메일로 비밀번호를 재설정할 수 있습니다
