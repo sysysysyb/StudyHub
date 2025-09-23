@@ -1,6 +1,9 @@
 import { Button } from '@/components'
-import { AuthSubmitButton, AuthVerifyButton } from '@/components/auth'
-import AuthStep from '@/components/auth/AuthStep'
+import {
+  AuthSubmitButton,
+  AuthVerifyButton,
+  AuthStep,
+} from '@/components/auth/common'
 import { Input, InputErrorMessage } from '@/components/common/input'
 import { useVerificationCode } from '@/hooks'
 import {
@@ -69,6 +72,7 @@ function SecondStep({ defaultValues, onPrev, onNext }: SecondStepProps) {
 
   useEffect(() => {
     handleCodeSend('phoneNumber')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
