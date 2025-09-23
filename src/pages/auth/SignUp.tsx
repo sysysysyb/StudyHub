@@ -54,7 +54,7 @@ function Signup() {
 
   const onSubmit = async () => {
     await new Promise((resolve) => setTimeout(resolve, 500))
-    triggerToast('success', '회원가입이 완료되었습니다!')
+    triggerToast('success', 'Signup 😎', '회원가입이 완료되었습니다')
     reset()
     navigate('/auth/login')
   }
@@ -68,7 +68,11 @@ function Signup() {
   const handleDuplicateCheck = async () => {
     await new Promise((resolve) => setTimeout(resolve, 1000))
     setIsDuplicateChecked(true)
-    triggerToast('success', '사용 가능한 닉네임입니다.')
+    triggerToast(
+      'success',
+      '사용 가능한 닉네임입니다.',
+      '다음 단계를 진행해 주세요'
+    )
   }
 
   return (

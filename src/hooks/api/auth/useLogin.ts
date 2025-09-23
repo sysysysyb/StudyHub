@@ -30,7 +30,7 @@ export default function useLogin(
       setAccessToken(newAccessToken)
       setIsLoggedIn(true)
       await qc.invalidateQueries({ queryKey: ['users', 'me'] })
-      triggerToast('success', '로그인이 완료되었습니다.')
+      triggerToast('success', 'Login 🎉', '로그인이 완료되었습니다.')
       navigate('/')
     },
     onError: () => {

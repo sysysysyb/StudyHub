@@ -1,13 +1,29 @@
 import { useToastStore } from '@/store'
 import type { Toast } from '@/types'
 
-const TIMEOUT = 3000
+const TIMEOUT = 3000 as const
 
 function useToast() {
   const { addToast, removeToast } = useToastStore.getState()
 
-  const triggerToast = (type: Toast['type'], content: Toast['content']) => {
-    const newToast = { id: Date.now(), type: type, content: content }
+  function triggerToast(type: Toast['type'], content: Toast['content']): void
+  function triggerToast(
+    type: Toast['type'],
+    title: Toast['title'],
+    content: Toast['content']
+  ): void
+
+  function triggerToast(
+    a: Toast['type'],
+    b: Toast['title'] | Toast['content'],
+    c?: Toast['content']
+  ) {
+    const newToast = {
+      id: Date.now(),
+      type: a,
+      title: c ? (b as Toast['title']) : undefined,
+      content: c ? (c as Toast['content']) : (b as Toast['content']),
+    }
 
     addToast(newToast)
 

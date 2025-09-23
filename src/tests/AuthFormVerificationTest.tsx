@@ -22,7 +22,7 @@ function AuthFormVerificationTest() {
 
   const onSubmit = async (data: AuthSchemaType) => {
     await new Promise((resolve) => setTimeout(resolve, 1000))
-    triggerToast('success', 'Auth 유효성 검사 성공!')
+    triggerToast('success', 'Test Success ✅', 'Auth 유효성 검사 성공!')
     console.log('입력 내용: ', data)
     reset()
   }

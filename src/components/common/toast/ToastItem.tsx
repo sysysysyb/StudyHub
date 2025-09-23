@@ -28,9 +28,9 @@ const TOAST_COLORS = {
 }
 
 const TOAST_TITLE = {
-  success: '성공적으로 저장되었습니다',
-  warning: '주의가 필요합니다',
-  error: '오류가 발생했습니다',
+  success: '성공적으로 저장되었습니다 ✅',
+  warning: '주의가 필요합니다 ⚠️',
+  error: '오류가 발생했습니다 ❌',
 }
 
 const TOAST_ICON = {
@@ -39,9 +39,13 @@ const TOAST_ICON = {
   error: CircleX,
 }
 
-function ToastItem({ id, type, content = '' }: Toast) {
+function ToastItem({
+  id,
+  type,
+  title = TOAST_TITLE[type],
+  content = '',
+}: Toast) {
   const styles = TOAST_COLORS[type]
-  const title = TOAST_TITLE[type]
   const Icon = TOAST_ICON[type]
   const { removeToast } = useToastStore()
 
@@ -57,14 +61,14 @@ function ToastItem({ id, type, content = '' }: Toast) {
         styles.bg
       )}
     >
-      <Icon className={cn('relative bottom-[1.75px] w-[18px]', styles.icon)} />
+      <Icon className={cn('relative bottom-[1.75px] w-4.5', styles.icon)} />
       <div className="flex-1 text-sm">
         <h4 className={styles.title}>{title}</h4>
         <p className={styles.content}>{content}</p>
       </div>
       <X
         className={cn(
-          'relative bottom-[1.75px] w-[18px] cursor-pointer',
+          'relative bottom-[1.75px] w-4.5 cursor-pointer',
           styles.icon
         )}
         onClick={handleClickDelete}
