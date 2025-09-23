@@ -1,5 +1,5 @@
 import { Avatar, Button } from '@/components'
-import { AuthSocialLoginButton } from '@/components/auth'
+import { AuthSocialLoginButton } from '@/components/auth/common'
 import { Input, InputLabel } from '@/components/common/input'
 import { useUserInformation } from '@/hooks/api'
 import useLogin from '@/hooks/api/auth/useLogin'
