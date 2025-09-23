@@ -1,4 +1,4 @@
-import { AuthBadge, AuthSubmitButton } from '@/components/auth'
+import { AuthBadge, AuthSubmitButton } from '@/components/auth/common'
 import { Input, InputErrorMessage, InputLabel } from '@/components/common/input'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
