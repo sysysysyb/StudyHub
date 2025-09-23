@@ -16,7 +16,7 @@ import {
 } from '@/schemas/form-schema/auth-schema'
 import { useLogin } from '@/hooks/api'
 
-const flexStyle = 'flex flex-col gap-3'
+const flexStyle = 'flex flex-col gap-4'
 
 function Login() {
   const {
@@ -51,23 +51,26 @@ function Login() {
       </div>
 
       <form className={flexStyle} onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          {...register('email')}
-          type="email"
-          placeholder="아이디 (example@gmail.com)"
-        />
-        {errors.email && (
-          <InputErrorMessage>{`${errors.email.message}`}</InputErrorMessage>
-        )}
-        <Input
-          {...register('password')}
-          type="password"
-          placeholder="비밀번호 (8~15자의 영문 대소문자, 숫자, 특수문자 포함)"
-        />
-        {errors.password && (
-          <InputErrorMessage>{`${errors.password.message}`}</InputErrorMessage>
-        )}
-
+        <div className="flex flex-col gap-2">
+          <Input
+            {...register('email')}
+            type="email"
+            placeholder="아이디 (example@gmail.com)"
+          />
+          {errors.email && (
+            <InputErrorMessage>{`${errors.email.message}`}</InputErrorMessage>
+          )}
+        </div>
+        <div className="flex flex-col gap-2">
+          <Input
+            {...register('password')}
+            type="password"
+            placeholder="비밀번호 (8~15자의 영문 대소문자, 숫자, 특수문자 포함)"
+          />
+          {errors.password && (
+            <InputErrorMessage>{`${errors.password.message}`}</InputErrorMessage>
+          )}
+        </div>
         <div className="flex gap-2">
           <AuthLink to="/auth/find-email">아이디 찾기</AuthLink>
           <span className="text-primary-600">|</span>

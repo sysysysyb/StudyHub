@@ -26,8 +26,8 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router'
 
-const flexRowStyle = 'flex gap-3'
-const flexColStyle = 'flex flex-col gap-3'
+const flexRowStyle = 'flex gap-2'
+const flexColStyle = 'flex flex-col gap-2'
 
 function Signup() {
   const [isDuplicateChecked, setIsDuplicateChecked] = useState(false)
