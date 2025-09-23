@@ -36,15 +36,11 @@ export default function UserRecoverFormModal({
     handleCodeVerify,
   } = useVerificationCode()
 
-  const { register, watch, getFieldState, handleSubmit } = useForm<UserRecover>(
-    {
-      resolver: zodResolver(UserRecoverSchema),
-    }
-  )
+  const { register, watch, getFieldState } = useForm<UserRecover>({
+    resolver: zodResolver(UserRecoverSchema),
+  })
 
   const isEmailNotValid = getFieldState('email').invalid || !watch('email')
-
-  const onSubmit = () => {}
 
   return (
     <Modal externalModalControl={userRecoverFormModalControl}>
@@ -62,10 +58,7 @@ export default function UserRecoverFormModal({
               입력하신 이메일로 인증번호를 보내드릴게요.
             </p>
           </div>
-          <form
-            className="flex w-full flex-col items-start gap-5"
-            onSubmit={handleSubmit(onSubmit)}
-          >
+          <form className="flex w-full flex-col items-start gap-5">
             <InputLabel isRequired>이메일</InputLabel>
             <div className="flex w-full gap-2">
               <Input
@@ -76,7 +69,9 @@ export default function UserRecoverFormModal({
               <AuthVerifyButton
                 type="button"
                 disabled={isEmailNotValid || timer.email.isCounting}
-                onClick={() => handleCodeSend('email')}
+                onClick={() => {
+                  handleCodeSend('email')
+                }}
               >
                 {timer.email.isCounting
                   ? `재전송 (${timer.email.formatMMSS(timer.email.remainSecond)})`
@@ -90,9 +85,11 @@ export default function UserRecoverFormModal({
                 {...register('verificationCode')}
               />
               <AuthVerifyButton
-                type="submit"
+                type="button"
                 disabled={!isCodeSent.email}
-                onClick={() => handleCodeVerify('email')}
+                onClick={() => {
+                  handleCodeVerify('email')
+                }}
               >
                 인증코드확인
               </AuthVerifyButton>
