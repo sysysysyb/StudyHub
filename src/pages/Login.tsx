@@ -14,8 +14,7 @@ import {
   loginSchema,
   type LoginSchemaType,
 } from '@/schemas/form-schema/auth-schema'
-import { useToast } from '@/hooks'
-import { useNavigate } from 'react-router'
+import { useLogin } from '@/hooks/api'
 
 const flexStyle = 'flex flex-col gap-3'
 
@@ -24,19 +23,15 @@ function Login() {
     register,
     handleSubmit,
     formState: { isValid, errors, isSubmitting },
-    reset,
   } = useForm<LoginSchemaType>({
     mode: 'onChange',
     resolver: zodResolver(loginSchema),
   })
-  const { triggerToast } = useToast()
-  const navigate = useNavigate()
+  const login = useLogin()
 
-  const onSubmit = async () => {
-    await new Promise((resolve) => setTimeout(resolve, 500))
-    triggerToast('success', '로그인이 완료되었습니다!')
-    reset()
-    navigate('/')
+  const onSubmit = async (data: LoginSchemaType) => {
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+    login.mutate(data)
   }
 
   return (

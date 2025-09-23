@@ -1,6 +1,7 @@
 import { cn } from '@/utils'
-import { Circle } from './SkeletonItem'
+
 import { AVATAR_SIZE } from '@/constants/avatar-sizes'
+import { SkeletonCircle } from './SkeletonItem'
 
 function AvatarSkeleton({
   size = 'md',
@@ -11,7 +12,7 @@ function AvatarSkeleton({
 
   return (
     <div className={cn(w)}>
-      <Circle />
+      <SkeletonCircle />
     </div>
   )
 }

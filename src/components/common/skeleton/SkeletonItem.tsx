@@ -3,7 +3,7 @@ import { cn } from '@/utils'
 const skeletonStyle =
   'text-gray-200 animate-shimmer bg-gradient-custom bg-[length:300%_100%]'
 
-export function Circle() {
+export function SkeletonCircle() {
   return (
     <svg
       viewBox={'0 0 100 100'}
@@ -12,7 +12,7 @@ export function Circle() {
   )
 }
 
-export function Rectangle({
+export function SkeletonRectangle({
   width = 100,
   height = 100,
   isRounded = true,
@@ -29,7 +29,7 @@ export function Rectangle({
   )
 }
 
-export function Sentence({ width = 100 }: { width?: number }) {
+export function SkeletonLine({ width = 100 }: { width?: number }) {
   return (
     <svg
       viewBox={`0 0 100 4`}
