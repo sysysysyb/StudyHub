@@ -6,7 +6,7 @@ import {
   AuthSocialLoginButton,
   AuthSubmitButton,
   AuthTitle,
-} from '@/components/auth'
+} from '@/components/auth/common'
 import { Input, InputErrorMessage } from '@/components/common/input'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
