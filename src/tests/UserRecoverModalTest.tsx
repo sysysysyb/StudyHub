@@ -1,4 +1,6 @@
 import { Button } from '@/components'
+import { AuthVerifyButton } from '@/components/auth'
+import { Input, InputLabel } from '@/components/common/input'
 import {
   Modal,
   ModalContent,
@@ -7,13 +9,13 @@ import {
   ModalMain,
   ModalTrigger,
 } from '@/components/common/Modal'
-import { MehIcon } from 'lucide-react'
+import { MehIcon, RotateCwIcon } from 'lucide-react'
 export default function UserRecoverModalTest() {
   return (
-    <div>
+    <div className="flex flex-col gap-2">
       <Modal>
         <ModalTrigger>
-          <Button>탈퇴 모달</Button>
+          <Button>탈퇴 안내 모달</Button>
         </ModalTrigger>
         <ModalContent>
           <ModalHeader className="border-none" />
@@ -36,6 +38,44 @@ export default function UserRecoverModalTest() {
               <Button>계정 다시 사용하기</Button>
             </ModalFooter>
           </ModalMain>
+        </ModalContent>
+      </Modal>
+
+      <Modal>
+        <ModalTrigger>
+          <Button>탈퇴 폼 모달</Button>
+        </ModalTrigger>
+        <ModalContent className="flex w-full max-w-lg flex-col items-center">
+          <ModalHeader className="w-full border-none" />
+          <ModalMain className="flex w-full flex-col gap-5">
+            <div className="flex flex-col items-center gap-2">
+              <div className="bg-primary-100 text-primary-500 flex size-7 items-center justify-center rounded-full">
+                <RotateCwIcon className="h-5" />
+              </div>
+              <h1 className="text-center text-xl font-bold text-gray-900">
+                계정 다시 사용하기
+              </h1>
+              <p className="text-center text-gray-600">
+                입력하신 이메일로 인증번호를 보내드릴게요.
+              </p>
+            </div>
+            <form className="flex w-full flex-col items-start gap-5">
+              <InputLabel>
+                이메일 <span className="text-danger-500">*</span>
+              </InputLabel>
+              <div className="flex w-full gap-2">
+                <Input
+                  placeholder="가입한 이메일을 입력해주세요."
+                  className="flex-1"
+                />
+                <AuthVerifyButton>인증코드전송</AuthVerifyButton>
+              </div>
+              <Input placeholder="인증번호를 입력해주세요." />
+            </form>
+          </ModalMain>
+          <ModalFooter className="border-none">
+            <Button>계정 다시 사용하기</Button>
+          </ModalFooter>
         </ModalContent>
       </Modal>
     </div>
