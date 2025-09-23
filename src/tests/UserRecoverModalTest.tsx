@@ -103,7 +103,7 @@ export default function UserRecoverModalTest() {
                   placeholder="인증번호를 입력해주세요."
                   className="flex-1"
                 />
-                <AuthVerifyButton>인증코드전송</AuthVerifyButton>
+                <AuthVerifyButton>인증코드확인</AuthVerifyButton>
               </div>
             </form>
           </ModalMain>
