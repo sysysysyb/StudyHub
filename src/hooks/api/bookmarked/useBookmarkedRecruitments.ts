@@ -1,4 +1,4 @@
-import { API_BASE_URL } from '@/constants/api-constants'
+import { API_BASE_URL } from '@/constants/url-constants'
 import type { recruitmentSearchParams } from '@/types'
 import type { BookmarkedRecruitments } from '@/types/api-response-types/recruitment-response-types'
 import api from '@/utils/axios'

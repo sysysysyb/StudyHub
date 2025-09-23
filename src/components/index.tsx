@@ -1,7 +1,6 @@
 // components
 import Badge from '@/components/common/Badge'
 import Button from '@/components/common/Button'
-import ImageCard from '@/components/common/card/ImageCard'
 import Header from '@/components/header/Header'
 import { Symbol } from '@/components/common/Symbol'
 import { Logo } from '@/components/common/Logo'
@@ -21,7 +20,6 @@ import Dropdown from '@/components/common/Dropdown'
 export {
   Badge,
   Button,
-  ImageCard,
   Header,
   Symbol,
   Logo,

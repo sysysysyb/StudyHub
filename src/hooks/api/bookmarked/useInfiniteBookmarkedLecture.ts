@@ -1,4 +1,4 @@
-import { API_BASE_URL } from '@/constants/api-constants'
+import { API_BASE_URL } from '@/constants/url-constants'
 import type { lectureSearchParams } from '@/types'
 import type { BookmarkedLectures } from '@/types/api-response-types/lecture-response-type'
 import api from '@/utils/axios'

@@ -9,6 +9,7 @@ import { AppliedStatusBadge } from '@/components/my-page/applied-recruitment/App
 import { ApplicationDetailModal } from '@/components/my-page/applied-recruitment/ApplicationDetailModal'
 import { CompletedStudyImageCard } from '@/components/my-page/completed-study/CompletedStudyImageCard'
 import { ReviewInputModal } from '@/components/my-page/completed-study/ReviewInputModal'
+import { RatingStars } from '@/components/my-page/completed-study/RatingStars'
 
 export {
   MyPageSideBar,
@@ -22,4 +23,5 @@ export {
   ApplicationDetailModal,
   CompletedStudyImageCard,
   ReviewInputModal,
+  RatingStars,
 }
