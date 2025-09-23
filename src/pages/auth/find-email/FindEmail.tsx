@@ -1,5 +1,9 @@
-import { AuthContainer, AuthDescription, AuthTitle } from '@/components/auth'
-import AuthStep from '@/components/auth/AuthStep'
+import {
+  AuthContainer,
+  AuthDescription,
+  AuthTitle,
+  AuthStep,
+} from '@/components/auth/common'
 import { useState } from 'react'
 import FindEmailFirstStep from './FindEmailFirstStep'
 import FindEmailSecondStep from './FindEmailSecondStep'

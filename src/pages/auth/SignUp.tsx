@@ -7,7 +7,7 @@ import {
   AuthSubmitButton,
   AuthTitle,
   AuthVerifyButton,
-} from '@/components/auth'
+} from '@/components/auth/common'
 import {
   Input,
   InputDescription,

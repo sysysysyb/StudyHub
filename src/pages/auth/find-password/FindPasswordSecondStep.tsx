@@ -4,8 +4,8 @@ import {
   AuthSubmitButton,
   AuthTitle,
   AuthVerifyButton,
-} from '@/components/auth'
-import AuthIcon from '@/components/auth/AuthIcon'
+  AuthIcon,
+} from '@/components/auth/common'
 import { Input, InputErrorMessage } from '@/components/common/input'
 import { useVerificationCode } from '@/hooks'
 import {

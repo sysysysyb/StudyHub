@@ -1,5 +1,9 @@
-import { AuthDescription, AuthSubmitButton, AuthTitle } from '@/components/auth'
-import AuthIcon from '@/components/auth/AuthIcon'
+import {
+  AuthDescription,
+  AuthSubmitButton,
+  AuthTitle,
+  AuthIcon,
+} from '@/components/auth/common'
 import { Input, InputErrorMessage } from '@/components/common/input'
 import {
   FindEmailStep1Schema,

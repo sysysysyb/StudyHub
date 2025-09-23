@@ -1,6 +1,5 @@
 import { Button } from '@/components'
-import { AuthDescription, AuthTitle } from '@/components/auth'
-import AuthIcon from '@/components/auth/AuthIcon'
+import { AuthDescription, AuthTitle, AuthIcon } from '@/components/auth/common'
 import { Check } from 'lucide-react'
 import { Link } from 'react-router'
 
