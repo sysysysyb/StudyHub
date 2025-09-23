@@ -6,7 +6,11 @@ import {
   AuthSubmitButton,
   AuthTitle,
 } from '@/components/auth/common'
-import { Input, InputErrorMessage } from '@/components/common/input'
+import {
+  Input,
+  InputErrorMessage,
+  PasswordInput,
+} from '@/components/common/input'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
@@ -63,9 +67,8 @@ function Login() {
           )}
         </div>
         <div className={InputFieldColStyle}>
-          <Input
+          <PasswordInput
             {...register('password')}
-            type="password"
             placeholder="비밀번호 (8~15자의 영문 대소문자, 숫자, 특수문자 포함)"
           />
           {errors.password && (
