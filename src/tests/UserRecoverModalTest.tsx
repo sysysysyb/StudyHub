@@ -17,7 +17,7 @@ export default function UserRecoverModalTest() {
         <ModalTrigger>
           <Button>탈퇴 안내 모달</Button>
         </ModalTrigger>
-        <ModalContent>
+        <ModalContent className="w-[90%]">
           <ModalHeader className="border-none" />
           <ModalMain className="flex flex-col items-center gap-5">
             <div className="bg-primary-100 text-primary-500 flex size-7 items-center justify-center rounded-full">
@@ -34,8 +34,8 @@ export default function UserRecoverModalTest() {
                 계정을 다시 사용하려면 아래 버튼을 눌러 복구를 진행해주세요.
               </p>
             </div>
-            <ModalFooter className="border-none">
-              <Button>계정 다시 사용하기</Button>
+            <ModalFooter className="flex w-full justify-center border-none">
+              <Button className="w-[90%] max-w-sm">계정 다시 사용하기</Button>
             </ModalFooter>
           </ModalMain>
         </ModalContent>
@@ -45,7 +45,7 @@ export default function UserRecoverModalTest() {
         <ModalTrigger>
           <Button>탈퇴 폼 모달</Button>
         </ModalTrigger>
-        <ModalContent className="flex w-full max-w-lg flex-col items-center">
+        <ModalContent className="flex w-[90%] max-w-lg flex-col items-center">
           <ModalHeader className="w-full border-none" />
           <ModalMain className="flex w-full flex-col gap-5">
             <div className="flex flex-col items-center gap-2">
@@ -70,11 +70,17 @@ export default function UserRecoverModalTest() {
                 />
                 <AuthVerifyButton>인증코드전송</AuthVerifyButton>
               </div>
-              <Input placeholder="인증번호를 입력해주세요." />
+              <div className="flex w-full gap-2">
+                <Input
+                  placeholder="인증번호를 입력해주세요."
+                  className="flex-1"
+                />
+                <AuthVerifyButton>인증코드전송</AuthVerifyButton>
+              </div>
             </form>
           </ModalMain>
-          <ModalFooter className="border-none">
-            <Button>계정 다시 사용하기</Button>
+          <ModalFooter className="flex w-full justify-center border-none">
+            <Button className="w-[90%] max-w-sm">확인</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
