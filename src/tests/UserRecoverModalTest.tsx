@@ -15,7 +15,7 @@ export default function UserRecoverModalTest() {
     <div className="flex flex-col gap-2">
       <Modal>
         <ModalTrigger>
-          <Button>탈퇴 안내 모달</Button>
+          <Button>계정 복구 안내 모달</Button>
         </ModalTrigger>
         <ModalContent className="w-[90%] max-w-lg">
           <ModalHeader className="border-none" />
@@ -43,7 +43,7 @@ export default function UserRecoverModalTest() {
 
       <Modal>
         <ModalTrigger>
-          <Button>탈퇴 폼 모달</Button>
+          <Button>계정 복구 폼 모달</Button>
         </ModalTrigger>
         <ModalContent className="flex w-[90%] max-w-lg flex-col items-center">
           <ModalHeader className="w-full border-none" />
