@@ -36,7 +36,7 @@ export default function useAxiosInterceptor() {
 
     if (response?.status === 401 && isTokenRefresh && isMypageLocated) {
       navigate('/auth/login')
-      triggerToast('error', '로그인이 만료되었습니다. 다시 로그인 해주세요.')
+      triggerToast('error', '로그인이 만료되었습니다', '다시 로그인 해주세요.')
     }
 
     return Promise.reject(error)

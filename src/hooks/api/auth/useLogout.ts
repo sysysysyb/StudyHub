@@ -22,7 +22,7 @@ export default function useLogout(options?: UseMutationOptions) {
       setIsLoggedIn(false)
       clearAccessToken()
       qc.removeQueries({ queryKey: ['users', 'me'] })
-      triggerToast('success', '로그아웃이 완료되었습니다.')
+      triggerToast('success', 'Logout 👋', '로그아웃이 완료되었습니다.')
     },
     ...options,
   })
