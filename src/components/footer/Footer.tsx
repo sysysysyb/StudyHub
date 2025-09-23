@@ -1,9 +1,8 @@
-import type { ReactNode } from 'react'
 import { Logo } from '@/components'
 import { FooterNavComponent } from '@/components/footer/FooterNavComponent'
 import { LEARN_BASE_URL, STUDY_BASE_URL } from '@/constants/url-constants'
 
-export function Footer(): ReactNode {
+export function Footer() {
   return (
     <footer className="flex flex-col items-center bg-gray-900 px-28 py-12">
       {/* 상부 섹션 */}
