@@ -30,6 +30,22 @@ export default function UserRecoverModalTest() {
     },
   }
 
+  const [isUserRecoverCompleteModalOpen, setIsUserRecoverCompleteModalOpen] =
+    useState(false)
+
+  const userRecoverCompleteModalControl: ModalContextValue = {
+    isOpen: isUserRecoverCompleteModalOpen,
+    open: () => {
+      setIsUserRecoverCompleteModalOpen(true)
+    },
+    close: () => {
+      setIsUserRecoverCompleteModalOpen(false)
+    },
+    toggle: () => {
+      setIsUserRecoverCompleteModalOpen((prev) => !prev)
+    },
+  }
+
   return (
     <div className="flex flex-col gap-2">
       <Modal>
@@ -71,7 +87,7 @@ export default function UserRecoverModalTest() {
 
       <Modal externalModalControl={userRecoverFormModalControl}>
         <ModalTrigger>
-          <Button>계정 복구 폼 모달</Button>
+          <Button className="hidden">계정 복구 폼 모달</Button>
         </ModalTrigger>
         <ModalContent className="flex w-[90%] max-w-lg flex-col items-center">
           <ModalHeader className="w-full border-none" />
@@ -108,14 +124,23 @@ export default function UserRecoverModalTest() {
             </form>
           </ModalMain>
           <ModalFooter className="flex w-full justify-center border-none">
-            <Button className="w-[90%] max-w-sm">확인</Button>
+            <ModalClose className="flex w-full justify-center">
+              <Button
+                className="w-[90%] max-w-sm"
+                onClick={() => {
+                  userRecoverCompleteModalControl.open()
+                }}
+              >
+                확인
+              </Button>
+            </ModalClose>
           </ModalFooter>
         </ModalContent>
       </Modal>
 
-      <Modal>
+      <Modal externalModalControl={userRecoverCompleteModalControl}>
         <ModalTrigger>
-          <Button>계정 복구 완료 모달</Button>
+          <Button className="hidden">계정 복구 완료 모달</Button>
         </ModalTrigger>
         <ModalContent className="flex w-[90%] max-w-sm flex-col items-center">
           <ModalMain className="flex flex-col items-center gap-2">
