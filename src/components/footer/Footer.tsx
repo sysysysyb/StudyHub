@@ -33,7 +33,7 @@ export function Footer() {
         />
       </section>
       {/* 하부 섹션 */}
-      <section className="flex w-full justify-center border-t border-t-gray-800 pt-8 text-gray-400">
+      <section className="flex w-full justify-center border-t border-t-gray-800 pt-8 whitespace-nowrap text-gray-400">
         © 2025 StudyHub. All rights reserved.
       </section>
     </footer>
