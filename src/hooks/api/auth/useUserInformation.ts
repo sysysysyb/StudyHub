@@ -20,6 +20,7 @@ export default function useUserInformation<T = UserInformation>(
         ...data,
         phoneNumber: data.phone_number,
         profileImageUrl: data.profile_image_url,
+        createdAt: data.created_at,
       }
     },
     enabled: isLoggedIn,

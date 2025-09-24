@@ -4,9 +4,9 @@ import { useUserInformation } from '@/hooks/api'
 export default function MyPageSideBarProfile() {
   const { data: userInfo } = useUserInformation()
   if (!userInfo) return '로그인이 필요합니다.'
-  const signUpDate = new Date(userInfo.birthday)
+  const signUpDate = new Date(userInfo.createdAt)
   const signUpYear = signUpDate.getFullYear()
-  const signUpMonth = signUpDate.getMonth()
+  const signUpMonth = signUpDate.getMonth() + 1
 
   return (
     <div className="flex flex-col items-center justify-start">
