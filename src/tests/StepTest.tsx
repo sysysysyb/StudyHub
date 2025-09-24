@@ -51,15 +51,22 @@ function FirstStep({ defaultValues, onNext }: FirstStepProps) {
 
 interface SecondStepProps {
   defaultValues: DefaultValues<FindEmailStep2Type>
+  phoneNumber: string
   onPrev: () => void
   onNext: (value: FindEmailStep2Type) => void
 }
 
-function SecondStep({ defaultValues, onPrev, onNext }: SecondStepProps) {
+function SecondStep({
+  defaultValues,
+  phoneNumber,
+  onPrev,
+  onNext,
+}: SecondStepProps) {
   const {
     register,
     handleSubmit,
     formState: { isValid, errors },
+    getValues,
   } = useForm<FindEmailStep2Type>({
     mode: 'onChange',
     resolver: zodResolver(FindEmailStep2Schema),
@@ -71,7 +78,7 @@ function SecondStep({ defaultValues, onPrev, onNext }: SecondStepProps) {
   const onSubmit = (value: FindEmailStep2Type) => onNext(value)
 
   useEffect(() => {
-    handleCodeSend('phoneNumber')
+    handleCodeSend('phoneNumber', phoneNumber)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -84,7 +91,12 @@ function SecondStep({ defaultValues, onPrev, onNext }: SecondStepProps) {
         />
         <AuthVerifyButton
           disabled={!isCodeSent.phoneNumber}
-          onClick={() => handleCodeVerify('phoneNumber')}
+          onClick={() =>
+            handleCodeVerify('phoneNumber', {
+              phoneNumber: phoneNumber,
+              verificationCode: getValues('code'),
+            })
+          }
         >
           인증코드확인
         </AuthVerifyButton>
@@ -131,6 +143,7 @@ function StepTest() {
       {currentStep === 2 && (
         <SecondStep
           defaultValues={stepHistory.step2}
+          phoneNumber={stepHistory.step1.phoneNumber}
           onPrev={() => setCurrentStep(1)}
           onNext={(value) => {
             setStepHistory((prev) => ({
