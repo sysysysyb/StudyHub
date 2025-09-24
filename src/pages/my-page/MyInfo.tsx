@@ -1,16 +1,24 @@
-import type { ReactNode } from 'react'
 import {
   UserInfoDescription,
   InfoUpdate,
   PasswordChange,
   Withdrawal,
 } from '@/components/my-page'
-import { Avatar } from '@/components'
+import { Avatar, UserInfoSkeleton } from '@/components'
+import { mapUserInfoToDescription } from '@/utils/map-user-info'
+import { useUserInformation } from '@/hooks/api'
 
-export function MyInfo(): ReactNode {
+export function MyInfo() {
+  const { data: userInfo, isPending } = useUserInformation()
+  if (!userInfo) return '로그인이 필요합니다.'
+
   return (
     <main>
-      <section className="flex flex-col gap-8 pb-16" aria-labelledby="myInfo">
+      {/* 내 정보 섹션 */}
+      <section
+        className="flex flex-col gap-8 pb-16"
+        aria-labelledby="myInfoHeading"
+      >
         <header className="flex justify-between">
           <div className="flex flex-col">
             <h2 className="text-heading3 pb-2">내 정보</h2>
@@ -21,23 +29,27 @@ export function MyInfo(): ReactNode {
           <InfoUpdate />
         </header>
         <figure className="flex flex-col items-center gap-4">
-          <Avatar size="5xl" state="none" />
+          <Avatar
+            size="5xl"
+            state="none"
+            src={userInfo.profileImageUrl ?? undefined}
+          />
           <figcaption className="text-heading5">프로필 이미지</figcaption>
         </figure>
-        <UserInfoDescription
-          infoList={[
-            { title: '이메일', detail: 'kim.dev@example.com' },
-            { title: '휴대폰 번호', detail: '' },
-            { title: '닉네임', detail: '' },
-            { title: '생년월일', detail: '' },
-            { title: '이름', detail: '' },
-          ]}
-        />
+        {isPending ? (
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            {[...Array(5)].map((_, i) => (
+              <UserInfoSkeleton key={i} />
+            ))}
+          </div>
+        ) : (
+          <UserInfoDescription infoList={mapUserInfoToDescription(userInfo)} />
+        )}
       </section>
-
+      {/* 비밀번호 섹션 */}
       <section
         className="border-y border-gray-200 py-16 pt-8"
-        aria-labelledby="passwordChange"
+        aria-labelledby="passwordChangeHeading"
       >
         <header className="flex justify-between">
           <div className="flex flex-col">
@@ -49,7 +61,8 @@ export function MyInfo(): ReactNode {
           <PasswordChange />
         </header>
       </section>
-      <section className="py-16 pt-8" aria-labelledby="unregister">
+      {/* 회원 탈퇴 섹션 */}
+      <section className="py-16 pt-8" aria-labelledby="withdrawalHeading">
         <header className="flex justify-between">
           <div className="flex flex-col">
             <h2 className="text-heading3 pb-2">회원 탈퇴</h2>
