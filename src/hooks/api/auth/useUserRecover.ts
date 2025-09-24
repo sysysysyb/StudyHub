@@ -4,7 +4,7 @@ import api from '@/utils/axios'
 import { useMutation, type UseMutationOptions } from '@tanstack/react-query'
 
 export default function useUserRecover(
-  options: UseMutationOptions<void, Error, userRecoverVerifyBody>
+  options?: UseMutationOptions<void, Error, userRecoverVerifyBody>
 ) {
   return useMutation({
     mutationFn: async ({ email, verificationCode }) => {

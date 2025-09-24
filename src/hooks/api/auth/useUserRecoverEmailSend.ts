@@ -3,7 +3,7 @@ import api from '@/utils/axios'
 import { useMutation, type UseMutationOptions } from '@tanstack/react-query'
 
 export default function useUserRecoverEmailSend(
-  options: UseMutationOptions<void, Error, string>
+  options?: UseMutationOptions<void, Error, string>
 ) {
   return useMutation({
     mutationFn: async (email) => {
