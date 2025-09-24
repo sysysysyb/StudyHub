@@ -1,11 +1,25 @@
 import { useState } from 'react'
 import { useTimer } from './useTimer'
 import { useToast } from '@/hooks'
+import useEmailSendCode from './api/auth/useEmailSendCode'
+import usePhoneSendCode from './api/auth/usePhoneSendCode'
+import useEmailVerify from './api/auth/useEmailVerify'
+import usePhoneVerify from './api/auth/usePhoneVerify'
+import type {
+  UserEmailSendCode,
+  UserEmailVerify,
+  UserPhoneSendCode,
+  UserPhoneVerify,
+} from '@/types/api-request-types/auth-request-types'
 
 const TIMER_DURATION_MS = 180000
 
 function useVerificationCode() {
   const { triggerToast } = useToast()
+  const emailSendCode = useEmailSendCode()
+  const phoneSendCode = usePhoneSendCode()
+  const emailVerify = useEmailVerify()
+  const phoneVerify = usePhoneVerify()
 
   const [isCodeSent, SetIsCodeSent] = useState({
     email: false,
@@ -32,23 +46,39 @@ function useVerificationCode() {
     ),
   }
 
-  const handleCodeSend = async (label: 'email' | 'phoneNumber') => {
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+  const handleCodeSend = async (
+    label: 'email' | 'phoneNumber',
+    email?: string,
+    phoneNumber?: string
+  ) => {
+    if (label === 'email' && email) {
+      const data: UserEmailSendCode = { email }
+      emailSendCode.mutate(data)
+    }
+    if (label === 'phoneNumber' && phoneNumber) {
+      const data: UserPhoneSendCode = { phoneNumber }
+      phoneSendCode.mutate(data)
+    }
     SetIsCodeSent((prev) => ({ ...prev, [label]: true }))
     timer[label].startTimer()
-    triggerToast('success', '인증 코드를 전송했습니다.', '확인 후 입력해주세요')
   }
 
-  const handleCodeVerify = async (label: 'email' | 'phoneNumber') => {
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+  const handleCodeVerify = async (
+    label: 'email' | 'phoneNumber',
+    emailVerifyData?: { email: string; verificationCode: string },
+    phoneVerifyData?: { phoneNumber: string; verificationCode: string }
+  ) => {
+    if (label === 'email' && emailVerifyData) {
+      const data: UserEmailVerify = emailVerifyData
+      emailVerify.mutate(data)
+    }
+    if (label === 'phoneNumber' && phoneVerifyData) {
+      const data: UserPhoneVerify = phoneVerifyData
+      phoneVerify.mutate(data)
+    }
     SetIsCodeVerified((prev) => ({ ...prev, [label]: true }))
     SetIsCodeSent((prev) => ({ ...prev, [label]: false }))
     timer[label].resetTimer()
-    triggerToast(
-      'success',
-      '인증코드가 확인되었습니다',
-      '다음 단계를 진행해 주세요'
-    )
   }
 
   return { isCodeSent, isCodeVerified, timer, handleCodeSend, handleCodeVerify }
