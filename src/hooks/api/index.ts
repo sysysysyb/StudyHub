@@ -9,6 +9,7 @@ import useInfiniteBookmarkedLecture from '@/hooks/api/bookmarked/useInfiniteBook
 import useLogin from '@/hooks/api/auth/useLogin'
 import useBookmarkedRecruitment from '@/hooks/api/bookmarked/useBookmarkedRecruitments'
 import useUserRecover from '@/hooks/api/auth/useUserRecover'
+import useUserRecoverEmailSend from '@/hooks/api/auth/useUserRecoverEmailSend'
 
 export {
   useUserInformation,
@@ -22,4 +23,5 @@ export {
   useLogin,
   useBookmarkedRecruitment,
   useUserRecover,
+  useUserRecoverEmailSend,
 }
