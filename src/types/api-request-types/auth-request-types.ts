@@ -8,11 +8,11 @@ export interface UserSignup {
   password: string
   nickname: string
   name: string
-  phone_number: string
+  phoneNumber: string
   birthday: string
   gender: string
-  email_verification_code: string
-  phone_verification_code: string
+  emailVerificationCode: string
+  phoneVerificationCode: string
 }
 
 export interface UserEmailSendCode {
