@@ -1,5 +1,7 @@
 export const BASE_URL = 'ozcoding.site'
 
+export const MSW_BASE_URL = `https://msw.${BASE_URL}/api/v1`
+
 export const API_BASE_URL = `https://api.${BASE_URL}/api/v1`
 
 // 1팀 담당 - 스터디 그룹 베이스 도메인

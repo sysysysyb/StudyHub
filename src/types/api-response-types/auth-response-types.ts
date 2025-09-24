@@ -7,4 +7,5 @@ export interface UserInformation {
   birthday: string
   gender: 'male' | 'female'
   profileImageUrl?: string
+  createdAt: Date
 }

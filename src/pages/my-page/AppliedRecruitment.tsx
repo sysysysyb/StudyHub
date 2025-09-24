@@ -1,5 +1,4 @@
-import { ListItemSkeleton } from '@/components'
-import EmptyDataState from '@/components/common/state/EmptyDataState'
+import { ListItemSkeleton, EmptyDataState } from '@/components'
 import { useAppliedRecruitment } from '@/hooks/api'
 import {
   AppliedRecruitmentCard,

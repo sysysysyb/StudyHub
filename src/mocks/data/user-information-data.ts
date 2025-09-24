@@ -8,6 +8,7 @@ export const userInformationMock = [
     birthday: '1990-01-01',
     gender: 'female',
     profile_image_url: 'https://picsum.photos/id/65/200/300',
+    created_at: '2023-05-12T10:20:30Z',
   },
   {
     id: 2,
@@ -18,6 +19,7 @@ export const userInformationMock = [
     birthday: '1990-02-02',
     gender: 'male',
     profile_image_url: 'https://picsum.photos/id/30/200/300',
+    created_at: '2024-02-01T15:45:00Z',
   },
   {
     id: 3,
@@ -28,5 +30,6 @@ export const userInformationMock = [
     birthday: '1990-03-03',
     gender: 'male',
     profile_image_url: null,
+    created_at: '2025-01-10T08:00:00Z',
   },
 ]

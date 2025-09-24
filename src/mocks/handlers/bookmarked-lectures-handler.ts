@@ -1,9 +1,9 @@
-import { API_BASE_URL } from '@/constants/url-constants'
+import { MSW_BASE_URL } from '@/constants/url-constants'
 import { http, HttpResponse } from 'msw'
 import { bookmarkedLecturesMock } from '@/mocks/data/bookmarked-lectures-data'
 
 const getBookmarkedLectures = http.get(
-  `${API_BASE_URL}/lectures/bookmarks`,
+  `${MSW_BASE_URL}/lectures/bookmarks`,
   () => {
     return HttpResponse.json(bookmarkedLecturesMock)
   }

@@ -1,6 +1,4 @@
-import type { ReactNode } from 'react'
-
-interface InfoDescription {
+export interface InfoDescription {
   title: string
   detail: string
 }
@@ -9,9 +7,7 @@ interface InfoDescriptionProps {
   infoList: InfoDescription[]
 }
 
-export function UserInfoDescription({
-  infoList,
-}: InfoDescriptionProps): ReactNode {
+export function UserInfoDescription({ infoList }: InfoDescriptionProps) {
   return (
     <dl className="grid grid-cols-1 gap-6 md:grid-cols-2">
       {infoList.map((list, index) => (

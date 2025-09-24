@@ -9,10 +9,6 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 async function enableMocking() {
-  if (process.env.NODE_ENV !== 'development') {
-    return
-  }
-
   const { worker } = await import('@/mocks/browser')
 
   // `worker.start()` returns a Promise that resolves
