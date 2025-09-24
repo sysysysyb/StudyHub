@@ -17,7 +17,7 @@ import AuthLayout from '@/components/layout/AuthLayout'
 import Notification from '@/components/notification/Notification'
 import Dropdown from '@/components/common/Dropdown'
 import EmptyDataState from '@/components/common/state/EmptyDataState'
-import UserInfoSkeleton from './common/skeleton/UserInfoSkeleton'
+import UserInfoSkeleton from '@/components/common/skeleton/UserInfoSkeleton'
 
 export {
   Badge,
