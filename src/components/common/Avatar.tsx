@@ -5,7 +5,7 @@ import { AVATAR_SIZE } from '@/constants/avatar-sizes'
 import { User as UserIcon } from 'lucide-react'
 
 const AvatarImage = cva(
-  'text-primary-600 bg-primary-100 rounded-full relative shrink-0 flex items-center justify-center border-primary-200 border',
+  'text-primary-600 bg-primary-100 rounded-full relative shrink-0 flex items-center justify-center',
   {
     variants: {
       size: AVATAR_SIZE,
