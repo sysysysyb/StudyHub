@@ -10,7 +10,15 @@ import {
   ModalMain,
   type ModalContextValue,
 } from '@/components/common/Modal'
+import { useToast, useVerificationCode } from '@/hooks'
+import { useUserRecover, useUserRecoverEmailSend } from '@/hooks/api'
+import {
+  UserRecoverSchema,
+  type UserRecover,
+} from '@/schemas/form-schema/user-recover-schema'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { RotateCwIcon } from 'lucide-react'
+import { useForm } from 'react-hook-form'
 
 interface UserRecoverFormModalProps {
   userRecoverFormModalControl: ModalContextValue
@@ -21,6 +29,39 @@ export default function UserRecoverFormModal({
   userRecoverFormModalControl,
   userRecoverCompleteModalOpen,
 }: UserRecoverFormModalProps) {
+  const {
+    isCodeSent,
+    isCodeVerified,
+    timer,
+    handleCodeSend,
+    handleCodeVerify,
+  } = useVerificationCode()
+
+  const { register, watch, getFieldState, getValues } = useForm<UserRecover>({
+    resolver: zodResolver(UserRecoverSchema),
+  })
+
+  const isEmailNotValid = getFieldState('email').invalid || !watch('email')
+
+  //mutation 코드는 이후 useVerificationCode 훅 안으로 이동 예정!!
+  const { triggerToast } = useToast()
+  const { mutate: sendEmail } = useUserRecoverEmailSend({
+    onSuccess: () => {
+      handleCodeSend('email')
+    },
+    onError: () => {
+      triggerToast('error', '이메일 전송 실패')
+    },
+  })
+  const { mutate: verifyEmail } = useUserRecover({
+    onSuccess: () => {
+      handleCodeVerify('email')
+    },
+    onError: () => {
+      triggerToast('error', '이메일 인증 실패')
+    },
+  })
+
   return (
     <Modal externalModalControl={userRecoverFormModalControl}>
       <ModalContent className="flex w-[90%] max-w-lg flex-col items-center">
@@ -43,29 +84,49 @@ export default function UserRecoverFormModal({
               <Input
                 placeholder="가입한 이메일을 입력해주세요."
                 className="flex-1"
+                {...register('email')}
               />
-              <AuthVerifyButton>인증코드전송</AuthVerifyButton>
+              <AuthVerifyButton
+                type="button"
+                disabled={isEmailNotValid || timer.email.isCounting}
+                onClick={() => {
+                  sendEmail(getValues('email'))
+                }}
+              >
+                {timer.email.isCounting
+                  ? `재전송 (${timer.email.formatMMSS(timer.email.remainSecond)})`
+                  : '인증코드전송'}
+              </AuthVerifyButton>
             </div>
             <div className="flex w-full gap-2">
               <Input
                 placeholder="인증번호를 입력해주세요."
                 className="flex-1"
+                {...register('verificationCode')}
               />
-              <AuthVerifyButton>인증코드확인</AuthVerifyButton>
+              <AuthVerifyButton
+                type="button"
+                disabled={!isCodeSent.email}
+                onClick={() => {
+                  const { email, verificationCode } = getValues()
+                  verifyEmail({ email, verificationCode })
+                }}
+              >
+                인증코드확인
+              </AuthVerifyButton>
             </div>
           </form>
         </ModalMain>
         <ModalFooter className="flex w-full justify-center border-none">
-          <ModalClose className="flex w-full justify-center">
-            <Button
-              className="w-[90%] max-w-sm"
-              onClick={() => {
-                userRecoverCompleteModalOpen()
-              }}
-            >
-              확인
-            </Button>
-          </ModalClose>
+          <Button
+            className="w-[90%] max-w-sm"
+            onClick={() => {
+              userRecoverCompleteModalOpen()
+            }}
+            disabled={!isCodeVerified.email}
+          >
+            <ModalClose className="flex w-full justify-center">확인</ModalClose>
+          </Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
