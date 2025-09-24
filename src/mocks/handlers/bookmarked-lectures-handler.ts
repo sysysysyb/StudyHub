@@ -9,4 +9,22 @@ const getBookmarkedLectures = http.get(
   }
 )
 
-export const bookmarkedLecturesHandlers = [getBookmarkedLectures]
+const postBookmarkLectures = http.post<{ lectureId: string }>(
+  `${API_BASE_URL}/lectures/:lectureId/bookmark`,
+  () => {
+    return HttpResponse.json()
+  }
+)
+
+const deleteBookmarkLectures = http.delete<{ lectureId: string }>(
+  `${API_BASE_URL}/lectures/:lectureId/bookmark`,
+  () => {
+    return HttpResponse.json()
+  }
+)
+
+export const bookmarkedLecturesHandlers = [
+  getBookmarkedLectures,
+  postBookmarkLectures,
+  deleteBookmarkLectures,
+]
