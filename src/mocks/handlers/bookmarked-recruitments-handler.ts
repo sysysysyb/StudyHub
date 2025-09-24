@@ -10,14 +10,14 @@ const getBookmarkedRecruitments = http.get(
 )
 
 const postBookmarkRecruitment = http.post<{ recruitmentId: string }>(
-  `${API_BASE_URL}/recruitments/:recruitmentId/bookmarks/add`,
+  `${MSW_BASE_URL}/recruitments/:recruitmentId/bookmarks/add`,
   () => {
     return HttpResponse.json()
   }
 )
 
 const deleteBookmarkRecruitment = http.delete<{ recruitmentId: string }>(
-  `${API_BASE_URL}/recruitments/:recruitmentId/bookmarks/remove`,
+  `${MSW_BASE_URL}/recruitments/:recruitmentId/bookmarks/remove`,
   () => {
     return HttpResponse.json()
   }

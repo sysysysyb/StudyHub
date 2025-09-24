@@ -10,14 +10,14 @@ const getBookmarkedLectures = http.get(
 )
 
 const postBookmarkLectures = http.post<{ lectureId: string }>(
-  `${API_BASE_URL}/lectures/:lectureId/bookmark`,
+  `${MSW_BASE_URL}/lectures/:lectureId/bookmark`,
   () => {
     return HttpResponse.json()
   }
 )
 
 const deleteBookmarkLectures = http.delete<{ lectureId: string }>(
-  `${API_BASE_URL}/lectures/:lectureId/bookmark`,
+  `${MSW_BASE_URL}/lectures/:lectureId/bookmark`,
   () => {
     return HttpResponse.json()
   }
