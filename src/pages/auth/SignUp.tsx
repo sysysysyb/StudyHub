@@ -20,8 +20,8 @@ import {
 } from '@/constants/auth-variants'
 import { useToast, useVerificationCode } from '@/hooks'
 import {
-  authSchema,
-  type AuthSchemaType,
+  signupSchema,
+  type SignupSchemaType,
 } from '@/schemas/form-schema/auth-schema'
 import { cn } from '@/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -38,9 +38,10 @@ function Signup() {
     reset,
     watch,
     getFieldState,
-  } = useForm<AuthSchemaType>({
+    getValues,
+  } = useForm<SignupSchemaType>({
     mode: 'onChange',
-    resolver: zodResolver(authSchema),
+    resolver: zodResolver(signupSchema),
   })
   const navigate = useNavigate()
   const { triggerToast } = useToast()
@@ -165,7 +166,7 @@ function Signup() {
             <AuthVerifyButton
               className={cn(timer.email.isCounting && 'w-44 p-0')}
               disabled={isEmailNotValid || timer.email.isCounting}
-              onClick={() => handleCodeSend('email')}
+              onClick={() => handleCodeSend('email', getValues('email'))}
             >
               {timer.email.isCounting
                 ? `재전송 (${timer.email.formatMMSS(timer.email.remainSecond)})`
@@ -182,7 +183,12 @@ function Signup() {
             />
             <AuthVerifyButton
               disabled={!isCodeSent.email}
-              onClick={() => handleCodeVerify('email')}
+              onClick={() =>
+                handleCodeVerify('email', {
+                  email: getValues('email'),
+                  verificationCode: getValues('verificationCode.email'),
+                })
+              }
             >
               인증코드확인
             </AuthVerifyButton>
@@ -202,7 +208,9 @@ function Signup() {
             <AuthVerifyButton
               className={cn(timer.phoneNumber.isCounting && 'w-44 p-0')}
               disabled={isPhoneNumberNotValid || timer.phoneNumber.isCounting}
-              onClick={() => handleCodeSend('phoneNumber')}
+              onClick={() =>
+                handleCodeSend('phoneNumber', getValues('phoneNumber'))
+              }
             >
               {timer.phoneNumber.isCounting
                 ? `재전송 (${timer.phoneNumber.formatMMSS(timer.phoneNumber.remainSecond)})`
@@ -219,7 +227,12 @@ function Signup() {
             />
             <AuthVerifyButton
               disabled={!isCodeSent.phoneNumber}
-              onClick={() => handleCodeVerify('phoneNumber')}
+              onClick={() =>
+                handleCodeVerify('phoneNumber', {
+                  email: getValues('phoneNumber'),
+                  verificationCode: getValues('verificationCode.phoneNumber'),
+                })
+              }
             >
               인증코드확인
             </AuthVerifyButton>
