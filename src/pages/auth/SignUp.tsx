@@ -25,6 +25,7 @@ import {
   type SignupSchemaType,
 } from '@/schemas/form-schema/signup-schema'
 import { cn } from '@/utils'
+import { formattedDateWithHyphen } from '@/utils/formatted-dates'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -60,7 +61,7 @@ function Signup() {
       password: data.password,
       name: data.name,
       nickname: data.nickname,
-      birthday: data.birthday,
+      birthday: formattedDateWithHyphen(data.birthday),
       phoneNumber: data.phoneNumber,
       emailVerificationCode: data.verificationCode.email,
       phoneVerificationCode: data.verificationCode.phoneNumber,
