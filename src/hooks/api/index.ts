@@ -11,7 +11,7 @@ import useBookmarkedRecruitment from '@/hooks/api/bookmarked/useBookmarkedRecrui
 import useUserRecover from '@/hooks/api/auth/useUserRecover'
 import useUserRecoverEmailSend from '@/hooks/api/auth/useUserRecoverEmailSend'
 import useToggleLectureBookmark from '@/hooks/api/bookmarked/useToggleLectureBookmark'
-import useToggleRecruitmentBookmark from '@/hooks/api/bookmarked/useToggleRecruitmentLecture'
+import useToggleRecruitmentBookmark from '@/hooks/api/bookmarked/useToggleRecruitmentBookmark'
 
 export {
   useUserInformation,
