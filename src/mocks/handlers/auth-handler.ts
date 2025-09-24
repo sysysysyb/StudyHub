@@ -1,7 +1,14 @@
 import { MSW_BASE_URL } from '@/constants/url-constants'
 import { http, HttpResponse, passthrough } from 'msw'
 import { userInformationMock } from '@/mocks/data/user-information-data'
-import { loginSchema } from '@/schemas/form-schema/auth-schema'
+import {
+  signupSchema,
+  emailSendCodeSchema,
+  emailVerifySchema,
+  loginSchema,
+  phoneSendCodeSchema,
+  phoneVerifySchema,
+} from '@/schemas/form-schema/auth-schema'
 
 const ACCESS_TOKEN = `msw-access-token=access-token-test; Path=/; SameSite=Strict;`
 const REFRESH_TOKEN =
@@ -98,6 +105,141 @@ const getRefreshToken = http.post(`${MSW_BASE_URL}/token/refresh`, () => {
   )
 })
 
+// 이메일 인증코드 전송
+const emailSendCode = http.post(
+  `${API_BASE_URL}/auth/email/send-code`,
+  async ({ request }) => {
+    const body = await request.json()
+    const parsedBody = emailSendCodeSchema.safeParse(body)
+
+    if (!parsedBody.success) {
+      return HttpResponse.json(
+        {
+          error: '잘못된 입력 형식입니다',
+        },
+        { status: 400 }
+      )
+    }
+
+    return HttpResponse.json(
+      {
+        detail: '이메일 인증코드를 전송했습니다',
+      },
+      {
+        status: 200,
+      }
+    )
+  }
+)
+
+// 이메일 인증코드 검증
+const emailVerify = http.post(
+  `${API_BASE_URL}/auth/email/verify`,
+  async ({ request }) => {
+    const body = await request.json()
+    const parsedBody = emailVerifySchema.safeParse(body)
+
+    if (!parsedBody.success) {
+      return HttpResponse.json(
+        {
+          error: '잘못된 입력 형식입니다',
+        },
+        { status: 400 }
+      )
+    }
+
+    return HttpResponse.json(
+      {
+        detail: '이메일 인증코드가 확인되었습니다',
+      },
+      {
+        status: 200,
+      }
+    )
+  }
+)
+
+// 휴대전화 인증코드 전송
+const phoneSendCode = http.post(
+  `${API_BASE_URL}/auth/phone/send-code`,
+  async ({ request }) => {
+    const body = await request.json()
+    const parsedBody = phoneSendCodeSchema.safeParse(body)
+
+    if (!parsedBody.success) {
+      return HttpResponse.json(
+        {
+          error: '잘못된 입력 형식입니다',
+        },
+        { status: 400 }
+      )
+    }
+
+    return HttpResponse.json(
+      {
+        detail: '휴대전화 인증코드를 전송했습니다',
+      },
+      {
+        status: 200,
+      }
+    )
+  }
+)
+
+// 휴대전화 인증코드 검증
+const phoneVerify = http.post(
+  `${API_BASE_URL}/auth/phone/verify`,
+  async ({ request }) => {
+    const body = await request.json()
+    const parsedBody = phoneVerifySchema.safeParse(body)
+
+    if (!parsedBody.success) {
+      return HttpResponse.json(
+        {
+          error: '잘못된 입력 형식입니다',
+        },
+        { status: 400 }
+      )
+    }
+
+    return HttpResponse.json(
+      {
+        detail: '휴대전화 인증코드가 확인되었습니다',
+      },
+      {
+        status: 200,
+      }
+    )
+  }
+)
+
+// 회원가입
+const signup = http.post(
+  `${API_BASE_URL}/auth/email/signup`,
+  async ({ request }) => {
+    const body = await request.json()
+    const parsedBody = signupSchema.safeParse(body)
+
+    if (!parsedBody.success) {
+      return HttpResponse.json(
+        {
+          error: '잘못된 입력 형식입니다',
+        },
+        { status: 400 }
+      )
+    }
+
+    return HttpResponse.json(
+      {
+        detail: '회원가입이 완료되었습니다',
+      },
+      {
+        status: 201,
+      }
+    )
+  }
+)
+
 // 외부 이미지 api
 const passthroughPiscumPhotos = http.get(
   `https://picsum.photos/id/:rest*`,
@@ -111,5 +253,10 @@ export const authHandlers = [
   logout,
   getUserInformation,
   getRefreshToken,
+  emailSendCode,
+  emailVerify,
+  phoneSendCode,
+  phoneVerify,
+  signup,
   passthroughPiscumPhotos,
 ]
