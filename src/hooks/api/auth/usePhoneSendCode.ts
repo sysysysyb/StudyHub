@@ -12,8 +12,7 @@ export default function usePhoneSendCode(
   return useMutation<unknown, AxiosError, UserPhoneSendCode>({
     ...options,
     mutationKey: ['auth', 'phone', 'send-code'],
-    mutationFn: async (payload) => {
-      const { phoneNumber } = payload
+    mutationFn: async ({ phoneNumber }) => {
       await api.post(`auth/phone/send-code`, { phone_number: phoneNumber })
     },
     onSuccess: () => {

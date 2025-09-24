@@ -12,10 +12,9 @@ export default function useEmailVerify(
   return useMutation<unknown, AxiosError, UserEmailVerify>({
     ...options,
     mutationKey: ['auth', 'email', 'verify'],
-    mutationFn: async (payload) => {
-      const { email, verificationCode } = payload
+    mutationFn: async ({ email, verificationCode }) => {
       await api.post(`auth/email/verify`, {
-        email,
+        email: email,
         verification_code: verificationCode,
       })
     },

@@ -12,8 +12,18 @@ export default function useSignup(
   return useMutation<unknown, AxiosError, UserSignup>({
     ...options,
     mutationKey: ['auth', 'email', 'signup'],
-    mutationFn: async (payload) => {
-      await api.post(`auth/email/signup`, payload)
+    mutationFn: async ({
+      phoneNumber,
+      emailVerificationCode,
+      phoneVerificationCode,
+      ...payload
+    }) => {
+      await api.post(`auth/email/signup`, {
+        phone_number: phoneNumber,
+        email_verification_code: emailVerificationCode,
+        phone_verification_code: phoneVerificationCode,
+        ...payload,
+      })
     },
     onSuccess: () => {
       triggerToast('success', 'Signup ✨', '회원가입을 완료했습니다')

@@ -12,8 +12,8 @@ export default function useEmailSendCode(
   return useMutation<unknown, AxiosError, UserEmailSendCode>({
     ...options,
     mutationKey: ['auth', 'email', 'send-code'],
-    mutationFn: async (payload) => {
-      await api.post(`auth/email/send-code`, payload)
+    mutationFn: async ({ email }) => {
+      await api.post(`auth/email/send-code`, { email: email })
     },
     onSuccess: () => {
       triggerToast(

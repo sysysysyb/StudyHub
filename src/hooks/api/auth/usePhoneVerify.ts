@@ -12,8 +12,7 @@ export default function usePhoneVerify(
   return useMutation<unknown, AxiosError, UserPhoneVerify>({
     ...options,
     mutationKey: ['auth', 'phone', 'verify'],
-    mutationFn: async (payload) => {
-      const { phoneNumber, verificationCode } = payload
+    mutationFn: async ({ phoneNumber, verificationCode }) => {
       await api.post(`auth/phone/verify`, {
         phone_number: phoneNumber,
         verification_code: verificationCode,
