@@ -3,7 +3,7 @@ import api from '@/utils/axios'
 import { useMutation, type UseMutationOptions } from '@tanstack/react-query'
 
 export default function useToggleRecruitmentBookmark(
-  options: UseMutationOptions<
+  options?: UseMutationOptions<
     void,
     Error,
     { recruitmentId: string; newStatus: 'add' | 'delete' }
