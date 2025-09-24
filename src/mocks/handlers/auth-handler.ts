@@ -1,4 +1,4 @@
-import { API_BASE_URL } from '@/constants/url-constants'
+import { MSW_BASE_URL } from '@/constants/url-constants'
 import { http, HttpResponse, passthrough } from 'msw'
 import { userInformationMock } from '@/mocks/data/user-information-data'
 import { loginSchema } from '@/schemas/form-schema/auth-schema'
@@ -8,7 +8,7 @@ const REFRESH_TOKEN =
   'msw-refresh-token=refresh-token-test; Path=/; SameSite=Strict;'
 
 const login = http.post(
-  `${API_BASE_URL}/auth/email/login`,
+  `${MSW_BASE_URL}/auth/email/login`,
   async ({ request }) => {
     const body = await request.json()
     const parsedBody = loginSchema.safeParse(body)
@@ -46,7 +46,7 @@ const login = http.post(
   }
 )
 
-const logout = http.post(`${API_BASE_URL}/users/logout`, () => {
+const logout = http.post(`${MSW_BASE_URL}/users/logout`, () => {
   return HttpResponse.json(
     { detail: 'Logout successful' },
     {
@@ -57,7 +57,7 @@ const logout = http.post(`${API_BASE_URL}/users/logout`, () => {
 })
 
 const getUserInformation = http.get(
-  `${API_BASE_URL}/users/me`,
+  `${MSW_BASE_URL}/users/me`,
   ({ request }) => {
     const header = request.headers.get('Authorization')
     const hasBearerToken = header
@@ -74,7 +74,7 @@ const getUserInformation = http.get(
   }
 )
 
-const getRefreshToken = http.post(`${API_BASE_URL}/token/refresh`, () => {
+const getRefreshToken = http.post(`${MSW_BASE_URL}/token/refresh`, () => {
   const currentCookie = document.cookie
   const isRefreshTokenRemain = currentCookie.includes('refresh-token')
 

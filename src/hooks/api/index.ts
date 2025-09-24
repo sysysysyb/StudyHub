@@ -8,6 +8,8 @@ import useInfiniteBookmarkedRecruitment from '@/hooks/api/bookmarked/useInfinite
 import useInfiniteBookmarkedLecture from '@/hooks/api/bookmarked/useInfiniteBookmarkedLecture'
 import useLogin from '@/hooks/api/auth/useLogin'
 import useBookmarkedRecruitment from '@/hooks/api/bookmarked/useBookmarkedRecruitments'
+import useUserRecover from '@/hooks/api/auth/useUserRecover'
+import useUserRecoverEmailSend from '@/hooks/api/auth/useUserRecoverEmailSend'
 
 export {
   useUserInformation,
@@ -20,4 +22,6 @@ export {
   useInfiniteBookmarkedLecture,
   useLogin,
   useBookmarkedRecruitment,
+  useUserRecover,
+  useUserRecoverEmailSend,
 }
