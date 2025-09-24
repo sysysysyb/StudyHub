@@ -13,7 +13,8 @@ export default function usePhoneSendCode(
     ...options,
     mutationKey: ['auth', 'phone', 'send-code'],
     mutationFn: async (payload) => {
-      await api.post(`auth/phone/send-code`, payload)
+      const { phoneNumber } = payload
+      await api.post(`auth/phone/send-code`, { phone_number: phoneNumber })
     },
     onSuccess: () => {
       triggerToast(
