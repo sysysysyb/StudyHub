@@ -11,6 +11,7 @@ import type {
   UserPhoneSendCode,
   UserPhoneVerify,
 } from '@/types/api-request-types/auth-request-types'
+import { formattedPhoneToE164KR } from '@/utils/formatted-phone'
 
 const TIMER_DURATION_MS = 180000
 
@@ -48,15 +49,15 @@ function useVerificationCode() {
 
   const handleCodeSend = async (
     label: 'email' | 'phoneNumber',
-    email?: string,
-    phoneNumber?: string
+    value: string
   ) => {
-    if (label === 'email' && email) {
-      const data: UserEmailSendCode = { email }
+    if (label === 'email') {
+      const data: UserEmailSendCode = { email: value }
       emailSendCode.mutate(data)
     }
-    if (label === 'phoneNumber' && phoneNumber) {
-      const data: UserPhoneSendCode = { phoneNumber }
+    if (label === 'phoneNumber') {
+      const phoneNumberE164KR = formattedPhoneToE164KR(value)
+      const data: UserPhoneSendCode = { phoneNumber: phoneNumberE164KR }
       phoneSendCode.mutate(data)
     }
     SetIsCodeSent((prev) => ({ ...prev, [label]: true }))
@@ -65,15 +66,18 @@ function useVerificationCode() {
 
   const handleCodeVerify = async (
     label: 'email' | 'phoneNumber',
-    emailVerifyData?: { email: string; verificationCode: string },
-    phoneVerifyData?: { phoneNumber: string; verificationCode: string }
+    verifyData: UserEmailVerify | UserPhoneVerify
   ) => {
-    if (label === 'email' && emailVerifyData) {
-      const data: UserEmailVerify = emailVerifyData
+    if (label === 'email') {
+      const data: UserEmailVerify = verifyData as UserEmailVerify
       emailVerify.mutate(data)
     }
-    if (label === 'phoneNumber' && phoneVerifyData) {
-      const data: UserPhoneVerify = phoneVerifyData
+    if (label === 'phoneNumber') {
+      const { phoneNumber, verificationCode } = verifyData as UserPhoneVerify
+      const data = {
+        phoneNumber: formattedPhoneToE164KR(phoneNumber),
+        verificationCode: verificationCode,
+      }
       phoneVerify.mutate(data)
     }
     SetIsCodeVerified((prev) => ({ ...prev, [label]: true }))
