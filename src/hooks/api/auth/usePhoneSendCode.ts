@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '@/constants/url-constants'
 import useToast from '@/hooks/useToast'
 import type { UserPhoneSendCode } from '@/types/api-request-types/auth-request-types'
 import api from '@/utils/axios'
@@ -13,7 +14,9 @@ export default function usePhoneSendCode(
     ...options,
     mutationKey: ['auth', 'phone', 'send-code'],
     mutationFn: async ({ phoneNumber }) => {
-      await api.post(`auth/phone/send-code`, { phone_number: phoneNumber })
+      await api.post(`${API_BASE_URL}/auth/phone/send-code`, {
+        phone_number: phoneNumber,
+      })
     },
     onSuccess: () => {
       triggerToast(

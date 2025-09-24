@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '@/constants/url-constants'
 import useToast from '@/hooks/useToast'
 import type { UserEmailVerify } from '@/types/api-request-types/auth-request-types'
 import api from '@/utils/axios'
@@ -13,7 +14,7 @@ export default function useEmailVerify(
     ...options,
     mutationKey: ['auth', 'email', 'verify'],
     mutationFn: async ({ email, verificationCode }) => {
-      await api.post(`auth/email/verify`, {
+      await api.post(`${API_BASE_URL}/auth/email/verify`, {
         email: email,
         verification_code: verificationCode,
       })

@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '@/constants/url-constants'
 import useToast from '@/hooks/useToast'
 import type { UserEmailSendCode } from '@/types/api-request-types/auth-request-types'
 import api from '@/utils/axios'
@@ -13,7 +14,7 @@ export default function useEmailSendCode(
     ...options,
     mutationKey: ['auth', 'email', 'send-code'],
     mutationFn: async ({ email }) => {
-      await api.post(`auth/email/send-code`, { email: email })
+      await api.post(`${API_BASE_URL}/auth/email/send-code`, { email: email })
     },
     onSuccess: () => {
       triggerToast(

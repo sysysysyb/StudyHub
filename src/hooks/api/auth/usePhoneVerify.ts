@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '@/constants/url-constants'
 import useToast from '@/hooks/useToast'
 import type { UserPhoneVerify } from '@/types/api-request-types/auth-request-types'
 import api from '@/utils/axios'
@@ -13,7 +14,7 @@ export default function usePhoneVerify(
     ...options,
     mutationKey: ['auth', 'phone', 'verify'],
     mutationFn: async ({ phoneNumber, verificationCode }) => {
-      await api.post(`auth/phone/verify`, {
+      await api.post(`${API_BASE_URL}/auth/phone/verify`, {
         phone_number: phoneNumber,
         verification_code: verificationCode,
       })
