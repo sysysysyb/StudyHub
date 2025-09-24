@@ -13,7 +13,11 @@ export default function useEmailVerify(
     ...options,
     mutationKey: ['auth', 'email', 'verify'],
     mutationFn: async (payload) => {
-      await api.post(`auth/email/verify`, payload)
+      const { email, verificationCode } = payload
+      await api.post(`auth/email/verify`, {
+        email,
+        verification_code: verificationCode,
+      })
     },
     onSuccess: () => {
       triggerToast('success', '인증 완료 ✅', '다음 단계를 진행해주세요')
