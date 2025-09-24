@@ -19,6 +19,7 @@ import {
   InputFieldRowStyle,
 } from '@/constants/auth-variants'
 import { useToast, useVerificationCode } from '@/hooks'
+import useSignup from '@/hooks/api/auth/useSignup'
 import {
   signupSchema,
   type SignupSchemaType,
@@ -35,7 +36,6 @@ function Signup() {
     register,
     handleSubmit,
     formState: { isValid, errors, isSubmitting },
-    reset,
     watch,
     getFieldState,
     getValues,
@@ -52,11 +52,21 @@ function Signup() {
     handleCodeSend,
     handleCodeVerify,
   } = useVerificationCode()
+  const signup = useSignup()
 
-  const onSubmit = async () => {
-    await new Promise((resolve) => setTimeout(resolve, 500))
-    triggerToast('success', 'Signup 😎', '회원가입이 완료되었습니다')
-    reset()
+  const onSubmit = async (data: SignupSchemaType) => {
+    const signupData = {
+      email: data.email,
+      password: data.password,
+      name: data.name,
+      nickname: data.nickname,
+      birthday: data.birthday,
+      phoneNumber: data.phoneNumber,
+      emailVerificationCode: data.verificationCode.email,
+      phoneVerificationCode: data.verificationCode.phoneNumber,
+      gender: data.gender,
+    }
+    signup.mutate(signupData)
     navigate('/auth/login')
   }
 
@@ -229,7 +239,7 @@ function Signup() {
               disabled={!isCodeSent.phoneNumber}
               onClick={() =>
                 handleCodeVerify('phoneNumber', {
-                  email: getValues('phoneNumber'),
+                  phoneNumber: getValues('phoneNumber'),
                   verificationCode: getValues('verificationCode.phoneNumber'),
                 })
               }
