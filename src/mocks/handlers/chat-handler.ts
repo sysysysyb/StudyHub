@@ -1,9 +1,9 @@
-import { API_BASE_URL } from '@/constants/url-constants'
+import { MSW_BASE_URL } from '@/constants/url-constants'
 import { http, HttpResponse, ws } from 'msw'
 import { chatRoomMessages } from '@/mocks/data/chat-room-data'
 
 const getChatMessages = http.get<{ study_group_uuid: string }>(
-  `${API_BASE_URL}/chat/rooms/:study_group_uuid/messages`,
+  `${MSW_BASE_URL}/chat/rooms/:study_group_uuid/messages`,
   () => {
     return HttpResponse.json(chatRoomMessages)
   }
