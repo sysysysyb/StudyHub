@@ -10,7 +10,8 @@ import {
   ModalMain,
   type ModalContextValue,
 } from '@/components/common/Modal'
-import { useVerificationCode } from '@/hooks'
+import { useToast, useVerificationCode } from '@/hooks'
+import { useUserRecover, useUserRecoverEmailSend } from '@/hooks/api'
 import {
   UserRecoverSchema,
   type UserRecover,
@@ -36,11 +37,30 @@ export default function UserRecoverFormModal({
     handleCodeVerify,
   } = useVerificationCode()
 
-  const { register, watch, getFieldState } = useForm<UserRecover>({
+  const { register, watch, getFieldState, getValues } = useForm<UserRecover>({
     resolver: zodResolver(UserRecoverSchema),
   })
 
   const isEmailNotValid = getFieldState('email').invalid || !watch('email')
+
+  //mutation 코드는 이후 useVerificationCode 훅 안으로 이동 예정!!
+  const { triggerToast } = useToast()
+  const { mutate: sendEmail } = useUserRecoverEmailSend({
+    onSuccess: () => {
+      handleCodeSend('email')
+    },
+    onError: () => {
+      triggerToast('error', '이메일 전송 실패')
+    },
+  })
+  const { mutate: verifyEmail } = useUserRecover({
+    onSuccess: () => {
+      handleCodeVerify('email')
+    },
+    onError: () => {
+      triggerToast('error', '이메일 인증 실패')
+    },
+  })
 
   return (
     <Modal externalModalControl={userRecoverFormModalControl}>
@@ -70,7 +90,7 @@ export default function UserRecoverFormModal({
                 type="button"
                 disabled={isEmailNotValid || timer.email.isCounting}
                 onClick={() => {
-                  handleCodeSend('email')
+                  sendEmail(getValues('email'))
                 }}
               >
                 {timer.email.isCounting
@@ -88,7 +108,8 @@ export default function UserRecoverFormModal({
                 type="button"
                 disabled={!isCodeSent.email}
                 onClick={() => {
-                  handleCodeVerify('email')
+                  const { email, verificationCode } = getValues()
+                  verifyEmail({ email, verificationCode })
                 }}
               >
                 인증코드확인
