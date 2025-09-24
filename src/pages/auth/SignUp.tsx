@@ -210,7 +210,7 @@ function Signup() {
         {/* 휴대전화 */}
         <div className={InputFieldColStyle}>
           <InputLabel isRequired>휴대전화</InputLabel>
-          <div className="flex gap-3">
+          <div className={InputFieldRowStyle}>
             <Input
               {...register('phoneNumber')}
               placeholder="휴대전화 번호를 입력해주세요 (ex. 01012345678)"
