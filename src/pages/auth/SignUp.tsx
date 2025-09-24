@@ -19,11 +19,13 @@ import {
   InputFieldRowStyle,
 } from '@/constants/auth-variants'
 import { useToast, useVerificationCode } from '@/hooks'
+import useSignup from '@/hooks/api/auth/useSignup'
 import {
-  authSchema,
-  type AuthSchemaType,
-} from '@/schemas/form-schema/auth-schema'
+  signupSchema,
+  type SignupSchemaType,
+} from '@/schemas/form-schema/signup-schema'
 import { cn } from '@/utils'
+import { formattedDateWithHyphen } from '@/utils/formatted-dates'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -35,12 +37,12 @@ function Signup() {
     register,
     handleSubmit,
     formState: { isValid, errors, isSubmitting },
-    reset,
     watch,
     getFieldState,
-  } = useForm<AuthSchemaType>({
+    getValues,
+  } = useForm<SignupSchemaType>({
     mode: 'onChange',
-    resolver: zodResolver(authSchema),
+    resolver: zodResolver(signupSchema),
   })
   const navigate = useNavigate()
   const { triggerToast } = useToast()
@@ -51,11 +53,21 @@ function Signup() {
     handleCodeSend,
     handleCodeVerify,
   } = useVerificationCode()
+  const signup = useSignup()
 
-  const onSubmit = async () => {
-    await new Promise((resolve) => setTimeout(resolve, 500))
-    triggerToast('success', 'Signup 😎', '회원가입이 완료되었습니다')
-    reset()
+  const onSubmit = async (data: SignupSchemaType) => {
+    const signupData = {
+      email: data.email,
+      password: data.password,
+      name: data.name,
+      nickname: data.nickname,
+      birthday: formattedDateWithHyphen(data.birthday),
+      phoneNumber: data.phoneNumber,
+      emailVerificationCode: data.verificationCode.email,
+      phoneVerificationCode: data.verificationCode.phoneNumber,
+      gender: data.gender,
+    }
+    signup.mutate(signupData)
     navigate('/auth/login')
   }
 
@@ -165,7 +177,7 @@ function Signup() {
             <AuthVerifyButton
               className={cn(timer.email.isCounting && 'w-44 p-0')}
               disabled={isEmailNotValid || timer.email.isCounting}
-              onClick={() => handleCodeSend('email')}
+              onClick={() => handleCodeSend('email', getValues('email'))}
             >
               {timer.email.isCounting
                 ? `재전송 (${timer.email.formatMMSS(timer.email.remainSecond)})`
@@ -182,7 +194,12 @@ function Signup() {
             />
             <AuthVerifyButton
               disabled={!isCodeSent.email}
-              onClick={() => handleCodeVerify('email')}
+              onClick={() =>
+                handleCodeVerify('email', {
+                  email: getValues('email'),
+                  verificationCode: getValues('verificationCode.email'),
+                })
+              }
             >
               인증코드확인
             </AuthVerifyButton>
@@ -194,7 +211,7 @@ function Signup() {
         {/* 휴대전화 */}
         <div className={InputFieldColStyle}>
           <InputLabel isRequired>휴대전화</InputLabel>
-          <div className="flex gap-3">
+          <div className={InputFieldRowStyle}>
             <Input
               {...register('phoneNumber')}
               placeholder="휴대전화 번호를 입력해주세요 (ex. 01012345678)"
@@ -202,7 +219,9 @@ function Signup() {
             <AuthVerifyButton
               className={cn(timer.phoneNumber.isCounting && 'w-44 p-0')}
               disabled={isPhoneNumberNotValid || timer.phoneNumber.isCounting}
-              onClick={() => handleCodeSend('phoneNumber')}
+              onClick={() =>
+                handleCodeSend('phoneNumber', getValues('phoneNumber'))
+              }
             >
               {timer.phoneNumber.isCounting
                 ? `재전송 (${timer.phoneNumber.formatMMSS(timer.phoneNumber.remainSecond)})`
@@ -219,7 +238,12 @@ function Signup() {
             />
             <AuthVerifyButton
               disabled={!isCodeSent.phoneNumber}
-              onClick={() => handleCodeVerify('phoneNumber')}
+              onClick={() =>
+                handleCodeVerify('phoneNumber', {
+                  phoneNumber: getValues('phoneNumber'),
+                  verificationCode: getValues('verificationCode.phoneNumber'),
+                })
+              }
             >
               인증코드확인
             </AuthVerifyButton>

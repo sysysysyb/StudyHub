@@ -1,12 +1,12 @@
 export const PUBLIC_ENDPOINTS = [
   'auth/email/login',
-  'users/signup',
+  'auth/email/signup',
   'auth/kakao/callback',
   'auth/naver/callback',
-  'email/send-code',
-  'phone/send-code',
+  'auth/email/send-code',
+  'auth/phone/send-code',
   'auth/email/verify',
-  'auth/verify-phone',
-  'token/refresh',
-  'users/recover-account',
+  'auth/phone/verify',
+  'auth/refresh',
+  'auth/recover-account',
 ] as const

@@ -31,7 +31,7 @@ export default function useAxiosInterceptor() {
 
   const errorHandler = (error: AxiosError) => {
     const { config, response } = error
-    const isTokenRefresh = config?.url?.includes('token/refresh')
+    const isTokenRefresh = config?.url?.includes('auth/refresh')
     const isMypageLocated = location.pathname.includes('my-page')
 
     if (response?.status === 401 && isTokenRefresh && isMypageLocated) {

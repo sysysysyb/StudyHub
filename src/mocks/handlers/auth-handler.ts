@@ -1,12 +1,12 @@
 import { MSW_BASE_URL } from '@/constants/url-constants'
 import { http, HttpResponse, passthrough } from 'msw'
 import { userInformationMock } from '@/mocks/data/user-information-data'
-import { loginSchema } from '@/schemas/form-schema/auth-schema'
-
+import { loginSchema } from '@/schemas/form-schema/login-schema'
 const ACCESS_TOKEN = `msw-access-token=access-token-test; Path=/; SameSite=Strict;`
 const REFRESH_TOKEN =
   'msw-refresh-token=refresh-token-test; Path=/; SameSite=Strict;'
 
+// 로그인
 const login = http.post(
   `${MSW_BASE_URL}/auth/email/login`,
   async ({ request }) => {
@@ -56,6 +56,7 @@ const logout = http.post(`${MSW_BASE_URL}/users/logout`, () => {
   )
 })
 
+// 사용자 정보 조회
 const getUserInformation = http.get(
   `${MSW_BASE_URL}/users/me`,
   ({ request }) => {
@@ -74,9 +75,9 @@ const getUserInformation = http.get(
   }
 )
 
-const getRefreshToken = http.post(`${MSW_BASE_URL}/token/refresh`, () => {
+const getRefreshToken = http.post(`${MSW_BASE_URL}/auth/refresh`, () => {
   const currentCookie = document.cookie
-  const isRefreshTokenRemain = currentCookie.includes('refresh-token')
+  const isRefreshTokenRemain = currentCookie.includes('msw-refresh-token')
 
   if (!isRefreshTokenRemain) {
     return HttpResponse.json(
@@ -96,6 +97,147 @@ const getRefreshToken = http.post(`${MSW_BASE_URL}/token/refresh`, () => {
   )
 })
 
+// 이메일 인증코드 전송
+const emailSendCode = http.post(
+  `${MSW_BASE_URL}/auth/email/send-code`,
+  async ({ request }) => {
+    const body = await request.clone().json()
+
+    if (!body.email) {
+      return HttpResponse.json(
+        {
+          error: '잘못된 입력 형식입니다',
+        },
+        { status: 400 }
+      )
+    }
+
+    return HttpResponse.json(
+      {
+        detail: '이메일 인증코드를 전송했습니다',
+      },
+      {
+        status: 200,
+      }
+    )
+  }
+)
+
+// 이메일 인증코드 검증
+const emailVerify = http.post(
+  `${MSW_BASE_URL}/auth/email/verify`,
+  async ({ request }) => {
+    const body = await request.clone().json()
+
+    if (!body.email || !body.verification_code) {
+      return HttpResponse.json(
+        {
+          error: '잘못된 입력 형식입니다',
+        },
+        { status: 400 }
+      )
+    }
+
+    return HttpResponse.json(
+      {
+        detail: '이메일 인증코드가 확인되었습니다',
+      },
+      {
+        status: 200,
+      }
+    )
+  }
+)
+
+// 휴대전화 인증코드 전송
+const phoneSendCode = http.post(
+  `${MSW_BASE_URL}/auth/phone/send-code`,
+  async ({ request }) => {
+    const body = await request.clone().json()
+
+    if (!body.phone_number) {
+      return HttpResponse.json(
+        {
+          error: '잘못된 입력 형식입니다',
+        },
+        { status: 400 }
+      )
+    }
+
+    return HttpResponse.json(
+      {
+        detail: '휴대전화 인증코드를 전송했습니다',
+      },
+      {
+        status: 200,
+      }
+    )
+  }
+)
+
+// 휴대전화 인증코드 검증
+const phoneVerify = http.post(
+  `${MSW_BASE_URL}/auth/phone/verify`,
+  async ({ request }) => {
+    const body = await request.clone().json()
+
+    if (!body.phone_number || !body.verification_code) {
+      return HttpResponse.json(
+        {
+          error: '잘못된 입력 형식입니다',
+        },
+        { status: 400 }
+      )
+    }
+
+    return HttpResponse.json(
+      {
+        detail: '휴대전화 인증코드가 확인되었습니다',
+      },
+      {
+        status: 200,
+      }
+    )
+  }
+)
+
+// 회원가입
+const signup = http.post(
+  `${MSW_BASE_URL}/auth/email/signup`,
+  async ({ request }) => {
+    const body = await request.clone().json()
+
+    if (
+      !body.email ||
+      !body.password ||
+      !body.nickname ||
+      !body.name ||
+      !body.phone_number ||
+      !body.birthday ||
+      !body.gender ||
+      !body.email_verification_code ||
+      !body.phone_verification_code
+    ) {
+      return HttpResponse.json(
+        {
+          error: '잘못된 입력 형식입니다',
+        },
+        { status: 400 }
+      )
+    }
+
+    return HttpResponse.json(
+      {
+        detail: '회원가입이 완료되었습니다',
+      },
+      {
+        status: 201,
+      }
+    )
+  }
+)
+
+// 외부 이미지 api
 const passthroughPiscumPhotos = http.get(
   `https://picsum.photos/id/:rest*`,
   () => {
@@ -108,5 +250,10 @@ export const authHandlers = [
   logout,
   getUserInformation,
   getRefreshToken,
+  emailSendCode,
+  emailVerify,
+  phoneSendCode,
+  phoneVerify,
+  signup,
   passthroughPiscumPhotos,
 ]

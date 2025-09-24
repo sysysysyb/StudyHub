@@ -38,3 +38,11 @@ export const formattedDateWithDots = (date: string) => {
 
   return `${yyyy}. ${mm}. ${dd}.`
 }
+
+export const formattedDateWithHyphen = (date: string) => {
+  const yyyy = date?.substring(0, 4)
+  const mm = date?.substring(4, 6)
+  const dd = date?.substring(6, 8)
+
+  return `${yyyy}-${mm}-${dd}`
+}
