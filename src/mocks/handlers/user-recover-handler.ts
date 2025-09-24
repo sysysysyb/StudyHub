@@ -1,9 +1,9 @@
-import { API_BASE_URL } from '@/constants/url-constants'
+import { MSW_BASE_URL } from '@/constants/url-constants'
 
 import { http, HttpResponse } from 'msw'
 
 const postRecoverAccountSend = http.post(
-  `${API_BASE_URL}/auth/recover-account/send`,
+  `${MSW_BASE_URL}/auth/recover-account/send`,
   async ({ request }) => {
     const body = await request.clone().json()
 
@@ -16,7 +16,7 @@ const postRecoverAccountSend = http.post(
 )
 
 const postRecoverAccountVerify = http.post(
-  `${API_BASE_URL}/auth/recover-account/verify`,
+  `${MSW_BASE_URL}/auth/recover-account/verify`,
   async ({ request }) => {
     const body = await request.clone().json()
 

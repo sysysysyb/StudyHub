@@ -1,3 +1,4 @@
+import { MSW_BASE_URL } from '@/constants/url-constants'
 import { useLoginStore } from '@/store/useLoginStore'
 import { setAccessToken } from '@/utils'
 import api from '@/utils/axios'
@@ -15,7 +16,7 @@ export default function useTokenRefresh(options?: UseMutationOptions) {
     ...options,
     mutationKey: ['token', 'refresh'],
     mutationFn: async () => {
-      const response = await api.post(`/token/refresh`)
+      const response = await api.post(`${MSW_BASE_URL}/token/refresh`)
       const newAccessToken = response.data.access_token
       return newAccessToken
     },

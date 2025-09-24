@@ -1,4 +1,4 @@
-import { API_BASE_URL } from '@/constants/url-constants'
+import { MSW_BASE_URL } from '@/constants/url-constants'
 import type { ApplicationDetail } from '@/types/api-response-types/recruitment-response-types'
 import api from '@/utils/axios'
 import { useQuery, type UseQueryOptions } from '@tanstack/react-query'
@@ -11,7 +11,7 @@ export default function useApplicationDetail(
     queryKey: ['applications', application_id],
     queryFn: async () => {
       const res = await api.get(
-        `${API_BASE_URL}/applications/me/${application_id}`
+        `${MSW_BASE_URL}/applications/me/${application_id}`
       )
       return res.data
     },

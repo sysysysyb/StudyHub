@@ -1,4 +1,4 @@
-import { API_BASE_URL } from '@/constants/url-constants'
+import { MSW_BASE_URL } from '@/constants/url-constants'
 import type { lectureSearchParams } from '@/types'
 import type { BookmarkedLectures } from '@/types/api-response-types/lecture-response-type'
 import api from '@/utils/axios'
@@ -23,7 +23,7 @@ export default function useInfiniteBookmarkedLecture(
   return useInfiniteQuery({
     queryKey: ['lectures', 'bookmarks', searchParam?.search ?? ''],
     queryFn: async ({ pageParam }) => {
-      const res = await api.get(`${API_BASE_URL}/lectures/bookmarks`, {
+      const res = await api.get(`${MSW_BASE_URL}/lectures/bookmarks`, {
         params: {
           cursor: pageParam,
           page_size: PAGE_SIZE,

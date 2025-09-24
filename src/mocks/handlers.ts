@@ -1,4 +1,4 @@
-import { API_BASE_URL } from '@/constants/url-constants'
+import { MSW_BASE_URL } from '@/constants/url-constants'
 import { http, HttpResponse } from 'msw'
 import { bookmarkedRecruitmentsHandlers } from '@/mocks/handlers/bookmarked-recruitments-handler'
 import { appliedRecruitmentsHandlers } from '@/mocks/handlers/applied-recruitments-handler'
@@ -9,7 +9,7 @@ import { completedStudiesHandlers } from '@/mocks/handlers/completed-study-handl
 import { authHandlers } from '@/mocks/handlers/auth-handler'
 import { userRecoverHandlers } from '@/mocks/handlers/user-recover-handler'
 
-const getTestMSW = http.get(`${API_BASE_URL}/`, () => {
+const getTestMSW = http.get(`${MSW_BASE_URL}/`, () => {
   return HttpResponse.text('msw is working!')
 })
 

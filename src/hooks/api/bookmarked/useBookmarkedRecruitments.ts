@@ -1,4 +1,4 @@
-import { API_BASE_URL } from '@/constants/url-constants'
+import { MSW_BASE_URL } from '@/constants/url-constants'
 import type { recruitmentSearchParams } from '@/types'
 import type { BookmarkedRecruitments } from '@/types/api-response-types/recruitment-response-types'
 import api from '@/utils/axios'
@@ -15,7 +15,7 @@ export default function useBookmarkedRecruitment(
       searchParam ? JSON.stringify(searchParam) : '',
     ],
     queryFn: async () => {
-      const res = await api.get(`${API_BASE_URL}/recruitments/bookmarks/me`, {
+      const res = await api.get(`${MSW_BASE_URL}/recruitments/bookmarks/me`, {
         params: searchParam,
       })
 
