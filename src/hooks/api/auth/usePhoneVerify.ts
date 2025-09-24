@@ -13,7 +13,11 @@ export default function usePhoneVerify(
     ...options,
     mutationKey: ['auth', 'phone', 'verify'],
     mutationFn: async (payload) => {
-      await api.post(`auth/phone/verify`, payload)
+      const { phoneNumber, verificationCode } = payload
+      await api.post(`auth/phone/verify`, {
+        phone_number: phoneNumber,
+        verification_code: verificationCode,
+      })
     },
     onSuccess: () => {
       triggerToast('success', '인증 완료 ✅', '다음 단계를 진행해주세요')
