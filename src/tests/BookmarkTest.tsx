@@ -36,7 +36,7 @@ export default function BookmarkTest() {
       <h1 className="text-heading3">북마크 기능 테스트</h1>
       <p>
         북마크 아이콘을 클릭했을 때 optimistic ui가 적용되어 ui가 즉시 바뀌고
-        북마크 변경 요청이 가야합니다.
+        북마크 변경 요청이 실행됩니다.
       </p>
       <BookmarkedLectureCard lecture={DUMMY_LECTURE} />
       <BookmarkedRecruitmentCard recruitment={DUMMY_RECRUITMENT} />
