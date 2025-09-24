@@ -1,7 +1,7 @@
 import { z } from 'zod'
-import { authSchema } from './auth-schema'
+import { signupSchema } from './signup-schema'
 
-export const FindEmailStep1Schema = authSchema.pick({
+export const FindEmailStep1Schema = signupSchema.pick({
   name: true,
   phoneNumber: true,
 })

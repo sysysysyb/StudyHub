@@ -2,11 +2,11 @@ import { AuthBadge, AuthSubmitButton } from '@/components/auth/common'
 import { Input, InputErrorMessage, InputLabel } from '@/components/common/input'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import {
-  authSchema,
-  type AuthSchemaType,
-} from '@/schemas/form-schema/auth-schema'
 import { useToast } from '@/hooks'
+import {
+  signupSchema,
+  type SignupSchemaType,
+} from '@/schemas/form-schema/signup-schema'
 
 function AuthFormVerificationTest() {
   const {
@@ -15,12 +15,12 @@ function AuthFormVerificationTest() {
     formState: { errors, isSubmitting },
     reset,
     watch,
-  } = useForm<AuthSchemaType>({
-    resolver: zodResolver(authSchema),
+  } = useForm<SignupSchemaType>({
+    resolver: zodResolver(signupSchema),
   })
   const { triggerToast } = useToast()
 
-  const onSubmit = async (data: AuthSchemaType) => {
+  const onSubmit = async (data: SignupSchemaType) => {
     await new Promise((resolve) => setTimeout(resolve, 1000))
     triggerToast('success', 'Test Success ✅', 'Auth 유효성 검사 성공!')
     console.log('입력 내용: ', data)

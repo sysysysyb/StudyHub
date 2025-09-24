@@ -16,7 +16,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import {
   loginSchema,
   type LoginSchemaType,
-} from '@/schemas/form-schema/auth-schema'
+} from '@/schemas/form-schema/login-schema'
 import { useLogin } from '@/hooks/api'
 import {
   InputFieldColStyle,
