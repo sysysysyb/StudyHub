@@ -22,7 +22,7 @@ import { useToast, useVerificationCode } from '@/hooks'
 import {
   signupSchema,
   type SignupSchemaType,
-} from '@/schemas/form-schema/auth-schema'
+} from '@/schemas/form-schema/signup-schema'
 import { cn } from '@/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'

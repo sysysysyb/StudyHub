@@ -1,15 +1,14 @@
 import { MSW_BASE_URL } from '@/constants/url-constants'
 import { http, HttpResponse, passthrough } from 'msw'
 import { userInformationMock } from '@/mocks/data/user-information-data'
+import { loginSchema } from '@/schemas/form-schema/login-schema'
 import {
-  signupSchema,
   emailSendCodeSchema,
   emailVerifySchema,
-  loginSchema,
   phoneSendCodeSchema,
   phoneVerifySchema,
-} from '@/schemas/form-schema/auth-schema'
-
+  signupSchema,
+} from '@/schemas/form-schema/signup-schema'
 const ACCESS_TOKEN = `msw-access-token=access-token-test; Path=/; SameSite=Strict;`
 const REFRESH_TOKEN =
   'msw-refresh-token=refresh-token-test; Path=/; SameSite=Strict;'
