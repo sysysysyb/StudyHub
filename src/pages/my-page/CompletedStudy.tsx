@@ -1,5 +1,4 @@
-import { ImageCardSkeleton } from '@/components'
-import EmptyDataState from '@/components/common/state/EmptyDataState'
+import { ImageCardSkeleton, EmptyDataState } from '@/components'
 import { useCompletedStudy } from '@/hooks/api'
 import { CompletedStudyImageCard } from '@/components/my-page'
 
