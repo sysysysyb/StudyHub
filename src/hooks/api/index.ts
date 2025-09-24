@@ -10,6 +10,8 @@ import useLogin from '@/hooks/api/auth/useLogin'
 import useBookmarkedRecruitment from '@/hooks/api/bookmarked/useBookmarkedRecruitments'
 import useUserRecover from '@/hooks/api/auth/useUserRecover'
 import useUserRecoverEmailSend from '@/hooks/api/auth/useUserRecoverEmailSend'
+import useToggleLectureBookmark from '@/hooks/api/bookmarked/useToggleLectureBookmark'
+import useToggleRecruitmentBookmark from '@/hooks/api/bookmarked/useToggleRecruitmentLecture'
 
 export {
   useUserInformation,
@@ -24,4 +26,6 @@ export {
   useBookmarkedRecruitment,
   useUserRecover,
   useUserRecoverEmailSend,
+  useToggleLectureBookmark,
+  useToggleRecruitmentBookmark,
 }
