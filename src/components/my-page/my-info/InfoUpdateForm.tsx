@@ -66,15 +66,17 @@ export const InfoUpdateForm = () => {
   // ✅ 인증코드 확인
   const handleCodeVerify = () => {
     const phoneNumber = getValues('phoneNumber')
-    const verificationCode = getValues('verificationCode')
-    if (!verificationCode) {
-      setError('verificationCode', { message: '인증번호를 입력해주세요' })
+    const infoUpdateVerificationCode = getValues('infoUpdateVerificationCode')
+    if (!infoUpdateVerificationCode) {
+      setError('infoUpdateVerificationCode', {
+        message: '인증번호를 입력해주세요',
+      })
       return
     }
 
     phoneVerify.mutate({
       phoneNumber: formattedPhoneToE164KR(phoneNumber),
-      verificationCode: verificationCode.phoneNumber,
+      verificationCode: infoUpdateVerificationCode,
     })
   }
 
@@ -135,10 +137,11 @@ export const InfoUpdateForm = () => {
               type="button"
               onClick={handleCodeSend}
               disabled={phoneSendCode.isPending}
+              className="min-w-[110px]"
             >
               {phoneSendCode.isSuccess
                 ? isCounting && (
-                    <span className="ml-2 text-sm text-gray-500">
+                    <span className="ml-2 text-sm whitespace-nowrap text-gray-900">
                       재전송 {formatMMSS(remainSecond)}
                     </span>
                   )
@@ -155,23 +158,24 @@ export const InfoUpdateForm = () => {
           <div className="flex flex-col gap-2">
             <div className="flex gap-2">
               <Input
-                id="verificationCode"
-                {...register('verificationCode')}
+                id="infoUpdateVerificationCode"
+                {...register('infoUpdateVerificationCode')}
                 placeholder="인증코드 6자리 입력"
                 readOnly={isVerified}
               />
               <Button
-                variant="secondary"
+                variant={isVerified ? 'secondary' : 'primary'}
                 type="button"
                 onClick={handleCodeVerify}
                 disabled={isVerified || phoneVerify.isPending}
+                className="whitespace-nowrap"
               >
                 {isVerified ? '인증완료' : '확인'}
               </Button>
             </div>
-            {errors.verificationCode && (
+            {errors.infoUpdateVerificationCode && (
               <InputErrorMessage>
-                {errors.verificationCode.message}
+                {errors.infoUpdateVerificationCode.message}
               </InputErrorMessage>
             )}
           </div>
