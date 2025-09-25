@@ -10,8 +10,7 @@ import {
   ModalMain,
   type ModalContextValue,
 } from '@/components/common/Modal'
-import { useToast, useVerificationCode } from '@/hooks'
-import { useUserRecoverVerify, useUserRecoverSendCode } from '@/hooks/api'
+import { useVerificationCode } from '@/hooks'
 import {
   UserRecoverSchema,
   type UserRecover,
@@ -43,29 +42,22 @@ export default function UserRecoverFormModal({
 
   const isEmailNotValid = getFieldState('email').invalid || !watch('email')
 
-  //mutation 코드는 이후 useVerificationCode 훅 안으로 이동 예정!!
-  const { triggerToast } = useToast()
-  const { mutate: sendEmail } = useUserRecoverSendCode({
-    onSuccess: () => {
-      // TODO: 실제 입력한 이메일 값 적용하도록 수정
-      handleCodeSend('email', 'test@test.com')
-    },
-    onError: () => {
-      triggerToast('error', '이메일 전송 실패')
-    },
-  })
-  const { mutate: verifyEmail } = useUserRecoverVerify({
-    // TODO: 실제 입력한 이메일 값과 전송받은 인증코드 적용하도록 수정
-    onSuccess: () => {
-      handleCodeVerify('email', {
-        email: 'test@test.com',
-        verificationCode: '123abc',
-      })
-    },
-    onError: () => {
-      triggerToast('error', '이메일 인증 실패')
-    },
-  })
+  const handleCodeSendClick: React.MouseEventHandler<HTMLButtonElement> = (
+    e
+  ) => {
+    e.preventDefault()
+    handleCodeSend('userRecover', getValues('email'))
+  }
+
+  const handleCodeVerifyClick: React.MouseEventHandler<HTMLButtonElement> = (
+    e
+  ) => {
+    e.preventDefault()
+    handleCodeVerify('userRecover', {
+      email: getValues('email'),
+      verificationCode: getValues('verificationCode'),
+    })
+  }
 
   return (
     <Modal externalModalControl={userRecoverFormModalControl}>
@@ -93,13 +85,11 @@ export default function UserRecoverFormModal({
               />
               <AuthVerifyButton
                 type="button"
-                disabled={isEmailNotValid || timer.email.isCounting}
-                onClick={() => {
-                  sendEmail(getValues('email'))
-                }}
+                disabled={isEmailNotValid || timer.userRecover.isCounting}
+                onClick={handleCodeSendClick}
               >
-                {timer.email.isCounting
-                  ? `재전송 (${timer.email.formatMMSS(timer.email.remainSecond)})`
+                {timer.userRecover.isCounting
+                  ? `재전송 (${timer.userRecover.formatMMSS(timer.userRecover.remainSecond)})`
                   : '인증코드전송'}
               </AuthVerifyButton>
             </div>
@@ -111,11 +101,8 @@ export default function UserRecoverFormModal({
               />
               <AuthVerifyButton
                 type="button"
-                disabled={!isCodeSent.email}
-                onClick={() => {
-                  const { email, verificationCode } = getValues()
-                  verifyEmail({ email, verificationCode })
-                }}
+                disabled={!isCodeSent.userRecover}
+                onClick={handleCodeVerifyClick}
               >
                 인증코드확인
               </AuthVerifyButton>
@@ -128,7 +115,7 @@ export default function UserRecoverFormModal({
             onClick={() => {
               userRecoverCompleteModalOpen()
             }}
-            disabled={!isCodeVerified.email}
+            disabled={!isCodeVerified.userRecover}
           >
             <ModalClose className="flex w-full justify-center">확인</ModalClose>
           </Button>
