@@ -26,8 +26,7 @@ import {
 import { UserRecoverModal } from '@/components/auth/user-recover-modal'
 import type { ModalContextValue } from '@/components/common/Modal'
 import { useState } from 'react'
-import type { AxiosError } from 'axios'
-import type { LoginErrorResponse } from '@/types/api-response-types/auth-response-types'
+import { AxiosError } from 'axios'
 import { useWithdrawalDateStore } from '@/store'
 
 function Login() {
@@ -60,13 +59,13 @@ function Login() {
     try {
       await login.mutateAsync(data)
     } catch (error) {
-      const axiosError = error as AxiosError<LoginErrorResponse>
-      const status = axiosError.response?.status
-
-      if (status === 401) {
-        const dueDate = axiosError.response?.data?.due_date ?? null
-        setWithdrawalDate(dueDate ?? null)
-        userRecoverFormModalControl.open()
+      if (error instanceof AxiosError) {
+        const status = error.status
+        if (status === 401) {
+          const dueDate = error.response?.data?.due_date ?? null
+          setWithdrawalDate(dueDate ?? null)
+          userRecoverFormModalControl.open()
+        }
       }
     }
   }
