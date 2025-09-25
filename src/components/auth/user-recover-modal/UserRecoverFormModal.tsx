@@ -47,15 +47,20 @@ export default function UserRecoverFormModal({
   const { triggerToast } = useToast()
   const { mutate: sendEmail } = useUserRecoverEmailSend({
     onSuccess: () => {
-      handleCodeSend('email')
+      // TODO: 실제 입력한 이메일 값 적용하도록 수정
+      handleCodeSend('email', 'test@test.com')
     },
     onError: () => {
       triggerToast('error', '이메일 전송 실패')
     },
   })
   const { mutate: verifyEmail } = useUserRecover({
+    // TODO: 실제 입력한 이메일 값과 전송받은 인증코드 적용하도록 수정
     onSuccess: () => {
-      handleCodeVerify('email')
+      handleCodeVerify('email', {
+        email: 'test@test.com',
+        verificationCode: '123abc',
+      })
     },
     onError: () => {
       triggerToast('error', '이메일 인증 실패')
