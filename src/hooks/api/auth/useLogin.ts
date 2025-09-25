@@ -41,10 +41,19 @@ export default function useLogin(
     onError: (error) => {
       if (error instanceof AxiosError) {
         const status = error.status
+        const dueDate = error.response?.data?.due_date
         if (status === 400) {
           triggerToast('error', '잘못된 이메일 또는 비밀번호 입니다')
         } else if (status === 401) {
-          triggerToast('warning', '탈퇴 예정 회원입니다')
+          if (dueDate) {
+            triggerToast('warning', '탈퇴 예정 회원입니다')
+          } else {
+            triggerToast(
+              'error',
+              'Login Failed 😥',
+              '이메일 또는 비밀번호가 올바르지 않습니다'
+            )
+          }
         } else {
           triggerToast('error', '잠시 후 다시 시도해주세요')
         }
