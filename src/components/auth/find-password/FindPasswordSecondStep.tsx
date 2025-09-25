@@ -39,6 +39,7 @@ function FindPasswordSecondStep({
     register,
     handleSubmit,
     formState: { isValid, errors },
+    getValues,
   } = useForm<FindPasswordStep2Type>({
     mode: 'onChange',
     resolver: zodResolver(FindPasswordStep2Schema),
@@ -49,8 +50,9 @@ function FindPasswordSecondStep({
 
   const onSubmit = (value: FindPasswordStep2Type) => onNext(value)
 
+  // TODO: 비밀번호 찾기 인증코드 전송 api에 맞게 수정 필요
   useEffect(() => {
-    handleCodeSend('phoneNumber')
+    handleCodeSend('email', email)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -72,7 +74,13 @@ function FindPasswordSecondStep({
             />
             <AuthVerifyButton
               disabled={!isCodeSent.phoneNumber}
-              onClick={() => handleCodeVerify('phoneNumber')}
+              // TODO: 비밀번호 찾기 인증코드 검증 api에 맞게 수정 필요
+              onClick={() =>
+                handleCodeVerify('email', {
+                  email: email,
+                  verificationCode: getValues('code'),
+                })
+              }
             >
               인증코드확인
             </AuthVerifyButton>

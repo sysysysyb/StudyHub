@@ -1,7 +1,7 @@
 import { z } from 'zod'
-import { authSchema } from './auth-schema'
+import { signupSchema } from './signup-schema'
 
-export const FindPasswordStep1Schema = authSchema.pick({
+export const FindPasswordStep1Schema = signupSchema.pick({
   email: true,
 })
 
@@ -16,7 +16,7 @@ export const FindPasswordStep2Schema = z.object({
 
 export type FindPasswordStep2Type = z.infer<typeof FindPasswordStep2Schema>
 
-export const FindPasswordStep3Schema = authSchema
+export const FindPasswordStep3Schema = signupSchema
   .pick({
     password: true,
     confirmPassword: true,

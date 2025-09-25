@@ -1,6 +1,7 @@
 import { z } from 'zod'
 
-export const authSchema = z
+// 회원가입
+const signupSchema = z
   .object({
     email: z
       .email('유효한 이메일 주소를 입력해주세요')
@@ -57,9 +58,42 @@ export const authSchema = z
     message: '비밀번호와 일치하지 않습니다',
     path: ['confirmPassword'],
   })
+type SignupSchemaType = z.infer<typeof signupSchema>
 
-export type AuthSchemaType = z.infer<typeof authSchema>
+// 이메일 인증코드 전송
+const emailSendCodeSchema = signupSchema.pick({ email: true })
+type EmailSendCodeSchemaType = z.infer<typeof emailSendCodeSchema>
 
-export const loginSchema = authSchema.pick({ email: true, password: true })
+// 이메일 인증코드 검증
+const emailVerifySchema = signupSchema.pick({
+  email: true,
+  verificationCode: true,
+})
+type EmailVerifySchemaType = z.infer<typeof emailVerifySchema>
 
-export type LoginSchemaType = z.infer<typeof loginSchema>
+// 휴대전화 인증코드 전송
+const phoneSendCodeSchema = signupSchema.pick({ phoneNumber: true })
+type PhoneSendCodeSchemaType = z.infer<typeof phoneSendCodeSchema>
+
+// 휴대전화 인증코드 검증
+const phoneVerifySchema = signupSchema.pick({
+  phoneNumber: true,
+  verificationCode: true,
+})
+type PhoneVerifySchemaType = z.infer<typeof phoneVerifySchema>
+
+export {
+  signupSchema,
+  emailSendCodeSchema,
+  emailVerifySchema,
+  phoneSendCodeSchema,
+  phoneVerifySchema,
+}
+
+export type {
+  SignupSchemaType,
+  EmailSendCodeSchemaType,
+  EmailVerifySchemaType,
+  PhoneSendCodeSchemaType,
+  PhoneVerifySchemaType,
+}
