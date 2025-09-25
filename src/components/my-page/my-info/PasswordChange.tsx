@@ -14,7 +14,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
   type PasswordChangeFormType,
-  passwordChangeSchema,
+  PasswordChangeSchema,
 } from '@/schemas/form-schema/password-change-schema'
 import useChangePassword from '@/hooks/api/auth/useChangePassword'
 
@@ -25,7 +25,7 @@ export const PasswordChange = () => {
     formState: { errors },
     reset,
   } = useForm<PasswordChangeFormType>({
-    resolver: zodResolver(passwordChangeSchema),
+    resolver: zodResolver(PasswordChangeSchema),
   })
 
   // ✅ 비밀번호 변경 API 요청
