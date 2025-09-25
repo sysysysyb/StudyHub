@@ -9,18 +9,18 @@ import {
   useQueryClient,
   type UseMutationOptions,
 } from '@tanstack/react-query'
-import type { AxiosError } from 'axios'
+import { AxiosError } from 'axios'
 import { useNavigate } from 'react-router'
 
 export default function useLogin(
-  options?: UseMutationOptions<string, AxiosError, UserLogin>
+  options?: UseMutationOptions<string, Error, UserLogin>
 ) {
   const qc = useQueryClient()
   const { triggerToast } = useToast()
   const { setIsLoggedIn } = useLoginStore()
   const navigate = useNavigate()
 
-  return useMutation<string, AxiosError, UserLogin>({
+  return useMutation<string, Error, UserLogin>({
     ...options,
     mutationKey: ['auth', 'email', 'login'],
     mutationFn: async (payload) => {
@@ -39,12 +39,15 @@ export default function useLogin(
       navigate('/')
     },
     onError: (error) => {
-      const status = error.status
-
-      if (status === 400) {
-        triggerToast('error', '잘못된 이메일 또는 비밀번호 입니다')
-      } else if (status === 401) {
-        triggerToast('warning', '탈퇴 예정 회원입니다')
+      if (error instanceof AxiosError) {
+        const status = error.status
+        if (status === 400) {
+          triggerToast('error', '잘못된 이메일 또는 비밀번호 입니다')
+        } else if (status === 401) {
+          triggerToast('warning', '탈퇴 예정 회원입니다')
+        } else {
+          triggerToast('error', '잠시 후 다시 시도해주세요')
+        }
       } else {
         triggerToast('error', '잠시 후 다시 시도해주세요')
       }
