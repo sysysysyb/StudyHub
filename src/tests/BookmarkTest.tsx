@@ -13,6 +13,7 @@ const DUMMY_LECTURE: Lecture = {
   discount_price: 59400,
   duration_hhmm: '12:30',
   url_link: 'https://www.inflearn.com/course/react-complete-guide',
+  lecture_id: 1312312,
 }
 
 const DUMMY_RECRUITMENT: BookmarkedRecruitment = {
