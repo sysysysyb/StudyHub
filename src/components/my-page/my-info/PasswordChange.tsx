@@ -9,7 +9,7 @@ import {
   ModalMain,
 } from '@/components/common/Modal'
 import { Button } from '@/components'
-import { PasswordChangeInputField } from '@/components/my-page/my-info/PasswordChangeInputField'
+import { PasswordChangeInputField } from './PasswordChangeInputField'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
@@ -32,9 +32,6 @@ export const PasswordChange = () => {
   const mutation = useChangePassword({
     onSuccess: () => {
       reset()
-    },
-    onError: (error) => {
-      console.error(error) // 필요 시 추가 로깅
     },
   })
 
