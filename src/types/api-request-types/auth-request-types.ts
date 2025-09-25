@@ -32,3 +32,8 @@ export interface UserPhoneVerify {
   phoneNumber: string
   verificationCode: string
 }
+
+export interface UpdateUserInfoRequest {
+  nickname: string
+  phoneNumber: string
+}
