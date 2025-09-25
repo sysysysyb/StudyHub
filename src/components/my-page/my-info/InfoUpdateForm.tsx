@@ -89,7 +89,6 @@ export const InfoUpdateForm = () => {
   // ✅ 최종 제출
   const onSubmit = (values: InfoUpdateType) => {
     if (!isVerified) {
-      alert('휴대폰 인증을 완료해주세요.')
       return
     }
 

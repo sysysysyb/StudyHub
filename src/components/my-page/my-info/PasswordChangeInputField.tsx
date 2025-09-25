@@ -3,7 +3,7 @@ import { Button } from '@/components'
 import type { ComponentProps } from 'react'
 import { ButtonVariants } from '@/constants/button-variants'
 
-interface InfoUpdateInputProps extends ComponentProps<'input'> {
+interface PasswordChangeInputProps extends ComponentProps<'input'> {
   label: string
   isRequired?: boolean
   id: string
@@ -13,7 +13,7 @@ interface InfoUpdateInputProps extends ComponentProps<'input'> {
   onButtonClick?: () => void
 }
 
-export const InfoUpdateInputField = ({
+export const PasswordChangeInputField = ({
   label,
   isRequired,
   id,
@@ -22,7 +22,7 @@ export const InfoUpdateInputField = ({
   buttonLabel,
   onButtonClick,
   ...props
-}: InfoUpdateInputProps) => {
+}: PasswordChangeInputProps) => {
   return (
     <div className="flex flex-col gap-2">
       <InputLabel htmlFor={id} isRequired={isRequired}>
