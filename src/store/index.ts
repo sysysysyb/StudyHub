@@ -2,7 +2,7 @@
 import { useToastStore } from '@/store/useToastStore'
 import { useNotificationNavigationItemStore } from '@/store/useNotificationNavigationItemStore'
 import { useChatRoomStore } from '@/store/useChatRoomStore'
-import { useWithdrawalDateStore } from './useWithdrawalDateStore'
+import { useWithdrawalDateStore } from '@/store/useWithdrawalDateStore'
 
 export {
   useToastStore,
