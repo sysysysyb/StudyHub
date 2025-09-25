@@ -8,8 +8,10 @@ import useInfiniteBookmarkedRecruitment from '@/hooks/api/bookmarked/useInfinite
 import useInfiniteBookmarkedLecture from '@/hooks/api/bookmarked/useInfiniteBookmarkedLecture'
 import useLogin from '@/hooks/api/auth/useLogin'
 import useBookmarkedRecruitment from '@/hooks/api/bookmarked/useBookmarkedRecruitments'
-import useUserRecover from '@/hooks/api/auth/useUserRecover'
-import useUserRecoverEmailSend from '@/hooks/api/auth/useUserRecoverEmailSend'
+import useUserRecoverVerify from '@/hooks/api/auth/useUserRecoverVerify'
+import useUserRecoverSendCode from '@/hooks/api/auth/useUserRecoverSendCode'
+import useToggleLectureBookmark from '@/hooks/api/bookmarked/useToggleLectureBookmark'
+import useToggleRecruitmentBookmark from '@/hooks/api/bookmarked/useToggleRecruitmentBookmark'
 
 export {
   useUserInformation,
@@ -22,6 +24,8 @@ export {
   useInfiniteBookmarkedLecture,
   useLogin,
   useBookmarkedRecruitment,
-  useUserRecover,
-  useUserRecoverEmailSend,
+  useUserRecoverVerify,
+  useUserRecoverSendCode,
+  useToggleLectureBookmark,
+  useToggleRecruitmentBookmark,
 }

@@ -5,6 +5,7 @@ import { Button } from '@/components'
 import { formattedCloseAt } from '@/utils'
 import useWindowWidth from '@/hooks/useWindowWidth'
 import { LG_WIDTH_PIXEL } from '@/constants/break-points'
+import RecruitmentBookmarkIcon from '@/components/my-page/bookmarked-recruitment/RecruitmentBookmarkIcon'
 
 interface BookmarkedRecruitmentCardProps {
   recruitment: BookmarkedRecruitment
@@ -95,7 +96,7 @@ export default function BookmarkedRecruitmentCard({
           ) : null}
         </div>
         <div className="flex items-center justify-end gap-2">
-          <BookmarkIcon className="text-primary-500 h-4" fill="#eab308" />
+          <RecruitmentBookmarkIcon recruitmentId={uuid} />
           <Link to={`/recruitment/${uuid}`}>
             <Button
               size={width > LG_WIDTH_PIXEL ? 'md' : 'sm'}
