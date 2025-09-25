@@ -5,7 +5,7 @@ import api from '@/utils/axios'
 import { useMutation, type UseMutationOptions } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 
-export default function useUserRecover(
+export default function useUserRecoverVerify(
   options?: UseMutationOptions<void, Error, userRecoverVerifyBody>
 ) {
   const { triggerToast } = useToast()

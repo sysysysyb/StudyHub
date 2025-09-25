@@ -4,7 +4,7 @@ import api from '@/utils/axios'
 import { useMutation, type UseMutationOptions } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 
-export default function useUserRecoverEmailSend(
+export default function useUserRecoverSendCode(
   options?: UseMutationOptions<void, Error, string>
 ) {
   const { triggerToast } = useToast()

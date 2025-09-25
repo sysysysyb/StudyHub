@@ -11,7 +11,7 @@ import {
   type ModalContextValue,
 } from '@/components/common/Modal'
 import { useToast, useVerificationCode } from '@/hooks'
-import { useUserRecover, useUserRecoverEmailSend } from '@/hooks/api'
+import { useUserRecoverVerify, useUserRecoverSendCode } from '@/hooks/api'
 import {
   UserRecoverSchema,
   type UserRecover,
@@ -45,7 +45,7 @@ export default function UserRecoverFormModal({
 
   //mutation 코드는 이후 useVerificationCode 훅 안으로 이동 예정!!
   const { triggerToast } = useToast()
-  const { mutate: sendEmail } = useUserRecoverEmailSend({
+  const { mutate: sendEmail } = useUserRecoverSendCode({
     onSuccess: () => {
       // TODO: 실제 입력한 이메일 값 적용하도록 수정
       handleCodeSend('email', 'test@test.com')
@@ -54,7 +54,7 @@ export default function UserRecoverFormModal({
       triggerToast('error', '이메일 전송 실패')
     },
   })
-  const { mutate: verifyEmail } = useUserRecover({
+  const { mutate: verifyEmail } = useUserRecoverVerify({
     // TODO: 실제 입력한 이메일 값과 전송받은 인증코드 적용하도록 수정
     onSuccess: () => {
       handleCodeVerify('email', {
