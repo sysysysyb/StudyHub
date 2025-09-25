@@ -9,4 +9,22 @@ const getBookmarkedRecruitments = http.get(
   }
 )
 
-export const bookmarkedRecruitmentsHandlers = [getBookmarkedRecruitments]
+const postBookmarkRecruitment = http.post<{ recruitmentId: string }>(
+  `${MSW_BASE_URL}/recruitments/:recruitmentId/bookmarks/add`,
+  () => {
+    return HttpResponse.json()
+  }
+)
+
+const deleteBookmarkRecruitment = http.delete<{ recruitmentId: string }>(
+  `${MSW_BASE_URL}/recruitments/:recruitmentId/bookmarks/remove`,
+  () => {
+    return HttpResponse.json()
+  }
+)
+
+export const bookmarkedRecruitmentsHandlers = [
+  getBookmarkedRecruitments,
+  postBookmarkRecruitment,
+  deleteBookmarkRecruitment,
+]

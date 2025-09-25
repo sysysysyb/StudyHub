@@ -1,11 +1,12 @@
 import Button from '@/components/common/Button'
 import type { Lecture } from '@/types/api-response-types/lecture-response-type'
-import { BookmarkIcon, Clock3Icon } from 'lucide-react'
+import { Clock3Icon } from 'lucide-react'
 import { Link } from 'react-router'
 import DifficultyBadge from './DifficultyBadge'
 import PlatformBadge from './PlatformBadge'
 import useWindowWidth from '@/hooks/useWindowWidth'
 import { LG_WIDTH_PIXEL } from '@/constants/break-points'
+import LectureBookmarkIcon from '@/components/my-page/bookmarked-lecture/LectureBookmarkIcon'
 
 interface BookmarkedLectureCardProps {
   lecture: Lecture
@@ -60,7 +61,8 @@ export default function BookmarkedLectureCard({
             ) : null}
           </div>
           <div className="flex items-center justify-center gap-1">
-            <BookmarkIcon className="text-primary-500 h-4" fill="#eab308" />
+            {/* TODO: 실제 강의 아이디 연결 */}
+            <LectureBookmarkIcon lectureId="111" />
             <Link to={urlLink}>
               <Button
                 size={width > LG_WIDTH_PIXEL ? 'md' : 'sm'}
