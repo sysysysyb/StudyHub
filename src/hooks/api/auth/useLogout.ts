@@ -17,7 +17,7 @@ export default function useLogout(options?: UseMutationOptions) {
   return useMutation({
     mutationKey: ['users', 'logout'],
     mutationFn: async () => {
-      await api.post(`${MSW_BASE_URL}/users/logout`)
+      await api.post(`${MSW_BASE_URL}/auth/logout`)
     },
     onSuccess: () => {
       setIsLoggedIn(false)
