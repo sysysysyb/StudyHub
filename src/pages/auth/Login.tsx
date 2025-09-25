@@ -23,6 +23,12 @@ import {
   InputFieldRowStyle,
   InputGroupStyle,
 } from '@/constants/auth-variants'
+import { UserRecoverModal } from '@/components/auth/user-recover-modal'
+import type { ModalContextValue } from '@/components/common/Modal'
+import { useState } from 'react'
+import type { AxiosError } from 'axios'
+import type { LoginErrorResponse } from '@/types/api-response-types/auth-response-types'
+import { useWithdrawalDateStore } from '@/store'
 
 function Login() {
   const {
@@ -34,10 +40,35 @@ function Login() {
     resolver: zodResolver(loginSchema),
   })
   const login = useLogin()
+  const { setWithdrawalDate } = useWithdrawalDateStore()
+  const [isUserRecoverModalOpen, setIsUserRecoverModalOpen] = useState(false)
+
+  const userRecoverFormModalControl: ModalContextValue = {
+    isOpen: isUserRecoverModalOpen,
+    open: () => {
+      setIsUserRecoverModalOpen(true)
+    },
+    close: () => {
+      setIsUserRecoverModalOpen(false)
+    },
+    toggle: () => {
+      setIsUserRecoverModalOpen((prev) => !prev)
+    },
+  }
 
   const onSubmit = async (data: LoginSchemaType) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-    login.mutate(data)
+    try {
+      await login.mutateAsync(data)
+    } catch (error) {
+      const axiosError = error as AxiosError<LoginErrorResponse>
+      const status = axiosError.response?.status
+
+      if (status === 401) {
+        const dueDate = axiosError.response?.data?.due_date ?? null
+        setWithdrawalDate(dueDate ?? null)
+        userRecoverFormModalControl.open()
+      }
+    }
   }
 
   return (
@@ -84,6 +115,7 @@ function Login() {
           일반회원 로그인
         </AuthSubmitButton>
       </form>
+      <UserRecoverModal userRecoverModalControl={userRecoverFormModalControl} />
     </AuthContainer>
   )
 }
