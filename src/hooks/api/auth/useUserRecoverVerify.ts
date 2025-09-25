@@ -1,12 +1,12 @@
 import { MSW_BASE_URL } from '@/constants/url-constants'
 import useToast from '@/hooks/useToast'
-import type { userRecoverVerifyBody } from '@/types/api-request-types/user-recover-request-types'
+import type { UserRecoverVerifyBody } from '@/types/api-request-types/user-recover-request-types'
 import api from '@/utils/axios'
 import { useMutation, type UseMutationOptions } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 
 export default function useUserRecoverVerify(
-  options?: UseMutationOptions<void, Error, userRecoverVerifyBody>
+  options?: UseMutationOptions<void, Error, UserRecoverVerifyBody>
 ) {
   const { triggerToast } = useToast()
 

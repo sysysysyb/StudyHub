@@ -1,8 +1,8 @@
-export interface userRecoverVerifyBody {
+export interface UserRecoverVerifyBody {
   email: string
   verificationCode: string
 }
 
-export interface userRecoverSendBody {
+export interface UserRecoverSendBody {
   email: string
 }
