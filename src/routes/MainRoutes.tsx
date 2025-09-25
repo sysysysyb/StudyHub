@@ -9,6 +9,7 @@ import {
   Bookmark,
   FindEmail,
   FindPassword,
+  NotFound,
 } from '@/pages'
 import { Route, Routes } from 'react-router'
 
@@ -34,6 +35,8 @@ function MainRoutes() {
           <Route path="bookmarked/" element={<Bookmark />} />
           <Route path="bookmarked/:content" element={<Bookmark />} />
         </Route>
+        {/* 404 페이지 */}
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   )
