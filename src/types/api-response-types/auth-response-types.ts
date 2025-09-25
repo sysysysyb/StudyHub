@@ -9,3 +9,5 @@ export interface UserInformation {
   profileImageUrl?: string
   createdAt: Date
 }
+
+export type LoginErrorResponse = { due_date?: string | null }
