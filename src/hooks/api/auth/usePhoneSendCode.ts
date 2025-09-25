@@ -3,14 +3,14 @@ import useToast from '@/hooks/useToast'
 import type { UserPhoneSendCode } from '@/types/api-request-types/auth-request-types'
 import api from '@/utils/axios'
 import { useMutation, type UseMutationOptions } from '@tanstack/react-query'
-import type { AxiosError } from 'axios'
+import { AxiosError } from 'axios'
 
 export default function usePhoneSendCode(
-  options?: UseMutationOptions<unknown, AxiosError, UserPhoneSendCode>
+  options?: UseMutationOptions<unknown, Error, UserPhoneSendCode>
 ) {
   const { triggerToast } = useToast()
 
-  return useMutation<unknown, AxiosError, UserPhoneSendCode>({
+  return useMutation<unknown, Error, UserPhoneSendCode>({
     ...options,
     mutationKey: ['auth', 'phone', 'send-code'],
     mutationFn: async ({ phoneNumber }) => {
@@ -26,10 +26,13 @@ export default function usePhoneSendCode(
       )
     },
     onError: (error) => {
-      const status = error.status
-
-      if (status === 400) {
-        triggerToast('error', '잘못된 휴대전화 번호 형식입니다')
+      if (error instanceof AxiosError) {
+        const status = error.status
+        if (status === 400) {
+          triggerToast('error', '잘못된 휴대전화 번호 형식입니다')
+        } else {
+          triggerToast('error', '잠시 후 다시 시도해주세요')
+        }
       } else {
         triggerToast('error', '잠시 후 다시 시도해주세요')
       }
