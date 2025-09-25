@@ -48,7 +48,7 @@ const getUserInformation = http.get(
   `${MSW_BASE_URL}/users/me`,
   ({ request }) => {
     const header = request.headers.get('Authorization')
-    const hasBearerToken = header?.includes('access')
+    const hasBearerToken = header?.includes('Bearer')
 
     if (!hasBearerToken) {
       return HttpResponse.json(
