@@ -7,7 +7,7 @@ import Bookmark from '@/pages/my-page/Bookmark'
 import { CompletedStudy } from '@/pages/my-page/CompletedStudy'
 import FindEmail from '@/pages/auth/FindEmail'
 import FindPassword from '@/pages/auth/FindPassword'
-import NotFound from '@/pages/Notfound'
+import NotFound from '@/pages/NotFound'
 
 export {
   LandingPage,
