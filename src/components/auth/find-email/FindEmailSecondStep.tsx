@@ -39,6 +39,7 @@ function FindEmailSecondStep({
     register,
     handleSubmit,
     formState: { isValid, errors },
+    getValues,
   } = useForm<FindEmailStep2Type>({
     mode: 'onChange',
     resolver: zodResolver(FindEmailStep2Schema),
@@ -49,8 +50,9 @@ function FindEmailSecondStep({
 
   const onSubmit = (value: FindEmailStep2Type) => onNext(value)
 
+  // TODO: 이메일 찾기 인증코드 전송 api에 맞게 수정 필요
   useEffect(() => {
-    handleCodeSend('phoneNumber')
+    handleCodeSend('phoneNumber', phoneNumber)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -74,7 +76,13 @@ function FindEmailSecondStep({
             />
             <AuthVerifyButton
               disabled={!isCodeSent.phoneNumber}
-              onClick={() => handleCodeVerify('phoneNumber')}
+              // TODO: 이메일 찾기 인증코드 검증 api에 맞게 수정 필요
+              onClick={() =>
+                handleCodeVerify('phoneNumber', {
+                  phoneNumber: phoneNumber,
+                  verificationCode: getValues('code'),
+                })
+              }
             >
               인증코드확인
             </AuthVerifyButton>
