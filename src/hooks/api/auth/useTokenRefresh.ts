@@ -17,7 +17,7 @@ export default function useTokenRefresh(options?: UseMutationOptions) {
     mutationKey: ['token', 'refresh'],
     mutationFn: async () => {
       const response = await api.post(`${MSW_BASE_URL}/auth/refresh`)
-      const newAccessToken = response.data.access_token
+      const newAccessToken = response.data.access
       return newAccessToken
     },
     onSuccess: (newAccessToken: string) => {
