@@ -9,7 +9,7 @@ import {
   ModalMain,
 } from '@/components/common/Modal'
 import { Button } from '@/components'
-import { MypageInputField } from '@/components/my-page/my-info/MypageInputField'
+import { InfoUpdateInputField } from '@/components/my-page/my-info/InfoUpdateInputField'
 
 export const PasswordChange = () => {
   return (
@@ -30,13 +30,17 @@ export const PasswordChange = () => {
         </ModalHeader>
 
         <ModalMain className="flex flex-col gap-4">
-          <MypageInputField
+          <InfoUpdateInputField
             label="현재 비밀번호"
             id="currentPassword"
             isRequired
           />
-          <MypageInputField label="새 비밀번호" id="newPassword" isRequired />
-          <MypageInputField
+          <InfoUpdateInputField
+            label="새 비밀번호"
+            id="newPassword"
+            isRequired
+          />
+          <InfoUpdateInputField
             label="새 비밀번호 확인"
             id="passwordConfirm"
             isRequired

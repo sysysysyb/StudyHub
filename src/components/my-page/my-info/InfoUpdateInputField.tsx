@@ -3,35 +3,37 @@ import { Button } from '@/components'
 import type { ComponentProps } from 'react'
 import { ButtonVariants } from '@/constants/button-variants'
 
-interface MyPageInputProps extends ComponentProps<'button'> {
+interface InfoUpdateInputProps extends ComponentProps<'input'> {
   label: string
   isRequired?: boolean
   id: string
   errorMessage?: string
   buttonVariant?: keyof typeof ButtonVariants
   buttonLabel?: string
+  onButtonClick?: () => void
 }
 
-export const MypageInputField = ({
+export const InfoUpdateInputField = ({
   label,
   isRequired,
   id,
   errorMessage,
   buttonVariant = 'primary',
   buttonLabel,
-  onClick,
-}: MyPageInputProps) => {
+  onButtonClick,
+  ...props
+}: InfoUpdateInputProps) => {
   return (
     <div className="flex flex-col gap-2">
       <InputLabel htmlFor={id} isRequired={isRequired}>
         {label}
       </InputLabel>
       <div className="flex gap-2">
-        <Input id={id} aria-describedby={id} />
+        <Input id={id} aria-describedby={id} {...props} />
         {buttonLabel && (
           <Button
             variant={buttonVariant}
-            onClick={onClick}
+            onClick={onButtonClick}
             className="w-22 whitespace-nowrap"
           >
             {buttonLabel}
