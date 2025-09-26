@@ -5,6 +5,7 @@ import {
   ChatSocketEventUnionSchema,
   type Message,
 } from '@/schemas/api-response-schemas/chat-response.schema'
+import { getChatRoomWebSocketUrl } from '@/utils'
 import { useEffect, useRef, useState } from 'react'
 
 export default function WebsocketTest() {
@@ -17,19 +18,22 @@ export default function WebsocketTest() {
   const divRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
-    webSocket.current = new WebSocket(`ws://example/ws/chat/`)
+    const chatURL = getChatRoomWebSocketUrl(chatRoomId, true)
+
+    if (!chatURL) return
+
+    webSocket.current = new WebSocket(chatURL)
 
     webSocket.current.onmessage = (event) => {
       try {
         const data = JSON.parse(event.data)
         const result = ChatSocketEventUnionSchema.parse(data)
-        console.log('✅ 유효한 이벤트:', result)
 
         if (result.type === 'chat_message') {
           setMessages((prev) => [...prev, result.data])
         }
       } catch (error) {
-        console.error('❌ 잘못된 이벤트 형식:', error)
+        alert('웹소켓 테스트 에러' + error)
       }
     }
 

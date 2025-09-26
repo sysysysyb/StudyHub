@@ -1,4 +1,4 @@
-import { MSW_BASE_URL } from '@/constants/url-constants'
+import { MSW_BASE_URL, WS_MSW_BASE_URL } from '@/constants/url-constants'
 import { http, HttpResponse, ws } from 'msw'
 import { chatRoomMessages } from '@/mocks/data/chat-room-data'
 
@@ -9,11 +9,9 @@ const getChatMessages = http.get<{ study_group_uuid: string }>(
   }
 )
 
-const chat = ws.link('ws://example/ws/chat/')
+const chat = ws.link(`${WS_MSW_BASE_URL}/chat/:study_group_uuid`)
 
 const chatConnection = chat.addEventListener('connection', ({ client }) => {
-  console.log('WebSocket client connecting...', client)
-
   // 3초마다 랜덤 메시지 전송
   const intervalId = setInterval(() => {
     // chatRoomMessages.results에서 랜덤 메시지 선택
@@ -68,7 +66,7 @@ const chatConnection = chat.addEventListener('connection', ({ client }) => {
         )
       }
     } catch (err) {
-      console.error('❌ 클라이언트 메시지 파싱 실패:', err)
+      alert('웹소켓 테스트 에러' + err)
     }
   })
 
