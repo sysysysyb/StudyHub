@@ -70,15 +70,15 @@ function useVerificationCode() {
   const handleCodeSend = async (label: labelType, value: string) => {
     if (label === 'email') {
       const data: UserEmailSendCode = { email: value }
-      emailSendCode.mutate(data)
+      await emailSendCode.mutateAsync(data)
     }
     if (label === 'phoneNumber') {
       const phoneNumberE164KR = formattedPhoneToE164KR(value)
       const data: UserPhoneSendCode = { phoneNumber: phoneNumberE164KR }
-      phoneSendCode.mutate(data)
+      await phoneSendCode.mutateAsync(data)
     }
     if (label === 'userRecover') {
-      userRecoverSendCode.mutate(value)
+      await userRecoverSendCode.mutateAsync(value)
     }
     SetIsCodeSent((prev) => ({ ...prev, [label]: true }))
     timer[label].startTimer()
