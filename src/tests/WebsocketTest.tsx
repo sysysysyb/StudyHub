@@ -1,46 +1,28 @@
 import { Button } from '@/components'
 import { Card } from '@/components/common/card/Card'
 import { Input } from '@/components/common/input'
-import {
-  ChatSocketEventUnionSchema,
-  type Message,
-} from '@/schemas/api-response-schemas/chat-response.schema'
-import { getChatRoomWebSocketUrl } from '@/utils'
+import { useChatRoomStore } from '@/store'
 import { useEffect, useRef, useState } from 'react'
 
 export default function WebsocketTest() {
-  const [messages, setMessages] = useState<Message[]>([])
-
+  const {
+    messages,
+    connect,
+    disconnect,
+    sendMessage: sendMessageToSocket,
+  } = useChatRoomStore()
   const [message, setMessage] = useState('')
 
-  const webSocket = useRef<WebSocket | null>(null)
   const chatRoomId = 'chat-1111'
   const divRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
-    const chatURL = getChatRoomWebSocketUrl(chatRoomId, true)
-
-    if (!chatURL) return
-
-    webSocket.current = new WebSocket(chatURL)
-
-    webSocket.current.onmessage = (event) => {
-      try {
-        const data = JSON.parse(event.data)
-        const result = ChatSocketEventUnionSchema.parse(data)
-
-        if (result.type === 'chat_message') {
-          setMessages((prev) => [...prev, result.data])
-        }
-      } catch (error) {
-        alert('웹소켓 테스트 에러' + error)
-      }
-    }
+    connect(chatRoomId)
 
     return () => {
-      if (webSocket.current) webSocket.current.close()
+      disconnect()
     }
-  }, [chatRoomId])
+  }, [chatRoomId, connect, disconnect])
 
   useEffect(() => {
     if (divRef.current) {
@@ -50,16 +32,8 @@ export default function WebsocketTest() {
 
   const handleSendMessage: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
-
-    if (webSocket.current && message.trim() !== '') {
-      const data = {
-        type: 'send_message',
-        data: { content: message },
-      }
-
-      webSocket.current.send(JSON.stringify(data))
-      setMessage('')
-    }
+    sendMessageToSocket(message)
+    setMessage('')
   }
 
   return (
