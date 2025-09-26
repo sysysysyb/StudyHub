@@ -8,6 +8,7 @@ import {
   ModalMain,
   type ModalContextValue,
 } from '@/components/common/Modal'
+import { useWithdrawalDateStore } from '@/store'
 import { MehIcon } from 'lucide-react'
 
 interface UserRecoverNoticeModalProps {
@@ -19,6 +20,8 @@ export default function UserRecoverNoticeModal({
   userRecoverNoticeModalControl,
   userRecoverFormOpen,
 }: UserRecoverNoticeModalProps) {
+  const { withdrawalDate } = useWithdrawalDateStore()
+
   return (
     <Modal externalModalControl={userRecoverNoticeModalControl}>
       <ModalContent className="w-[90%] max-w-lg">
@@ -32,7 +35,7 @@ export default function UserRecoverNoticeModal({
           </h1>
           <div>
             <p className="text-center text-gray-600">
-              2025년 9월 20일 이후, 계정 정보는 완전히 삭제돼요.
+              {withdrawalDate} 이후, 계정 정보는 완전히 삭제돼요.
             </p>
             <p className="text-center text-gray-600">
               계정을 다시 사용하려면 아래 버튼을 눌러 복구를 진행해주세요.

@@ -32,17 +32,28 @@ export const formattedEndDate = (endDateString: Date) => {
 }
 
 export const formattedDateWithDots = (date: string) => {
-  const yyyy = date?.substring(0, 4)
-  const mm = date?.substring(5, 7)
-  const dd = date?.substring(8, 10)
+  const dateWithNumber = date.replace(/\D/g, '')
+  const yyyy = dateWithNumber.substring(0, 4)
+  const mm = dateWithNumber.substring(4, 6)
+  const dd = dateWithNumber.substring(6, 8)
 
   return `${yyyy}. ${mm}. ${dd}.`
 }
 
 export const formattedDateWithHyphen = (date: string) => {
-  const yyyy = date?.substring(0, 4)
-  const mm = date?.substring(4, 6)
-  const dd = date?.substring(6, 8)
+  const dateWithNumber = date.replace(/\D/g, '')
+  const yyyy = dateWithNumber.substring(0, 4)
+  const mm = dateWithNumber.substring(4, 6)
+  const dd = dateWithNumber.substring(6, 8)
 
   return `${yyyy}-${mm}-${dd}`
+}
+
+export const formattedDateWithKorean = (date: string) => {
+  const dateWithNumber = date.replace(/\D/g, '')
+  const yyyy = dateWithNumber.substring(0, 4)
+  const mm = dateWithNumber.substring(4, 6)
+  const dd = dateWithNumber.substring(6, 8)
+
+  return `${yyyy}년 ${mm}월 ${dd}일`
 }

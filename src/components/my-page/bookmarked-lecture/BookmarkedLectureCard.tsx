@@ -25,6 +25,7 @@ export default function BookmarkedLectureCard({
     discount_price: discountPrice,
     url_link: urlLink,
     duration_hhmm: durationHHMM,
+    lecture_id: lectureId,
   } = lecture
 
   const width = useWindowWidth()
@@ -62,7 +63,7 @@ export default function BookmarkedLectureCard({
           </div>
           <div className="flex items-center justify-center gap-1">
             {/* TODO: 실제 강의 아이디 연결 */}
-            <LectureBookmarkIcon lectureId="111" />
+            <LectureBookmarkIcon lectureId={String(lectureId)} />
             <Link to={urlLink}>
               <Button
                 size={width > LG_WIDTH_PIXEL ? 'md' : 'sm'}
