@@ -15,7 +15,7 @@ import usePhoneVerify from '@/hooks/api/auth/usePhoneVerify'
 import {
   InfoUpdateSchema,
   type InfoUpdateType,
-} from '@/schemas/form-schema/Info-update-schema'
+} from '@/schemas/form-schema/info-update-schema'
 import { useTimer } from '@/hooks'
 
 export const InfoUpdateForm = () => {
