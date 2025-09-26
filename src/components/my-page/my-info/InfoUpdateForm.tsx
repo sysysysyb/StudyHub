@@ -9,25 +9,22 @@ import { Input, InputLabel, InputErrorMessage } from '@/components/common/input'
 import { useUserInformation, useUpdateUserInfo } from '@/hooks/api'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { formattedPhoneToE164KR } from '@/utils/formatted-phone'
-import usePhoneSendCode from '@/hooks/api/auth/usePhoneSendCode'
-import usePhoneVerify from '@/hooks/api/auth/usePhoneVerify'
 import {
   InfoUpdateSchema,
   type InfoUpdateType,
 } from '@/schemas/form-schema/info-update-schema'
-import { useTimer } from '@/hooks'
+import { useVerificationCode } from '@/hooks'
 
 export const InfoUpdateForm = () => {
   const { data: userInfo } = useUserInformation()
-  const phoneSendCode = usePhoneSendCode()
-  const phoneVerify = usePhoneVerify()
-  const isVerified = phoneVerify.isSuccess
   const { close } = useModalContext()
-  const { remainSecond, isCounting, startTimer, formatMMSS } = useTimer(
-    180000,
-    () => {}
-  )
+  const {
+    isCodeSent,
+    isCodeVerified,
+    timer,
+    handleCodeSend,
+    handleCodeVerify,
+  } = useVerificationCode()
 
   const {
     register,
@@ -44,39 +41,28 @@ export const InfoUpdateForm = () => {
     },
   })
 
-  const handleCodeSend = () => {
-    const phoneNumber = getValues('phoneNumber')
+  const phoneNumber = getValues('phoneNumber')
+
+  const handlePhoneCodeSendClick = () => {
     if (!phoneNumber) {
-      setError('phoneNumber', { message: '휴대폰 번호를 입력해주세요' })
+      setError('phoneNumber', {
+        message: '휴대폰 번호를 입력해주세요',
+      })
       return
     }
-
-    phoneSendCode.mutate(
-      {
-        phoneNumber: formattedPhoneToE164KR(phoneNumber),
-      },
-      {
-        onSuccess: () => {
-          startTimer()
-        },
-      }
-    )
+    handleCodeSend('phoneNumber', phoneNumber)
   }
-
-  // ✅ 인증코드 확인
-  const handleCodeVerify = () => {
-    const phoneNumber = getValues('phoneNumber')
-    const infoUpdateVerificationCode = getValues('infoUpdateVerificationCode')
-    if (!infoUpdateVerificationCode) {
+  const handleVerifyButtonClick = () => {
+    const verificationCode = getValues('infoUpdateVerificationCode')
+    if (!verificationCode) {
       setError('infoUpdateVerificationCode', {
         message: '인증번호를 입력해주세요',
       })
       return
     }
-
-    phoneVerify.mutate({
-      phoneNumber: formattedPhoneToE164KR(phoneNumber),
-      verificationCode: infoUpdateVerificationCode,
+    handleCodeVerify('phoneNumber', {
+      phoneNumber,
+      verificationCode,
     })
   }
 
@@ -88,13 +74,16 @@ export const InfoUpdateForm = () => {
 
   // ✅ 최종 제출
   const onSubmit = (values: InfoUpdateType) => {
-    if (!isVerified) {
+    if (!isCodeVerified.phoneNumber) {
+      setError('infoUpdateVerificationCode', {
+        message: '휴대폰 번호 인증을 완료해주세요',
+      })
       return
     }
 
     updateUserInfo.mutate({
       nickname: values.nickname,
-      phoneNumber: formattedPhoneToE164KR(values.phoneNumber),
+      phoneNumber: values.phoneNumber,
     })
   }
 
@@ -122,29 +111,30 @@ export const InfoUpdateForm = () => {
           )}
         </div>
 
-        {/* 휴대폰 번호 입력 + 인증하기 버튼 클릭 */}
+        {/* 휴대폰 번호 입력 + 인증하기 버튼 */}
         <div className="flex flex-col gap-2">
           <InputLabel isRequired>휴대폰 번호</InputLabel>
           <div className="flex gap-2">
             <Input
               id="phoneNumber"
               {...register('phoneNumber')}
-              readOnly={isVerified}
+              readOnly={isCodeSent.phoneNumber}
             />
             <Button
               variant="secondary"
               type="button"
-              onClick={handleCodeSend}
-              disabled={phoneSendCode.isPending}
+              onClick={handlePhoneCodeSendClick}
+              disabled={isCodeVerified.phoneNumber}
               className="min-w-[110px]"
             >
-              {phoneSendCode.isSuccess
-                ? isCounting && (
-                    <span className="ml-2 text-sm whitespace-nowrap text-gray-900">
-                      재전송 {formatMMSS(remainSecond)}
-                    </span>
-                  )
-                : '인증하기'}
+              {isCodeSent.phoneNumber ? (
+                <span className="ml-2 text-sm whitespace-nowrap text-gray-900">
+                  재전송{' '}
+                  {timer.phoneNumber.formatMMSS(timer.phoneNumber.remainSecond)}
+                </span>
+              ) : (
+                '인증하기'
+              )}
             </Button>
           </div>
           {errors.phoneNumber && (
@@ -153,23 +143,23 @@ export const InfoUpdateForm = () => {
         </div>
 
         {/* 인증번호 입력 */}
-        {phoneSendCode.isSuccess && (
+        {isCodeSent.phoneNumber && (
           <div className="flex flex-col gap-2">
             <div className="flex gap-2">
               <Input
                 id="infoUpdateVerificationCode"
                 {...register('infoUpdateVerificationCode')}
                 placeholder="인증코드 6자리 입력"
-                readOnly={isVerified}
+                readOnly={isCodeVerified.phoneNumber}
               />
               <Button
-                variant={isVerified ? 'secondary' : 'primary'}
+                variant={isCodeVerified.phoneNumber ? 'secondary' : 'primary'}
                 type="button"
-                onClick={handleCodeVerify}
-                disabled={isVerified || phoneVerify.isPending}
+                onClick={handleVerifyButtonClick}
+                disabled={isCodeVerified.phoneNumber}
                 className="whitespace-nowrap"
               >
-                {isVerified ? '인증완료' : '확인'}
+                {isCodeVerified.phoneNumber ? '인증완료' : '확인'}
               </Button>
             </div>
             {errors.infoUpdateVerificationCode && (
@@ -188,7 +178,7 @@ export const InfoUpdateForm = () => {
         <Button
           variant="primary"
           type="submit"
-          disabled={!isValid || !isVerified}
+          disabled={!isValid || !isCodeVerified.phoneNumber}
         >
           변경하기
         </Button>
