@@ -43,22 +43,19 @@ const logout = http.post(`${MSW_BASE_URL}/auth/logout`, () => {
   )
 })
 
-// 사용자 정보 조회
-const getUserInformation = http.get(
-  `${MSW_BASE_URL}/users/me`,
-  ({ request }) => {
-    const header = request.headers.get('Authorization')
-    const hasBearerToken = header?.includes('Bearer')
+// 내 정보 조회
+const getUserInformation = http.get(`${MSW_BASE_URL}/info`, ({ request }) => {
+  const header = request.headers.get('Authorization')
+  const hasBearerToken = header?.includes('Bearer')
 
-    if (!hasBearerToken) {
-      return HttpResponse.json(
-        { detail: 'Authentication required.' },
-        { status: 401 }
-      )
-    }
-    return HttpResponse.json(userInformationMock[0])
+  if (!hasBearerToken) {
+    return HttpResponse.json(
+      { detail: 'Authentication required.' },
+      { status: 401 }
+    )
   }
-)
+  return HttpResponse.json(userInformationMock[0])
+})
 
 // 액세스 토큰 재발급
 const getRefreshToken = http.post(`${MSW_BASE_URL}/auth/refresh`, () => {
