@@ -56,7 +56,7 @@ function ToastItem({
   return (
     <div
       className={cn(
-        'animate-fade-in-out-toast flex justify-between gap-3 rounded-lg border border-solid p-[17px] opacity-0',
+        'animate-fade-in-out-toast flex justify-between gap-3 rounded-lg border border-solid p-4 opacity-0',
         styles.border,
         styles.bg
       )}

@@ -6,6 +6,8 @@ import { Route, Routes, Link } from 'react-router'
 import MainRoutes from './MainRoutes'
 
 function Root() {
+  const randomString = Math.random().toString(36).substring(2, 11)
+
   return (
     <div className="flex h-screen items-center justify-center gap-10">
       <Button className="px-10 py-6 text-2xl">
@@ -13,6 +15,9 @@ function Root() {
       </Button>
       <Button className="px-10 py-6 text-2xl">
         <Link to="/my-page">마이 페이지</Link>
+      </Button>
+      <Button className="px-10 py-6 text-2xl">
+        <Link to={`/${randomString}`}>404 페이지</Link>
       </Button>
       <Button className="px-10 py-6 text-2xl">
         <Link to="/test-hub">테스트 허브</Link>

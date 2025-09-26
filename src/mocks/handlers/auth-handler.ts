@@ -1,7 +1,6 @@
 import { MSW_BASE_URL } from '@/constants/url-constants'
 import { http, HttpResponse, passthrough } from 'msw'
 import { userInformationMock } from '@/mocks/data/user-information-data'
-import { loginSchema } from '@/schemas/form-schema/login-schema'
 const ACCESS_TOKEN = `msw-access-token=access-token-test; Path=/; SameSite=Strict;`
 const REFRESH_TOKEN =
   'msw-refresh-token=refresh-token-test; Path=/; SameSite=Strict;'
@@ -10,45 +9,33 @@ const REFRESH_TOKEN =
 const login = http.post(
   `${MSW_BASE_URL}/auth/email/login`,
   async ({ request }) => {
-    const body = await request.json()
-    const parsedBody = loginSchema.safeParse(body)
+    const body = await request.clone().json()
 
-    if (!parsedBody.success) {
+    if (!body.email || !body.password) {
       return HttpResponse.json(
         {
-          error: 'Invalid credentials.',
+          error: '잘못된 입력 형식입니다',
         },
         { status: 400 }
       )
     }
 
-    const data = parsedBody.data
-
-    if (data.email === 'qwerty@test.com' && data.password === 'Qwer1234!!') {
-      return HttpResponse.json(
-        {
-          detail: 'Login successful',
-          access_token: `${ACCESS_TOKEN} Max-Age=10`,
-        },
-        {
-          status: 200,
-          headers: { 'Set-Cookie': `${REFRESH_TOKEN} Max-Age=360000` },
-        }
-      )
-    } else {
-      return HttpResponse.json(
-        {
-          error: 'Invalid credentials.',
-        },
-        { status: 400 }
-      )
-    }
+    return HttpResponse.json(
+      {
+        detail: '로그인이 완료되었습니다',
+        access: `${ACCESS_TOKEN} Max-Age=10`,
+      },
+      {
+        status: 200,
+        headers: { 'Set-Cookie': `${REFRESH_TOKEN} Max-Age=360000` },
+      }
+    )
   }
 )
 
-const logout = http.post(`${MSW_BASE_URL}/users/logout`, () => {
+const logout = http.post(`${MSW_BASE_URL}/auth/logout`, () => {
   return HttpResponse.json(
-    { detail: 'Logout successful' },
+    { detail: '로그아웃이 완료되었습니다' },
     {
       status: 200,
       headers: { 'Set-Cookie': `${REFRESH_TOKEN} Max-Age=0` },
@@ -61,9 +48,7 @@ const getUserInformation = http.get(
   `${MSW_BASE_URL}/users/me`,
   ({ request }) => {
     const header = request.headers.get('Authorization')
-    const hasBearerToken = header
-      ?.substring(7)
-      .includes('msw-access-token=access-token-test;')
+    const hasBearerToken = header?.includes('Bearer')
 
     if (!hasBearerToken) {
       return HttpResponse.json(
@@ -75,6 +60,7 @@ const getUserInformation = http.get(
   }
 )
 
+// 액세스 토큰 재발급
 const getRefreshToken = http.post(`${MSW_BASE_URL}/auth/refresh`, () => {
   const currentCookie = document.cookie
   const isRefreshTokenRemain = currentCookie.includes('msw-refresh-token')
@@ -89,7 +75,7 @@ const getRefreshToken = http.post(`${MSW_BASE_URL}/auth/refresh`, () => {
   return HttpResponse.json(
     {
       detail: '새로운 액세스 토큰을 발급했습니다',
-      access_token: `${ACCESS_TOKEN} Max-Age=10`,
+      access: `${ACCESS_TOKEN} Max-Age=10`,
     },
     {
       status: 200,

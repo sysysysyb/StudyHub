@@ -14,6 +14,7 @@ export const bookmarkedLecturesMock: BookmarkedLectures = {
       discount_price: 59400,
       duration_hhmm: '12:30',
       url_link: 'https://www.inflearn.com/course/react-complete-guide',
+      lecture_id: 111,
     },
     {
       title: 'TypeScript로 배우는 웹 애플리케이션 개발',
@@ -25,6 +26,7 @@ export const bookmarkedLecturesMock: BookmarkedLectures = {
       discount_price: 38500,
       duration_hhmm: '08:45',
       url_link: 'https://www.inflearn.com/course/typescript-web',
+      lecture_id: 112,
     },
     {
       title: 'Next.js 15과 Prisma로 만드는 풀스택 앱',
@@ -36,6 +38,7 @@ export const bookmarkedLecturesMock: BookmarkedLectures = {
       discount_price: 84000,
       duration_hhmm: '20:10',
       url_link: 'https://www.inflearn.com/course/nextjs15-prisma',
+      lecture_id: 113,
     },
     {
       title: '알고리즘 문제풀이: 파이썬으로 쉽게 배우기',
@@ -47,6 +50,7 @@ export const bookmarkedLecturesMock: BookmarkedLectures = {
       discount_price: 27500,
       duration_hhmm: '06:20',
       url_link: 'https://www.inflearn.com/course/python-algorithm',
+      lecture_id: 114,
     },
     {
       title: 'Docker와 Kubernetes로 배우는 배포 자동화',
@@ -58,6 +62,7 @@ export const bookmarkedLecturesMock: BookmarkedLectures = {
       discount_price: 61600,
       duration_hhmm: '15:50',
       url_link: 'https://www.inflearn.com/course/docker-kubernetes',
+      lecture_id: 115,
     },
   ],
 }

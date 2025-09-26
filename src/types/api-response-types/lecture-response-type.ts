@@ -8,6 +8,7 @@ export interface BookmarkedLectures {
 }
 
 export interface Lecture {
+  lecture_id: number
   title: string
   instructor: string
   thumbnail_img_url: string

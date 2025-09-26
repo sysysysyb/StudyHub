@@ -3,14 +3,14 @@ import useToast from '@/hooks/useToast'
 import type { UserEmailSendCode } from '@/types/api-request-types/auth-request-types'
 import api from '@/utils/axios'
 import { useMutation, type UseMutationOptions } from '@tanstack/react-query'
-import type { AxiosError } from 'axios'
+import { AxiosError } from 'axios'
 
 export default function useEmailSendCode(
-  options?: UseMutationOptions<unknown, AxiosError, UserEmailSendCode>
+  options?: UseMutationOptions<unknown, Error, UserEmailSendCode>
 ) {
   const { triggerToast } = useToast()
 
-  return useMutation<unknown, AxiosError, UserEmailSendCode>({
+  return useMutation<unknown, Error, UserEmailSendCode>({
     ...options,
     mutationKey: ['auth', 'email', 'send-code'],
     mutationFn: async ({ email }) => {
@@ -24,10 +24,13 @@ export default function useEmailSendCode(
       )
     },
     onError: (error) => {
-      const status = error.status
-
-      if (status === 400) {
-        triggerToast('error', '잘못된 이메일 형식입니다')
+      if (error instanceof AxiosError) {
+        const status = error.status
+        if (status === 400) {
+          triggerToast('error', '잘못된 이메일 형식입니다')
+        } else {
+          triggerToast('error', '잠시 후 다시 시도해주세요')
+        }
       } else {
         triggerToast('error', '잠시 후 다시 시도해주세요')
       }
