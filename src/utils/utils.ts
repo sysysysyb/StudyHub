@@ -18,8 +18,8 @@ export const getChatRoomWebSocketUrl = (
   }
 
   if (isMsw) {
-    return `${WS_MSW_BASE_URL}/${studyGroupId}/?token=${token}`
+    return `${WS_MSW_BASE_URL}/chat/${studyGroupId}/?token=${token}`
   } else {
-    return `${WS_API_BASE_URL}/${studyGroupId}/?token=${token}`
+    return `${WS_API_BASE_URL}/chat/${studyGroupId}/?token=${token}`
   }
 }
