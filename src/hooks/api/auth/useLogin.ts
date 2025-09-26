@@ -28,7 +28,7 @@ export default function useLogin(
         `${API_BASE_URL}/auth/email/login`,
         payload
       )
-      const newAccessToken = response.data.access_token
+      const newAccessToken = response.data.access
       return newAccessToken
     },
     onSuccess: async (newAccessToken: string) => {
