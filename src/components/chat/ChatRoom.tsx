@@ -4,6 +4,7 @@ import ChatRoomMessages from './ChatRoomMessages'
 import useChatMessages from '@/hooks/api/chat/useChatMessages'
 import LoadingState from '@/components/common/state/LoadingState'
 import { useEffect, useRef } from 'react'
+import { getChatRoomWebSocketUrl } from '@/utils'
 
 const dummyChatRoomUsers: { username: string; isOnline: boolean }[] = [
   { username: 'Bob', isOnline: true },
@@ -29,7 +30,11 @@ export default function ChatRoom({ chatRoomId }: ChatRoomProps) {
   const webSocket = useRef<WebSocket | null>(null)
 
   useEffect(() => {
-    webSocket.current = new WebSocket(`ws://example/ws/chat/${chatRoomId}`)
+    const chatRoomURL = getChatRoomWebSocketUrl(chatRoomId, true)
+
+    if (!chatRoomURL) return
+
+    webSocket.current = new WebSocket(chatRoomURL)
 
     webSocket.current.onmessage = (event) => {
       console.log(event.data)
@@ -46,7 +51,7 @@ export default function ChatRoom({ chatRoomId }: ChatRoomProps) {
       {isMessagePending ? (
         <LoadingState className="p-10">로딩중</LoadingState>
       ) : messages ? (
-        <ChatRoomMessages messages={messages} />
+        <ChatRoomMessages messages={messages.results} />
       ) : null}
 
       <ChatRoomInput />

@@ -1,20 +1,20 @@
-import type { ChatRoomMessages as ChatRoomMessagesType } from '@/schemas/api-response-schemas/chat-response.schema'
+import type { Message } from '@/schemas/api-response-schemas/chat-response.schema'
 import { cn } from '@/utils'
 
 interface ChatRoomMessagesProps {
-  messages: ChatRoomMessagesType
+  messages: Message[]
 }
 
 export default function ChatRoomMessages({ messages }: ChatRoomMessagesProps) {
   return (
     <section className="flex flex-col space-y-3">
-      {messages.results.map((result) => {
+      {messages.map((message) => {
         const {
           content,
           created_at: createdAtString,
           sender: { nickname, user_uuid: senderId },
           message_id: id,
-        } = result
+        } = message
 
         //현재 로그인 한 아이디
         //추후 실제 아이디와 연결
