@@ -11,6 +11,7 @@ import {
   FindPassword,
   NotFound,
 } from '@/pages'
+import KakaoAuth from '@/pages/auth/KakaoAuth'
 import { Route, Routes } from 'react-router'
 
 function MainRoutes() {
@@ -37,6 +38,10 @@ function MainRoutes() {
         </Route>
         {/* 404 페이지 */}
         <Route path="*" element={<NotFound />} />
+
+        {/* 소셜 로그인 */}
+        <Route path="/oauth/kakao" element={<KakaoAuth />} />
+        {/* <Route path="/oauth/naver" element={<NaverAuth />} /> */}
       </Route>
     </Routes>
   )

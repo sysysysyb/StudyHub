@@ -8,6 +8,7 @@ import { CompletedStudy } from '@/pages/my-page/CompletedStudy'
 import FindEmail from '@/pages/auth/FindEmail'
 import FindPassword from '@/pages/auth/FindPassword'
 import NotFound from '@/pages/NotFound'
+import KakaoAuth from '@/pages/auth/KakaoAuth'
 
 export {
   LandingPage,
@@ -20,4 +21,5 @@ export {
   FindEmail,
   FindPassword,
   NotFound,
+  KakaoAuth,
 }
