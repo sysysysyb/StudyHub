@@ -1,7 +1,6 @@
 import type { Notification } from '@/types/api-response-types/notification-response-types'
 import { cn } from '@/utils'
 import NotificationIcon from '@/components/notification/NotificationIcon'
-import { useNavigate } from 'react-router'
 import { useChatRoomStore } from '@/store'
 
 interface NotificationCardProps {
@@ -24,7 +23,6 @@ export default function NotificationCard({
   const createdMonth = createdAt.getMonth()
   const createdDate = createdAt.getDate()
 
-  const navigate = useNavigate()
   const { setChatRoomId, openChatRoom } = useChatRoomStore()
 
   const handleCardClick: React.MouseEventHandler<HTMLDivElement> = (e) => {
@@ -34,7 +32,7 @@ export default function NotificationCard({
       setChatRoomId('aaajjjdddccc')
       openChatRoom()
     } else {
-      navigate(redirectUrl)
+      window.location.href = redirectUrl
     }
   }
 
