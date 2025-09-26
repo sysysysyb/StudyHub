@@ -27,9 +27,10 @@ export default function ChatRoomMessages({ messages }: ChatRoomMessagesProps) {
         const hours = String(createdAt.getHours()).padStart(2, '0')
         const minutes = String(createdAt.getMinutes()).padStart(2, '0')
 
+        const randomString = Math.random().toString(36).substring(2, 11)
         return (
           <div
-            key={id}
+            key={`${id}-${randomString}`}
             className={cn(
               'flex flex-col space-y-1 p-3',
               isMine ? 'items-end' : 'items-start'

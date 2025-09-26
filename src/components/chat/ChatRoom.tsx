@@ -3,8 +3,12 @@ import ChatRoomUsers from './ChatRoomUsers'
 import ChatRoomMessages from './ChatRoomMessages'
 import useChatMessages from '@/hooks/api/chat/useChatMessages'
 import LoadingState from '@/components/common/state/LoadingState'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { getChatRoomWebSocketUrl } from '@/utils'
+import {
+  ChatSocketEventUnionSchema,
+  type Message,
+} from '@/schemas/api-response-schemas/chat-response.schema'
 
 const dummyChatRoomUsers: { username: string; isOnline: boolean }[] = [
   { username: 'Bob', isOnline: true },
@@ -20,13 +24,16 @@ interface ChatRoomProps {
 }
 
 export default function ChatRoom({ chatRoomId }: ChatRoomProps) {
-  //1. 현재 유저 정보 받아오기
+  const [messages, setMessages] = useState<Message[]>([])
 
-  //2. 지난 메세지 받아오기
-  const { data: messages, isPending: isMessagePending } =
-    useChatMessages(chatRoomId)
+  //지난 메세지 받아오기
+  const {
+    data: lastMessages,
+    isPending: isMessagePending,
+    status,
+  } = useChatMessages(chatRoomId)
 
-  //3. 웹소켓 연결하기
+  //웹소켓 연결하기
   const webSocket = useRef<WebSocket | null>(null)
 
   useEffect(() => {
@@ -37,7 +44,16 @@ export default function ChatRoom({ chatRoomId }: ChatRoomProps) {
     webSocket.current = new WebSocket(chatRoomURL)
 
     webSocket.current.onmessage = (event) => {
-      console.log(event.data)
+      try {
+        const data = JSON.parse(event.data)
+        const result = ChatSocketEventUnionSchema.parse(data)
+
+        if (result.type === 'chat_message') {
+          setMessages((prev) => [...prev, result.data])
+        }
+      } catch (error) {
+        alert('웹소켓  에러' + error)
+      }
     }
 
     return () => {
@@ -45,13 +61,19 @@ export default function ChatRoom({ chatRoomId }: ChatRoomProps) {
     }
   }, [chatRoomId])
 
+  useEffect(() => {
+    if (status === 'success' && lastMessages) {
+      setMessages((prev) => [...prev, ...lastMessages.results])
+    }
+  }, [lastMessages, status])
+
   return (
     <div>
       <ChatRoomUsers users={dummyChatRoomUsers} />
       {isMessagePending ? (
         <LoadingState className="p-10">로딩중</LoadingState>
-      ) : messages ? (
-        <ChatRoomMessages messages={messages.results} />
+      ) : lastMessages ? (
+        <ChatRoomMessages messages={messages} />
       ) : null}
 
       <ChatRoomInput />
