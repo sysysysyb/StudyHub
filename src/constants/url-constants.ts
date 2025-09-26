@@ -11,3 +11,8 @@ export const STUDY_BASE_URL = `https://study.${BASE_URL}/study-group`
 export const LEARN_BASE_URL = `https://learn.${BASE_URL}`
 // 디코에는 나와 있지 않지만, 구인공고가 아닌 강의에 대한 하위 도메인이
 // 따로 존재해야 할 것 같아 베이스 도메인 수정.
+
+//채팅용 URL
+export const WS_API_BASE_URL = `ws://${BASE_URL}/ws/`
+
+export const MSW_API_BASE_URL = `ws://msw.${BASE_URL}/ws/`
