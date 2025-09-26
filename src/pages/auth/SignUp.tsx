@@ -18,7 +18,7 @@ import {
   InputFieldColStyle,
   InputFieldRowStyle,
 } from '@/constants/auth-variants'
-import { useToast, useVerificationCode } from '@/hooks'
+import { useVerificationCode } from '@/hooks'
 import useSignup from '@/hooks/api/auth/useSignup'
 import {
   signupSchema,
@@ -26,13 +26,12 @@ import {
 } from '@/schemas/form-schema/signup-schema'
 import { cn } from '@/utils'
 import { formattedDateWithHyphen } from '@/utils/formatted-dates'
+import { formattedPhoneToE164KR } from '@/utils/formatted-phone'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router'
 
 function Signup() {
-  const [isDuplicateChecked, setIsDuplicateChecked] = useState(false)
   const {
     register,
     handleSubmit,
@@ -45,7 +44,6 @@ function Signup() {
     resolver: zodResolver(signupSchema),
   })
   const navigate = useNavigate()
-  const { triggerToast } = useToast()
   const {
     isCodeSent,
     isCodeVerified,
@@ -62,7 +60,7 @@ function Signup() {
       name: data.name,
       nickname: data.nickname,
       birthday: formattedDateWithHyphen(data.birthday),
-      phoneNumber: data.phoneNumber,
+      phoneNumber: formattedPhoneToE164KR(data.phoneNumber),
       emailVerificationCode: data.verificationCode.email,
       phoneVerificationCode: data.verificationCode.phoneNumber,
       gender: data.gender,
@@ -71,21 +69,9 @@ function Signup() {
     navigate('/auth/login')
   }
 
-  const isNicknameNotValid =
-    getFieldState('nickname').invalid || !watch('nickname')
   const isEmailNotValid = getFieldState('email').invalid || !watch('email')
   const isPhoneNumberNotValid =
     getFieldState('phoneNumber').invalid || !watch('phoneNumber')
-
-  const handleDuplicateCheck = async () => {
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-    setIsDuplicateChecked(true)
-    triggerToast(
-      'success',
-      '사용 가능한 닉네임입니다.',
-      '다음 단계를 진행해 주세요'
-    )
-  }
 
   return (
     <AuthContainer className="flex flex-col gap-10">
@@ -113,12 +99,6 @@ function Signup() {
               {...register('nickname')}
               placeholder="닉네임을 입력해주세요"
             />
-            <AuthVerifyButton
-              disabled={isNicknameNotValid}
-              onClick={handleDuplicateCheck}
-            >
-              중복확인
-            </AuthVerifyButton>
           </div>
           {errors.nickname && (
             <InputErrorMessage>{`${errors.nickname.message}`}</InputErrorMessage>
@@ -189,8 +169,12 @@ function Signup() {
           )}
           <div className={InputFieldRowStyle}>
             <Input
+              disabled={!isCodeSent.email}
               {...register('verificationCode.email')}
               placeholder="인증코드 6자리를 입력해주세요"
+              className={cn(
+                isCodeVerified.email && 'disabled:bg-white disabled:text-black'
+              )}
             />
             <AuthVerifyButton
               disabled={!isCodeSent.email}
@@ -233,8 +217,13 @@ function Signup() {
           )}
           <div className={InputFieldRowStyle}>
             <Input
+              disabled={!isCodeSent.phoneNumber}
               {...register('verificationCode.phoneNumber')}
               placeholder="인증코드 6자리를 입력해주세요"
+              className={cn(
+                isCodeVerified.phoneNumber &&
+                  'disabled:bg-white disabled:text-black'
+              )}
             />
             <AuthVerifyButton
               disabled={!isCodeSent.phoneNumber}
@@ -284,7 +273,6 @@ function Signup() {
           disabled={
             !isValid ||
             isSubmitting ||
-            !isDuplicateChecked ||
             !isCodeVerified.email ||
             !isCodeVerified.phoneNumber
           }

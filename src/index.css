@@ -143,3 +143,19 @@ body {
     background-color: #f3f4f6;
   }
 }
+
+@layer base {
+  input:autofill,
+  input:autofill:hover,
+  input:autofill:focus,
+  input:autofill:active,
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-text-fill-color: theme(--color-black);
+    box-shadow: 0 0 0 1000px theme(--color-white) inset;
+    -webkit-box-shadow: 0 0 0 1000px theme(--color-white) inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+}

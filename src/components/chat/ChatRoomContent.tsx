@@ -106,7 +106,7 @@ export default function ChatRoomContent() {
 
       <ModalMain className="overflow-y-scroll p-0" ref={scrollRef}>
         {chatRoomId ? (
-          <ChatRoom chatRoomId={chatRoomId} />
+          <ChatRoom chatRoomId={chatRoomId} scrollRef={scrollRef} />
         ) : (
           dummyChatroomsData.map(
             ({ title, lastMessage, unReadedChatCount, lastUpdateTime }, i) => (

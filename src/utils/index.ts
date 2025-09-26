@@ -1,5 +1,5 @@
 // utils
-import { cn } from '@/utils/utils'
+import { cn, getChatRoomWebSocketUrl } from '@/utils/utils'
 import { testPages } from '@/utils/registryTestPages'
 import {
   formattedAppliedAt,
@@ -23,4 +23,5 @@ export {
   clearAccessToken,
   getAccessToken,
   setAccessToken,
+  getChatRoomWebSocketUrl,
 }
