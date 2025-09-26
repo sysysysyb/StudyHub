@@ -6,6 +6,7 @@ import { iconVariants, inputVariants } from './input.styles'
 
 function PasswordInput({ isError = false, className, ...props }: InputProps) {
   const [isExposed, setIsExposed] = useState(false)
+  // 비밀번호가 노출되는지의 여부를 상태관리하기에 isExposed로 단어 수정
   const inputType = isExposed ? 'text' : 'password'
 
   const handleIconClick = () => {
