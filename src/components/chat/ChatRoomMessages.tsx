@@ -1,41 +1,49 @@
-import type { ChatRoomMessages as ChatRoomMessagesType } from '@/schemas/api-response-schemas/chat-response.schema'
+import { useUserInformation } from '@/hooks/api'
+import type { Message } from '@/schemas/api-response-schemas/chat-response.schema'
 import { cn } from '@/utils'
 
 interface ChatRoomMessagesProps {
-  messages: ChatRoomMessagesType
+  messages: Message[]
 }
 
 export default function ChatRoomMessages({ messages }: ChatRoomMessagesProps) {
+  const { data } = useUserInformation()
+
   return (
     <section className="flex flex-col space-y-3">
-      {messages.results.map((result) => {
+      {messages.map((message) => {
         const {
           content,
           created_at: createdAtString,
           sender: { nickname, user_uuid: senderId },
           message_id: id,
-        } = result
+        } = message
 
         //현재 로그인 한 아이디
         //추후 실제 아이디와 연결
-        const userId = 'user-uuid-2'
+        const userId = data?.id
 
-        const isMine = senderId === userId
+        //'client-uuid-1234' msw에서 보내는 id
+        const isMine =
+          senderId === String(userId) || senderId === 'client-uuid-1234'
 
         const createdAt = new Date(createdAtString)
 
         const hours = String(createdAt.getHours()).padStart(2, '0')
         const minutes = String(createdAt.getMinutes()).padStart(2, '0')
 
+        const randomString = Math.random().toString(36).substring(2, 11)
         return (
           <div
-            key={id}
+            key={`${id}-${randomString}`}
             className={cn(
               'flex flex-col space-y-1 p-3',
               isMine ? 'items-end' : 'items-start'
             )}
           >
-            <span className="px-1 text-xs text-gray-600">{nickname}</span>
+            <span className="px-1 text-xs text-gray-600">
+              {isMine ? '' : nickname}
+            </span>
             <p
               className={cn(
                 'rounded-lg px-3 py-2',

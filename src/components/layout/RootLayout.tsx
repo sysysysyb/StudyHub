@@ -1,6 +1,7 @@
 import { Header, Footer, Chat } from '@/components'
 import { SM_WIDTH_PIXEL } from '@/constants/break-points'
 import { useWindowHeight, useWindowWidth } from '@/hooks'
+import { useUserInformation } from '@/hooks/api'
 import { Outlet } from 'react-router'
 
 const HEADER_HEIGHT_PX = 64
@@ -19,6 +20,8 @@ export default function RootLayout() {
       ? DESKTOP_FOOTER_HEIGHT_PX
       : MOBILE_FOOTER_HEIGHT_PX)
 
+  const { data: userData } = useUserInformation()
+
   return (
     <div>
       <Header />
@@ -31,7 +34,7 @@ export default function RootLayout() {
         <Outlet />
       </div>
       <Footer />
-      <Chat />
+      {userData ? <Chat /> : null}
     </div>
   )
 }

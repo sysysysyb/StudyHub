@@ -1,42 +1,28 @@
 import { Button } from '@/components'
 import { Card } from '@/components/common/card/Card'
 import { Input } from '@/components/common/input'
-import {
-  ChatSocketEventUnionSchema,
-  type Message,
-} from '@/schemas/api-response-schemas/chat-response.schema'
+import { useChatRoomStore } from '@/store'
 import { useEffect, useRef, useState } from 'react'
 
 export default function WebsocketTest() {
-  const [messages, setMessages] = useState<Message[]>([])
-
+  const {
+    messages,
+    connect,
+    disconnect,
+    sendMessage: sendMessageToSocket,
+  } = useChatRoomStore()
   const [message, setMessage] = useState('')
 
-  const webSocket = useRef<WebSocket | null>(null)
   const chatRoomId = 'chat-1111'
   const divRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
-    webSocket.current = new WebSocket(`ws://example/ws/chat/`)
-
-    webSocket.current.onmessage = (event) => {
-      try {
-        const data = JSON.parse(event.data)
-        const result = ChatSocketEventUnionSchema.parse(data)
-        console.log('✅ 유효한 이벤트:', result)
-
-        if (result.type === 'chat_message') {
-          setMessages((prev) => [...prev, result.data])
-        }
-      } catch (error) {
-        console.error('❌ 잘못된 이벤트 형식:', error)
-      }
-    }
+    connect(chatRoomId)
 
     return () => {
-      if (webSocket.current) webSocket.current.close()
+      disconnect()
     }
-  }, [chatRoomId])
+  }, [chatRoomId, connect, disconnect])
 
   useEffect(() => {
     if (divRef.current) {
@@ -46,16 +32,8 @@ export default function WebsocketTest() {
 
   const handleSendMessage: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
-
-    if (webSocket.current && message.trim() !== '') {
-      const data = {
-        type: 'send_message',
-        data: { content: message },
-      }
-
-      webSocket.current.send(JSON.stringify(data))
-      setMessage('')
-    }
+    sendMessageToSocket(message)
+    setMessage('')
   }
 
   return (
