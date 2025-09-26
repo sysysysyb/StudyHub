@@ -12,6 +12,7 @@ import useUserRecoverVerify from '@/hooks/api/auth/useUserRecoverVerify'
 import useUserRecoverSendCode from '@/hooks/api/auth/useUserRecoverSendCode'
 import useToggleLectureBookmark from '@/hooks/api/bookmarked/useToggleLectureBookmark'
 import useToggleRecruitmentBookmark from '@/hooks/api/bookmarked/useToggleRecruitmentBookmark'
+import useUpdateUserInfo from '@/hooks/api/auth/useUpdateUserInfo'
 
 export {
   useUserInformation,
@@ -28,4 +29,5 @@ export {
   useUserRecoverSendCode,
   useToggleLectureBookmark,
   useToggleRecruitmentBookmark,
+  useUpdateUserInfo,
 }
