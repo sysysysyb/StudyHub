@@ -1,11 +1,11 @@
 export function getAccessToken() {
-  return localStorage.getItem('access')
+  return localStorage.getItem('access_token')
 }
 
 export function setAccessToken(token: string) {
-  localStorage.setItem('access', token)
+  localStorage.setItem('access_token', token)
 }
 
 export function clearAccessToken() {
-  localStorage.removeItem('access')
+  localStorage.removeItem('access_token')
 }

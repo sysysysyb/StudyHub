@@ -28,6 +28,7 @@ import type { ModalContextValue } from '@/components/common/Modal'
 import { useState } from 'react'
 import { AxiosError } from 'axios'
 import { useWithdrawalDateStore } from '@/store'
+import { KAKAO_AUTH_URL } from '@/constants/oauth-constants'
 
 function Login() {
   const {
@@ -70,6 +71,10 @@ function Login() {
     }
   }
 
+  const handleKakaoLogin = () => {
+    window.location.href = KAKAO_AUTH_URL
+  }
+
   return (
     <AuthContainer className="flex flex-col gap-10">
       <div className={InputFieldColStyle}>
@@ -81,7 +86,7 @@ function Login() {
       </div>
 
       <div className={InputGroupStyle}>
-        <AuthSocialLoginButton socialType="kakao" />
+        <AuthSocialLoginButton socialType="kakao" onClick={handleKakaoLogin} />
         <AuthSocialLoginButton socialType="naver" />
       </div>
 

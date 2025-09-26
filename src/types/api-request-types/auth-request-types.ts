@@ -37,3 +37,7 @@ export interface UpdateUserInfoRequest {
   nickname: string
   phoneNumber: string
 }
+
+export interface UserKakaoLogin {
+  code: string
+}
