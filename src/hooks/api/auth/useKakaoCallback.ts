@@ -26,7 +26,7 @@ export default function useKakaoCallback(
       const response = await api.post(`${API_BASE_URL}/auth/kakao/callback`, {
         code: code,
       })
-      const newAccessToken = response.data.access
+      const newAccessToken = response.data.access_token
       return newAccessToken
     },
     onSuccess: async (newAccessToken: string) => {
