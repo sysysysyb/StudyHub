@@ -1,11 +1,11 @@
 import type { BookmarkedRecruitment } from '@/types/api-response-types/recruitment-response-types'
 import { BookmarkIcon, CalendarIcon, EyeIcon, UsersIcon } from 'lucide-react'
-import { Link } from 'react-router'
 import { Button } from '@/components'
 import { formattedCloseAt } from '@/utils'
 import useWindowWidth from '@/hooks/useWindowWidth'
 import { LG_WIDTH_PIXEL } from '@/constants/break-points'
 import RecruitmentBookmarkIcon from '@/components/my-page/bookmarked-recruitment/RecruitmentBookmarkIcon'
+import { STUDY_BASE_URL } from '@/constants/url-constants'
 
 interface BookmarkedRecruitmentCardProps {
   recruitment: BookmarkedRecruitment
@@ -27,6 +27,7 @@ export default function BookmarkedRecruitmentCard({
   } = recruitment
 
   const width = useWindowWidth()
+  const redirectUrl = `${STUDY_BASE_URL}/${uuid}`
 
   return (
     <div
@@ -97,14 +98,16 @@ export default function BookmarkedRecruitmentCard({
         </div>
         <div className="flex items-center justify-end gap-2">
           <RecruitmentBookmarkIcon recruitmentId={uuid} />
-          <Link to={`/recruitment/${uuid}`}>
-            <Button
-              size={width > LG_WIDTH_PIXEL ? 'md' : 'sm'}
-              className="text-xs text-nowrap lg:text-sm"
-            >
-              {width > LG_WIDTH_PIXEL ? '공고 보기' : '보기'}
-            </Button>
-          </Link>
+
+          <Button
+            size={width > LG_WIDTH_PIXEL ? 'md' : 'sm'}
+            className="text-xs text-nowrap lg:text-sm"
+            onClick={() => {
+              window.location.href = redirectUrl
+            }}
+          >
+            {width > LG_WIDTH_PIXEL ? '공고 보기' : '보기'}
+          </Button>
         </div>
       </div>
     </div>
