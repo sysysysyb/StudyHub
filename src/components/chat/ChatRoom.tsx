@@ -3,12 +3,8 @@ import ChatRoomUsers from './ChatRoomUsers'
 import ChatRoomMessages from './ChatRoomMessages'
 import useChatMessages from '@/hooks/api/chat/useChatMessages'
 import LoadingState from '@/components/common/state/LoadingState'
-import { useEffect, useRef, useState } from 'react'
-import { getChatRoomWebSocketUrl } from '@/utils'
-import {
-  ChatSocketEventUnionSchema,
-  type Message,
-} from '@/schemas/api-response-schemas/chat-response.schema'
+import { useEffect } from 'react'
+import { useChatRoomStore } from '@/store'
 
 const dummyChatRoomUsers: { username: string; isOnline: boolean }[] = [
   { username: 'Bob', isOnline: true },
@@ -25,7 +21,7 @@ interface ChatRoomProps {
 }
 
 export default function ChatRoom({ chatRoomId, scrollRef }: ChatRoomProps) {
-  const [messages, setMessages] = useState<Message[]>([])
+  const { messages, connect, disconnect, setMessages } = useChatRoomStore()
 
   //지난 메세지 받아오기
   const {
@@ -35,38 +31,19 @@ export default function ChatRoom({ chatRoomId, scrollRef }: ChatRoomProps) {
   } = useChatMessages(chatRoomId)
 
   //웹소켓 연결하기
-  const webSocket = useRef<WebSocket | null>(null)
-
   useEffect(() => {
-    const chatRoomURL = getChatRoomWebSocketUrl(chatRoomId, true)
-
-    if (!chatRoomURL) return
-
-    webSocket.current = new WebSocket(chatRoomURL)
-
-    webSocket.current.onmessage = (event) => {
-      try {
-        const data = JSON.parse(event.data)
-        const result = ChatSocketEventUnionSchema.parse(data)
-
-        if (result.type === 'chat_message') {
-          setMessages((prev) => [...prev, result.data])
-        }
-      } catch (error) {
-        alert('웹소켓  에러' + error)
-      }
-    }
+    connect(chatRoomId)
 
     return () => {
-      if (webSocket.current) webSocket.current.close()
+      disconnect()
     }
-  }, [chatRoomId, scrollRef])
+  }, [chatRoomId, connect, disconnect])
 
   useEffect(() => {
     if (status === 'success' && lastMessages) {
-      setMessages((prev) => [...prev, ...lastMessages.results])
+      setMessages(lastMessages.results)
     }
-  }, [lastMessages, scrollRef, status])
+  }, [lastMessages, scrollRef, setMessages, status])
 
   useEffect(() => {
     if (scrollRef && scrollRef.current) {
