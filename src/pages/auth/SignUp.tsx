@@ -65,7 +65,7 @@ function Signup() {
       phoneVerificationCode: data.verificationCode.phoneNumber,
       gender: data.gender,
     }
-    signup.mutate(signupData)
+    await signup.mutateAsync(signupData)
     navigate('/auth/login')
   }
 
