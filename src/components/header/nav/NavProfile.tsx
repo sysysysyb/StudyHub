@@ -1,4 +1,4 @@
-import { Button, Avatar, Chat, Notification } from '@/components'
+import { Button, Avatar, Notification } from '@/components'
 import { SkeletonRectangle } from '@/components/common/skeleton/SkeletonItem'
 import { useUserInformation } from '@/hooks/api'
 import { useLoginStore } from '@/store/useLoginStore'
