@@ -15,4 +15,4 @@ export const LEARN_BASE_URL = `https://learn.${BASE_URL}`
 //채팅용 URL
 export const WS_API_BASE_URL = `ws://${BASE_URL}/ws/`
 
-export const MSW_API_BASE_URL = `ws://msw.${BASE_URL}/ws/`
+export const WS_MSW_BASE_URL = `ws://msw.${BASE_URL}/ws/`
