@@ -14,6 +14,7 @@ import {
   type InfoUpdateType,
 } from '@/schemas/form-schema/info-update-schema'
 import { useVerificationCode } from '@/hooks'
+import { cn } from '@/utils'
 
 export const InfoUpdateForm = () => {
   const { data: userInfo } = useUserInformation()
@@ -147,10 +148,15 @@ export const InfoUpdateForm = () => {
           <div className="flex flex-col gap-2">
             <div className="flex gap-2">
               <Input
+                disabled={!isCodeSent.phoneNumber}
                 id="infoUpdateVerificationCode"
                 {...register('infoUpdateVerificationCode')}
                 placeholder="인증코드 6자리 입력"
                 readOnly={isCodeVerified.phoneNumber}
+                className={cn(
+                  isCodeVerified.phoneNumber &&
+                    'disabled:bg-white disabled:text-black'
+                )}
               />
               <Button
                 variant={isCodeVerified.phoneNumber ? 'secondary' : 'primary'}
