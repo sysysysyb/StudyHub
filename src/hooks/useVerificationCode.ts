@@ -70,15 +70,15 @@ function useVerificationCode() {
   const handleCodeSend = async (label: labelType, value: string) => {
     if (label === 'email') {
       const data: UserEmailSendCode = { email: value }
-      emailSendCode.mutate(data)
+      await emailSendCode.mutateAsync(data)
     }
     if (label === 'phoneNumber') {
       const phoneNumberE164KR = formattedPhoneToE164KR(value)
       const data: UserPhoneSendCode = { phoneNumber: phoneNumberE164KR }
-      phoneSendCode.mutate(data)
+      await phoneSendCode.mutateAsync(data)
     }
     if (label === 'userRecover') {
-      userRecoverSendCode.mutate(value)
+      await userRecoverSendCode.mutateAsync(value)
     }
     SetIsCodeSent((prev) => ({ ...prev, [label]: true }))
     timer[label].startTimer()
@@ -90,7 +90,7 @@ function useVerificationCode() {
   ) => {
     if (label === 'email') {
       const data: UserEmailVerify = verifyData as UserEmailVerify
-      emailVerify.mutate(data)
+      await emailVerify.mutateAsync(data)
     }
     if (label === 'phoneNumber') {
       const { phoneNumber, verificationCode } = verifyData as UserPhoneVerify
@@ -98,11 +98,11 @@ function useVerificationCode() {
         phoneNumber: formattedPhoneToE164KR(phoneNumber),
         verificationCode: verificationCode,
       }
-      phoneVerify.mutate(data)
+      await phoneVerify.mutateAsync(data)
     }
     if (label === 'userRecover') {
       const { email, verificationCode } = verifyData as UserRecoverVerifyBody
-      userRecoverVerify.mutate({ email, verificationCode })
+      await userRecoverVerify.mutateAsync({ email, verificationCode })
     }
     SetIsCodeVerified((prev) => ({ ...prev, [label]: true }))
     SetIsCodeSent((prev) => ({ ...prev, [label]: false }))

@@ -15,6 +15,7 @@ import {
   UserRecoverSchema,
   type UserRecover,
 } from '@/schemas/form-schema/user-recover-schema'
+import { cn } from '@/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { RotateCwIcon } from 'lucide-react'
 import { useForm } from 'react-hook-form'
@@ -95,8 +96,12 @@ export default function UserRecoverFormModal({
             </div>
             <div className="flex w-full gap-2">
               <Input
+                disabled={!isCodeSent.userRecover}
                 placeholder="인증번호를 입력해주세요."
-                className="flex-1"
+                className={cn(
+                  isCodeVerified.userRecover &&
+                    'flex-1 disabled:bg-white disabled:text-black'
+                )}
                 {...register('verificationCode')}
               />
               <AuthVerifyButton
