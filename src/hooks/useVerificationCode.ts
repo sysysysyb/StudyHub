@@ -90,7 +90,7 @@ function useVerificationCode() {
   ) => {
     if (label === 'email') {
       const data: UserEmailVerify = verifyData as UserEmailVerify
-      emailVerify.mutate(data)
+      await emailVerify.mutateAsync(data)
     }
     if (label === 'phoneNumber') {
       const { phoneNumber, verificationCode } = verifyData as UserPhoneVerify
@@ -98,11 +98,11 @@ function useVerificationCode() {
         phoneNumber: formattedPhoneToE164KR(phoneNumber),
         verificationCode: verificationCode,
       }
-      phoneVerify.mutate(data)
+      await phoneVerify.mutateAsync(data)
     }
     if (label === 'userRecover') {
       const { email, verificationCode } = verifyData as UserRecoverVerifyBody
-      userRecoverVerify.mutate({ email, verificationCode })
+      await userRecoverVerify.mutateAsync({ email, verificationCode })
     }
     SetIsCodeVerified((prev) => ({ ...prev, [label]: true }))
     SetIsCodeSent((prev) => ({ ...prev, [label]: false }))
