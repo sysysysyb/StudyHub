@@ -4,8 +4,22 @@ import { bookmarkedRecruitmentsMock } from '@/mocks/data/bookmarked-recruitments
 
 const getBookmarkedRecruitments = http.get(
   `${MSW_BASE_URL}/recruitments/bookmarks/me`,
-  () => {
-    return HttpResponse.json(bookmarkedRecruitmentsMock)
+  ({ request }) => {
+    const url = new URL(request.url)
+    const title = url.searchParams.get('title')
+
+    if (!title) {
+      return HttpResponse.json(bookmarkedRecruitmentsMock)
+    }
+
+    const mock = bookmarkedRecruitmentsMock
+
+    mock.results = mock.results.filter((result) => {
+      const { title: mockTitle } = result
+      return mockTitle.includes(title)
+    })
+
+    return HttpResponse.json(mock)
   }
 )
 
