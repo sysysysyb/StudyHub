@@ -18,7 +18,7 @@ import {
   InputFieldColStyle,
   InputFieldRowStyle,
 } from '@/constants/auth-variants'
-import { useToast, useVerificationCode } from '@/hooks'
+import { useVerificationCode } from '@/hooks'
 import useSignup from '@/hooks/api/auth/useSignup'
 import {
   signupSchema,
@@ -27,12 +27,10 @@ import {
 import { cn } from '@/utils'
 import { formattedDateWithHyphen } from '@/utils/formatted-dates'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router'
 
 function Signup() {
-  const [isDuplicateChecked, setIsDuplicateChecked] = useState(false)
   const {
     register,
     handleSubmit,
@@ -45,7 +43,6 @@ function Signup() {
     resolver: zodResolver(signupSchema),
   })
   const navigate = useNavigate()
-  const { triggerToast } = useToast()
   const {
     isCodeSent,
     isCodeVerified,
@@ -71,21 +68,9 @@ function Signup() {
     navigate('/auth/login')
   }
 
-  const isNicknameNotValid =
-    getFieldState('nickname').invalid || !watch('nickname')
   const isEmailNotValid = getFieldState('email').invalid || !watch('email')
   const isPhoneNumberNotValid =
     getFieldState('phoneNumber').invalid || !watch('phoneNumber')
-
-  const handleDuplicateCheck = async () => {
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-    setIsDuplicateChecked(true)
-    triggerToast(
-      'success',
-      '사용 가능한 닉네임입니다.',
-      '다음 단계를 진행해 주세요'
-    )
-  }
 
   return (
     <AuthContainer className="flex flex-col gap-10">
@@ -113,12 +98,6 @@ function Signup() {
               {...register('nickname')}
               placeholder="닉네임을 입력해주세요"
             />
-            <AuthVerifyButton
-              disabled={isNicknameNotValid}
-              onClick={handleDuplicateCheck}
-            >
-              중복확인
-            </AuthVerifyButton>
           </div>
           {errors.nickname && (
             <InputErrorMessage>{`${errors.nickname.message}`}</InputErrorMessage>
@@ -293,7 +272,6 @@ function Signup() {
           disabled={
             !isValid ||
             isSubmitting ||
-            !isDuplicateChecked ||
             !isCodeVerified.email ||
             !isCodeVerified.phoneNumber
           }
