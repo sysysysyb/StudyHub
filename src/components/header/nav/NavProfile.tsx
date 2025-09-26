@@ -1,4 +1,4 @@
-import { Button, Avatar } from '@/components'
+import { Button, Avatar, Notification } from '@/components'
 import { SkeletonRectangle } from '@/components/common/skeleton/SkeletonItem'
 import { useUserInformation } from '@/hooks/api'
 import { useLoginStore } from '@/store/useLoginStore'
@@ -53,7 +53,7 @@ function NavProfile({ onProfileClick }: { onProfileClick: () => void }) {
   return (
     <div className="flex items-center gap-2.5 lg:gap-4">
       <div className="p-3">
-        <Bell className="h-7 cursor-pointer text-gray-700" />
+        <Notification />
       </div>
       {user && (
         <button
