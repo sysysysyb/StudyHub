@@ -189,8 +189,12 @@ function Signup() {
           )}
           <div className={InputFieldRowStyle}>
             <Input
+              disabled={!isCodeSent.email}
               {...register('verificationCode.email')}
               placeholder="인증코드 6자리를 입력해주세요"
+              className={cn(
+                isCodeVerified.email && 'disabled:bg-white disabled:text-black'
+              )}
             />
             <AuthVerifyButton
               disabled={!isCodeSent.email}
@@ -233,8 +237,13 @@ function Signup() {
           )}
           <div className={InputFieldRowStyle}>
             <Input
+              disabled={!isCodeSent.phoneNumber}
               {...register('verificationCode.phoneNumber')}
               placeholder="인증코드 6자리를 입력해주세요"
+              className={cn(
+                isCodeVerified.phoneNumber &&
+                  'disabled:bg-white disabled:text-black'
+              )}
             />
             <AuthVerifyButton
               disabled={!isCodeSent.phoneNumber}
