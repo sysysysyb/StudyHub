@@ -1,4 +1,8 @@
-import { Input, InputLabel, InputErrorMessage } from '@/components/common/input'
+import {
+  PasswordInput,
+  InputLabel,
+  InputErrorMessage,
+} from '@/components/common/input'
 import { Button } from '@/components'
 import type { ComponentProps } from 'react'
 import { ButtonVariants } from '@/constants/button-variants'
@@ -29,7 +33,7 @@ export const PasswordChangeInputField = ({
         {label}
       </InputLabel>
       <div className="flex gap-2">
-        <Input id={id} aria-describedby={id} {...props} />
+        <PasswordInput id={id} aria-describedby={id} {...props} />
         {buttonLabel && (
           <Button
             variant={buttonVariant}

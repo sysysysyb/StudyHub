@@ -5,11 +5,11 @@ import { Eye, EyeOff } from 'lucide-react'
 import { iconVariants, inputVariants } from './input.styles'
 
 function PasswordInput({ isError = false, className, ...props }: InputProps) {
-  const [isClicked, setIsClicked] = useState(false)
-  const inputType = isClicked ? 'text' : 'password'
+  const [isExposed, setIsExposed] = useState(false)
+  const inputType = isExposed ? 'text' : 'password'
 
   const handleIconClick = () => {
-    setIsClicked((prev) => !prev)
+    setIsExposed((prev) => !prev)
   }
 
   return (
@@ -27,13 +27,13 @@ function PasswordInput({ isError = false, className, ...props }: InputProps) {
         className="cursor-pointer"
         onClick={handleIconClick}
       >
-        {isClicked && (
+        {/* 기본 타입인 password 타입일 때 눈에 빗금이 쳐져있는 아이콘이 되도록 수정 */}
+        {isExposed ? (
+          <Eye className={cn(iconVariants({ iconPosition: 'end' }), 'h-5')} />
+        ) : (
           <EyeOff
             className={cn(iconVariants({ iconPosition: 'end' }), 'h-5')}
           />
-        )}
-        {!isClicked && (
-          <Eye className={cn(iconVariants({ iconPosition: 'end' }), 'h-5')} />
         )}
       </button>
     </div>
