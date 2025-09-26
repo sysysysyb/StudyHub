@@ -1,5 +1,5 @@
 export const InputBase =
-  'w-full focus:ring-primary-500 rounded-lg py-[13px] text-sm ring ring-gray-300 outline-none placeholder:text-gray-400 focus:border-none focus:ring-2' as const
+  'w-full focus:ring-primary-500 rounded-lg py-3 text-sm ring ring-gray-300 outline-none placeholder:text-gray-400 focus:border-none focus:ring-2 disabled:bg-gray-50 disabled:text-gray-200 disabled:placeholder:text-gray-200 bg-white' as const
 
 export const InputError = {
   true: 'ring-danger-100',
