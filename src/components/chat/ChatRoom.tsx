@@ -21,9 +21,10 @@ const dummyChatRoomUsers: { username: string; isOnline: boolean }[] = [
 
 interface ChatRoomProps {
   chatRoomId: string
+  scrollRef?: React.RefObject<HTMLDivElement | null>
 }
 
-export default function ChatRoom({ chatRoomId }: ChatRoomProps) {
+export default function ChatRoom({ chatRoomId, scrollRef }: ChatRoomProps) {
   const [messages, setMessages] = useState<Message[]>([])
 
   //지난 메세지 받아오기
@@ -59,13 +60,19 @@ export default function ChatRoom({ chatRoomId }: ChatRoomProps) {
     return () => {
       if (webSocket.current) webSocket.current.close()
     }
-  }, [chatRoomId])
+  }, [chatRoomId, scrollRef])
 
   useEffect(() => {
     if (status === 'success' && lastMessages) {
       setMessages((prev) => [...prev, ...lastMessages.results])
     }
-  }, [lastMessages, status])
+  }, [lastMessages, scrollRef, status])
+
+  useEffect(() => {
+    if (scrollRef && scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight
+    }
+  }, [messages, scrollRef])
 
   return (
     <div>
