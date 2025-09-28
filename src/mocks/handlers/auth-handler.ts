@@ -32,6 +32,7 @@ const login = http.post(
   }
 )
 
+// 로그아웃
 const logout = http.post(`${MSW_BASE_URL}/auth/logout`, () => {
   return HttpResponse.json(
     { detail: '로그아웃이 완료되었습니다' },
