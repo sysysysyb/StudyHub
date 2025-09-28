@@ -64,8 +64,8 @@ function NavProfile({ onProfileClick }: { onProfileClick: () => void }) {
             size="sm"
             state="none"
             src={user.profileImageUrl}
-            alt={`
-              ${user.name}-profile-image`}
+            alt={user.profileImageUrl && `${user.name}-profile-image`}
+            iconSize={20}
           />
           <span className="text-primary-600 text-base font-medium">
             {user.name}

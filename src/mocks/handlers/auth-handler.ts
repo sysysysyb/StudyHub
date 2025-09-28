@@ -1,6 +1,5 @@
 import { MSW_BASE_URL } from '@/constants/url-constants'
 import { http, HttpResponse, passthrough } from 'msw'
-import { userInformationMock } from '@/mocks/data/user-information-data'
 const ACCESS_TOKEN = `msw-access-token=access-token-test; Path=/; SameSite=Strict;`
 const REFRESH_TOKEN =
   'msw-refresh-token=refresh-token-test; Path=/; SameSite=Strict;'
@@ -42,23 +41,6 @@ const logout = http.post(`${MSW_BASE_URL}/auth/logout`, () => {
     }
   )
 })
-
-// 사용자 정보 조회
-const getUserInformation = http.get(
-  `${MSW_BASE_URL}/users/me`,
-  ({ request }) => {
-    const header = request.headers.get('Authorization')
-    const hasBearerToken = header?.includes('Bearer')
-
-    if (!hasBearerToken) {
-      return HttpResponse.json(
-        { detail: 'Authentication required.' },
-        { status: 401 }
-      )
-    }
-    return HttpResponse.json(userInformationMock[0])
-  }
-)
 
 // 액세스 토큰 재발급
 const getRefreshToken = http.post(`${MSW_BASE_URL}/auth/refresh`, () => {
@@ -234,7 +216,6 @@ const passthroughPiscumPhotos = http.get(
 export const authHandlers = [
   login,
   logout,
-  getUserInformation,
   getRefreshToken,
   emailSendCode,
   emailVerify,
