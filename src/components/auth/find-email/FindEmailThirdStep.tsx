@@ -5,10 +5,9 @@ import { Link } from 'react-router'
 
 interface FindEmailThirdStepProps {
   email: string
-  createdAt: string
 }
 
-function FindEmailThirdStep({ email, createdAt }: FindEmailThirdStepProps) {
+function FindEmailThirdStep({ email }: FindEmailThirdStepProps) {
   return (
     <article className="flex flex-col gap-12">
       <div className="flex flex-col items-center">
@@ -26,9 +25,6 @@ function FindEmailThirdStep({ email, createdAt }: FindEmailThirdStepProps) {
       </div>
       <div className="mb-15 flex flex-col items-center gap-1 rounded-lg border border-solid border-gray-200 bg-gray-50 py-4">
         <span className="text-base font-medium text-gray-900">{email}</span>
-        <span className="text-sm font-normal text-gray-500">
-          가입일: {createdAt}
-        </span>
       </div>
       <div className="flex gap-2">
         <Button className="bg-success-500 hover:bg-success-600 active:bg-success-800 flex-1 py-3 text-base font-medium">
