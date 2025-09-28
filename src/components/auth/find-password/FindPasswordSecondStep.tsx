@@ -17,6 +17,7 @@ import {
   FindPasswordStep2Schema,
   type FindPasswordStep2Type,
 } from '@/schemas/form-schema/find-password-schema'
+import { cn } from '@/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { MailCheck } from 'lucide-react'
 import { useEffect } from 'react'
@@ -50,9 +51,8 @@ function FindPasswordSecondStep({
 
   const onSubmit = (value: FindPasswordStep2Type) => onNext(value)
 
-  // TODO: 비밀번호 찾기 인증코드 전송 api에 맞게 수정 필요
   useEffect(() => {
-    handleCodeSend('email', email)
+    handleCodeSend('resetPassword', email)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -69,14 +69,18 @@ function FindPasswordSecondStep({
         <div className={InputFieldColStyle}>
           <div className={InputFieldRowStyle}>
             <Input
+              disabled={!isCodeSent.resetPassword}
               {...register('code')}
               placeholder="인증코드 6자리를 입력해주세요"
+              className={cn(
+                isCodeVerified.resetPassword &&
+                  'disabled:bg-white disabled:text-black'
+              )}
             />
             <AuthVerifyButton
-              disabled={!isCodeSent.phoneNumber}
-              // TODO: 비밀번호 찾기 인증코드 검증 api에 맞게 수정 필요
+              disabled={!isCodeSent.resetPassword}
               onClick={() =>
-                handleCodeVerify('email', {
+                handleCodeVerify('resetPassword', {
                   email: email,
                   verificationCode: getValues('code'),
                 })
@@ -90,7 +94,7 @@ function FindPasswordSecondStep({
           )}
         </div>
 
-        <AuthSubmitButton disabled={!isValid || !isCodeVerified.phoneNumber}>
+        <AuthSubmitButton disabled={!isValid || !isCodeVerified.resetPassword}>
           인증하기
         </AuthSubmitButton>
         <Button variant="outline" onClick={onPrev} className="w-full py-4">
