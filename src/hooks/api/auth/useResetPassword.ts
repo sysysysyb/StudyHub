@@ -4,18 +4,20 @@ import type { UserResetPassword } from '@/types/api-request-types/auth-request-t
 import api from '@/utils/axios'
 import { useMutation, type UseMutationOptions } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
+import { useNavigate } from 'react-router'
 
 export function useResetPassword(
   options?: UseMutationOptions<unknown, Error, UserResetPassword>
 ) {
   const { triggerToast } = useToast()
+  const navigate = useNavigate()
 
   return useMutation<unknown, Error, UserResetPassword>({
     ...options,
     mutationKey: ['auth', 'reset-password'],
-    mutationFn: async ({ newPassword }) => {
+    mutationFn: async ({ password }) => {
       await api.patch(`${MSW_BASE_URL}/auth/reset-password`, {
-        new_password: newPassword,
+        password: password,
       })
     },
     onSuccess: () => {
@@ -24,6 +26,7 @@ export function useResetPassword(
         'Reset Password 🎊',
         '비밀번호 재설정이 완료되었습니다'
       )
+      navigate('/auth/login')
     },
     onError: (error) => {
       if (error instanceof AxiosError) {

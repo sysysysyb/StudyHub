@@ -62,5 +62,5 @@ export interface UserResetPasswordVerify {
 }
 
 export interface UserResetPassword {
-  newPassword: string
+  password: string
 }
