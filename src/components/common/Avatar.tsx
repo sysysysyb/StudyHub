@@ -37,13 +37,16 @@ const AvatarState = cva(
 interface AvatarProps
   extends ComponentProps<'img'>,
     VariantProps<typeof AvatarImage>,
-    VariantProps<typeof AvatarState> {}
+    VariantProps<typeof AvatarState> {
+  iconSize?: number
+}
 
 export default function Avatar({
   alt,
   size,
   state,
   className,
+  iconSize = 50,
   src,
 }: AvatarProps) {
   return (
@@ -55,7 +58,7 @@ export default function Avatar({
           className="h-full w-full rounded-full object-cover"
         />
       ) : (
-        <span>{alt?.charAt(0) || <UserIcon size={50} />}</span>
+        <span>{alt?.charAt(0) || <UserIcon size={iconSize} />}</span>
         // 마이페이지 사이드바에서 쓰인 아이콘으로 대체.
       )}
       <span aria-hidden="true" className={cn(AvatarState({ state }))} />
