@@ -8,11 +8,13 @@ import {
   useQueryClient,
   type UseMutationOptions,
 } from '@tanstack/react-query'
+import { useNavigate } from 'react-router'
 
 export default function useLogout(options?: UseMutationOptions) {
   const qc = useQueryClient()
   const { triggerToast } = useToast()
   const { setIsLoggedIn } = useLoginStore()
+  const navigate = useNavigate()
 
   return useMutation({
     mutationKey: ['auth', 'logout'],
@@ -24,6 +26,7 @@ export default function useLogout(options?: UseMutationOptions) {
       clearAccessToken()
       qc.removeQueries({ queryKey: ['info'] })
       triggerToast('success', 'Logout 👋', '로그아웃이 완료되었습니다.')
+      navigate('/')
     },
     ...options,
   })
