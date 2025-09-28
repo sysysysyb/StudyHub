@@ -12,21 +12,31 @@ import type {
   UserFindEmailVerify,
   UserPhoneSendCode,
   UserPhoneVerify,
+  UserResetPasswordSendCode,
+  UserResetPasswordVerify,
 } from '@/types/api-request-types/auth-request-types'
 import { formattedPhoneToE164KR } from '@/utils/formatted-phone'
 import { useUserRecoverSendCode, useUserRecoverVerify } from '@/hooks/api'
 import type { UserRecoverVerifyBody } from '@/types/api-request-types/user-recover-request-types'
 import { useFindEmailSendCode } from './api/auth/useFindEmailSendCode'
 import { useFindEmailVerify } from './api/auth/useFindEmailVerify'
+import { useResetPasswordSendCode } from './api/auth/useResetPasswordSendCode'
+import { useResetPasswordVerify } from './api/auth/useResetPasswordVerify'
 
 const TIMER_DURATION_MS = 180000
-type labelType = 'email' | 'phoneNumber' | 'userRecover' | 'findEmail'
+type labelType =
+  | 'email'
+  | 'phoneNumber'
+  | 'userRecover'
+  | 'findEmail'
+  | 'resetPassword'
 
 interface VerifyDataMap {
   email: UserEmailVerify
   phoneNumber: UserPhoneVerify
   userRecover: UserRecoverVerifyBody
   findEmail: UserFindEmailVerify
+  resetPassword: UserResetPasswordVerify
 }
 
 function useVerificationCode() {
@@ -36,22 +46,26 @@ function useVerificationCode() {
   const phoneSendCode = usePhoneSendCode()
   const userRecoverSendCode = useUserRecoverSendCode()
   const findEmailSendCode = useFindEmailSendCode()
+  const resetPasswordSendCode = useResetPasswordSendCode()
   const emailVerify = useEmailVerify()
   const phoneVerify = usePhoneVerify()
   const userRecoverVerify = useUserRecoverVerify()
   const findEmailVerify = useFindEmailVerify()
+  const resetPasswordVerify = useResetPasswordVerify()
 
   const [isCodeSent, SetIsCodeSent] = useState({
     email: false,
     phoneNumber: false,
     userRecover: false,
     findEmail: false,
+    resetPassword: false,
   })
   const [isCodeVerified, SetIsCodeVerified] = useState({
     email: false,
     phoneNumber: false,
     userRecover: false,
     findEmail: false,
+    resetPassword: false,
   })
   const timer = {
     email: useTimer(TIMER_DURATION_MS, () =>
@@ -82,6 +96,13 @@ function useVerificationCode() {
         '다시 시도해주세요'
       )
     ),
+    resetPassword: useTimer(TIMER_DURATION_MS, () =>
+      triggerToast(
+        'warning',
+        '이메일 인증 시간이 만료되었습니다',
+        '다시 시도해주세요'
+      )
+    ),
   }
 
   const handleCodeSend = async (label: labelType, value: string) => {
@@ -101,6 +122,10 @@ function useVerificationCode() {
       const phoneNumberE164KR = formattedPhoneToE164KR(value)
       const data: UserFindEmailSendCode = { phoneNumber: phoneNumberE164KR }
       await findEmailSendCode.mutateAsync(data)
+    }
+    if (label === 'resetPassword') {
+      const data: UserResetPasswordSendCode = { email: value }
+      await resetPasswordSendCode.mutateAsync(data)
     }
     SetIsCodeSent((prev) => ({ ...prev, [label]: true }))
     timer[label].startTimer()
@@ -136,6 +161,10 @@ function useVerificationCode() {
       }
       const email = await findEmailVerify.mutateAsync(data)
       setFindEmailValue(email)
+    }
+    if (label === 'resetPassword') {
+      const data: UserResetPasswordVerify = verifyData as UserEmailVerify
+      await resetPasswordVerify.mutateAsync(data)
     }
     SetIsCodeVerified((prev) => ({ ...prev, [label]: true }))
     SetIsCodeSent((prev) => ({ ...prev, [label]: false }))
