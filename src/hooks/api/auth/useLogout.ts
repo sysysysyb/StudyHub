@@ -15,14 +15,14 @@ export default function useLogout(options?: UseMutationOptions) {
   const { setIsLoggedIn } = useLoginStore()
 
   return useMutation({
-    mutationKey: ['users', 'logout'],
+    mutationKey: ['auth', 'logout'],
     mutationFn: async () => {
       await api.post(`${API_BASE_URL}/auth/logout`)
     },
     onSuccess: () => {
       setIsLoggedIn(false)
       clearAccessToken()
-      qc.removeQueries({ queryKey: ['users', 'me'] })
+      qc.removeQueries({ queryKey: ['info'] })
       triggerToast('success', 'Logout 👋', '로그아웃이 완료되었습니다.')
     },
     ...options,
