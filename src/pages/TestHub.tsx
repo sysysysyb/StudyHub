@@ -8,8 +8,8 @@ function TestHub() {
   const { pathname } = useLocation()
 
   useEffect(() => {
-    if (pathname === '/test-hub' && testPages.length > 0) {
-      navigate(`/test-hub/${testPages[0].route}`, { replace: true })
+    if (pathname === '/test/test-hub' && testPages.length > 0) {
+      navigate(`/test/test-hub/${testPages[0].route}`, { replace: true })
     }
   }, [pathname, navigate])
 
@@ -23,7 +23,7 @@ function TestHub() {
               <Button
                 key={p.key}
                 variant="outline"
-                onClick={() => navigate(`/test-hub/${p.route}`)}
+                onClick={() => navigate(`/test/test-hub/${p.route}`)}
                 className="px-10 py-5"
               >
                 {p.name}

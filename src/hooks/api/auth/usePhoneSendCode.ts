@@ -30,6 +30,12 @@ export default function usePhoneSendCode(
         const status = error.status
         if (status === 400) {
           triggerToast('error', '잘못된 휴대전화 번호 형식입니다')
+        } else if (status === 409) {
+          triggerToast(
+            'error',
+            '이미 가입된 휴대전화 번호입니다',
+            '다른 번호를 사용해주세요'
+          )
         } else {
           triggerToast('error', '잠시 후 다시 시도해주세요')
         }

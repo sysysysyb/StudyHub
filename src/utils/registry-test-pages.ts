@@ -31,7 +31,7 @@ export const testPages = Object.entries(modules)
   .map(([key, loader]) => {
     const base = removeTestSuffix(getFileNameFromPath(key))
     const name = toDisplayName(base)
-    const route = `test-pages/${toKebabCase(base)}`
+    const route = `${toKebabCase(base)}`
     return { key, name, route, loader }
   })
   .sort((a, b) => a.name.localeCompare(b.name))
