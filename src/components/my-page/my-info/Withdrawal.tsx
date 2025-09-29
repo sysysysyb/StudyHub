@@ -10,11 +10,34 @@ import {
 } from '@/components/common/Modal'
 import { Button } from '@/components'
 import { CircleAlert } from 'lucide-react'
-import { InputLabel, CustomSelectBox } from '@/components/common/input'
+import {
+  InputLabel,
+  CustomSelectBox,
+  InputErrorMessage,
+} from '@/components/common/input'
 import { InputBase } from '@/constants/input-variants'
 import { cn } from '@/utils'
+import { useState } from 'react'
+import useWithdrawUser from '@/hooks/api/auth/useWithdrawUser'
+import { WithdrawalReasonEnum } from '@/types/api-request-types/auth-request-types'
 
 export const Withdrawal = () => {
+  const [reason, setReason] = useState<string | null>(null)
+  const [detail, setDetail] = useState<string>('')
+  const [agree, setAgree] = useState(false)
+  const withdrawMutation = useWithdrawUser()
+  const [validation, setValidation] = useState(false)
+
+  const handleSubmit = () => {
+    if (!reason || !detail || !agree) {
+      setValidation(true)
+    }
+    withdrawMutation.mutate({
+      reason: reason as WithdrawalReasonEnum,
+      reason_detail: detail,
+    })
+  }
+
   return (
     <Modal>
       {/* 모달 열기 버튼 */}
@@ -51,7 +74,7 @@ export const Withdrawal = () => {
           <section className="flex flex-col gap-2">
             <InputLabel isRequired>탈퇴 사유</InputLabel>
             <CustomSelectBox
-              defaultLabel="탈퇴 사유를 선택해주세요"
+              defaultLabel="탈퇴 사유 선택"
               options={[
                 {
                   label: '서비스 이용할 시간이 없음',
@@ -72,16 +95,38 @@ export const Withdrawal = () => {
                 },
                 { label: '기타', value: 'OTHER' },
               ]}
+              value={reason ?? null}
+              onChange={(val) => setReason(val as WithdrawalReasonEnum)}
             />
+            {(validation && !reason) ?? (
+              <InputErrorMessage> 탈퇴 사유를 선택해주세요 </InputErrorMessage>
+            )}
             <InputLabel isRequired>탈퇴 상세 사유</InputLabel>
             <textarea
               className={cn(InputBase, 'h-20 resize-none px-3 text-gray-800')}
-              placeholder="탈퇴 사유를 입력해주세요."
+              placeholder="탈퇴 상세 사유를 입력해주세요."
+              value={detail}
+              onChange={(e) => setDetail(e.target.value)}
             />
+            {(validation && !detail) ?? (
+              <InputErrorMessage>
+                {' '}
+                탈퇴 상세 사유를 입력해주세요{' '}
+              </InputErrorMessage>
+            )}
             <div className="flex gap-2">
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                checked={agree}
+                onChange={(e) => setAgree(e.target.checked)}
+              />
               <InputLabel isRequired>회원 탈퇴에 동의합니다</InputLabel>
             </div>
+            {(validation && !agree) ?? (
+              <InputErrorMessage>
+                회원 탈퇴를 위한 동의가 필요합니다
+              </InputErrorMessage>
+            )}
           </section>
         </ModalMain>
 
@@ -89,7 +134,9 @@ export const Withdrawal = () => {
           <ModalClose>
             <Button variant="outline">취소</Button>
           </ModalClose>
-          <Button variant="danger">회원 탈퇴</Button>
+          <Button variant="danger" onClick={handleSubmit}>
+            회원 탈퇴
+          </Button>
         </ModalFooter>
       </ModalContent>
     </Modal>

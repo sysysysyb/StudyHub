@@ -16,7 +16,7 @@ export default function useWithdrawUser() {
   return useMutation<void, AxiosError, WithdrawalRequest>({
     mutationKey: ['user', 'withdraw'],
     mutationFn: async (payload) => {
-      return await api.delete(`${API_BASE_URL}/users/me`, {
+      return await api.delete(`${API_BASE_URL}/users/delete`, {
         data: payload,
       })
     },
@@ -26,6 +26,7 @@ export default function useWithdrawUser() {
       setIsLoggedIn(false)
       navigate('/')
     },
+
     onError: (error) => {
       const status = error.response?.status
       if (status === 400) {
