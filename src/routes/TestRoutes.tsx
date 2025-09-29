@@ -3,15 +3,14 @@ import TestHub from '@/pages/TestHub'
 import { testPages } from '@/utils'
 import { lazy, Suspense } from 'react'
 import { Route, Routes, Link } from 'react-router'
-import MainRoutes from './MainRoutes'
 
-function Root() {
+function TestMenu() {
   const randomString = Math.random().toString(36).substring(2, 11)
 
   return (
     <div className="flex h-screen items-center justify-center gap-10">
       <Button className="px-10 py-6 text-2xl">
-        <Link to="/landing">사이트 메인</Link>
+        <Link to="/">사이트 메인</Link>
       </Button>
       <Button className="px-10 py-6 text-2xl">
         <Link to="/my-page">마이 페이지</Link>
@@ -20,7 +19,7 @@ function Root() {
         <Link to={`/${randomString}`}>404 페이지</Link>
       </Button>
       <Button className="px-10 py-6 text-2xl">
-        <Link to="/test-hub">테스트 허브</Link>
+        <Link to="/test/test-hub">테스트 허브</Link>
       </Button>
     </div>
   )
@@ -29,8 +28,7 @@ function Root() {
 function TestRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<Root />} />
-      <Route path="/*" element={<MainRoutes />} />
+      <Route path="/" element={<TestMenu />} />
       <Route path="/test-hub/*" element={<TestHub />}>
         {testPages.map((p) => {
           const Page = lazy(p.loader)
