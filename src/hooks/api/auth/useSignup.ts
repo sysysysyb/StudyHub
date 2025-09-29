@@ -34,6 +34,12 @@ export default function useSignup(
         const status = error.status
         if (status === 400) {
           triggerToast('error', '잘못 입력된 항목이 있습니다')
+        } else if (status === 409) {
+          triggerToast(
+            'error',
+            '이미 가입된 계정 정보입니다',
+            '다른 이메일 또는 휴대전화 번호를 사용해주세요'
+          )
         } else {
           triggerToast('error', '잠시 후 다시 시도해주세요')
         }

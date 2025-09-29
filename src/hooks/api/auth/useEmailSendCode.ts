@@ -28,6 +28,12 @@ export default function useEmailSendCode(
         const status = error.status
         if (status === 400) {
           triggerToast('error', '잘못된 이메일 형식입니다')
+        } else if (status === 409) {
+          triggerToast(
+            'error',
+            '이미 가입된 이메일입니다',
+            '다른 이메일을 사용해주세요'
+          )
         } else {
           triggerToast('error', '잠시 후 다시 시도해주세요')
         }

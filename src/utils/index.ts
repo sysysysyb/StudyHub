@@ -1,6 +1,6 @@
 // utils
 import { cn, getChatRoomWebSocketUrl } from '@/utils/utils'
-import { testPages } from '@/utils/registryTestPages'
+import { testPages } from '@/utils/registry-test-pages'
 import {
   formattedAppliedAt,
   formattedCloseAt,

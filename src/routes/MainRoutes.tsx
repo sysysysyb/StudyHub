@@ -13,13 +13,13 @@ import {
 } from '@/pages'
 import KakaoAuth from '@/pages/auth/KakaoAuth'
 import { Route, Routes } from 'react-router'
+import TestRoutes from './TestRoutes'
 
 function MainRoutes() {
   return (
     <Routes>
-      <Route element={<RootLayout />}>
-        {/* TODO: /landing -> index로 수정 */}
-        <Route path="landing" element={<LandingPage />} />
+      <Route path="/" element={<RootLayout />}>
+        <Route index element={<LandingPage />} />
 
         <Route path="auth" element={<AuthLayout />}>
           <Route path="login" element={<Login />} />
@@ -36,6 +36,7 @@ function MainRoutes() {
           <Route path="bookmarked/" element={<Bookmark />} />
           <Route path="bookmarked/:content" element={<Bookmark />} />
         </Route>
+
         {/* 404 페이지 */}
         <Route path="*" element={<NotFound />} />
 
@@ -43,6 +44,9 @@ function MainRoutes() {
         <Route path="/oauth/kakao" element={<KakaoAuth />} />
         {/* <Route path="/oauth/naver" element={<NaverAuth />} /> */}
       </Route>
+
+      {/* 테스트 허브 */}
+      <Route path="/test/*" element={<TestRoutes />} />
     </Routes>
   )
 }
