@@ -4,13 +4,18 @@ import {
   AuthTitle,
   AuthStep,
 } from '@/components/auth/common'
-import { useState } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import FindPasswordFirstStep from '@/components/auth/find-password/FindPasswordFirstStep'
-import FindPasswordSecondStep from '@/components/auth/find-password/FindPasswordSecondStep'
-import FindPasswordThirdStep from '@/components/auth/find-password/FindPasswordThirdStep'
 import { InputFieldColStyle } from '@/constants/auth-variants'
 import { cn } from '@/utils'
 import { useResetPassword } from '@/hooks/api/auth/useResetPassword'
+
+const FindPasswordSecondStep = lazy(
+  () => import('@/components/auth/find-password/FindPasswordSecondStep')
+)
+const FindPasswordThirdStep = lazy(
+  () => import('@/components/auth/find-password/FindPasswordThirdStep')
+)
 
 const FIND_EMAIL_STEP_LIST = ['이메일입력', '이메일인증', '비밀번호재설정']
 
@@ -51,38 +56,42 @@ function FindPassword() {
         />
       )}
       {currentStep === 2 && (
-        <FindPasswordSecondStep
-          defaultValues={stepHistory.step2}
-          email={stepHistory.step1.email}
-          onPrev={() => setCurrentStep(1)}
-          onNext={(value) => {
-            setStepHistory((prev) => ({
-              ...prev,
-              step2: {
-                ...prev.step2,
-                ...value,
-              },
-              step3: {
-                ...prev.step3,
-                email: 'test@test.com',
-                createdAt: '2025-01-15',
-              },
-            }))
-            setCurrentStep(3)
-          }}
-        />
+        <Suspense fallback={<div>Loading...</div>}>
+          <FindPasswordSecondStep
+            defaultValues={stepHistory.step2}
+            email={stepHistory.step1.email}
+            onPrev={() => setCurrentStep(1)}
+            onNext={(value) => {
+              setStepHistory((prev) => ({
+                ...prev,
+                step2: {
+                  ...prev.step2,
+                  ...value,
+                },
+                step3: {
+                  ...prev.step3,
+                  email: 'test@test.com',
+                  createdAt: '2025-01-15',
+                },
+              }))
+              setCurrentStep(3)
+            }}
+          />
+        </Suspense>
       )}
       {currentStep === 3 && (
-        <FindPasswordThirdStep
-          defaultValues={stepHistory.step3}
-          onNext={(value) => {
-            setStepHistory((prev) => ({
-              ...prev,
-              step3: { ...prev.step3, ...value },
-            }))
-            resetPassword.mutate({ password: value.password })
-          }}
-        />
+        <Suspense fallback={<div>Loading...</div>}>
+          <FindPasswordThirdStep
+            defaultValues={stepHistory.step3}
+            onNext={(value) => {
+              setStepHistory((prev) => ({
+                ...prev,
+                step3: { ...prev.step3, ...value },
+              }))
+              resetPassword.mutate({ password: value.password })
+            }}
+          />
+        </Suspense>
       )}
     </AuthContainer>
   )
