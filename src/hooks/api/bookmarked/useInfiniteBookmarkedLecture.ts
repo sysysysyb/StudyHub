@@ -26,13 +26,19 @@ export default function useInfiniteBookmarkedLecture(
         params: {
           cursor: pageParam,
           page_size: PAGE_SIZE,
-          search: searchParam,
+          search:
+            searchParam && searchParam?.length > 0 ? searchParam : undefined,
         },
       })
 
       return res.data
     },
-    getNextPageParam: (lastPage) => lastPage.next_cursor,
+    getNextPageParam: (lastPage) => {
+      if (!lastPage.next_cursor || lastPage.next_cursor.length < 1) {
+        return null
+      }
+      return lastPage.next_cursor
+    },
     initialPageParam: '',
     ...options,
   })
