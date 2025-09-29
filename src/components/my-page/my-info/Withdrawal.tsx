@@ -25,17 +25,25 @@ export const Withdrawal = () => {
   const [reason, setReason] = useState<string | null>(null)
   const [detail, setDetail] = useState<string>('')
   const [agree, setAgree] = useState(false)
-  const withdrawMutation = useWithdrawUser()
   const [validation, setValidation] = useState(false)
+  const withdrawMutation = useWithdrawUser()
 
   const handleSubmit = () => {
     if (!reason || !detail || !agree) {
       setValidation(true)
+      return
     }
     withdrawMutation.mutate({
       reason: reason as WithdrawalReasonEnum,
       reason_detail: detail,
     })
+  }
+
+  const handleCancel = () => {
+    setReason(null)
+    setDetail('')
+    setAgree(false)
+    setValidation(false)
   }
 
   return (
@@ -95,10 +103,10 @@ export const Withdrawal = () => {
                 },
                 { label: '기타', value: 'OTHER' },
               ]}
-              value={reason ?? null}
+              value={reason}
               onChange={(val) => setReason(val as WithdrawalReasonEnum)}
             />
-            {(validation && !reason) ?? (
+            {validation && !reason && (
               <InputErrorMessage> 탈퇴 사유를 선택해주세요 </InputErrorMessage>
             )}
             <InputLabel isRequired>탈퇴 상세 사유</InputLabel>
@@ -108,10 +116,9 @@ export const Withdrawal = () => {
               value={detail}
               onChange={(e) => setDetail(e.target.value)}
             />
-            {(validation && !detail) ?? (
+            {validation && !detail && (
               <InputErrorMessage>
-                {' '}
-                탈퇴 상세 사유를 입력해주세요{' '}
+                탈퇴 상세 사유를 입력해주세요
               </InputErrorMessage>
             )}
             <div className="flex gap-2">
@@ -122,7 +129,7 @@ export const Withdrawal = () => {
               />
               <InputLabel isRequired>회원 탈퇴에 동의합니다</InputLabel>
             </div>
-            {(validation && !agree) ?? (
+            {validation && !agree && (
               <InputErrorMessage>
                 회원 탈퇴를 위한 동의가 필요합니다
               </InputErrorMessage>
@@ -132,7 +139,9 @@ export const Withdrawal = () => {
 
         <ModalFooter className="flex justify-end gap-1">
           <ModalClose>
-            <Button variant="outline">취소</Button>
+            <Button variant="outline" onClick={handleCancel}>
+              취소
+            </Button>
           </ModalClose>
           <Button variant="danger" onClick={handleSubmit}>
             회원 탈퇴
