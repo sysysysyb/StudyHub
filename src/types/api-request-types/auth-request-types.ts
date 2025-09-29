@@ -1,3 +1,5 @@
+import { bigint } from 'zod'
+
 export interface UserLogin {
   email: string
   password: string
@@ -63,4 +65,22 @@ export interface UserResetPasswordVerify {
 
 export interface UserResetPassword {
   password: string
+}
+// ERD 참조하여 생성
+export interface Withdrawals {
+  id: bigint
+  userId: bigint
+  reason: WithdrawalReasonEnum
+  reason_detail: string
+  dueDate: Date
+  createdAt: Date
+  updatedAt: Date
+}
+
+export enum WithdrawalReasonEnum {
+  dissatisfaction = 'dissatisfaction',
+  privacy = 'privacy',
+  lowUsage = 'low_usage',
+  competitor = 'competitor',
+  other = 'other',
 }
