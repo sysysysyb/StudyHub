@@ -1,16 +1,18 @@
 import type { AxiosError, InternalAxiosRequestConfig } from 'axios'
-import { getAccessToken, isPublicEndpoint } from '@/utils'
+import { clearAccessToken, getAccessToken, isPublicEndpoint } from '@/utils'
 import api from '@/utils/axios'
 import { useEffect } from 'react'
 import useTokenRefresh from '@/hooks/api/auth/useTokenRefresh'
 import { useLocation, useNavigate } from 'react-router'
 import { useToast } from '@/hooks'
+import { useLoginStore } from '@/store/useLoginStore'
 
 export default function useAxiosInterceptor() {
   const tokenRefresh = useTokenRefresh()
   const navigate = useNavigate()
   const location = useLocation()
   const { triggerToast } = useToast()
+  const { setIsLoggedIn } = useLoginStore()
 
   const requestHandler = async (config: InternalAxiosRequestConfig) => {
     const { url } = config
@@ -30,13 +32,21 @@ export default function useAxiosInterceptor() {
   }
 
   const errorHandler = (error: AxiosError) => {
-    const { config, response } = error
-    const isTokenRefresh = config?.url?.includes('auth/refresh')
+    const { response } = error
     const isMypageLocated = location.pathname.includes('my-page')
 
-    if (response?.status === 401 && isTokenRefresh && isMypageLocated) {
-      navigate('/auth/login')
-      triggerToast('error', '로그인이 만료되었습니다', '다시 로그인 해주세요.')
+    if (response?.status === 401) {
+      clearAccessToken()
+      setIsLoggedIn(false)
+
+      if (isMypageLocated) {
+        navigate('/auth/login')
+        triggerToast(
+          'error',
+          '로그인이 만료되었습니다',
+          '다시 로그인 해주세요.'
+        )
+      }
     }
 
     return Promise.reject(error)
