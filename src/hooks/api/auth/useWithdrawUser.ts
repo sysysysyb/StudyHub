@@ -16,9 +16,7 @@ export default function useWithdrawUser() {
   return useMutation<void, AxiosError, WithdrawalRequest>({
     mutationKey: ['user', 'withdraw'],
     mutationFn: async (payload) => {
-      return await api.post(`${API_BASE_URL}/auth/withdraw`, {
-        data: payload,
-      })
+      return await api.post(`${API_BASE_URL}/auth/withdraw`, payload)
     },
     onSuccess: () => {
       triggerToast('success', '회원 탈퇴가 완료되었습니다 ✅')
