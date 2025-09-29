@@ -1,9 +1,5 @@
 @import 'tailwindcss';
-
-@font-face {
-  font-family: 'Pretendard';
-  src: url('/src/assets/font/PretendardVariable.woff2');
-}
+@import './pretendard-subset.css';
 
 body {
   font-family: 'Pretendard', sans-serif;
