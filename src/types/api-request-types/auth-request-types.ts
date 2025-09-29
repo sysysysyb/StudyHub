@@ -1,5 +1,3 @@
-import { bigint } from 'zod'
-
 export interface UserLogin {
   email: string
   password: string
@@ -40,7 +38,6 @@ export interface UpdateUserInfoRequest {
   phoneNumber: string
 }
 
-<<<<<<< HEAD
 export interface UserKakaoLogin {
   code: string
 }
@@ -68,16 +65,9 @@ export interface UserResetPassword {
   password: string
 }
 // ERD 참조하여 생성
-=======
->>>>>>> 91a6563 (♻️ Refactor: 탈퇴 사유 enum을 ERD에 맞춰서 수정, UI도 수정 (#223))
-export interface Withdrawals {
-  id: bigint
-  userId: bigint
+export interface WithdrawalRequest {
   reason: WithdrawalReasonEnum
   reason_detail: string
-  dueDate: Date
-  createdAt: Date
-  updatedAt: Date
 }
 
 export enum WithdrawalReasonEnum {
