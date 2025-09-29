@@ -16,7 +16,7 @@ export default function useWithdrawUser() {
   return useMutation<void, AxiosError, WithdrawalRequest>({
     mutationKey: ['user', 'withdraw'],
     mutationFn: async (payload) => {
-      return await api.delete(`${API_BASE_URL}/users/delete`, {
+      return await api.post(`${API_BASE_URL}/auth/withdraw`, {
         data: payload,
       })
     },
