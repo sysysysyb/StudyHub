@@ -11,7 +11,7 @@ import {
 const LIMIT = 10
 
 export default function useInfiniteBookmarkedRecruitment(
-  searchParam?: Pick<recruitmentSearchParams, 'title'>,
+  searchParam?: string,
   options?: UseInfiniteQueryOptions<
     BookmarkedRecruitments,
     Error,
@@ -21,13 +21,13 @@ export default function useInfiniteBookmarkedRecruitment(
   >
 ) {
   return useInfiniteQuery({
-    queryKey: ['recruitment', 'bookmarked', searchParam?.title ?? ''],
+    queryKey: ['recruitment', 'bookmarked', searchParam ?? ''],
     queryFn: async ({ pageParam }) => {
       const cursor = pageParam || ''
 
       const res = await api.get(`${MSW_BASE_URL}/recruitments/bookmarks/me`, {
         params: {
-          title: searchParam?.title,
+          title: searchParam,
           limit: LIMIT,
           cursor,
         } satisfies Partial<recruitmentSearchParams>,
