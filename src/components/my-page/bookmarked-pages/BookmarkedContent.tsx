@@ -1,5 +1,6 @@
 import { Dropdown, ListItemSkeleton } from '@/components'
 import { Input } from '@/components/common/input'
+import EmptyResultState from '@/components/common/state/EmptyResultState'
 import { BookmarkedRecruitmentCard } from '@/components/my-page'
 import BookmarkedLectureCard from '@/components/my-page/bookmarked-lecture/BookmarkedLectureCard'
 import { useWindowHeight, useWindowWidth } from '@/hooks'
@@ -263,59 +264,68 @@ export default function BookmarkedContent({
               transform: `translateY(${items[0]?.start ?? 0}px)`,
             }}
           >
-            {items.map((virtualRow) => {
-              const isLoaderRow = virtualRow.index > contents.length - 1
-              const content = contents[virtualRow.index]
+            {items.length > 0 ? (
+              items.map((virtualRow) => {
+                const isLoaderRow = virtualRow.index > contents.length - 1
+                const content = contents[virtualRow.index]
 
-              if (
-                isLoaderRow &&
-                (isFetchingNextLectures || isFetchingNextRecruitments)
-              ) {
-                return (
-                  <div
-                    key={virtualRow.key}
-                    data-index={virtualRow.index}
-                    ref={virtualizer.measureElement}
-                  >
-                    {[...Array(5)].map((_, i) => (
-                      <div key={i} className="mb-2">
-                        <ListItemSkeleton />
-                      </div>
-                    ))}
-                  </div>
-                )
-              }
+                if (
+                  isLoaderRow &&
+                  (isFetchingNextLectures || isFetchingNextRecruitments)
+                ) {
+                  return (
+                    <div
+                      key={virtualRow.key}
+                      data-index={virtualRow.index}
+                      ref={virtualizer.measureElement}
+                    >
+                      {[...Array(5)].map((_, i) => (
+                        <div key={i} className="mb-2">
+                          <ListItemSkeleton />
+                        </div>
+                      ))}
+                    </div>
+                  )
+                }
 
-              if (!content) return null
+                if (!content) return null
 
-              //content type === lecture -> lecture card
-              if ('instructor' in content && isLectureSelected) {
-                return (
-                  <div
-                    key={virtualRow.key}
-                    data-index={virtualRow.index}
-                    ref={virtualizer.measureElement}
-                    className="mb-2"
-                  >
-                    <BookmarkedLectureCard lecture={content} />
-                  </div>
-                )
-              }
+                //content type === lecture -> lecture card
+                if ('instructor' in content && isLectureSelected) {
+                  return (
+                    <div
+                      key={virtualRow.key}
+                      data-index={virtualRow.index}
+                      ref={virtualizer.measureElement}
+                      className="mb-2"
+                    >
+                      <BookmarkedLectureCard lecture={content} />
+                    </div>
+                  )
+                }
 
-              //content type === recruitment -> recruitment card
-              if ('tags' in content && isRecruitmentSelected) {
-                return (
-                  <div
-                    key={virtualRow.key}
-                    data-index={virtualRow.index}
-                    ref={virtualizer.measureElement}
-                    className="mb-2"
-                  >
-                    <BookmarkedRecruitmentCard recruitment={content} />
-                  </div>
-                )
-              }
-            })}
+                //content type === recruitment -> recruitment card
+                if ('tags' in content && isRecruitmentSelected) {
+                  return (
+                    <div
+                      key={virtualRow.key}
+                      data-index={virtualRow.index}
+                      ref={virtualizer.measureElement}
+                      className="mb-2"
+                    >
+                      <BookmarkedRecruitmentCard recruitment={content} />
+                    </div>
+                  )
+                }
+              })
+            ) : (
+              <EmptyResultState
+                onClick={() => {
+                  setSearchState('')
+                }}
+                className="p-2"
+              />
+            )}
           </div>
         </div>
       </main>

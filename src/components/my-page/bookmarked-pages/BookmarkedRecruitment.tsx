@@ -11,6 +11,7 @@ import { useEffect, useRef } from 'react'
 import { useVirtualizer } from '@tanstack/react-virtual'
 import { cn } from '@/utils'
 import { useWindowHeight } from '@/hooks'
+import EmptyResultState from '@/components/common/state/EmptyResultState'
 
 const ESTIMATE_CARD_SIZE_PX = 260
 const OVER_SCAN = 3
@@ -113,41 +114,50 @@ export default function BookmarkedRecruitment({
               transform: `translateY(${items[0]?.start ?? 0}px)`,
             }}
           >
-            {items.map((virtualRow) => {
-              const isLoaderRow = virtualRow.index > recruitments.length - 1
-              const recruitment = recruitments[virtualRow.index]
+            {items.length > 0 ? (
+              items.map((virtualRow) => {
+                const isLoaderRow = virtualRow.index > recruitments.length - 1
+                const recruitment = recruitments[virtualRow.index]
 
-              if (isLoaderRow && isFetchingNextPage) {
-                return (
-                  <div
-                    key={virtualRow.key}
-                    data-index={virtualRow.index}
-                    ref={virtualizer.measureElement}
-                  >
-                    {[...Array(5)].map((_, i) => (
-                      <div key={i} className="mb-2">
-                        <ListItemSkeleton />
-                      </div>
-                    ))}
-                  </div>
-                )
-              }
+                if (isLoaderRow && isFetchingNextPage) {
+                  return (
+                    <div
+                      key={virtualRow.key}
+                      data-index={virtualRow.index}
+                      ref={virtualizer.measureElement}
+                    >
+                      {[...Array(5)].map((_, i) => (
+                        <div key={i} className="mb-2">
+                          <ListItemSkeleton />
+                        </div>
+                      ))}
+                    </div>
+                  )
+                }
 
-              if (recruitment) {
-                return (
-                  <div
-                    key={virtualRow.key}
-                    data-index={virtualRow.index}
-                    ref={virtualizer.measureElement}
-                    className="mb-2"
-                  >
-                    <BookmarkedRecruitmentCard recruitment={recruitment} />
-                  </div>
-                )
-              }
+                if (recruitment) {
+                  return (
+                    <div
+                      key={virtualRow.key}
+                      data-index={virtualRow.index}
+                      ref={virtualizer.measureElement}
+                      className="mb-2"
+                    >
+                      <BookmarkedRecruitmentCard recruitment={recruitment} />
+                    </div>
+                  )
+                }
 
-              return null
-            })}
+                return null
+              })
+            ) : (
+              <EmptyResultState
+                onClick={() => {
+                  setSearchState('')
+                }}
+                className="p-2"
+              />
+            )}
           </div>
         </div>
       </main>

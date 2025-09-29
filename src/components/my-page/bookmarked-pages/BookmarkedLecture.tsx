@@ -1,5 +1,6 @@
 import { ListItemSkeleton } from '@/components'
 import { Input } from '@/components/common/input'
+import EmptyResultState from '@/components/common/state/EmptyResultState'
 import BookmarkedLectureCard from '@/components/my-page/bookmarked-lecture/BookmarkedLectureCard'
 import { useWindowHeight } from '@/hooks'
 import type { BookmarkedLectures } from '@/types/api-response-types/lecture-response-type'
@@ -113,41 +114,50 @@ export default function BookmarkedLecture({
               transform: `translateY(${items[0]?.start ?? 0}px)`,
             }}
           >
-            {items.map((virtualRow) => {
-              const isLoaderRow = virtualRow.index > lectures.length - 1
-              const lecture = lectures[virtualRow.index]
+            {items.length > 0 ? (
+              items.map((virtualRow) => {
+                const isLoaderRow = virtualRow.index > lectures.length - 1
+                const lecture = lectures[virtualRow.index]
 
-              if (isLoaderRow && isFetchingNextPage) {
-                return (
-                  <div
-                    key={virtualRow.key}
-                    data-index={virtualRow.index}
-                    ref={virtualizer.measureElement}
-                  >
-                    {[...Array(5)].map((_, i) => (
-                      <div key={i} className="mb-2">
-                        <ListItemSkeleton />
-                      </div>
-                    ))}
-                  </div>
-                )
-              }
+                if (isLoaderRow && isFetchingNextPage) {
+                  return (
+                    <div
+                      key={virtualRow.key}
+                      data-index={virtualRow.index}
+                      ref={virtualizer.measureElement}
+                    >
+                      {[...Array(5)].map((_, i) => (
+                        <div key={i} className="mb-2">
+                          <ListItemSkeleton />
+                        </div>
+                      ))}
+                    </div>
+                  )
+                }
 
-              if (lecture) {
-                return (
-                  <div
-                    key={virtualRow.key}
-                    data-index={virtualRow.index}
-                    ref={virtualizer.measureElement}
-                    className="mb-2"
-                  >
-                    <BookmarkedLectureCard lecture={lecture} />
-                  </div>
-                )
-              }
+                if (lecture) {
+                  return (
+                    <div
+                      key={virtualRow.key}
+                      data-index={virtualRow.index}
+                      ref={virtualizer.measureElement}
+                      className="mb-2"
+                    >
+                      <BookmarkedLectureCard lecture={lecture} />
+                    </div>
+                  )
+                }
 
-              return null
-            })}
+                return null
+              })
+            ) : (
+              <EmptyResultState
+                className="p-2"
+                onClick={() => {
+                  setSearchState('')
+                }}
+              />
+            )}
           </div>
         </div>
       </main>
