@@ -79,7 +79,7 @@ export const Withdrawal = () => {
               <li>2주 후 모든 개인정보가 완전히 삭제됩니다</li>
             </ul>
           </section>
-          <section className="flex flex-col gap-2">
+          <form className="flex flex-col gap-2">
             <InputLabel isRequired>탈퇴 사유</InputLabel>
             <CustomSelectBox
               defaultLabel="탈퇴 사유 선택"
@@ -134,7 +134,7 @@ export const Withdrawal = () => {
                 회원 탈퇴를 위한 동의가 필요합니다
               </InputErrorMessage>
             )}
-          </section>
+          </form>
         </ModalMain>
 
         <ModalFooter className="flex justify-end gap-1">
