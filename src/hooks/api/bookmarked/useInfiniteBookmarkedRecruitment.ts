@@ -27,7 +27,8 @@ export default function useInfiniteBookmarkedRecruitment(
 
       const res = await api.get(`${MSW_BASE_URL}/recruitments/bookmarks/me`, {
         params: {
-          title: searchParam,
+          title:
+            searchParam && searchParam?.length > 0 ? searchParam : undefined,
           limit: LIMIT,
           cursor,
         } satisfies Partial<recruitmentSearchParams>,
@@ -36,7 +37,12 @@ export default function useInfiniteBookmarkedRecruitment(
       return res.data
     },
     initialPageParam: '',
-    getNextPageParam: (lastPage) => lastPage.next_cursor,
+    getNextPageParam: (lastPage) => {
+      if (!lastPage.next_cursor || lastPage.next_cursor.length < 1) {
+        return null
+      }
+      return lastPage.next_cursor
+    },
     ...options,
   })
 }
