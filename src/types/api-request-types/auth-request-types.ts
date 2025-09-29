@@ -40,6 +40,7 @@ export interface UpdateUserInfoRequest {
   phoneNumber: string
 }
 
+<<<<<<< HEAD
 export interface UserKakaoLogin {
   code: string
 }
@@ -67,6 +68,8 @@ export interface UserResetPassword {
   password: string
 }
 // ERD 참조하여 생성
+=======
+>>>>>>> 91a6563 (♻️ Refactor: 탈퇴 사유 enum을 ERD에 맞춰서 수정, UI도 수정 (#223))
 export interface Withdrawals {
   id: bigint
   userId: bigint
@@ -78,9 +81,24 @@ export interface Withdrawals {
 }
 
 export enum WithdrawalReasonEnum {
-  dissatisfaction = 'dissatisfaction',
-  privacy = 'privacy',
-  lowUsage = 'low_usage',
-  competitor = 'competitor',
-  other = 'other',
+  NO_LONGER_NEEDED = 'NO_LONGER_NEEDED',
+  LACK_OF_INTEREST = 'LACK_OF_INTEREST',
+  TOO_DIFFICULT = 'TOO_DIFFICULT',
+  FOUND_BETTER_SERVICE = 'FOUND_BETTER_SERVICE',
+  PRIVACY_CONCERNS = 'PRIVACY_CONCERNS',
+  POOR_SERVICE_QUALITY = 'POOR_SERVICE_QUALITY',
+  TECHNICAL_ISSUES = 'TECHNICAL_ISSUES',
+  LACK_OF_CONTENT = 'LACK_OF_CONTENT',
+  OTHER = 'OTHER',
 }
+
+// 백엔드 ERD 참조
+// NO_LONGER_NEEDED // 서비스 이용할 시간이 없음
+// LACK_OF_INTEREST // 관심이 사라짐
+// TOO_DIFFICULT // 서비스를 이용하기가 너무 어려움
+// FOUND_BETTER_SERVICE // 더 좋은 대안을 찾음
+// PRIVACY_CONCERNS // 개인정보/보안 우려
+// POOR_SERVICE_QUALITY // 서비스 품질 불만
+// TECHNICAL_ISSUES // 기술적 문제(버그 등)
+// LACK_OF_CONTENT // 원하는 콘텐츠나 기능의 부족
+// OTHER // 기타

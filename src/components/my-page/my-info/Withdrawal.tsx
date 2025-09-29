@@ -53,11 +53,24 @@ export const Withdrawal = () => {
             <CustomSelectBox
               defaultLabel="탈퇴 사유를 선택해주세요"
               options={[
-                { label: '서비스 불만족', value: 'dissatisfaction' },
-                { label: '개인정보 우려', value: 'privacy' },
-                { label: '사용 빈도 낮음', value: 'low_usage' },
-                { label: '경쟁 서비스 이용', value: 'competitor' },
-                { label: '기타', value: 'other' },
+                {
+                  label: '서비스 이용할 시간이 없음',
+                  value: 'NO_LONGER_NEEDED',
+                },
+                { label: '관심이 사라짐', value: 'LACK_OF_INTEREST' },
+                {
+                  label: '서비스를 이용하기가 너무 어려움',
+                  value: 'TOO_DIFFICULT',
+                },
+                { label: '더 좋은 대안을 찾음', value: 'FOUND_BETTER_SERVICE' },
+                { label: '개인정보/보안 우려', value: 'PRIVACY_CONCERNS' },
+                { label: '서비스 품질 불만', value: 'POOR_SERVICE_QUALITY' },
+                { label: '기술적 문제(버그 등)', value: 'TECHNICAL_ISSUES' },
+                {
+                  label: '원하는 콘텐츠나 기능의 부족',
+                  value: 'LACK_OF_CONTENT',
+                },
+                { label: '기타', value: 'OTHER' },
               ]}
             />
             <InputLabel isRequired>탈퇴 상세 사유</InputLabel>
