@@ -41,3 +41,26 @@ export interface UpdateUserInfoRequest {
 export interface UserKakaoLogin {
   code: string
 }
+
+export interface UserFindEmailSendCode {
+  phoneNumber: string
+}
+
+export interface UserFindEmailVerify {
+  name: string
+  phoneNumber: string
+  verificationCode: string
+}
+
+export interface UserResetPasswordSendCode {
+  email: string
+}
+
+export interface UserResetPasswordVerify {
+  email: string
+  verificationCode: string
+}
+
+export interface UserResetPassword {
+  password: string
+}
