@@ -8,7 +8,7 @@ import { Avatar, UserInfoSkeleton } from '@/components'
 import { mapUserInfoToDescription } from '@/utils/map-user-info'
 import { useUserInformation } from '@/hooks/api'
 
-export function MyInfo() {
+function MyInfo() {
   const { data: userInfo, isPending } = useUserInformation()
   if (!userInfo) return '로그인이 필요합니다.'
 
@@ -81,3 +81,5 @@ export function MyInfo() {
     </main>
   )
 }
+
+export default MyInfo
