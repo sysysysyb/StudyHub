@@ -14,7 +14,7 @@ export function useFindEmailSendCode(
     ...options,
     mutationKey: ['auth', 'find-email', 'send'],
     mutationFn: async ({ phoneNumber }) => {
-      await api.post(`${MSW_BASE_URL}/auth/find-email/send`, {
+      await api.post(`${MSW_BASE_URL}/auth/find-email/send-code`, {
         phone_number: phoneNumber,
       })
     },
