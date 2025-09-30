@@ -42,6 +42,10 @@ export interface UserKakaoLogin {
   code: string
 }
 
+export interface UserNaverLogin {
+  code: string
+}
+
 export interface UserFindEmailSendCode {
   phoneNumber: string
 }
