@@ -28,7 +28,7 @@ export default function useLogin(
         `${API_BASE_URL}/auth/email/login`,
         payload
       )
-      const newAccessToken = response.data.access
+      const newAccessToken = response.data.access_token
       return newAccessToken
     },
     onSuccess: async (newAccessToken: string) => {
@@ -41,11 +41,11 @@ export default function useLogin(
     onError: (error) => {
       if (error instanceof AxiosError) {
         const status = error.status
-        const dueDate = error.response?.data?.due_date
+        const dueDate = error.response?.data?.error.due_date
         if (status === 400) {
           triggerToast('error', '잘못된 이메일 또는 비밀번호 입니다')
         } else if (status === 401) {
-          if (dueDate) {
+          if (dueDate !== 'None') {
             triggerToast('warning', '탈퇴 예정 회원입니다')
           } else {
             triggerToast(

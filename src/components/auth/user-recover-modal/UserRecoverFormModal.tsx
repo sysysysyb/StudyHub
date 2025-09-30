@@ -11,6 +11,7 @@ import {
   type ModalContextValue,
 } from '@/components/common/Modal'
 import { useVerificationCode } from '@/hooks'
+import useUserRecover from '@/hooks/api/auth/useUserRecover'
 import {
   UserRecoverSchema,
   type UserRecover,
@@ -58,6 +59,20 @@ export default function UserRecoverFormModal({
       email: getValues('email'),
       verificationCode: getValues('verificationCode'),
     })
+  }
+
+  const { mutate } = useUserRecover()
+
+  const handleRecoverClick: React.MouseEventHandler<HTMLButtonElement> = (
+    e
+  ) => {
+    e.preventDefault()
+    mutate({
+      email: getValues('email'),
+      verificationCode: getValues('verificationCode'),
+    })
+
+    userRecoverCompleteModalOpen()
   }
 
   return (
@@ -117,9 +132,7 @@ export default function UserRecoverFormModal({
         <ModalFooter className="flex w-full justify-center border-none">
           <Button
             className="w-[90%] max-w-sm"
-            onClick={() => {
-              userRecoverCompleteModalOpen()
-            }}
+            onClick={handleRecoverClick}
             disabled={!isCodeVerified.userRecover}
           >
             <ModalClose className="flex w-full justify-center">확인</ModalClose>

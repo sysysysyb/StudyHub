@@ -9,6 +9,7 @@ export const PUBLIC_ENDPOINTS = [
   'auth/phone/verify',
   'auth/refresh',
   'auth/recover-account',
+  'auth/recover',
   'auth/find-email/send',
   'auth/find-email/verify',
   'auth/reset-password/send',

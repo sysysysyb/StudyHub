@@ -20,7 +20,8 @@ export default function useWithdrawUser() {
         data: payload,
       })
     },
-    onSuccess: () => {
+    onSuccess: async () => {
+      await api.post(`${API_BASE_URL}/auth/logout`)
       triggerToast('success', '회원 탈퇴가 완료되었습니다 ✅')
       clearAccessToken()
       setIsLoggedIn(false)

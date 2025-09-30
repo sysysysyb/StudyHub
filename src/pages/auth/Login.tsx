@@ -28,7 +28,7 @@ import type { ModalContextValue } from '@/components/common/Modal'
 import { useState } from 'react'
 import { AxiosError } from 'axios'
 import { useWithdrawalDateStore } from '@/store'
-import { KAKAO_AUTH_URL } from '@/constants/oauth-constants'
+import { KAKAO_AUTH_URL, NAVER_AUTH_URL } from '@/constants/oauth-constants'
 
 function Login() {
   const {
@@ -62,8 +62,8 @@ function Login() {
     } catch (error) {
       if (error instanceof AxiosError) {
         const status = error.status
-        const dueDate = error.response?.data?.due_date
-        if (status === 401 && dueDate) {
+        const dueDate = error.response?.data?.error.due_date
+        if (status === 401 && dueDate !== 'None') {
           setWithdrawalDate(dueDate)
           userRecoverFormModalControl.open()
         }
@@ -73,6 +73,10 @@ function Login() {
 
   const handleKakaoLogin = () => {
     window.location.href = KAKAO_AUTH_URL
+  }
+
+  const handleNaverLogin = () => {
+    window.location.href = NAVER_AUTH_URL
   }
 
   return (
@@ -87,7 +91,7 @@ function Login() {
 
       <div className={InputGroupStyle}>
         <AuthSocialLoginButton socialType="kakao" onClick={handleKakaoLogin} />
-        <AuthSocialLoginButton socialType="naver" />
+        <AuthSocialLoginButton socialType="naver" onClick={handleNaverLogin} />
       </div>
 
       <form className={InputGroupStyle} onSubmit={handleSubmit(onSubmit)}>

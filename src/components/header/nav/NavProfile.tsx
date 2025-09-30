@@ -9,14 +9,23 @@ import { Link } from 'react-router'
 function NavProfile({ onProfileClick }: { onProfileClick: () => void }) {
   const { isLoggedIn } = useLoginStore()
   const { data: user } = useUserInformation<
-    Pick<UserInformation, 'name' | 'profileImageUrl'>
+    Pick<UserInformation, 'name' | 'nickname' | 'profileImageUrl'>
   >({
     select: (data) => ({
       name: data.name,
+      nickname: data.nickname,
       profileImageUrl: data.profileImageUrl,
     }),
     queryKey: ['info'],
   })
+
+  const getDisplayName = (name: string, nickname: string) => {
+    if (!name || name.trim() === '이름없음') {
+      return nickname ?? 'Hello'
+    } else {
+      return name
+    }
+  }
 
   if (!isLoggedIn)
     return (
@@ -68,7 +77,7 @@ function NavProfile({ onProfileClick }: { onProfileClick: () => void }) {
             iconSize={20}
           />
           <span className="text-primary-600 text-base font-medium">
-            {user.name}
+            {getDisplayName(user.name, user.nickname)}
           </span>
         </button>
       )}
