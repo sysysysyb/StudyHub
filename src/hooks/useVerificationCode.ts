@@ -40,7 +40,6 @@ interface VerifyDataMap {
 }
 
 function useVerificationCode() {
-  const [findEmailValue, setFindEmailValue] = useState('')
   const { triggerToast } = useToast()
   const emailSendCode = useEmailSendCode()
   const phoneSendCode = usePhoneSendCode()
@@ -152,15 +151,13 @@ function useVerificationCode() {
       await userRecoverVerify.mutateAsync({ email, verificationCode })
     }
     if (label === 'findEmail') {
-      const { name, phoneNumber, verificationCode } =
+      const { phoneNumber, verificationCode } =
         verifyData as UserFindEmailVerify
       const data = {
-        name: name,
         phoneNumber: formattedPhoneToE164KR(phoneNumber),
         verificationCode: verificationCode,
       }
-      const email = await findEmailVerify.mutateAsync(data)
-      setFindEmailValue(email)
+      await findEmailVerify.mutateAsync(data)
     }
     if (label === 'resetPassword') {
       const data: UserResetPasswordVerify = verifyData as UserEmailVerify
@@ -177,7 +174,6 @@ function useVerificationCode() {
     timer,
     handleCodeSend,
     handleCodeVerify,
-    findEmailValue,
   }
 }
 
