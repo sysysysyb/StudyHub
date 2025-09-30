@@ -10,7 +10,6 @@ import {
 } from '@/hooks/api'
 import { useDebounce } from '@/hooks/useDebounce'
 import useWindowWidth from '@/hooks/useWindowWidth'
-import type { lectureSearchParams, recruitmentSearchParams } from '@/types'
 import { useState } from 'react'
 import { useParams } from 'react-router'
 
@@ -23,19 +22,11 @@ export default function Bookmark() {
   const [search, setSearch] = useState('')
   const debouncedSearch = useDebounce(search, DEBOUNCE_TIME_MS)
 
-  const recruitmentSearchParams: recruitmentSearchParams = {
-    title: debouncedSearch,
-  }
-
-  const lectureSearchParams: lectureSearchParams = {
-    search: debouncedSearch,
-  }
-
   const bookmarkedLecturesInfinityQueryResult =
-    useInfiniteBookmarkedLecture(lectureSearchParams)
+    useInfiniteBookmarkedLecture(debouncedSearch)
 
   const bookmarkedRecruitmentInfiniteQueryResult =
-    useInfiniteBookmarkedRecruitment(recruitmentSearchParams)
+    useInfiniteBookmarkedRecruitment(debouncedSearch)
 
   if (windowWidth < MD_WIDTH_PIXEL) {
     const option =

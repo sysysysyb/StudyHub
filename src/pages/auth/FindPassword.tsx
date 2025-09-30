@@ -8,10 +8,9 @@ import { useState } from 'react'
 import FindPasswordFirstStep from '@/components/auth/find-password/FindPasswordFirstStep'
 import FindPasswordSecondStep from '@/components/auth/find-password/FindPasswordSecondStep'
 import FindPasswordThirdStep from '@/components/auth/find-password/FindPasswordThirdStep'
-import { useNavigate } from 'react-router'
-import { useToast } from '@/hooks'
 import { InputFieldColStyle } from '@/constants/auth-variants'
 import { cn } from '@/utils'
+import { useResetPassword } from '@/hooks/api/auth/useResetPassword'
 
 const FIND_EMAIL_STEP_LIST = ['이메일입력', '이메일인증', '비밀번호재설정']
 
@@ -22,8 +21,7 @@ function FindPassword() {
     step2: { code: '' },
     step3: { password: '', confirmPassword: '' },
   })
-  const navigate = useNavigate()
-  const { triggerToast } = useToast()
+  const resetPassword = useResetPassword()
 
   return (
     <AuthContainer className="flex flex-col gap-10">
@@ -77,9 +75,12 @@ function FindPassword() {
       {currentStep === 3 && (
         <FindPasswordThirdStep
           defaultValues={stepHistory.step3}
-          onNext={() => {
-            navigate('/auth/login')
-            triggerToast('success', '비밀번호 변경이 완료되었습니다.')
+          onNext={(value) => {
+            setStepHistory((prev) => ({
+              ...prev,
+              step3: { ...prev.step3, ...value },
+            }))
+            resetPassword.mutate({ password: value.password })
           }}
         />
       )}

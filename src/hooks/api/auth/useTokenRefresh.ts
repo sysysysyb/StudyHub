@@ -23,11 +23,11 @@ export default function useTokenRefresh(options?: UseMutationOptions) {
     onSuccess: (newAccessToken: string) => {
       setAccessToken(newAccessToken)
       setIsLoggedIn(true)
-      qc.invalidateQueries({ queryKey: ['users', 'me'] })
+      qc.invalidateQueries({ queryKey: ['info'] })
     },
     onError: () => {
       setIsLoggedIn(false)
-      qc.removeQueries({ queryKey: ['users', 'me'] })
+      qc.removeQueries({ queryKey: ['info'] })
     },
   })
 }

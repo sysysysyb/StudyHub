@@ -11,7 +11,7 @@ export default function useUserInformation<T = UserInformation>(
 
   return useQuery<UserInformation, Error, T>({
     ...options,
-    queryKey: ['users', 'me'],
+    queryKey: ['info'],
     queryFn: async () => {
       const response = await api.get(`${API_BASE_URL}/info/`)
       const data = response.data

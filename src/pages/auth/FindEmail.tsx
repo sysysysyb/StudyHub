@@ -18,7 +18,7 @@ function FindEmail() {
   const [stepHistory, setStepHistory] = useState({
     step1: { name: '', phoneNumber: '' },
     step2: { code: '' },
-    step3: { email: '', createdAt: '' },
+    step3: { email: '' },
   })
 
   return (
@@ -51,6 +51,7 @@ function FindEmail() {
       {currentStep === 2 && (
         <FindEmailSecondStep
           defaultValues={stepHistory.step2}
+          name={stepHistory.step1.name}
           phoneNumber={stepHistory.step1.phoneNumber}
           onPrev={() => setCurrentStep(1)}
           onNext={(value) => {
@@ -60,21 +61,22 @@ function FindEmail() {
                 ...prev.step2,
                 ...value,
               },
-              step3: {
-                ...prev.step3,
-                email: 'test@test.com',
-                createdAt: '2025-01-15',
-              },
             }))
             setCurrentStep(3)
+          }}
+          onSetEmail={(value) => {
+            setStepHistory((prev) => ({
+              ...prev,
+              step3: {
+                ...prev.step3,
+                email: value,
+              },
+            }))
           }}
         />
       )}
       {currentStep === 3 && (
-        <FindEmailThirdStep
-          email={stepHistory.step3.email}
-          createdAt={stepHistory.step3.createdAt}
-        />
+        <FindEmailThirdStep email={stepHistory.step3.email} />
       )}
     </AuthContainer>
   )

@@ -32,7 +32,7 @@ export default function useKakaoCallback(
     onSuccess: async (newAccessToken: string) => {
       setAccessToken(newAccessToken)
       setIsLoggedIn(true)
-      await qc.invalidateQueries({ queryKey: ['users', 'me'] })
+      await qc.invalidateQueries({ queryKey: ['info'] })
       triggerToast(
         'success',
         'Kakao Login 🎉',

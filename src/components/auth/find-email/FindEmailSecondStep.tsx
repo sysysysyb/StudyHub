@@ -17,6 +17,7 @@ import {
   FindEmailStep2Schema,
   type FindEmailStep2Type,
 } from '@/schemas/form-schema/find-email-schema'
+import { cn } from '@/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Phone } from 'lucide-react'
 import { useEffect } from 'react'
@@ -24,37 +25,58 @@ import { useForm, type DefaultValues } from 'react-hook-form'
 
 interface FindEmailSecondStepProps {
   defaultValues: DefaultValues<FindEmailStep2Type>
+  name: string
   phoneNumber: string
   onPrev: () => void
   onNext: (value: FindEmailStep2Type) => void
+  onSetEmail: (value: string) => void
 }
 
 function FindEmailSecondStep({
   defaultValues,
+  name,
   phoneNumber,
   onPrev,
   onNext,
+  onSetEmail,
 }: FindEmailSecondStepProps) {
   const {
     register,
     handleSubmit,
-    formState: { isValid, errors },
+    formState: { errors },
     getValues,
   } = useForm<FindEmailStep2Type>({
     mode: 'onChange',
     resolver: zodResolver(FindEmailStep2Schema),
     defaultValues,
   })
-  const { isCodeSent, isCodeVerified, handleCodeSend, handleCodeVerify } =
-    useVerificationCode()
+  const {
+    isCodeSent,
+    isCodeVerified,
+    handleCodeSend,
+    handleCodeVerify,
+    findEmailValue,
+  } = useVerificationCode()
 
-  const onSubmit = (value: FindEmailStep2Type) => onNext(value)
+  const onSubmit = (code: FindEmailStep2Type) => onNext(code)
 
-  // TODO: 이메일 찾기 인증코드 전송 api에 맞게 수정 필요
+  const handleClickVerifyButton = () => {
+    handleCodeVerify('findEmail', {
+      name: name,
+      phoneNumber: phoneNumber,
+      verificationCode: getValues('code'),
+    })
+  }
+
   useEffect(() => {
-    handleCodeSend('phoneNumber', phoneNumber)
+    handleCodeSend('findEmail', phoneNumber)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  useEffect(() => {
+    onSetEmail(findEmailValue)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [findEmailValue])
 
   return (
     <article className="flex flex-col gap-12">
@@ -71,18 +93,17 @@ function FindEmailSecondStep({
         <div className={InputFieldColStyle}>
           <div className={InputFieldRowStyle}>
             <Input
+              disabled={!isCodeSent.findEmail}
               {...register('code')}
               placeholder="인증코드 6자리를 입력해주세요"
+              className={cn(
+                isCodeVerified.findEmail &&
+                  'disabled:bg-white disabled:text-black'
+              )}
             />
             <AuthVerifyButton
-              disabled={!isCodeSent.phoneNumber}
-              // TODO: 이메일 찾기 인증코드 검증 api에 맞게 수정 필요
-              onClick={() =>
-                handleCodeVerify('phoneNumber', {
-                  phoneNumber: phoneNumber,
-                  verificationCode: getValues('code'),
-                })
-              }
+              disabled={!isCodeSent.findEmail}
+              onClick={handleClickVerifyButton}
             >
               인증코드확인
             </AuthVerifyButton>
@@ -92,7 +113,7 @@ function FindEmailSecondStep({
           )}
         </div>
 
-        <AuthSubmitButton disabled={!isValid || !isCodeVerified.phoneNumber}>
+        <AuthSubmitButton disabled={!isCodeVerified.findEmail}>
           인증하기
         </AuthSubmitButton>
         <Button variant="outline" onClick={onPrev} className="w-full py-4">
