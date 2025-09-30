@@ -2,6 +2,7 @@ import RootLayout from '@/components/layout/RootLayout'
 import { Route, Routes } from 'react-router'
 import { lazy, Suspense } from 'react'
 import LandingPage from '@/pages/LandingPage'
+import NaverAuth from '@/pages/auth/NaverAuth'
 
 // layouts
 const AuthLayout = lazy(() => import('@/components/layout/AuthLayout'))
@@ -52,7 +53,7 @@ function MainRoutes() {
 
           {/* 소셜 로그인 */}
           <Route path="/oauth/kakao" element={<KakaoAuth />} />
-          {/* <Route path="/oauth/naver" element={<NaverAuth />} /> */}
+          <Route path="/oauth/naver" element={<NaverAuth />} />
         </Route>
 
         {/* 테스트 허브 */}
