@@ -13,6 +13,7 @@ import {
   InputGroupStyle,
 } from '@/constants/auth-variants'
 import { useVerificationCode } from '@/hooks'
+import { useFindEmail } from '@/hooks/api/auth/useFindEmail'
 import {
   FindEmailStep2Schema,
   type FindEmailStep2Type,
@@ -55,14 +56,14 @@ function FindEmailSecondStep({
     isCodeVerified,
     handleCodeSend,
     handleCodeVerify,
-    findEmailValue,
+    // findEmailValue,
   } = useVerificationCode()
+  const findEmail = useFindEmail()
 
   const onSubmit = (code: FindEmailStep2Type) => onNext(code)
 
   const handleClickVerifyButton = () => {
     handleCodeVerify('findEmail', {
-      name: name,
       phoneNumber: phoneNumber,
       verificationCode: getValues('code'),
     })
@@ -74,9 +75,21 @@ function FindEmailSecondStep({
   }, [])
 
   useEffect(() => {
-    onSetEmail(findEmailValue)
+    if (!isCodeVerified.findEmail) return
+
+    findEmail.mutate(
+      {
+        name,
+        phoneNumber,
+        verificationCode: getValues('code'),
+      },
+      {
+        onSuccess: onSetEmail,
+      }
+    )
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [findEmailValue])
+  }, [isCodeVerified.findEmail])
 
   return (
     <article className="flex flex-col gap-12">
