@@ -18,7 +18,7 @@ function AuthStepDot({
   return (
     <div
       className={cn(
-        'flex size-8 items-center justify-center rounded-full bg-gray-200 text-gray-500 transition-colors duration-200 ease-out',
+        'flex size-8 items-center justify-center rounded-full bg-gray-200 text-gray-500 transition-colors duration-300 ease-out',
         isStepReached(stepIndex, currentStep) && 'bg-primary-500 text-white',
         isFinished(currentStep) && 'bg-success-500 text-white'
       )}
@@ -38,7 +38,7 @@ function AuthStepLine({
   return (
     <div
       className={cn(
-        'h-1 flex-1 rounded-sm bg-gray-200 transition-colors duration-200 ease-out',
+        'h-1 flex-1 rounded-sm bg-gray-200 transition-colors duration-300 ease-out',
         isStepReached(stepIndex, currentStep) && 'bg-primary-500',
         isFinished(currentStep) && 'bg-success-500'
       )}
