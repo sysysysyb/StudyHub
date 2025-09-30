@@ -2,7 +2,7 @@ import { ImageCardSkeleton, EmptyDataState } from '@/components'
 import { useCompletedStudy } from '@/hooks/api'
 import { CompletedStudyImageCard } from '@/components/my-page'
 
-export const CompletedStudy = () => {
+const CompletedStudy = () => {
   const { data, isPending } = useCompletedStudy()
   if (!isPending && !data) return <EmptyDataState />
   return (
@@ -23,3 +23,5 @@ export const CompletedStudy = () => {
     </main>
   )
 }
+
+export default CompletedStudy

@@ -5,7 +5,7 @@ import {
   ApplicationDetailModal,
 } from '@/components/my-page'
 
-export const AppliedRecruitment = () => {
+const AppliedRecruitment = () => {
   const { data, isPending } = useAppliedRecruitment()
   if (!isPending && !data) return <EmptyDataState />
   return (
@@ -32,3 +32,5 @@ export const AppliedRecruitment = () => {
     </main>
   )
 }
+
+export default AppliedRecruitment
