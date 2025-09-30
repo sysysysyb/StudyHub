@@ -6,7 +6,7 @@ export const formattedPhoneToE164KR = (phoneNumber: string) => {
 }
 
 export const formattedPhoneWithHyphen = (phoneNumber: string) => {
-  if (phoneNumber.startsWith('010')) return phoneNumber
+  if (!phoneNumber || phoneNumber.startsWith('010')) return phoneNumber
 
   const frontNumber = phoneNumber.substring(5, 9)
   const backNumber = phoneNumber.substring(9, 13)
