@@ -15,7 +15,7 @@ function NavProfile({ onProfileClick }: { onProfileClick: () => void }) {
       name: data.name,
       profileImageUrl: data.profileImageUrl,
     }),
-    queryKey: ['users', 'me'],
+    queryKey: ['info'],
   })
 
   if (!isLoggedIn)
