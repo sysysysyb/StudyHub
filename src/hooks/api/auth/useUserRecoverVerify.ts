@@ -1,4 +1,4 @@
-import { MSW_BASE_URL } from '@/constants/url-constants'
+import { API_BASE_URL } from '@/constants/url-constants'
 import useToast from '@/hooks/useToast'
 import type { UserRecoverVerifyBody } from '@/types/api-request-types/user-recover-request-types'
 import api from '@/utils/axios'
@@ -12,13 +12,13 @@ export default function useUserRecoverVerify(
 
   return useMutation({
     mutationFn: async ({ email, verificationCode }) => {
-      await api.post(`${MSW_BASE_URL}/auth/recover-account/verify`, {
+      await api.post(`${API_BASE_URL}/auth/recover-account/verify`, {
         email,
         verification_code: verificationCode,
       })
     },
     onSuccess: () => {
-      triggerToast('success', '인증 완료 ✅', '계정 정보가 복구되었습니다.')
+      triggerToast('success', '인증 완료 ✅', '확인 버튼을 눌러주세요.')
     },
     onError: (error) => {
       if (error instanceof AxiosError) {

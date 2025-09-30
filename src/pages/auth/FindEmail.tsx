@@ -4,12 +4,17 @@ import {
   AuthTitle,
   AuthStep,
 } from '@/components/auth/common'
-import { useState } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import FindEmailFirstStep from '@/components/auth/find-email/FindEmailFirstStep'
-import FindEmailSecondStep from '@/components/auth/find-email/FindEmailSecondStep'
-import FindEmailThirdStep from '@/components/auth/find-email/FindEmailThirdStep'
 import { InputFieldColStyle } from '@/constants/auth-variants'
 import { cn } from '@/utils'
+
+const FindEmailSecondStep = lazy(
+  () => import('@/components/auth/find-email/FindEmailSecondStep')
+)
+const FindEmailThirdStep = lazy(
+  () => import('@/components/auth/find-email/FindEmailThirdStep')
+)
 
 const FIND_EMAIL_STEP_LIST = ['정보입력', '휴대폰인증', '결과확인']
 
@@ -49,34 +54,38 @@ function FindEmail() {
         />
       )}
       {currentStep === 2 && (
-        <FindEmailSecondStep
-          defaultValues={stepHistory.step2}
-          name={stepHistory.step1.name}
-          phoneNumber={stepHistory.step1.phoneNumber}
-          onPrev={() => setCurrentStep(1)}
-          onNext={(value) => {
-            setStepHistory((prev) => ({
-              ...prev,
-              step2: {
-                ...prev.step2,
-                ...value,
-              },
-            }))
-            setCurrentStep(3)
-          }}
-          onSetEmail={(value) => {
-            setStepHistory((prev) => ({
-              ...prev,
-              step3: {
-                ...prev.step3,
-                email: value,
-              },
-            }))
-          }}
-        />
+        <Suspense fallback={<div>Loading...</div>}>
+          <FindEmailSecondStep
+            defaultValues={stepHistory.step2}
+            name={stepHistory.step1.name}
+            phoneNumber={stepHistory.step1.phoneNumber}
+            onPrev={() => setCurrentStep(1)}
+            onNext={(value) => {
+              setStepHistory((prev) => ({
+                ...prev,
+                step2: {
+                  ...prev.step2,
+                  ...value,
+                },
+              }))
+              setCurrentStep(3)
+            }}
+            onSetEmail={(value) => {
+              setStepHistory((prev) => ({
+                ...prev,
+                step3: {
+                  ...prev.step3,
+                  email: value,
+                },
+              }))
+            }}
+          />
+        </Suspense>
       )}
       {currentStep === 3 && (
-        <FindEmailThirdStep email={stepHistory.step3.email} />
+        <Suspense fallback={<div>Loading...</div>}>
+          <FindEmailThirdStep email={stepHistory.step3.email} />
+        </Suspense>
       )}
     </AuthContainer>
   )
