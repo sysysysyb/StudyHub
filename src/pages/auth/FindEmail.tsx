@@ -8,6 +8,7 @@ import { lazy, Suspense, useState } from 'react'
 import FindEmailFirstStep from '@/components/auth/find-email/FindEmailFirstStep'
 import { InputFieldColStyle } from '@/constants/auth-variants'
 import { cn } from '@/utils'
+import { Spinner } from '@/components'
 
 const FindEmailSecondStep = lazy(
   () => import('@/components/auth/find-email/FindEmailSecondStep')
@@ -17,6 +18,8 @@ const FindEmailThirdStep = lazy(
 )
 
 const FIND_EMAIL_STEP_LIST = ['정보입력', '휴대폰인증', '결과확인']
+
+const STEP_WRAPPER_HEIGHT = 366
 
 function FindEmail() {
   const [currentStep, setCurrentStep] = useState(1)
@@ -54,7 +57,16 @@ function FindEmail() {
         />
       )}
       {currentStep === 2 && (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense
+          fallback={
+            <div
+              className="flex flex-col items-center justify-center"
+              style={{ height: STEP_WRAPPER_HEIGHT }}
+            >
+              <Spinner />
+            </div>
+          }
+        >
           <FindEmailSecondStep
             defaultValues={stepHistory.step2}
             name={stepHistory.step1.name}
@@ -83,7 +95,16 @@ function FindEmail() {
         </Suspense>
       )}
       {currentStep === 3 && (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense
+          fallback={
+            <div
+              className="flex flex-col items-center justify-center"
+              style={{ height: STEP_WRAPPER_HEIGHT }}
+            >
+              <Spinner className="border-success-500" />
+            </div>
+          }
+        >
           <FindEmailThirdStep email={stepHistory.step3.email} />
         </Suspense>
       )}
