@@ -1,7 +1,8 @@
-import { MSW_BASE_URL } from '@/constants/url-constants'
+import { API_BASE_URL } from '@/constants/url-constants'
 import useToast from '@/hooks/useToast'
 import type { UserFindEmail } from '@/types/api-request-types/auth-request-types'
 import api from '@/utils/axios'
+import { formattedPhoneToE164KR } from '@/utils/formatted-phone'
 import { useMutation, type UseMutationOptions } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 import { useNavigate } from 'react-router'
@@ -16,9 +17,9 @@ export function useFindEmail(
     ...options,
     mutationKey: ['info', 'reset-password'],
     mutationFn: async ({ name, phoneNumber, verificationCode }) => {
-      const response = await api.post(`${MSW_BASE_URL}/info/find-email`, {
+      const response = await api.post(`${API_BASE_URL}/info/find-email`, {
         name: name,
-        phone_number: phoneNumber,
+        phone_number: formattedPhoneToE164KR(phoneNumber),
         code: verificationCode,
       })
       const email = response.data.email
