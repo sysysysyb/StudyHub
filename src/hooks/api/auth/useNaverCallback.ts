@@ -1,3 +1,4 @@
+import { NAVER_STATE } from '@/constants/oauth-constants'
 import { API_BASE_URL } from '@/constants/url-constants'
 import { useToast } from '@/hooks'
 import { useLoginStore } from '@/store/useLoginStore'
@@ -25,6 +26,7 @@ export default function useNaverCallback(
     mutationFn: async ({ code }) => {
       const response = await api.post(`${API_BASE_URL}/auth/naver/callback`, {
         code: code,
+        state: NAVER_STATE,
       })
       const newAccessToken = response.data.access_token
       return newAccessToken
