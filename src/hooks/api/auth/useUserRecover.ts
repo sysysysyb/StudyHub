@@ -5,20 +5,20 @@ import api from '@/utils/axios'
 import { useMutation, type UseMutationOptions } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 
-export default function useUserRecoverVerify(
+export default function useUserRecover(
   options?: UseMutationOptions<void, Error, UserRecoverVerifyBody>
 ) {
   const { triggerToast } = useToast()
 
   return useMutation({
     mutationFn: async ({ email, verificationCode }) => {
-      await api.post(`${API_BASE_URL}/auth/recover-account/verify`, {
+      await api.post(`${API_BASE_URL}/auth/recover`, {
         email,
         verification_code: verificationCode,
       })
     },
     onSuccess: () => {
-      triggerToast('success', '인증 완료 ✅', '확인 버튼을 눌러주세요.')
+      triggerToast('success', '인증 완료 ✅', '계정 정보가 복구되었습니다.')
     },
     onError: (error) => {
       if (error instanceof AxiosError) {
