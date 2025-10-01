@@ -30,18 +30,6 @@ function BaseStateIcon({
   )
 }
 
-function BaseStateSpinner({ className, ...props }: ComponentProps<'div'>) {
-  return (
-    <div
-      className={cn(
-        'border-primary-500 animate-loading-state size-12 rounded-full border-b-2 border-solid',
-        className
-      )}
-      {...props}
-    />
-  )
-}
-
 interface BaseStateContentProps extends ComponentProps<'div'> {
   title: string
   description: string
@@ -102,10 +90,4 @@ function BaseStateWrapper({ className, children }: ComponentProps<'div'>) {
   )
 }
 
-export {
-  BaseStateIcon,
-  BaseStateSpinner,
-  BaseStateContent,
-  BaseStateButton,
-  BaseStateWrapper,
-}
+export { BaseStateIcon, BaseStateContent, BaseStateButton, BaseStateWrapper }

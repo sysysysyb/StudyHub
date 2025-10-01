@@ -18,6 +18,7 @@ import Notification from '@/components/notification/Notification'
 import Dropdown from '@/components/common/Dropdown'
 import EmptyDataState from '@/components/common/state/EmptyDataState'
 import UserInfoSkeleton from '@/components/common/skeleton/UserInfoSkeleton'
+import Spinner from '@/components/common/Spinner'
 
 export {
   Badge,
@@ -39,4 +40,5 @@ export {
   Dropdown,
   EmptyDataState,
   UserInfoSkeleton,
+  Spinner,
 }
