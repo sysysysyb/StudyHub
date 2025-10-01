@@ -182,6 +182,16 @@
 > - 매일 오전 10시 20분에 데일리 스크럼 진행
 > - 매주 금요일 오후 6시에 KDT 회고와 Weekly Sprint 진행
 
+### .env
+
+```
+  VITE_KAKAO_CLIENT_ID
+  VITE_KAKAO_REDIRECT_URI
+  VITE_NAVER_CLIENT_ID
+  VITE_NAVER_CLIENT_SECRET
+  VITE_NAVER_REDIRECT_URI
+```
+
 ### Documents
 
 | 서비스 기획 문서                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | 팀 문서                                                                                                                                                                                                                                                                                                                      |
