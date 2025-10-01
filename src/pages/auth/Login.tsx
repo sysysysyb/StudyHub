@@ -29,6 +29,7 @@ import { useState } from 'react'
 import { AxiosError } from 'axios'
 import { useWithdrawalDateStore } from '@/store'
 import { KAKAO_AUTH_URL, NAVER_AUTH_URL } from '@/constants/oauth-constants'
+import { createNaverState, setNaverState } from '@/utils/manage-naver-state'
 
 function Login() {
   const {
@@ -63,7 +64,7 @@ function Login() {
       if (error instanceof AxiosError) {
         const status = error.status
         const dueDate = error.response?.data?.error.due_date
-        if (status === 401 && dueDate !== 'None') {
+        if (status === 401 && dueDate && dueDate !== 'None') {
           setWithdrawalDate(dueDate)
           userRecoverFormModalControl.open()
         }
@@ -76,7 +77,9 @@ function Login() {
   }
 
   const handleNaverLogin = () => {
-    window.location.href = NAVER_AUTH_URL
+    const str = createNaverState()
+    setNaverState(str)
+    window.location.href = NAVER_AUTH_URL(str)
   }
 
   return (

@@ -12,7 +12,8 @@ export const PUBLIC_ENDPOINTS = [
   'auth/recover',
   'auth/find-email/send',
   'auth/find-email/verify',
+  'info/find-email',
   'auth/reset-password/send',
   'auth/reset-password/verify',
-  'auth/reset-password',
+  'info/reset-password',
 ] as const
