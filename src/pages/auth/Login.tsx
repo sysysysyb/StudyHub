@@ -29,6 +29,7 @@ import { useState } from 'react'
 import { AxiosError } from 'axios'
 import { useWithdrawalDateStore } from '@/store'
 import { KAKAO_AUTH_URL, NAVER_AUTH_URL } from '@/constants/oauth-constants'
+import { createNaverState, setNaverState } from '@/utils/manage-naver-state'
 
 function Login() {
   const {
@@ -76,7 +77,9 @@ function Login() {
   }
 
   const handleNaverLogin = () => {
-    window.location.href = NAVER_AUTH_URL
+    const str = createNaverState()
+    setNaverState(str)
+    window.location.href = NAVER_AUTH_URL(str)
   }
 
   return (

@@ -44,6 +44,7 @@ export interface UserKakaoLogin {
 
 export interface UserNaverLogin {
   code: string
+  state: string
 }
 
 export interface UserFindEmailSendCode {
