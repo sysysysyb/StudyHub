@@ -52,6 +52,11 @@ export interface UserFindEmailSendCode {
 }
 
 export interface UserFindEmailVerify {
+  phoneNumber: string
+  verificationCode: string
+}
+
+export interface UserFindEmail {
   name: string
   phoneNumber: string
   verificationCode: string
@@ -69,6 +74,7 @@ export interface UserResetPasswordVerify {
 export interface UserResetPassword {
   password: string
 }
+
 // ERD 참조하여 생성
 export interface WithdrawalRequest {
   reason: WithdrawalReasonEnum

@@ -209,7 +209,7 @@ const signup = http.post(
 
 // 이메일 찾기 - 휴대전화 인증코드 전송
 const findEmailSendCode = http.post(
-  `${MSW_BASE_URL}/auth/find-email/send`,
+  `${MSW_BASE_URL}/auth/find-email/send-code`,
   async ({ request }) => {
     const body = await request.clone().json()
 
@@ -239,7 +239,7 @@ const findEmailVerify = http.post(
   async ({ request }) => {
     const body = await request.clone().json()
 
-    if (!body.name || !body.phone_number || !body.verification_code) {
+    if (!body.phone_number || !body.verification_code) {
       return HttpResponse.json(
         {
           error: '잘못된 입력 형식입니다',
@@ -252,6 +252,33 @@ const findEmailVerify = http.post(
       {
         detail: '휴대전화 인증코드가 확인되었습니다',
         email: userInformationMock[0].email,
+      },
+      {
+        status: 200,
+      }
+    )
+  }
+)
+
+// 이메일 찾기
+const findEmail = http.post(
+  `${MSW_BASE_URL}/info/find-email`,
+  async ({ request }) => {
+    const body = await request.clone().json()
+
+    if (!body.name || !body.phone_number || !body.code) {
+      return HttpResponse.json(
+        {
+          error: '인증 코드 검증에 실패했습니다',
+        },
+        { status: 400 }
+      )
+    }
+
+    return HttpResponse.json(
+      {
+        detail: '이메일 찾기가 완료되었습니다.',
+        email: 'example@test.com',
       },
       {
         status: 200,
@@ -358,6 +385,7 @@ export const authHandlers = [
   signup,
   findEmailSendCode,
   findEmailVerify,
+  findEmail,
   resetPasswordSendCode,
   resetPasswordVerify,
   resetPassword,
