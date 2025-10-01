@@ -4,6 +4,7 @@ import { useLoginStore } from '@/store/useLoginStore'
 import type { UserNaverLogin } from '@/types/api-request-types/auth-request-types'
 import { setAccessToken } from '@/utils'
 import api from '@/utils/axios'
+import { clearNaverState } from '@/utils/manage-naver-state'
 import {
   useMutation,
   useQueryClient,
@@ -22,9 +23,10 @@ export default function useNaverCallback(
   return useMutation<string, Error, UserNaverLogin>({
     ...options,
     mutationKey: ['auth', 'naver', 'callback'],
-    mutationFn: async ({ code }) => {
+    mutationFn: async ({ code, state }) => {
       const response = await api.post(`${API_BASE_URL}/auth/naver/callback`, {
         code: code,
+        state: state,
       })
       const newAccessToken = response.data.access_token
       return newAccessToken
@@ -39,10 +41,12 @@ export default function useNaverCallback(
         '네이버 로그인이 완료되었습니다.'
       )
       navigate('/')
+      clearNaverState()
     },
     onError: () => {
       triggerToast('error', '잠시 후 다시 시도해주세요')
       navigate('/auth/login')
+      clearNaverState()
     },
   })
 }
