@@ -9,6 +9,7 @@ import FindPasswordFirstStep from '@/components/auth/find-password/FindPasswordF
 import { InputFieldColStyle } from '@/constants/auth-variants'
 import { cn } from '@/utils'
 import { useResetPassword } from '@/hooks/api/auth/useResetPassword'
+import { Spinner } from '@/components'
 
 const FindPasswordSecondStep = lazy(
   () => import('@/components/auth/find-password/FindPasswordSecondStep')
@@ -18,6 +19,8 @@ const FindPasswordThirdStep = lazy(
 )
 
 const FIND_EMAIL_STEP_LIST = ['이메일입력', '이메일인증', '비밀번호재설정']
+
+const STEP_WRAPPER_HEIGHT = 366
 
 function FindPassword() {
   const [currentStep, setCurrentStep] = useState(1)
@@ -56,7 +59,16 @@ function FindPassword() {
         />
       )}
       {currentStep === 2 && (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense
+          fallback={
+            <div
+              className="flex flex-col items-center justify-center"
+              style={{ height: STEP_WRAPPER_HEIGHT }}
+            >
+              <Spinner />
+            </div>
+          }
+        >
           <FindPasswordSecondStep
             defaultValues={stepHistory.step2}
             email={stepHistory.step1.email}
@@ -80,7 +92,16 @@ function FindPassword() {
         </Suspense>
       )}
       {currentStep === 3 && (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense
+          fallback={
+            <div
+              className="flex flex-col items-center justify-center"
+              style={{ height: STEP_WRAPPER_HEIGHT }}
+            >
+              <Spinner />
+            </div>
+          }
+        >
           <FindPasswordThirdStep
             defaultValues={stepHistory.step3}
             onNext={(value) => {

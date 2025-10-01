@@ -2,7 +2,7 @@ import RootLayout from '@/components/layout/RootLayout'
 import { Route, Routes } from 'react-router'
 import { lazy, Suspense } from 'react'
 import LandingPage from '@/pages/LandingPage'
-import NaverAuth from '@/pages/auth/NaverAuth'
+import Spinner from '@/components/common/Spinner'
 
 // layouts
 const AuthLayout = lazy(() => import('@/components/layout/AuthLayout'))
@@ -24,10 +24,17 @@ const FindEmail = lazy(() => import('@/pages/auth/FindEmail'))
 const FindPassword = lazy(() => import('@/pages/auth/FindPassword'))
 const NotFound = lazy(() => import('@/pages/NotFound'))
 const KakaoAuth = lazy(() => import('@/pages/auth/KakaoAuth'))
+const NaverAuth = lazy(() => import('@/pages/auth/NaverAuth'))
 
 function MainRoutes() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense
+      fallback={
+        <div className="flex h-dvh flex-col items-center justify-center">
+          <Spinner />
+        </div>
+      }
+    >
       <Routes>
         <Route path="/" element={<RootLayout />}>
           <Route index element={<LandingPage />} />
