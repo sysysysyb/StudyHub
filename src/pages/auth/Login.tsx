@@ -64,7 +64,7 @@ function Login() {
       if (error instanceof AxiosError) {
         const status = error.status
         const dueDate = error.response?.data?.error.due_date
-        if (status === 401 && dueDate !== 'None') {
+        if (status === 401 && dueDate && dueDate !== 'None') {
           setWithdrawalDate(dueDate)
           userRecoverFormModalControl.open()
         }
